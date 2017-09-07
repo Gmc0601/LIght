@@ -13,6 +13,7 @@
 		4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */; };
 		4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDED1F5FA97A00FA1F85 /* FactorySet.m */; };
 		425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 425F203B1F613BD900D0E44D /* OrderTableViewCell.m */; };
+		425F203F1F61955100D0E44D /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 425F203E1F61955100D0E44D /* OrderModel.m */; };
 		429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */; };
 		42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC01F5F07B3005130DC /* LocationHelper.m */; };
 		42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC31F5F0CE5005130DC /* UIButton+SSEdgeInsets.m */; };
@@ -77,6 +78,8 @@
 		4214BDED1F5FA97A00FA1F85 /* FactorySet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactorySet.m; sourceTree = "<group>"; };
 		425F203A1F613BD900D0E44D /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		425F203B1F613BD900D0E44D /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		425F203D1F61955100D0E44D /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		425F203E1F61955100D0E44D /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		429940EC1F5E8ED60009ADDA /* CCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBaseViewController.h; sourceTree = "<group>"; };
 		429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBaseViewController.m; sourceTree = "<group>"; };
 		42A24FBF1F5F07B3005130DC /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 		429941231F5EAC4F0009ADDA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				425F203D1F61955100D0E44D /* OrderModel.h */,
+				425F203E1F61955100D0E44D /* OrderModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 				42A24FCF1F5F0CE5005130DC /* UIView+Frame.m in Sources */,
 				42A24FD01F5F0CE5005130DC /* UIView+Utils.m in Sources */,
 				42A24FCE1F5F0CE5005130DC /* UILabel+Width.m in Sources */,
+				425F203F1F61955100D0E44D /* OrderModel.m in Sources */,
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,
