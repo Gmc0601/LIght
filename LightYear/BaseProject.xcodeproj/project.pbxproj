@@ -25,6 +25,8 @@
 		42A4443E1EF133E000F90791 /* BaseProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42A4443C1EF133E000F90791 /* BaseProject.xcdatamodeld */; };
 		42A444401EF133E000F90791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A4443F1EF133E000F90791 /* Assets.xcassets */; };
 		42A444431EF133E000F90791 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A444411EF133E000F90791 /* LaunchScreen.storyboard */; };
+		42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B5F4BB1F62301F0072FF36 /* OrderDetialViewController.m */; };
+		42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B5F4BF1F6233960072FF36 /* OrderAlterView.m */; };
 		42C84EAF1EF2DB060008189D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84EA51EF2DB060008189D /* ViewController.m */; };
 		42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84EAC1EF2DB060008189D /* AppDelegate.m */; };
 		42C84EB11EF2DB060008189D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84EAD1EF2DB060008189D /* main.m */; };
@@ -102,6 +104,10 @@
 		42A444441EF133E000F90791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42A444491EF133E000F90791 /* BaseProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A444541EF133E100F90791 /* BaseProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42B5F4BA1F62301F0072FF36 /* OrderDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetialViewController.h; sourceTree = "<group>"; };
+		42B5F4BB1F62301F0072FF36 /* OrderDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetialViewController.m; sourceTree = "<group>"; };
+		42B5F4BE1F6233960072FF36 /* OrderAlterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderAlterView.h; sourceTree = "<group>"; };
+		42B5F4BF1F6233960072FF36 /* OrderAlterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderAlterView.m; sourceTree = "<group>"; };
 		42C84EA41EF2DB060008189D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		42C84EA51EF2DB060008189D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		42C84EAB1EF2DB060008189D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -298,6 +304,8 @@
 			children = (
 				4214BDDC1F5FA74E00FA1F85 /* OrderViewController.h */,
 				4214BDDD1F5FA74E00FA1F85 /* OrderViewController.m */,
+				42B5F4BA1F62301F0072FF36 /* OrderDetialViewController.h */,
+				42B5F4BB1F62301F0072FF36 /* OrderDetialViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,6 +347,7 @@
 				42C84EAE1EF2DB060008189D /* SuperClass */,
 				42C84EA31EF2DB060008189D /* Classes */,
 				42C84EA61EF2DB060008189D /* Factory */,
+				42B5F4BD1F6231A00072FF36 /* Commen */,
 				42C84EA21EF2DB060008189D /* Category */,
 				42C84EA91EF2DB060008189D /* Library */,
 				42C84EAA1EF2DB060008189D /* Main */,
@@ -357,6 +366,15 @@
 				42A4443C1EF133E000F90791 /* BaseProject.xcdatamodeld */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42B5F4BD1F6231A00072FF36 /* Commen */ = {
+			isa = PBXGroup;
+			children = (
+				42B5F4BE1F6233960072FF36 /* OrderAlterView.h */,
+				42B5F4BF1F6233960072FF36 /* OrderAlterView.m */,
+			);
+			path = Commen;
 			sourceTree = "<group>";
 		};
 		42C84EA21EF2DB060008189D /* Category */ = {
@@ -738,9 +756,11 @@
 				4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */,
 				42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */,
 				42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */,
+				42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */,
 				42C84EAF1EF2DB060008189D /* ViewController.m in Sources */,
 				42C84EB91EF2DCD90008189D /* MainApi.m in Sources */,
 				42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */,
+				42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */,
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */,

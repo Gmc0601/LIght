@@ -8,6 +8,7 @@
 
 #import "OrderViewController.h"
 #import "OrderTableViewCell.h"
+#import "OrderAlterView.h"
 
 @interface OrderViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -63,9 +64,12 @@
     }
     
     [cell changeFoodviewType:type];
-    
+    __block int i  = indexPath.row;
     cell.BtnClickBlock = ^{
-        NSLog(@"....");
+        if (i == Order_Invite) {
+            OrderAlterView *view = [[OrderAlterView alloc] initWithFrame:FRAME(0, 0, kScreenW, kScreenH)];
+            [view pop];
+        }
     };
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
