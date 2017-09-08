@@ -1,22 +1,22 @@
 //
-//  ShoppingCarViewController.m
+//  FavoriteGoodsViewController.m
 //  BaseProject
 //
-//  Created by cc on 2017/9/6.
-//  Copyright © 2017年 cc. All rights reserved.
+//  Created by LeoGeng on 08/09/2017.
+//  Copyright © 2017 cc. All rights reserved.
 //
 
-#import "ShoppingCarViewController.h"
+#import "FavoriteGoodsViewController.h"
 
-@interface ShoppingCarViewController ()
+@interface FavoriteGoodsViewController ()
 
 @end
 
-@implementation ShoppingCarViewController
+@implementation FavoriteGoodsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLab.text = @"Test";
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

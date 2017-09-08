@@ -10,7 +10,7 @@
 
 #import "OrderViewController.h"
 #import "MycenterViewController.h"
-#import "ShoppingCarViewController.h"
+#import "FirstLevelGoodsViewController.h"
 
 @interface FirstViewViewController ()
 
@@ -56,7 +56,7 @@
         }
             break;
         case 1:{//  B  购物车 商品详情等
-            to = [ShoppingCarViewController new];
+            to = [FirstLevelGoodsViewController new];
         }
             break;
         case 2:{//  D  订单

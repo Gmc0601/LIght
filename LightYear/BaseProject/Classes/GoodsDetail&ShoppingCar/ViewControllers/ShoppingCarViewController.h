@@ -6,8 +6,8 @@
 //  Copyright © 2017年 cc. All rights reserved.
 //
 
-#import "CCBaseViewController.h"
+#import "ShopBaseViewController.h"
 
-@interface ShoppingCarViewController : CCBaseViewController
+@interface ShoppingCarViewController : ShopBaseViewController
 
 @end
