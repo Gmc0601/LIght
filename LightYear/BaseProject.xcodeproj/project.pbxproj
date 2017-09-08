@@ -80,6 +80,7 @@
 		6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */; };
 		6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */; };
 		6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */; };
+		6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */; };
 		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
 /* End PBXBuildFile section */
 
@@ -250,6 +251,8 @@
 		6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevelGoodsViewController.m; sourceTree = "<group>"; };
 		6B5F6DBA1F629EB8001BDC0E /* GoodsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsListViewController.h; sourceTree = "<group>"; };
 		6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsListViewController.m; sourceTree = "<group>"; };
+		6B5F6DBD1F62A027001BDC0E /* GoodDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodDetialViewController.h; sourceTree = "<group>"; };
+		6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodDetialViewController.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +317,8 @@
 				6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */,
 				6B5F6DBA1F629EB8001BDC0E /* GoodsListViewController.h */,
 				6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */,
+				6B5F6DBD1F62A027001BDC0E /* GoodDetialViewController.h */,
+				6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -971,6 +976,7 @@
 				42A24FD01F5F0CE5005130DC /* UIView+Utils.m in Sources */,
 				42A24FCE1F5F0CE5005130DC /* UILabel+Width.m in Sources */,
 				425F203F1F61955100D0E44D /* OrderModel.m in Sources */,
+				6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */,
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "GoodsListViewController.h"
 #import "GoodsCategory.h"
+#import "GoodDetialViewController.h"
 
 #define TAG 100
 
@@ -91,6 +92,12 @@
     lbl.text = ((GoodsCategory *) _dataSource[indexPath.row]).text;
     
     return cell;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    GoodDetialViewController *newVC = [GoodDetialViewController new];
+//    newVC.categry = _dataSource[indexPath.row];
+    [self.navigationController pushViewController:newVC animated:YES];
 }
 
 -(UILabel *) getTitleLableWithIndex:(NSInteger) index{

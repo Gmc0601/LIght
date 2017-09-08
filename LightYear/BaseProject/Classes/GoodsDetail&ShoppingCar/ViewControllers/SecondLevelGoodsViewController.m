@@ -8,6 +8,7 @@
 
 #import "SecondLevelGoodsViewController.h"
 #import "GoodsCategory.h"
+#import "GoodsListViewController.h"
 
 #define TAG 100
 
@@ -71,6 +72,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  _dataSource.count;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    GoodsListViewController *newVC = [GoodsListViewController new];
+    newVC.categry = _dataSource[indexPath.row];
+    [self.navigationController pushViewController:newVC animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
