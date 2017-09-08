@@ -52,7 +52,7 @@
 -(void) addTitleLableTo:(UITableViewCell *)cell{
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(17));
-    lblTitle.textColor = [UIColor colo]
+//    lblTitle.textColor = [UIColor colo]
     
 }
 
