@@ -6,13 +6,12 @@
 //  Copyright © 2017 cc. All rights reserved.
 //
 
-#import "FirstLevelGoodsViewController.h"
+#import "GoodsListViewController.h"
 #import "GoodsCategory.h"
-#import "SecondLevelGoodsViewController.h"
 
 #define TAG 100
 
-@interface FirstLevelGoodsViewController () <UITableViewDelegate,UITableViewDataSource>{
+@interface GoodsListViewController () <UITableViewDelegate,UITableViewDataSource>{
     UITableView *_tb;
     NSString *_cellIdentifier;
     NSMutableArray *_dataSource;
@@ -20,23 +19,27 @@
 
 @end
 
-@implementation FirstLevelGoodsViewController
+@implementation GoodsListViewController
+@synthesize categry = _categry;
+-(void) setCategry:(GoodsCategory *)categry{
+    _categry = categry;
+    self.titleLab.text = _categry.text;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self mockData];
     [self addFavoriteButton];
-    [self addSearchButton];
     [self addTableView];
 }
 
 -(void) mockData{
     _dataSource = [NSMutableArray arrayWithCapacity:10];
-
+    
     for (int i=0; i<10; i++) {
         GoodsCategory *c = [GoodsCategory new];
         c._id = @"1";
-        c.text = @"一级目录";
+        c.text = @"商品";
         [_dataSource addObject:c];
     }
 }
@@ -44,12 +47,12 @@
 -(void) addTableView{
     _cellIdentifier = @"cell";
     _tb = [[UITableView alloc] init];
-    _tb.rowHeight = SizeHeigh(66);
+    _tb.rowHeight = SizeHeigh(162);
     _tb.delegate = self;
     _tb.dataSource = self;
-    _tb.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:_cellIdentifier];
     _tb.tableFooterView = [UIView new];
+    
     [self.view addSubview:_tb];
     
     [_tb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +78,6 @@
     if (lbl == nil) {
         cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f2"];
-        
         lbl = [self getTitleLableWithIndex:indexPath.row];
         [cell addSubview:lbl];
         [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,12 +93,6 @@
     return cell;
 }
 
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SecondLevelGoodsViewController *newVC = [SecondLevelGoodsViewController new];
-    newVC.categry = _dataSource[indexPath.row];
-    [self.navigationController pushViewController:newVC animated:YES];
-}
-
 -(UILabel *) getTitleLableWithIndex:(NSInteger) index{
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(17));
@@ -106,22 +102,4 @@
     
     return lblTitle;
 }
-
--(void) addSearchButton{
-    self.titleLab.text = @"输入商品名称";
-    self.titleLab.font = SourceHanSansCNRegular(SizeWidth(14));
-    self.titleLab.textColor = [UIColor lightGrayColor];
-    self.titleLab.textAlignment = NSTextAlignmentLeft;
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_nav_ss"]];
-    [self.navigationView addSubview:imgView];
-    
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.titleLab.mas_centerY).offset(SizeHeigh(5));
-        make.right.equalTo(self.titleLab.mas_left).offset(SizeWidth(-10));
-        make.height.equalTo(@(SizeHeigh(16)));
-        make.width.equalTo(@(SizeWidth(16)));
-    }];
-}
-
 @end

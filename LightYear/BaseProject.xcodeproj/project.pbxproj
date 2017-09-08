@@ -79,6 +79,7 @@
 		6B5F6DB31F628D28001BDC0E /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D9B1F628D28001BDC0E /* UIView+Category.m */; };
 		6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */; };
 		6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */; };
+		6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */; };
 		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
 /* End PBXBuildFile section */
 
@@ -247,6 +248,8 @@
 		6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategory.m; sourceTree = "<group>"; };
 		6B5F6DB71F629ABF001BDC0E /* SecondLevelGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondLevelGoodsViewController.h; sourceTree = "<group>"; };
 		6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevelGoodsViewController.m; sourceTree = "<group>"; };
+		6B5F6DBA1F629EB8001BDC0E /* GoodsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsListViewController.h; sourceTree = "<group>"; };
+		6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsListViewController.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -309,6 +312,8 @@
 				6B5F6D6A1F6282D7001BDC0E /* FavoriteGoodsViewController.m */,
 				6B5F6DB71F629ABF001BDC0E /* SecondLevelGoodsViewController.h */,
 				6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */,
+				6B5F6DBA1F629EB8001BDC0E /* GoodsListViewController.h */,
+				6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */,
 				6B5F6DA31F628D28001BDC0E /* NSMutableDictionary+Category.m in Sources */,
 				42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */,
+				6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
