@@ -13,6 +13,7 @@
 @end
 
 @implementation ShopBaseViewController
+@synthesize bottomView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +27,14 @@
 
 -(void) addFavoriteButton{
     [self.rightBar setTitle:@"喜欢" forState:UIControlStateNormal];
+}
+
+-(BOOL) hasBottomView{
+    return  self.bottomView != nil;
+}
+
+-(void) injected{
+    [self viewDidLoad];
 }
 
 @end

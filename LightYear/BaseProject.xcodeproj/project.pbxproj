@@ -77,6 +77,8 @@
 		6B5F6DB11F628D28001BDC0E /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D971F628D28001BDC0E /* UIView+Animation.m */; };
 		6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D991F628D28001BDC0E /* UIView+BGFrame.m */; };
 		6B5F6DB31F628D28001BDC0E /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D9B1F628D28001BDC0E /* UIView+Category.m */; };
+		6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */; };
+		6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */; };
 		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +243,10 @@
 		6B5F6D991F628D28001BDC0E /* UIView+BGFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BGFrame.m"; sourceTree = "<group>"; };
 		6B5F6D9A1F628D28001BDC0E /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
 		6B5F6D9B1F628D28001BDC0E /* UIView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
+		6B5F6DB41F6291B7001BDC0E /* GoodsCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCategory.h; sourceTree = "<group>"; };
+		6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategory.m; sourceTree = "<group>"; };
+		6B5F6DB71F629ABF001BDC0E /* SecondLevelGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondLevelGoodsViewController.h; sourceTree = "<group>"; };
+		6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevelGoodsViewController.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,6 +290,8 @@
 		4214BDE61F5FA8A800FA1F85 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6B5F6DB41F6291B7001BDC0E /* GoodsCategory.h */,
+				6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +307,8 @@
 				6B5F6D671F6281BC001BDC0E /* FirstLevelGoodsViewController.m */,
 				6B5F6D691F6282D7001BDC0E /* FavoriteGoodsViewController.h */,
 				6B5F6D6A1F6282D7001BDC0E /* FavoriteGoodsViewController.m */,
+				6B5F6DB71F629ABF001BDC0E /* SecondLevelGoodsViewController.h */,
+				6B5F6DB81F629ABF001BDC0E /* SecondLevelGoodsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -918,6 +928,7 @@
 				42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */,
 				6B5F6DA61F628D28001BDC0E /* NSString+MD5.m in Sources */,
 				42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */,
+				6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */,
 				42C84EAF1EF2DB060008189D /* ViewController.m in Sources */,
 				42C84EB91EF2DCD90008189D /* MainApi.m in Sources */,
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
@@ -925,6 +936,7 @@
 				42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */,
 				6B5F6D9E1F628D28001BDC0E /* NSData+Category.m in Sources */,
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
+				6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */,
 				6B5F6DAC1F628D28001BDC0E /* UIImage+Category.m in Sources */,
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */,

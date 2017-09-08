@@ -9,5 +9,9 @@
 #import "CCBaseViewController.h"
 
 @interface ShopBaseViewController : CCBaseViewController
+@property(retain,atomic) UIView *bottomView;
+
 -(void) addFavoriteButton;
+-(BOOL) hasBottomView;
+-(void) addSearchButton;
 @end
