@@ -9,6 +9,8 @@
 #import "GoodsListViewController.h"
 #import "GoodsCategory.h"
 #import "GoodDetialViewController.h"
+#import "GoodsModel.h"
+#import "GoodsCell.h"
 
 #define TAG 100
 
@@ -38,20 +40,26 @@
     _dataSource = [NSMutableArray arrayWithCapacity:10];
     
     for (int i=0; i<10; i++) {
-        GoodsCategory *c = [GoodsCategory new];
-        c._id = @"1";
-        c.text = @"商品";
-        [_dataSource addObject:c];
+        GoodsModel *model = [GoodsModel new];
+        model._id = @"1";
+        model.name = @"小龙虾";
+        model.canTakeBySelf = YES;
+        model.hasDiscounts = YES;
+        model.canDelivery = NO;
+        model.isNew = NO;
+        model.price = @"111";
+        model.memberPrice = @"1";
+        [_dataSource addObject:model];
     }
 }
 
 -(void) addTableView{
     _cellIdentifier = @"cell";
     _tb = [[UITableView alloc] init];
-    _tb.rowHeight = SizeHeigh(162);
+    _tb.rowHeight = SizeHeigh(161);
     _tb.delegate = self;
     _tb.dataSource = self;
-    [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:_cellIdentifier];
+    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:_cellIdentifier];
     _tb.tableFooterView = [UIView new];
     
     [self.view addSubview:_tb];
@@ -74,29 +82,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    UILabel *lbl = [cell viewWithTag:TAG + indexPath.row];
-    if (lbl == nil) {
-        cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f2"];
-        lbl = [self getTitleLableWithIndex:indexPath.row];
-        [cell addSubview:lbl];
-        [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(cell).offset(SizeWidth(15));
-            make.right.equalTo(cell);
-            make.top.equalTo(cell);
-            make.bottom.equalTo(cell);
-        }];
-    }
-    
-    lbl.text = ((GoodsCategory *) _dataSource[indexPath.row]).text;
+    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    cell.model = _dataSource[indexPath.row];
     
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodDetialViewController *newVC = [GoodDetialViewController new];
-//    newVC.categry = _dataSource[indexPath.row];
+   
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
@@ -109,4 +103,6 @@
     
     return lblTitle;
 }
+
+
 @end

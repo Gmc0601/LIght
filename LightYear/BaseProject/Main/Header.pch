@@ -79,7 +79,7 @@
 #define VerdanaBoldItalic(FONTSIZE)      [UIFont fontWithName:@"Verdana-BoldItalic" size:FONTSIZE]
 #define Verdana(FONTSIZE)      [UIFont fontWithName:@"Verdana" size:FONTSIZE]
 #define VerdanaBold(FONTSIZE)      [UIFont fontWithName:@"Verdana-Bold" size:FONTSIZE]
-
+#define PingFangSCMedium(FONTSIZE)      [UIFont fontWithName:@"PingFang-SC-Medium" size:FONTSIZE]
 /**
  * 颜色（RGB）
  */
