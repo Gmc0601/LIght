@@ -94,15 +94,5 @@
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
--(UILabel *) getTitleLableWithIndex:(NSInteger) index{
-    UILabel *lblTitle = [UILabel new];
-    lblTitle.font = SourceHanSansCNMedium(SizeWidth(17));
-    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-    lblTitle.textAlignment = NSTextAlignmentLeft;
-    lblTitle.tag = TAG + index;
-    
-    return lblTitle;
-}
-
 
 @end

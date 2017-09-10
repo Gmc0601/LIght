@@ -52,12 +52,13 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
+    self.separatorInset = UIEdgeInsetsMake(0, SizeWidth(15), 0, SizeWidth(15));
     return  self;
 }
 
 -(void) addSubView{
     _img = [UIImageView new];
+    _img.backgroundColor = [UIColor redColor];
     [_img sd_setImageWithURL:[NSURL URLWithString:_model.img]];
     [self addSubview:_img];
     

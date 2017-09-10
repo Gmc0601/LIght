@@ -6,5 +6,6 @@ pod 'SDWebImage'
 pod 'MBProgressHUD'
 pod 'Masonry'
 pod 'MJExtension'
+pod 'ZYBannerView'
 
 end

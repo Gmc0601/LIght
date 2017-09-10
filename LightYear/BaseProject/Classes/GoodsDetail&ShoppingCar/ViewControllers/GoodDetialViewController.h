@@ -9,5 +9,5 @@
 #import "ShopBaseViewController.h"
 
 @interface GoodDetialViewController : ShopBaseViewController
-
+@property (retain,nonatomic) NSString *goodsId;
 @end
