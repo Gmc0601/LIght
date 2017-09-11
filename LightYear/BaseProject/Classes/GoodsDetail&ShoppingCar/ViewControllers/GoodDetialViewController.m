@@ -18,6 +18,7 @@
 @interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource>{
     UITableView *_tb;
     NSString *_cellIdentifier;
+    NSString *_headerIdentifier;
     ZYBannerView *_banner;
     UILabel *_lblTitle;
     UILabel *_lblPrice1;
@@ -50,10 +51,12 @@
 
 -(void) addTableView{
     _cellIdentifier = @"cell";
+    _headerIdentifier = @"header";
     _tb = [[UITableView alloc] init];
     _tb.delegate = self;
     _tb.dataSource = self;
     [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:_cellIdentifier];
+    [_tb registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:_headerIdentifier];
     _tb.tableFooterView = [UIView new];
     _tb.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _tb.allowsSelection = NO;
@@ -71,9 +74,12 @@
     }];
 }
 
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  4;
+    return  1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -224,18 +230,68 @@
         return SizeHeigh(616/2);
     }else if(indexPath.row == 1){
         if (_showDetail) {
-            return SizeHeigh(61 + _heightOfDetail + 100);
+            return SizeHeigh(_heightOfDetail + 100);
         }else{
-            return SizeHeigh(61);
+            return 0;
         }
     }else if(indexPath.row == 2){
         if (_showReminder) {
-            return SizeHeigh(61 + _heightOfDetail + 100);
+            return SizeHeigh( _heightOfDetail + 100);
         }else{
-            return SizeHeigh(61);
+            return 0;
         }
     }
     
     return  SizeHeigh(271);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1 || section == 2) {
+        return SizeHeigh(61);
+    }
+    
+    return 0;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:_headerIdentifier];
+    
+    if (section == 1) {
+        [self setHeader:header withSection:section withText:@"产品详情"];
+    }else if (section == 2){
+        [self setHeader:header withSection:section withText:@"重要提示"];
+    }
+    
+    return header;
+}
+
+-(void) setHeader:(UITableViewHeaderFooterView *) header withSection:(NSInteger) section withText:(NSString *) text{
+    UILabel *lblTitle = [header viewWithTag:TAG + section];
+    if (lblTitle == nil) {
+        lblTitle = [self addLableToHeaderView:header  withIndex:section];
+    }
+    
+    lblTitle.text = text;
+    
+    header.backgroundView = [UIView new];
+    header.backgroundView.backgroundColor = [UIColor redColor];
+}
+
+-(UILabel *) addLableToHeaderView:(UIView *) header withIndex:(NSInteger) index{
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
+    lblTitle.textAlignment = NSTextAlignmentLeft;
+    lblTitle.tag = TAG + index;
+    
+    [header addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(header);
+        make.left.equalTo(header.mas_left).offset(SizeWidth(30));
+        make.width.equalTo(@(SizeHeigh(100)));
+    }];
+    
+    return lblTitle;
 }
 @end
