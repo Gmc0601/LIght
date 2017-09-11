@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C971F663A9300F03EAA /* LoginViewController.m */; };
+		00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C991F663A9300F03EAA /* MycenterViewController.m */; };
+		00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C9C1F663A9300F03EAA /* BaseTextField.m */; };
 		4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */; };
 		4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDD1F5FA74E00FA1F85 /* OrderViewController.m */; };
-		4214BDE11F5FA7AA00FA1F85 /* MycenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE01F5FA7AA00FA1F85 /* MycenterViewController.m */; };
 		4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */; };
 		4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDED1F5FA97A00FA1F85 /* FactorySet.m */; };
 		425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 425F203B1F613BD900D0E44D /* OrderTableViewCell.m */; };
@@ -104,12 +106,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00F49C961F663A9300F03EAA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		00F49C971F663A9300F03EAA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		00F49C981F663A9300F03EAA /* MycenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterViewController.h; sourceTree = "<group>"; };
+		00F49C991F663A9300F03EAA /* MycenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterViewController.m; sourceTree = "<group>"; };
+		00F49C9B1F663A9300F03EAA /* BaseTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextField.h; sourceTree = "<group>"; };
+		00F49C9C1F663A9300F03EAA /* BaseTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTextField.m; sourceTree = "<group>"; };
 		4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewViewController.h; sourceTree = "<group>"; };
 		4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewViewController.m; sourceTree = "<group>"; };
 		4214BDDC1F5FA74E00FA1F85 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		4214BDDD1F5FA74E00FA1F85 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
-		4214BDDF1F5FA7AA00FA1F85 /* MycenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterViewController.h; sourceTree = "<group>"; };
-		4214BDE01F5FA7AA00FA1F85 /* MycenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterViewController.m; sourceTree = "<group>"; };
 		4214BDE81F5FA8A800FA1F85 /* ShoppingCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarViewController.h; sourceTree = "<group>"; };
 		4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarViewController.m; sourceTree = "<group>"; };
 		4214BDEC1F5FA97A00FA1F85 /* FactorySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactorySet.h; sourceTree = "<group>"; };
@@ -289,6 +295,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00F49C931F663A9300F03EAA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		00F49C941F663A9300F03EAA /* Uilts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Uilts;
+			sourceTree = "<group>";
+		};
+		00F49C951F663A9300F03EAA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				00F49C961F663A9300F03EAA /* LoginViewController.h */,
+				00F49C971F663A9300F03EAA /* LoginViewController.m */,
+				00F49C981F663A9300F03EAA /* MycenterViewController.h */,
+				00F49C991F663A9300F03EAA /* MycenterViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		00F49C9A1F663A9300F03EAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00F49C9B1F663A9300F03EAA /* BaseTextField.h */,
+				00F49C9C1F663A9300F03EAA /* BaseTextField.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4214BDE51F5FA8A800FA1F85 /* GoodsDetail&ShoppingCar */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,34 +416,12 @@
 		4299411E1F5EAC4F0009ADDA /* MyCenter&Login */ = {
 			isa = PBXGroup;
 			children = (
-				429941201F5EAC4F0009ADDA /* ViewControllers */,
-				429941211F5EAC4F0009ADDA /* Views */,
-				4299411F1F5EAC4F0009ADDA /* Models */,
+				00F49C931F663A9300F03EAA /* Models */,
+				00F49C941F663A9300F03EAA /* Uilts */,
+				00F49C951F663A9300F03EAA /* ViewControllers */,
+				00F49C9A1F663A9300F03EAA /* Views */,
 			);
 			path = "MyCenter&Login";
-			sourceTree = "<group>";
-		};
-		4299411F1F5EAC4F0009ADDA /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		429941201F5EAC4F0009ADDA /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				4214BDDF1F5FA7AA00FA1F85 /* MycenterViewController.h */,
-				4214BDE01F5FA7AA00FA1F85 /* MycenterViewController.m */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		429941211F5EAC4F0009ADDA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		429941221F5EAC4F0009ADDA /* Order */ = {
@@ -928,6 +946,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F795BC1F00C8B200A11A69 /* BaseViewController.m in Sources */,
+				00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */,
 				42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */,
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
@@ -955,6 +974,7 @@
 				42C84EB91EF2DCD90008189D /* MainApi.m in Sources */,
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
 				42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */,
+				00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */,
 				42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */,
 				6B5F6D9E1F628D28001BDC0E /* NSData+Category.m in Sources */,
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
@@ -992,8 +1012,8 @@
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,
-				4214BDE11F5FA7AA00FA1F85 /* MycenterViewController.m in Sources */,
 				42C84F1E1EF2EB650008189D /* SBJSON.m in Sources */,
+				00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */,
 				6B5F6D9C1F628D28001BDC0E /* NSArray+Category.m in Sources */,
 				6B5F6DA91F628D28001BDC0E /* UIButton+Category.m in Sources */,
 				42C84EC71EF2DD1A0008189D /* GTMBase64.m in Sources */,
