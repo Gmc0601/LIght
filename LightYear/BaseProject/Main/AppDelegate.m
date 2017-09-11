@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "FirstViewViewController.h"
+#import "LoginViewController.h"
+
 @interface AppDelegate ()
 @end
 
@@ -18,15 +20,35 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
+    UINavigationController * na;
     
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
+    }else{
+        na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
+    }
     self.window.rootViewController = na;
     
     self.window.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginActionWithType:) name:kLoginNotification object:nil];
+    
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)loginActionWithType:(NSNotification *)aNote {
+    /**
+     *  type=0登录成功，type=1退出登录，type=2注册成功，type=3登录失败
+     */
+    UINavigationController * na;
+    if ([aNote.object isEqual:@0]) {
+        na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
+    }else if ([aNote.object isEqual:@1]){
+        na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
+    }
+    self.window.rootViewController = na;
 }
 
 

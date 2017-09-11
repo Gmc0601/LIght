@@ -13,7 +13,7 @@
 #import "ConfigModel.h"
 #import "MainApi.h"
 
-
+#import <Masonry.h>
 
 /*
  通用
@@ -117,6 +117,8 @@
 /** SDK版本 */
 #define App_SDKversion         [[UIDevice currentDevice] systemVersion]
 
+// 登录成功之后的通知
+#define kLoginNotification @"loginNotification"
 
 #ifdef DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"\n%s\t(%d)\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);

@@ -18,7 +18,10 @@
     [super viewDidLoad];
     self.titleLab.text = @"你还，小宝贝";
 }
-
+- (void)more:(UIButton *)sender{
+    [ConfigModel saveBoolObject:NO forKey:IsLogin];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(1)];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
