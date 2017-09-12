@@ -273,7 +273,7 @@
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin{
     UILabel *lbl = [UILabel new];
-    lbl.font = VerdanaBold(SizeWidth(15));
+    lbl.font = SourceHanSansCNLight(SizeWidth(15));
     lbl.textColor = fontColor;
     lbl.textAlignment = NSTextAlignmentLeft;
     lbl.text = text;

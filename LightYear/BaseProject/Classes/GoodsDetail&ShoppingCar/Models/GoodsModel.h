@@ -19,4 +19,6 @@
 @property(assign,atomic) BOOL hasDiscounts;
 @property(assign,atomic) BOOL isNew;
 @property(assign,atomic) BOOL outOfStack;
+@property(assign,atomic) int count;
+@property(retain,atomic) NSString *discountMessage;
 @end
