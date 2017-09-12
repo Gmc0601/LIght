@@ -20,7 +20,7 @@
 - (id)initWithFrame:(CGRect)frame PlaceholderStr:(NSString *)placeholderStr{
     self = [super initWithFrame:frame];
     if (self) {
-        self.textColor = [UIColor blackColor];
+        self.textColor = UIColorFromHex(0x3e7bb1);
         self.font = [UIFont systemFontOfSize:18.0];
         self.tintColor = UIColorFromHex(0xcccccc);
         UIButton * userCleanButton = [self valueForKey:@"_clearButton"];

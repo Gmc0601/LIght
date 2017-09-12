@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 008A7DD41F68512A000806F8 /* MycenterHeadView.m */; };
 		00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C971F663A9300F03EAA /* LoginViewController.m */; };
 		00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C991F663A9300F03EAA /* MycenterViewController.m */; };
 		00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C9C1F663A9300F03EAA /* BaseTextField.m */; };
@@ -106,6 +107,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		008A7DD31F68512A000806F8 /* MycenterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterHeadView.h; sourceTree = "<group>"; };
+		008A7DD41F68512A000806F8 /* MycenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterHeadView.m; sourceTree = "<group>"; };
 		00F49C961F663A9300F03EAA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		00F49C971F663A9300F03EAA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		00F49C981F663A9300F03EAA /* MycenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterViewController.h; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 			children = (
 				00F49C9B1F663A9300F03EAA /* BaseTextField.h */,
 				00F49C9C1F663A9300F03EAA /* BaseTextField.m */,
+				008A7DD31F68512A000806F8 /* MycenterHeadView.h */,
+				008A7DD41F68512A000806F8 /* MycenterHeadView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -990,6 +995,7 @@
 				42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */,
 				6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
+				008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
 				6B5F6DAB1F628D28001BDC0E /* UIControl+ResponseTime.m in Sources */,
