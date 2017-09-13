@@ -90,6 +90,8 @@
 		6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */; };
 		6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */; };
 		6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */; };
+		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
+		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +281,10 @@
 		6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCell.m; sourceTree = "<group>"; };
 		6B5F6DC31F63D5F1001BDC0E /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
+		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
+		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
+		6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCV.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,6 +403,10 @@
 		4214BDEA1F5FA8A800FA1F85 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */,
+				6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */,
+				6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */,
+				6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */,
 				6B5F6DC01F63D5D2001BDC0E /* GoodsCell.h */,
 				6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */,
 			);
@@ -1001,6 +1011,7 @@
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
 				42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */,
 				00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */,
+				6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */,
 				42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */,
 				6B5F6D9E1F628D28001BDC0E /* NSData+Category.m in Sources */,
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
@@ -1019,6 +1030,7 @@
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
 				008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
+				6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
 				6B5F6DAB1F628D28001BDC0E /* UIControl+ResponseTime.m in Sources */,
 				6B5F6D9D1F628D28001BDC0E /* NSAttributedString+Category.m in Sources */,
