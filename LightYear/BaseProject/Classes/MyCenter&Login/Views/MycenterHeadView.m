@@ -22,12 +22,13 @@
 - (void)configUI{
     UIButton * headButton = [UIButton new];
     headButton.tag = 10;
+    [headButton addTarget:self action:@selector(headViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     headButton.layer.cornerRadius = 40.0f;
     headButton.layer.masksToBounds = YES;
     [self addSubview:headButton];
     [headButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_offset(0);
-        make.top.mas_offset(50);
+        make.top.mas_offset(40);
         make.size.mas_offset(CGSizeMake(80, 80));
     }];
     
@@ -51,13 +52,14 @@
         make.left.right.mas_offset(0);
     }];
     
-    NSArray * imageArr = @[@"",@"",@"",@"",@""];
+    NSArray * imageArr = @[@"icon_grzx_qbdd",@"icon_grzx_dps",@"icon_grzx_dzt",@"icon_grzx_psz",@"icon_grzx_dzf"];
     NSArray * titleArr = @[@"全部订单",@"待配送",@"待自取",@"配送中",@"待支付"];
     CGFloat buttonWidth = kScreenW/8;
     CGFloat buttonLeft= (kScreenW-kScreenW/8*5-15*4)/2;
     UIButton * baseButton;
     for (int i = 0; i < 5; i++) {
         UIButton * button = [UIButton new];
+        button.tag = 20+i;
         button.backgroundColor = [UIColor whiteColor];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,6 +89,11 @@
             make.bottom.mas_offset(0);
             make.centerX.mas_offset(0);
         }];
+    }
+}
+- (void)headViewButtonAction:(UIButton *)button{
+    if ([self.delegate respondsToSelector:@selector(didMycenterHeadViewButton:)]) {
+        [self.delegate didMycenterHeadViewButton:button];
     }
 }
 @end
