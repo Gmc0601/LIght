@@ -682,6 +682,23 @@
     return lblTitle;
 }
 
+-(void) addSubViewForLastCell:(UIView *) superView{
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+    lblTitle.text = @"推荐";
+    
+    [superView addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView);
+        make.top.equalTo(superView).offset(SizeHeigh(19));
+        make.height.equalTo(@(SizeHeigh(13)));
+        make.width.equalTo(@(SizeHeigh(100)));
+    }];
+}
+
 -(BOOL) noMemberPriceLable{
     return [_model.memberPrice isEqualToString:@""];
 }
