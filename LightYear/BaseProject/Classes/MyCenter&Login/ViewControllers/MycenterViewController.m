@@ -10,7 +10,8 @@
 #import "UserInfoViewController.h"
 
 #import "MycenterHeadView.h"
-
+#import "DeliveryAddressViewController.h"
+#import "FeedBackViewController.h"
 @interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate>
 {
     UIButton * bottomButton;
@@ -69,7 +70,7 @@
         UserInfoViewController * userInfoVC = [[UserInfoViewController alloc] init];
         [self.navigationController pushViewController:userInfoVC animated:YES];
     }else{
-        
+        //订单 20--24
     }
 }
 #pragma mark UITableViewDelegate
@@ -129,8 +130,12 @@
 
     if (indexPath.section == 0) {
         //收货地址
+        DeliveryAddressViewController * addressVC = [[DeliveryAddressViewController alloc] init];
+        [self.navigationController pushViewController:addressVC animated:YES];
     }else if (indexPath.section == 1){
         //意见反馈
+        FeedBackViewController * feedBackVC = [[FeedBackViewController alloc] init];
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }else if (indexPath.section == 2){
         //联系我们
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0571-0000999"];

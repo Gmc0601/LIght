@@ -50,7 +50,7 @@
         make.height.mas_offset(40);
     }];
     
-    _userTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入11位手机号"];
+    _userTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入11位手机号" isBorder:YES];
     _userTextField.keyboardType = UIKeyboardTypeNumberPad;
     _userTextField.tag = 100;
     _userTextField.textDelegate = self;
@@ -90,7 +90,7 @@
         make.height.mas_offset(40);
     }];
     
-    _passTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入6位验证码"];
+    _passTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入6位验证码" isBorder:YES];
     _passTextField.keyboardType = UIKeyboardTypeNumberPad;
     _passTextField.tag = 101;
     _passTextField.isChangeKeyBoard = YES;
@@ -130,6 +130,43 @@
         make.centerX.mas_offset(0);
         make.top.mas_equalTo(_loginButton.mas_bottom).offset(20);
     }];
+    
+    NSArray * imageArr = @[@"icon_dl_QQ",@"icon_dl_wx"];
+    NSArray * titleArr = @[@"QQ",@"微信"];
+    UIButton * baseButton;
+    for (int i = 0; i < 2; i++) {
+        UIButton * button = [UIButton new];
+        button.tag = 20+i;
+        button.backgroundColor = [UIColor whiteColor];
+        [button addTarget:self action:@selector(loginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(tipLabel.mas_bottom).offset(20);
+            if (i == 0) {
+                make.centerX.mas_offset(-70);
+            }else{
+                make.centerX.mas_offset(70);
+            }
+        }];
+        baseButton = button;
+        
+        UIImageView * imageView = [UIImageView new];
+        imageView.image = [UIImage imageNamed:imageArr[i]];
+        [button addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_offset(0);
+            make.top.mas_offset(0);
+        }];
+        
+        UILabel * titleLabel = [UILabel new];
+        titleLabel.text = titleArr[i];
+        titleLabel.font = [UIFont systemFontOfSize:14];
+        [button addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(imageView.mas_bottom).offset(10);
+            make.centerX.mas_offset(0);
+        }];
+    }
 }
 //登录
 - (void)loginAction:(UIButton *)sender{
@@ -201,6 +238,10 @@
             //_loginButton.alpha = 0.5f;
         }
     }
+}
+//第三方登录
+- (void)loginButtonAction:(UIButton *)button{
+    
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

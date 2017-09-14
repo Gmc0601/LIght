@@ -33,34 +33,37 @@
     }];
     
     headImage = [UIImageView new];
-    headImage.image = [UIImage imageNamed:@"icon_grzl_tx"];
+    headImage.image = [UIImage imageNamed:@"icon_grzx_tx"];
     [headButton addSubview:headImage];
     [headImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.mas_offset(0);
+        make.bottom.right.mas_offset(5);
+        make.top.left.mas_offset(-5);
     }];
     
     UILabel * headEditLabel = [UILabel new];
     headEditLabel.text = @"编辑";
     headEditLabel.alpha = 0.5f;
     headEditLabel.textAlignment = NSTextAlignmentCenter;
-    headEditLabel.font = [UIFont systemFontOfSize:14];
+    headEditLabel.font = [UIFont systemFontOfSize:13];
     headEditLabel.textColor = [UIColor whiteColor];
     headEditLabel.backgroundColor = [UIColor blackColor];
     [headButton addSubview:headEditLabel];
     [headEditLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_offset(0);
         make.left.right.mas_offset(0);
+        make.height.mas_offset(20);
     }];
     
     NSArray * imageArr = @[@"icon_grzx_qbdd",@"icon_grzx_dps",@"icon_grzx_dzt",@"icon_grzx_psz",@"icon_grzx_dzf"];
     NSArray * titleArr = @[@"全部订单",@"待配送",@"待自取",@"配送中",@"待支付"];
-    CGFloat buttonWidth = kScreenW/8;
-    CGFloat buttonLeft= (kScreenW-kScreenW/8*5-15*4)/2;
+    CGFloat buttonWidth = kScreenW/7;
+    CGFloat buttonLeft= (kScreenW-kScreenW/7*5-15*4)/2;
     UIButton * baseButton;
     for (int i = 0; i < 5; i++) {
         UIButton * button = [UIButton new];
         button.tag = 20+i;
         button.backgroundColor = [UIColor whiteColor];
+        [button addTarget:self action:@selector(headViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_offset(-20);

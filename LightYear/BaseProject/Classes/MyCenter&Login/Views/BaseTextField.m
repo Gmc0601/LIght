@@ -17,7 +17,7 @@
 
 @implementation BaseTextField
 
-- (id)initWithFrame:(CGRect)frame PlaceholderStr:(NSString *)placeholderStr{
+- (id)initWithFrame:(CGRect)frame PlaceholderStr:(NSString *)placeholderStr isBorder:(BOOL)isBorder{
     self = [super initWithFrame:frame];
     if (self) {
         self.textColor = UIColorFromHex(0x3e7bb1);
@@ -29,12 +29,13 @@
         self.placeholder = placeholderStr;
         [self setValue:UIColorFromHex(0xcccccc) forKeyPath:@"_placeholderLabel.textColor"];
         [self addTarget:self action:@selector(textFieldTextChange) forControlEvents:UIControlEventEditingChanged];
-        self.layer.borderWidth = .5f;
-        self.layer.borderColor = UIColorFromHex(0xcccccc).CGColor;
         self.leftView  = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 20.f, 0.f)];
         self.leftViewMode = UITextFieldViewModeAlways;
         self.delegate = self;
-        
+        if (isBorder) {
+            self.layer.borderWidth = .5f;
+            self.layer.borderColor = UIColorFromHex(0xcccccc).CGColor;
+        }
     }
     return self;
 }

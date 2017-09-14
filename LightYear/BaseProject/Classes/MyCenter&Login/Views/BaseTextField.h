@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @protocol BaseTextFieldDelegate <NSObject>
+
 @optional
+
 -(void)textFieldTextChange:(UITextField *)textField;
+
 @end
+
 @interface BaseTextField : UITextField
+
 @property (nonatomic, assign) BOOL isChangeKeyBoard;
+
 @property (nonatomic, weak) id<BaseTextFieldDelegate> textDelegate;
-- (id)initWithFrame:(CGRect)frame PlaceholderStr:(NSString *)placeholderStr;
+
+- (id)initWithFrame:(CGRect)frame PlaceholderStr:(NSString *)placeholderStr isBorder:(BOOL)isBorder;
 
 @end
