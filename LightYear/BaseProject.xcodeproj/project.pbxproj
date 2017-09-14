@@ -97,6 +97,7 @@
 		6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
+		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
 		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
 /* End PBXBuildFile section */
 
@@ -300,6 +301,8 @@
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
 		6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCV.m; sourceTree = "<group>"; };
+		6BBD89C81F69928500C8B7C3 /* GoodsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsListView.h; sourceTree = "<group>"; };
+		6BBD89C91F69928500C8B7C3 /* GoodsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsListView.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -434,6 +437,8 @@
 				6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */,
 				6B5F6DC01F63D5D2001BDC0E /* GoodsCell.h */,
 				6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */,
+				6BBD89C81F69928500C8B7C3 /* GoodsListView.h */,
+				6BBD89C91F69928500C8B7C3 /* GoodsListView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -886,7 +891,7 @@
 				TargetAttributes = {
 					42A4442C1EF133E000F90791 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = ZU4PJ5HFP5;
+						DevelopmentTeam = 5XW4L96Z63;
 						ProvisioningStyle = Automatic;
 					};
 					42A444481EF133E000F90791 = {
@@ -1028,6 +1033,7 @@
 				4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */,
 				00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */,
 				00445EB21F68DC65009BD830 /* UserInfoViewController.m in Sources */,
+				6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */,
 				42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */,
 				42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */,
 				6B5F6DA61F628D28001BDC0E /* NSString+MD5.m in Sources */,
@@ -1239,7 +1245,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZU4PJ5HFP5;
+				DEVELOPMENT_TEAM = 5XW4L96Z63;
 				GCC_PREFIX_HEADER = BaseProject/Main/Header.pch;
 				INFOPLIST_FILE = BaseProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1258,7 +1264,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZU4PJ5HFP5;
+				DEVELOPMENT_TEAM = 5XW4L96Z63;
 				GCC_PREFIX_HEADER = BaseProject/Main/Header.pch;
 				INFOPLIST_FILE = BaseProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

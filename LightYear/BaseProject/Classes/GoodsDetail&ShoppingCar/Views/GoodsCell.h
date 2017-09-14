@@ -11,4 +11,5 @@
 
 @interface GoodsCell : UITableViewCell
 @property(retain,nonatomic) GoodsModel *model;
+@property(assign,nonatomic) BOOL isFavorite;
 @end

@@ -9,14 +9,13 @@
 #import "GoodsListViewController.h"
 #import "GoodsCategory.h"
 #import "GoodDetialViewController.h"
+#import "GoodsListView.h"
 #import "GoodsModel.h"
-#import "GoodsCell.h"
 
 #define TAG 100
 
-@interface GoodsListViewController () <UITableViewDelegate,UITableViewDataSource>{
-    UITableView *_tb;
-    NSString *_cellIdentifier;
+@interface GoodsListViewController () <GoodsListViewDelegate>{
+    GoodsListView *_list;
     NSMutableArray *_dataSource;
 }
 
@@ -31,9 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self mockData];
     [self addFavoriteButton];
     [self addTableView];
+    [self mockData];
 }
 
 -(void) mockData{
@@ -51,20 +50,16 @@
         model.memberPrice = @"1";
         [_dataSource addObject:model];
     }
+    
+    _list.datasource = _dataSource;
 }
 
 -(void) addTableView{
-    _cellIdentifier = @"cell";
-    _tb = [[UITableView alloc] init];
-    _tb.rowHeight = SizeHeigh(161);
-    _tb.delegate = self;
-    _tb.dataSource = self;
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:_cellIdentifier];
-    _tb.tableFooterView = [UIView new];
+    _list = [GoodsListView new];
+    _list.delegate = self;
+    [self.view addSubview:_list];
     
-    [self.view addSubview:_tb];
-    
-    [_tb mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_list mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.navigationView.mas_bottom);
@@ -73,26 +68,8 @@
         }else{
             make.bottom.equalTo(self.view);
         }
+
     }];
 }
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  _dataSource.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    cell.model = _dataSource[indexPath.row];
-    
-    return cell;
-}
-
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    GoodDetialViewController *newVC = [GoodDetialViewController new];
-   
-    [self.navigationController pushViewController:newVC animated:YES];
-}
-
 
 @end

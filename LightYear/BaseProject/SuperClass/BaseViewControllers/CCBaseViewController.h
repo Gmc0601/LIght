@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Masonry/Masonry.h>
 #import "UIColor+BGHexColor.h"
-
 @interface CCBaseViewController : UIViewController
 
 @property (nonatomic, retain) UIView *navigationView;

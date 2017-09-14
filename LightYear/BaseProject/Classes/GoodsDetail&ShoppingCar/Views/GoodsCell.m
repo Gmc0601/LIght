@@ -23,6 +23,8 @@
     UILabel *_lblTakeBySelf;
     UIImageView *_imgDiscounts;
     UIImageView *_imgNew;
+    CGFloat _imgTop;
+    CGSize _imgSize;
 }
 
 @end
@@ -30,6 +32,13 @@
 @implementation GoodsCell
 
 @synthesize model = _model;
+@synthesize isFavorite = _isFavorite;
+-(void) setIsFavorite:(BOOL)isFavorite{
+    _isFavorite = isFavorite;
+    _imgTop = SizeHeigh(15);
+    _imgSize = CGSizeMake(SizeWidth(72), SizeHeigh(72));
+}
+
 -(void) setModel:(GoodsModel *)model{
     _model = model;
     for (UIView *subView in self.subviews) {
@@ -53,10 +62,23 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     self.separatorInset = UIEdgeInsetsMake(0, SizeWidth(15), 0, SizeWidth(15));
+    _imgTop = SizeHeigh(31);
+    _imgSize = CGSizeMake(SizeWidth(100), SizeHeigh(100));
+    
     return  self;
 }
 
 -(void) addSubView{
+    UIView *seperator = [UIView new];
+    seperator.backgroundColor = [UIColor colorWithHexString:@"#e0e0e0"];
+    [self addSubview:seperator];
+    [seperator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self);
+        make.left.equalTo(self).offset(SizeWidth(15));
+        make.right.equalTo(self).offset(SizeWidth(15));
+        make.height.equalTo(@(SizeHeigh(0.5)));
+    }];
+    
     _img = [UIImageView new];
     _img.backgroundColor = [UIColor redColor];
     [_img sd_setImageWithURL:[NSURL URLWithString:_model.img]];
@@ -64,9 +86,9 @@
     
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(SizeWidth(15));
-        make.top.equalTo(self.mas_top).offset(SizeHeigh(31));
-        make.height.equalTo(@(SizeHeigh(100)));
-        make.width.equalTo(@(SizeHeigh(100)));
+        make.top.equalTo(self.mas_top).offset(_imgTop);
+        make.height.equalTo(@(_imgSize.height));
+        make.width.equalTo(@(_imgSize.width));
     }];
     
     if (_model.outOfStack) {

@@ -7,5 +7,6 @@ pod 'MBProgressHUD'
 pod 'Masonry'
 pod 'MJExtension'
 pod 'ZYBannerView'
+pod 'YiSlideMenu', '~> 0.1'
 
 end
