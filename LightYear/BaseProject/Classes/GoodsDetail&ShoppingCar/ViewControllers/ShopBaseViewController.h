@@ -7,9 +7,12 @@
 //
 
 #import "CCBaseViewController.h"
+#import "SearchBarView.h"
+#import "ConfigModel.h"
 
 @interface ShopBaseViewController : CCBaseViewController
 @property(retain,atomic) UIView *bottomView;
+@property(retain,atomic) SearchBarView *searchBar;
 
 -(void) addFavoriteButton;
 -(BOOL) hasBottomView;

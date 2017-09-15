@@ -7,10 +7,10 @@
 //
 
 #import "ShopBaseViewController.h"
-#import <YiSlideMenu/YiSlideMenu.h>
 #import "GoodsModel.h"
 #import "GoodsListView.h"
 #import "GoodDetialViewController.h"
+
 @interface ShopBaseViewController ()<GoodsListViewDelegate>
 @property(retain,atomic) GoodsListView *rightView;
 @property(retain,atomic) UIView *rightBackgroundView;
@@ -43,7 +43,17 @@
     [self viewDidLoad];
 }
 
--(void) addSearchButton{}
+-(void) addSearchButton{
+    _searchBar = [SearchBarView new];
+    [self.navigationView addSubview:_searchBar];
+    
+    [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.leftBar.mas_centerY);
+        make.left.equalTo(self.leftBar.mas_right).offset(SizeWidth(24));
+        make.height.equalTo(self.navigationView.mas_height);
+        make.right.equalTo(self.navigationView.mas_right);
+    }];
+}
 
 -(void) showFavoriarView{
     CGFloat width = SizeWidth(639/2);
@@ -51,7 +61,7 @@
     
     if (_rightView == nil) {
         _rightBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-
+        
         [self.view addSubview:_rightBackgroundView];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissRightView)];
         [_rightBackgroundView addGestureRecognizer:tapGesture];
@@ -77,7 +87,6 @@
     }];
     
     _rightView.datasource = [self mockData1];
-    
 }
 
 -(NSMutableArray *) mockData1{
@@ -103,7 +112,7 @@
 -(void) dismissRightView{
     [UIView animateWithDuration:0.5 animations:^{
         _rightBackgroundView.frame = CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-         _rightView.frame = CGRectMake(self.view.bounds.size.width, _rightView.frame.origin.y, _rightView.bounds.size.width, _rightView.bounds.size.height);
+        _rightView.frame = CGRectMake(self.view.bounds.size.width, _rightView.frame.origin.y, _rightView.bounds.size.width, _rightView.bounds.size.height);
     }];
 }
 

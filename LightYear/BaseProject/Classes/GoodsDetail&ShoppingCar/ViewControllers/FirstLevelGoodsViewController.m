@@ -9,6 +9,7 @@
 #import "FirstLevelGoodsViewController.h"
 #import "GoodsCategory.h"
 #import "SecondLevelGoodsViewController.h"
+#import "SearchViewContrller.h"
 
 #define TAG 100
 
@@ -28,6 +29,11 @@
     [self addFavoriteButton];
     [self addSearchButton];
     [self addTableView];
+    self.searchBar.enable = NO;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSearchViewController)];
+    
+    [self.searchBar addGestureRecognizer:tap];
 }
 
 -(void) mockData{
@@ -107,21 +113,9 @@
     return lblTitle;
 }
 
--(void) addSearchButton{
-    self.titleLab.text = @"输入商品名称";
-    self.titleLab.font = SourceHanSansCNRegular(SizeWidth(14));
-    self.titleLab.textColor = [UIColor lightGrayColor];
-    self.titleLab.textAlignment = NSTextAlignmentLeft;
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_nav_ss"]];
-    [self.navigationView addSubview:imgView];
-    
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.titleLab.mas_centerY).offset(SizeHeigh(5));
-        make.right.equalTo(self.titleLab.mas_left).offset(SizeWidth(-10));
-        make.height.equalTo(@(SizeHeigh(16)));
-        make.width.equalTo(@(SizeWidth(16)));
-    }];
+-(void) gotoSearchViewController{
+    SearchViewContrller *newVC = [SearchViewContrller new];
+    [self.navigationController pushViewController:newVC animated:YES];
 }
 
 @end

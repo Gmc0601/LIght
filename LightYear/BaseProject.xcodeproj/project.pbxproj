@@ -95,6 +95,8 @@
 		6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */; };
 		6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */; };
 		6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */; };
+		6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AC1F6C177B00C9C886 /* SearchBarView.m */; };
+		6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
@@ -297,6 +299,10 @@
 		6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCell.m; sourceTree = "<group>"; };
 		6B5F6DC31F63D5F1001BDC0E /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		6BB114AB1F6C177B00C9C886 /* SearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarView.h; sourceTree = "<group>"; };
+		6BB114AC1F6C177B00C9C886 /* SearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarView.m; sourceTree = "<group>"; };
+		6BB114AE1F6C1F4B00C9C886 /* SearchViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewContrller.h; sourceTree = "<group>"; };
+		6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewContrller.m; sourceTree = "<group>"; };
 		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
@@ -424,6 +430,8 @@
 				6B5F6DBB1F629EB8001BDC0E /* GoodsListViewController.m */,
 				6B5F6DBD1F62A027001BDC0E /* GoodDetialViewController.h */,
 				6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */,
+				6BB114AE1F6C1F4B00C9C886 /* SearchViewContrller.h */,
+				6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -439,6 +447,8 @@
 				6B5F6DC11F63D5D2001BDC0E /* GoodsCell.m */,
 				6BBD89C81F69928500C8B7C3 /* GoodsListView.h */,
 				6BBD89C91F69928500C8B7C3 /* GoodsListView.m */,
+				6BB114AB1F6C177B00C9C886 /* SearchBarView.h */,
+				6BB114AC1F6C177B00C9C886 /* SearchBarView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1055,6 +1065,8 @@
 				425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */,
 				6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */,
 				42C84F1C1EF2EB650008189D /* NSObject+SBJSON.m in Sources */,
+				6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */,
+				6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */,
 				42A4443E1EF133E000F90791 /* BaseProject.xcdatamodeld in Sources */,
 				42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */,
 				00445EB61F68E710009BD830 /* DateView.m in Sources */,

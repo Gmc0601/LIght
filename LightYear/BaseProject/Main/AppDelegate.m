@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FirstViewViewController.h"
 #import "LoginViewController.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface AppDelegate ()
 @end
@@ -22,7 +23,7 @@
     
     UINavigationController * na;
     
-    if ([ConfigModel getBoolObjectforKey:IsLogin] != YES) {
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
         na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
     }else{
         na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
@@ -32,7 +33,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginActionWithType:) name:kLoginNotification object:nil];
-    
+    [IQKeyboardManager sharedManager].enable = YES;
     [self.window makeKeyAndVisible];
     
     return YES;
