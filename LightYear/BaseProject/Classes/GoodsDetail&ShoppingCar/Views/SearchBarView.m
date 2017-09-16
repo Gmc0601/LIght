@@ -21,6 +21,13 @@
     _txtSearch.enabled = _enable;
 }
 
+@synthesize keyword= _keyword;
+-(void) setKeyword:(NSString *)keyword{
+    _keyword = keyword;
+    _txtSearch.text = _keyword;
+    [self.delegate didSearch:keyword];
+}
+
 - (instancetype)init
 {
     self = [super init];

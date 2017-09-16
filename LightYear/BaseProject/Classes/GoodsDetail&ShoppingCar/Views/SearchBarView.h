@@ -16,5 +16,6 @@
 
 @interface SearchBarView : UIView
 @property(assign,nonatomic)  BOOL enable;
+@property(retain,nonatomic)  NSString *keyword;
 @property(weak,nullable)  id<SearchBarViewDelegate> delegate;
 @end

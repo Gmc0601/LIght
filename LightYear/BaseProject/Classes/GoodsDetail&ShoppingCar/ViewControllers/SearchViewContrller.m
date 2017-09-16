@@ -7,11 +7,12 @@
 //
 
 #import "SearchViewContrller.h"
+#import "HistoryTableView.h"
 
-@interface SearchViewContrller()<SearchBarViewDelegate>{
+@interface SearchViewContrller()<SearchBarViewDelegate,HistoryTableViewDelegate>{
     NSString *historyKey;
 }
-@property(retain,atomic) UIView *initialView;
+@property(retain,atomic) HistoryTableView *initialView;
 @end
 
 @implementation SearchViewContrller
@@ -24,8 +25,11 @@
 }
 
 -(void) addInitialView{
-    _initialView = [UIView new];
+    _initialView = [HistoryTableView new];
     [self.view addSubview:_initialView];
+    NSArray *history = [ConfigModel getArrforKey:historyKey];
+    _initialView.datasource = history;
+    _initialView.ownerVC = self;
     
     [_initialView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.navigationView.mas_bottom);
@@ -33,57 +37,20 @@
         make.left.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
-    
-    UILabel *lblTitle = [UILabel new];
-    lblTitle.font = SourceHanSansCNRegular(SizeWidth(13));
-    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-    lblTitle.textAlignment = NSTextAlignmentLeft;
-    lblTitle.text = @"历史搜索";
-    [_initialView addSubview:lblTitle];
-    
-    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_initialView.mas_top).offset(SizeHeigh(20));
-        make.left.equalTo(_initialView).offset(SizeWidth(15));
-        make.right.equalTo(_initialView).offset(-SizeWidth(15));
-        make.height.equalTo(@(SizeHeigh(13)));
-    }];
-    
-    UIView *seperatorView = [UIView new];
-    seperatorView.backgroundColor = [UIColor colorWithHexString:@"#e0e0e0"];
-    [_initialView addSubview:seperatorView];
-    
-    [seperatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(20));
-        make.left.equalTo(_initialView).offset(SizeWidth(15));
-        make.right.equalTo(_initialView).offset(-SizeWidth(15));
-        make.height.equalTo(@(SizeHeigh(0.5)));
-    }];
-    
-    NSArray *history = [ConfigModel getArrforKey:historyKey];
-    if (history.count > 0) {
-        
-    }else{
-        UILabel *lblMsg = [UILabel new];
-        lblMsg.font = SourceHanSansCNRegular(SizeWidth(12));
-        lblMsg.textColor = [UIColor colorWithHexString:@"#999999"];
-        lblMsg.textAlignment = NSTextAlignmentCenter;
-        lblMsg.text = @"暂无历史搜索";
-        [_initialView addSubview:lblMsg];
-        
-        [lblMsg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(seperatorView).offset(SizeHeigh(30));
-            make.left.equalTo(_initialView).offset(SizeWidth(15));
-            make.right.equalTo(_initialView).offset(-SizeWidth(15));
-            make.height.equalTo(@(SizeHeigh(13)));
-        }];
-    }
 }
 
 -(void) didSearch:(NSString *)keyworkd{
     NSMutableArray *history = [ConfigModel getArrforKey:historyKey];
     [history removeObject:keyworkd];
-    [history addObject:keyworkd];
+    [history insertObject:keyworkd atIndex:0];
+    if (history.count > 10) {
+        [history removeLastObject];
+    }
+    
     [ConfigModel saveArr:history forKey:historyKey];
 }
 
+-(void) didSelect:(NSString *)keyworkd{
+    self.searchBar.keyword = keyworkd;
+}
 @end

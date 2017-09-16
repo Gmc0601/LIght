@@ -260,8 +260,6 @@ static char kDTActionHandlerLongPressGestureKey;
     }
 }
 
-
-
 - (CGPoint)offsetFromView:(UIView*)otherView {
     CGFloat x = 0.0f, y = 0.0f;
     for (UIView* view = self; view && view != otherView; view = view.superview) {

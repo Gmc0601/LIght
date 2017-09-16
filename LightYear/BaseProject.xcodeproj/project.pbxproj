@@ -97,10 +97,11 @@
 		6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */; };
 		6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AC1F6C177B00C9C886 /* SearchBarView.m */; };
 		6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */; };
+		6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
-		B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */; };
+		94CFB0C9C148325C439484B8 /* Pods_BaseProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10C35584B1A7641A967DEC9 /* Pods_BaseProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,7 +233,6 @@
 		42F795D51F00CC3E00A11A69 /* TBRefreshHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRefreshHeadView.m; sourceTree = "<group>"; };
 		42F795D61F00CC3E00A11A69 /* UIScrollView+TBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TBRefresh.h"; sourceTree = "<group>"; };
 		42F795D71F00CC3E00A11A69 /* UIScrollView+TBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TBRefresh.m"; sourceTree = "<group>"; };
-		65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B5F6D631F628143001BDC0E /* ShopBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopBaseViewController.h; sourceTree = "<group>"; };
 		6B5F6D641F628143001BDC0E /* ShopBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopBaseViewController.m; sourceTree = "<group>"; };
 		6B5F6D661F6281BC001BDC0E /* FirstLevelGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLevelGoodsViewController.h; sourceTree = "<group>"; };
@@ -303,6 +303,8 @@
 		6BB114AC1F6C177B00C9C886 /* SearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarView.m; sourceTree = "<group>"; };
 		6BB114AE1F6C1F4B00C9C886 /* SearchViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewContrller.h; sourceTree = "<group>"; };
 		6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewContrller.m; sourceTree = "<group>"; };
+		6BB114B11F6D0D5F00C9C886 /* HistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableView.h; sourceTree = "<group>"; };
+		6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableView.m; sourceTree = "<group>"; };
 		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 		6BBD89C81F69928500C8B7C3 /* GoodsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsListView.h; sourceTree = "<group>"; };
 		6BBD89C91F69928500C8B7C3 /* GoodsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsListView.m; sourceTree = "<group>"; };
 		A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
+		C10C35584B1A7641A967DEC9 /* Pods_BaseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -318,7 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B79A5CFD6299881CB3643ACB /* libPods-BaseProject.a in Frameworks */,
+				94CFB0C9C148325C439484B8 /* Pods_BaseProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +452,8 @@
 				6BBD89C91F69928500C8B7C3 /* GoodsListView.m */,
 				6BB114AB1F6C177B00C9C886 /* SearchBarView.h */,
 				6BB114AC1F6C177B00C9C886 /* SearchBarView.m */,
+				6BB114B11F6D0D5F00C9C886 /* HistoryTableView.h */,
+				6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -817,7 +822,7 @@
 		7F5FE81AF3930B1D8AB68F96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65EBE4FCE8758654A9B05419 /* libPods-BaseProject.a */,
+				C10C35584B1A7641A967DEC9 /* Pods_BaseProject.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1069,6 +1074,7 @@
 				6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */,
 				42A4443E1EF133E000F90791 /* BaseProject.xcdatamodeld in Sources */,
 				42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */,
+				6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */,
 				00445EB61F68E710009BD830 /* DateView.m in Sources */,
 				6B5F6DA31F628D28001BDC0E /* NSMutableDictionary+Category.m in Sources */,
 				42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */,

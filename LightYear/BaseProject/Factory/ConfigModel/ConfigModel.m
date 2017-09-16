@@ -7,7 +7,7 @@
 //
 
 #import "ConfigModel.h"
-#import <MBProgressHUD.h>
+#import "MBProgressHUD.h"
 @implementation ConfigModel
 
 + (void)showHud:(UIViewController *)vc {
@@ -56,7 +56,7 @@
     }
     
     [mutableCopyArr addObjectsFromArray:arr];
-    NSData * data  = [NSKeyedArchiver archivedDataWithRootObject:mutableCopyArr];
+    NSData * data  = [NSKeyedArchiver archivedDataWithRootObject:arr];
     [[NSUserDefaults standardUserDefaults] setValue:data forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
