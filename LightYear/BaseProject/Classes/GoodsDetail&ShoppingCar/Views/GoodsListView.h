@@ -10,7 +10,7 @@
 
 @protocol GoodsListViewDelegate <NSObject>
 
--(void) didSelect:(NSString *) goodsId;
+-(void) didSelectGoods:(NSString *) goodsId;
 
 @end
 

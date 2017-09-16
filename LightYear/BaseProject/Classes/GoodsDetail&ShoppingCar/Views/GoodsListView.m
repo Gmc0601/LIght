@@ -96,6 +96,6 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodsModel *model = (GoodsModel *) _dataSource[indexPath.row];
-    [self.delegate didSelect:model._id];
+    [self.delegate didSelectGoods:model._id];
 }
 @end

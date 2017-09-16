@@ -182,8 +182,7 @@
 
 -(void) tapDeleteAllButton{
     PopupDialog *popup = [[PopupDialog alloc] initWithTitle:@"" message:@"确定要清空历史搜索吗？" image:nil buttonAlignment:(UILayoutConstraintAxisHorizontal) transitionStyle:PopupDialogTransitionStyleBounceDown gestureDismissal:YES completion:nil];
-
-    // Create buttons
+    
     CancelButton *leftBotton = [[CancelButton alloc] initWithTitle:@"取消" height:SizeHeigh(50) dismissOnTap:YES action:^{
         [popup dismiss:nil];
     }];

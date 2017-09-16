@@ -14,7 +14,7 @@
 
 #define TAG 100
 
-@interface GoodsListViewController () <GoodsListViewDelegate>{
+@interface GoodsListViewController (){
     GoodsListView *_list;
     NSMutableArray *_dataSource;
 }
@@ -68,7 +68,7 @@
         }else{
             make.bottom.equalTo(self.view);
         }
-
+        
     }];
 }
 

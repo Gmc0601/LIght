@@ -25,6 +25,7 @@
 -(void) setKeyword:(NSString *)keyword{
     _keyword = keyword;
     _txtSearch.text = _keyword;
+    _imgDelete.hidden = [_keyword isEqualToString:@""];
     [self.delegate didSearch:keyword];
 }
 
@@ -93,6 +94,8 @@
 
 -(void) deleteText{
     _txtSearch.text = @"";
+    [self.delegate didClearKeyword];
+    _imgDelete.hidden = YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

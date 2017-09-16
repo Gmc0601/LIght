@@ -11,6 +11,7 @@
 @protocol SearchBarViewDelegate <NSObject>
 
 -(void) didSearch:(NSString *) keyworkd;
+-(void) didClearKeyword;
 
 @end
 

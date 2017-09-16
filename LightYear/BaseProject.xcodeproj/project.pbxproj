@@ -98,6 +98,7 @@
 		6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AC1F6C177B00C9C886 /* SearchBarView.m */; };
 		6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */; };
 		6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */; };
+		6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B51F6D25CC00C9C886 /* SearchResultView.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
@@ -305,6 +306,8 @@
 		6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewContrller.m; sourceTree = "<group>"; };
 		6BB114B11F6D0D5F00C9C886 /* HistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableView.h; sourceTree = "<group>"; };
 		6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableView.m; sourceTree = "<group>"; };
+		6BB114B41F6D25CC00C9C886 /* SearchResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultView.h; sourceTree = "<group>"; };
+		6BB114B51F6D25CC00C9C886 /* SearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultView.m; sourceTree = "<group>"; };
 		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
@@ -454,6 +457,8 @@
 				6BB114AC1F6C177B00C9C886 /* SearchBarView.m */,
 				6BB114B11F6D0D5F00C9C886 /* HistoryTableView.h */,
 				6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */,
+				6BB114B41F6D25CC00C9C886 /* SearchResultView.h */,
+				6BB114B51F6D25CC00C9C886 /* SearchResultView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1031,6 +1036,7 @@
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
 				00445EBD1F696558009BD830 /* ChangePayPasswordViewController.m in Sources */,
+				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
 				428D51BB1F6296D40001B3C8 /* CouponViewController.m in Sources */,
 				42A24FCD1F5F0CE5005130DC /* UIButton+YX.m in Sources */,
 				00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */,

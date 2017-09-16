@@ -35,8 +35,10 @@
 @synthesize isFavorite = _isFavorite;
 -(void) setIsFavorite:(BOOL)isFavorite{
     _isFavorite = isFavorite;
-    _imgTop = SizeHeigh(15);
-    _imgSize = CGSizeMake(SizeWidth(72), SizeHeigh(72));
+    if (isFavorite) {
+        _imgTop = SizeHeigh(15);
+        _imgSize = CGSizeMake(SizeWidth(72), SizeHeigh(72));
+    }
 }
 
 -(void) setModel:(GoodsModel *)model{

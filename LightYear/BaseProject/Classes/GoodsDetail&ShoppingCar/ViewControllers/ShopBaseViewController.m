@@ -116,7 +116,7 @@
     }];
 }
 
--(void) didSelect:(NSString *)goodsId{
+-(void) didSelectGoods:(NSString *)goodsId{
     [self dismissRightView];
     GoodDetialViewController *newVC = [GoodDetialViewController new];
     [self.navigationController pushViewController:newVC animated:YES];
