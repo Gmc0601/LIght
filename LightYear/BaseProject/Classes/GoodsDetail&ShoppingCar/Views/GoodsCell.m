@@ -149,6 +149,11 @@
         [self addNewImage];
     }
     
+    
+    if (_model.outOfStack) {
+        [self addOutOfStackView];
+    }
+    
 }
 
 -(UILabel *) getLableForTag:(BOOL) highlight{
@@ -297,7 +302,7 @@
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin{
     UILabel *lbl = [UILabel new];
-    lbl.font = SourceHanSansCNLight(SizeWidth(15));
+    lbl.font = SourceHanSansCNLight(SizeWidth(12));
     lbl.textColor = fontColor;
     lbl.textAlignment = NSTextAlignmentLeft;
     lbl.text = text;
@@ -314,4 +319,33 @@
     return lbl;
 }
 
+-(void) addOutOfStackView{
+    
+    UIView *backgroudView = [UIView new];
+    backgroudView.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+    backgroudView.alpha = 0.49;
+    [self addSubview:backgroudView];
+    
+    [backgroudView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self);
+        make.left.equalTo(self);
+        make.right.equalTo(self);
+        make.bottom.equalTo(self);
+    }];
+    
+    
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#ffffff"];
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    lblTitle.text = @"已售完";
+    [self addSubview:lblTitle];
+    
+    [backgroudView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.centerY.equalTo(self);
+        make.height.equalTo(@(SizeHeigh(15)));
+        make.width.equalTo(@(SizeWidth(100)));
+    }];
+}
 @end

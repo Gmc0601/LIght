@@ -10,14 +10,13 @@
 #import "GoodsCategory.h"
 #import "SecondLevelGoodsViewController.h"
 #import "SearchViewContrller.h"
-
 #define TAG 100
 
 @interface FirstLevelGoodsViewController () <UITableViewDelegate,UITableViewDataSource>{
-    UITableView *_tb;
     NSString *_cellIdentifier;
     NSMutableArray *_dataSource;
 }
+@property(retain,atomic) UITableView *tb;
 
 @end
 
@@ -26,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self mockData];
+    [self addBottomView];
     [self addFavoriteButton];
     [self addSearchButton];
     [self addTableView];
@@ -34,6 +34,17 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSearchViewController)];
     
     [self.searchBar addGestureRecognizer:tap];
+    [self addFavoriteButton];
+    
+    __weak FirstLevelGoodsViewController *weakSelf = self;
+
+    [_tb addRefreshHeaderWithBlock:^{
+        [weakSelf.tb.header endHeadRefresh];
+    }];
+    
+    [_tb addRefreshFootWithBlock:^{
+        [weakSelf.tb.footer endFooterRefreshing];
+    }];
 }
 
 -(void) mockData{
@@ -98,6 +109,7 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     SecondLevelGoodsViewController *newVC = [SecondLevelGoodsViewController new];
     newVC.categry = _dataSource[indexPath.row];
     [self.navigationController pushViewController:newVC animated:YES];

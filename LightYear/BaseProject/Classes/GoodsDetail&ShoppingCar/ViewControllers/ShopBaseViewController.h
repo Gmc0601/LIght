@@ -9,11 +9,14 @@
 #import "CCBaseViewController.h"
 #import "SearchBarView.h"
 #import "ConfigModel.h"
+#import "TBRefresh.h"
 
 @interface ShopBaseViewController : CCBaseViewController
-@property(retain,atomic) UIView *bottomView;
 @property(retain,atomic) SearchBarView *searchBar;
+@property(retain,atomic) UIView *bottomView;
 
+
+-(void) addBottomView;
 -(void) addFavoriteButton;
 -(BOOL) hasBottomView;
 -(void) addSearchButton;

@@ -13,11 +13,11 @@
 #define TAG 100
 
 @interface SecondLevelGoodsViewController () <UITableViewDelegate,UITableViewDataSource>{
-    UITableView *_tb;
     NSString *_cellIdentifier;
     NSMutableArray *_dataSource;
 }
 
+@property(retain,atomic) UITableView *tb;
 @end
 
 @implementation SecondLevelGoodsViewController
@@ -30,8 +30,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self mockData];
+    [self addBottomView];
     [self addFavoriteButton];
     [self addTableView];
+    __weak SecondLevelGoodsViewController *weakSelf = self;
+    
+    [_tb addRefreshHeaderWithBlock:^{
+        [weakSelf.tb.header endHeadRefresh];
+    }];
+    
+    [_tb addRefreshFootWithBlock:^{
+        [weakSelf.tb.footer endFooterRefreshing];
+    }];
 }
 
 -(void) mockData{
@@ -75,6 +85,8 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
     GoodsListViewController *newVC = [GoodsListViewController new];
     newVC.categry = _dataSource[indexPath.row];
     [self.navigationController pushViewController:newVC animated:YES];

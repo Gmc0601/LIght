@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class GoodsListView;
 @protocol GoodsListViewDelegate <NSObject>
 
 -(void) didSelectGoods:(NSString *) goodsId;
-
+-(void) refreshHeader:(GoodsListView *) sender;
+-(void) refreshFooter:(GoodsListView *) sender;
 @end
 
 @interface GoodsListView : UIView
 @property(weak,nullable) id<GoodsListViewDelegate> delegate;
-@property(strong,nonatomic) NSMutableArray *datasource;
+@property(retain,nonatomic) NSMutableArray *datasource;
 @property(assign,nonatomic) BOOL isFavorite;
 
 @end

@@ -56,6 +56,7 @@
     [super viewDidLoad];
     [self mockData];
     [self addTableView];
+    self.rightBar.hidden = YES;
 }
 
 -(void) mockData{
@@ -327,7 +328,7 @@
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{
     UILabel *lbl = [UILabel new];
-    lbl.font = SourceHanSansCNLight(SizeWidth(15));
+    lbl.font = SourceHanSansCNLight(SizeWidth(12));
     lbl.textColor = fontColor;
     lbl.textAlignment = NSTextAlignmentLeft;
     lbl.text = text;

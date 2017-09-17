@@ -9,12 +9,12 @@
 #import "GoodsListView.h"
 #import "GoodsModel.h"
 #import "GoodsCell.h"
+#import "TBRefresh.h"
 
 @interface GoodsListView ()<UITableViewDelegate,UITableViewDataSource>{
-    UITableView *_tb;
     NSString *_cellIdentifier;
 }
-
+@property(retain,atomic)     UITableView *tb;
 @end
 @implementation GoodsListView
 
@@ -79,6 +79,16 @@
         make.right.equalTo(self);
         make.top.equalTo(self);
         make.bottom.equalTo(self);
+    }];
+    
+    __weak GoodsListView *weakSelf = self;
+
+    [_tb addRefreshHeaderWithBlock:^{
+        [weakSelf.tb.header endHeadRefresh];
+    }];
+    
+    [_tb addRefreshFootWithBlock:^{
+        [weakSelf.tb.footer endFooterRefreshing];
     }];
 }
 

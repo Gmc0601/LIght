@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addFavoriteButton];
+    [self addBottomView];
     [self addTableView];
     [self mockData];
 }

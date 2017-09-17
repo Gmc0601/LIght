@@ -104,6 +104,8 @@
 		6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */; };
 		6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */; };
 		6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B51F6D25CC00C9C886 /* SearchResultView.m */; };
+		6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B81F6D7E9A00C9C886 /* PurchaseCarViewController.m */; };
+		6BB114BC1F6D8DDE00C9C886 /* CLImageViewPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114BB1F6D8DDE00C9C886 /* CLImageViewPopup.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
@@ -323,6 +325,10 @@
 		6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableView.m; sourceTree = "<group>"; };
 		6BB114B41F6D25CC00C9C886 /* SearchResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultView.h; sourceTree = "<group>"; };
 		6BB114B51F6D25CC00C9C886 /* SearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultView.m; sourceTree = "<group>"; };
+		6BB114B71F6D7E9A00C9C886 /* PurchaseCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseCarViewController.h; sourceTree = "<group>"; };
+		6BB114B81F6D7E9A00C9C886 /* PurchaseCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCarViewController.m; sourceTree = "<group>"; };
+		6BB114BA1F6D8DDE00C9C886 /* CLImageViewPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageViewPopup.h; sourceTree = "<group>"; };
+		6BB114BB1F6D8DDE00C9C886 /* CLImageViewPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageViewPopup.m; sourceTree = "<group>"; };
 		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
@@ -448,6 +454,8 @@
 				4214BDE71F5FA8A800FA1F85 /* ViewControllers */,
 				4214BDEA1F5FA8A800FA1F85 /* Views */,
 				4214BDE61F5FA8A800FA1F85 /* Models */,
+				6BB114BA1F6D8DDE00C9C886 /* CLImageViewPopup.h */,
+				6BB114BB1F6D8DDE00C9C886 /* CLImageViewPopup.m */,
 			);
 			path = "GoodsDetail&ShoppingCar";
 			sourceTree = "<group>";
@@ -482,6 +490,8 @@
 				6B5F6DBE1F62A027001BDC0E /* GoodDetialViewController.m */,
 				6BB114AE1F6C1F4B00C9C886 /* SearchViewContrller.h */,
 				6BB114AF1F6C1F4B00C9C886 /* SearchViewContrller.m */,
+				6BB114B71F6D7E9A00C9C886 /* PurchaseCarViewController.h */,
+				6BB114B81F6D7E9A00C9C886 /* PurchaseCarViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1066,6 +1076,7 @@
 				00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */,
 				42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */,
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
+				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
 				00445EBD1F696558009BD830 /* ChangePayPasswordViewController.m in Sources */,
@@ -1083,6 +1094,7 @@
 				6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */,
 				42F795BB1F00C8B200A11A69 /* BaseTableView.m in Sources */,
 				6B5F6DA51F628D28001BDC0E /* NSString+DisplayTime.m in Sources */,
+				6BB114BC1F6D8DDE00C9C886 /* CLImageViewPopup.m in Sources */,
 				6B5F6DB31F628D28001BDC0E /* UIView+Category.m in Sources */,
 				4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */,
 				00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */,

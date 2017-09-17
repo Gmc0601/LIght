@@ -10,6 +10,7 @@
 #import "GoodsModel.h"
 #import "GoodsListView.h"
 #import "GoodDetialViewController.h"
+#import "PurchaseCarViewController.h"
 
 @interface ShopBaseViewController ()<GoodsListViewDelegate>
 @property(retain,atomic) GoodsListView *rightView;
@@ -51,7 +52,7 @@
         make.centerY.equalTo(self.leftBar.mas_centerY);
         make.left.equalTo(self.leftBar.mas_right).offset(SizeWidth(24));
         make.height.equalTo(self.navigationView.mas_height);
-        make.right.equalTo(self.navigationView.mas_right);
+        make.right.equalTo(self.rightBar.mas_left);
     }];
 }
 
@@ -119,6 +120,62 @@
 -(void) didSelectGoods:(NSString *)goodsId{
     [self dismissRightView];
     GoodDetialViewController *newVC = [GoodDetialViewController new];
+    [self.navigationController pushViewController:newVC animated:YES];
+}
+
+-(void) addBottomView{
+    self.bottomView = [UIView new];
+    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
+    [self.view addSubview:self.bottomView];
+    
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.height.equalTo(@(SizeHeigh(98/2)));
+    }];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
+    [self.bottomView addSubview:imgView];
+    
+    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bottomView).offset(SizeHeigh(27/2));
+        make.left.equalTo(self.bottomView).offset(SizeWidth(38/2));
+        make.width.equalTo(@(SizeWidth(57/2)));
+        make.height.equalTo(@(SizeHeigh(57/2)));
+    }];
+    
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNRegular(SizeWidth(15));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    lblTitle.text = @"购物清单";
+    [self.bottomView addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomView.mas_centerY);
+        make.centerX.equalTo(self.bottomView.mas_centerX);
+        make.width.equalTo(@(SizeWidth(200)));
+        make.height.equalTo(@(SizeHeigh(15)));
+    }];
+    
+    UIImageView *upView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down"]];
+    [self.bottomView addSubview:upView];
+    
+    [upView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomView);
+        make.right.equalTo(self.bottomView).offset(-SizeWidth(32/2));
+        make.width.equalTo(@(SizeWidth(28/2)));
+        make.height.equalTo(@(SizeHeigh(14/2)));
+    }];
+    
+    UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPurchaseCarViewController)];
+    [self.bottomView addGestureRecognizer:tapGuesture];
+}
+
+-(void) showPurchaseCarViewController{
+    PurchaseCarViewController *newVC = [PurchaseCarViewController new];
+    
     [self.navigationController pushViewController:newVC animated:YES];
 }
 @end
