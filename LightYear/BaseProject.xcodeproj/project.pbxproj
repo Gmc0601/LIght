@@ -25,6 +25,7 @@
 		04654A971F6E66280023FF63 /* WMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A941F6E66280023FF63 /* WMTableView.m */; };
 		04654A9A1F6E66360023FF63 /* balancePointDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A991F6E66360023FF63 /* balancePointDetailsCell.m */; };
 		04654A9D1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */; };
+		04654AA31F6E97230023FF63 /* couponDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654AA21F6E97230023FF63 /* couponDetailsCell.m */; };
 		4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */; };
 		4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDD1F5FA74E00FA1F85 /* OrderViewController.m */; };
 		4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */; };
@@ -165,6 +166,8 @@
 		04654A991F6E66360023FF63 /* balancePointDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = balancePointDetailsCell.m; sourceTree = "<group>"; };
 		04654A9B1F6E663D0023FF63 /* WMBalancePointDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMBalancePointDetailsViewController.h; sourceTree = "<group>"; };
 		04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMBalancePointDetailsViewController.m; sourceTree = "<group>"; };
+		04654AA11F6E97230023FF63 /* couponDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = couponDetailsCell.h; sourceTree = "<group>"; };
+		04654AA21F6E97230023FF63 /* couponDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = couponDetailsCell.m; sourceTree = "<group>"; };
 		4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewViewController.h; sourceTree = "<group>"; };
 		4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewViewController.m; sourceTree = "<group>"; };
 		4214BDDC1F5FA74E00FA1F85 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 		04654A8D1F6E65F80023FF63 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04654AA11F6E97230023FF63 /* couponDetailsCell.h */,
+				04654AA21F6E97230023FF63 /* couponDetailsCell.m */,
 				04654A981F6E66360023FF63 /* balancePointDetailsCell.h */,
 				04654A991F6E66360023FF63 /* balancePointDetailsCell.m */,
 			);
@@ -891,12 +896,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42A4445D1EF133E100F90791 /* Build configuration list for PBXNativeTarget "BaseProject" */;
 			buildPhases = (
-				09484DDEC2A8F983CBD49D10 /* [CP] Check Pods Manifest.lock */,
 				42A444291EF133E000F90791 /* Sources */,
 				42A4442A1EF133E000F90791 /* Frameworks */,
 				42A4442B1EF133E000F90791 /* Resources */,
 				6BA87D59C4CCF9CC6B80990B /* [CP] Embed Pods Frameworks */,
-				133526D14F1C236D4D0AF02F /* [CP] Copy Pods Resources */,
+				DB7B00028533D42E221FAC6D /* 📦 Embed Pods Frameworks */,
+				DBFB35C7AB65B340397D675A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1020,36 +1025,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09484DDEC2A8F983CBD49D10 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		133526D14F1C236D4D0AF02F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6BA87D59C4CCF9CC6B80990B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1063,6 +1038,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB7B00028533D42E221FAC6D /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBFB35C7AB65B340397D675A /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1126,6 +1131,7 @@
 				6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */,
 				6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */,
 				42A4443E1EF133E000F90791 /* BaseProject.xcdatamodeld in Sources */,
+				04654AA31F6E97230023FF63 /* couponDetailsCell.m in Sources */,
 				42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */,
 				6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */,
 				04654A961F6E66280023FF63 /* WMSegmentView.m in Sources */,

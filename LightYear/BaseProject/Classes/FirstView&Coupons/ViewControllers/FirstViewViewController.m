@@ -11,6 +11,7 @@
 #import "OrderViewController.h"
 #import "MycenterViewController.h"
 #import "FirstLevelGoodsViewController.h"
+#import "WMBalancePointDetailsViewController.h"
 
 @interface FirstViewViewController ()
 
@@ -35,7 +36,7 @@
 //   ************   进入自己的模块  ************
 - (UIView *)classView {
     if (!_classView) {
-        _classView = [[UIView alloc] initWithFrame:FRAME(0, 64, SizeWidth(80), SizeHeigh(200))];
+        _classView = [[UIView alloc] initWithFrame:FRAME(0, 64, SizeWidth(80), SizeHeigh(240))];
         _classView.backgroundColor = RGBColor(239, 240, 241);
         for (int i = 0; i < self.classArr.count; i++) {
             UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(SizeWidth(10), SizeHeigh(10 + i * 60), SizeWidth(60), SizeHeigh(60))];
@@ -63,7 +64,10 @@
             to = [OrderViewController new];
         }
             break;
-            
+        case 3:{//  C 首页等
+            to = [WMBalancePointDetailsViewController new];
+        }
+            break;
         default:
             NSLog(@"搞错了吧");
             break;
@@ -73,7 +77,7 @@
 
 - (NSArray *)classArr {
     if (!_classArr) {
-        _classArr = @[@"A", @"B", @"D"];
+        _classArr = @[@"A", @"B", @"D", @"C"];
     }
     return _classArr;
 }

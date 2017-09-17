@@ -39,7 +39,7 @@
 #pragma mark - lazyLoad
 - (UILabel *)promptLabel {
     if (!_promptLabel) {
-        _promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(25), SizeWidth(150), SizeHeigh(15))];
+        _promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(18), SizeWidth(150), SizeHeigh(15))];
         _promptLabel.textColor = UIColorFromHex(0x333333);
         _promptLabel.font = SourceHanSansCNRegular(SizeWidth(13));
         _promptLabel.text = @"店内消费";

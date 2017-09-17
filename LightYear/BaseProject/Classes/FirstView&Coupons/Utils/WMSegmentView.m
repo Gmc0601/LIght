@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         [self commonSetup];
     }
     return self;
@@ -36,7 +36,7 @@
         return;
     }
     
-    self.backgroundColor =[UIColor whiteColor];
+    self.backgroundColor =[UIColor clearColor];
     setupFinished = YES;
 }
 
@@ -59,8 +59,8 @@
         }
         
         [UIView animateWithDuration:0.4 animations:^{
-            NSInteger count = [_items count];
-            CGFloat width = self.width / count;
+//            NSInteger count = [_items count];
+//            CGFloat width = self.width / count;
             CGFloat height = self.height;
             
             CGFloat left =0;
@@ -68,7 +68,7 @@
                 UIImageView *l = [self.lines objectAtIndex:currentIndex-1];
                 left = l.origin.x;
             }
-            self.bottomLine.frame = CGRectMake(left, height-SizeHeigh(4), width-1, SizeHeigh(4));
+            self.bottomLine.frame = CGRectMake( left+SizeWidth(8), height-SizeHeigh(4), SizeWidth(75), SizeHeigh(4));
         }];
     }
     
@@ -115,10 +115,10 @@
         _bottomLine.backgroundColor = UIColorFromHex(0x3e7bb1);
         _bottomLine.userInteractionEnabled =YES;
         
-        NSInteger count = [_items count];
-        CGFloat width = self.bounds.size.width / count;
+//        NSInteger count = [_items count];
+//        CGFloat width = self.bounds.size.width / count;
         CGFloat height = self.bounds.size.height;
-        self.bottomLine.frame = CGRectMake(0, height-1.5, width, 1.5);
+        self.bottomLine.frame = CGRectMake( SizeWidth(8), height-SizeHeigh(4), SizeWidth(75), SizeHeigh(4));
         [self bringSubviewToFront:(UIButton *)[self.buttons objectAtIndex:self.currentIndex]];
         [self addSubview:_bottomLine];
     }

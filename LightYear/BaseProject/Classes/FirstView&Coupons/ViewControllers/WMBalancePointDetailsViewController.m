@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setupSubView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,7 +107,7 @@
 - (WMScrollView *)scrollView
 {
     if (!_scrollView) {
-        _scrollView = [[WMScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-64)];
+        _scrollView = [[WMScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH)];
         _scrollView.contentSize = CGSizeMake(kScreenW*2, 0);
         _scrollView.delegate = self;
     }
@@ -116,7 +117,7 @@
 - (WMTableView *)balanceTableV
 {
     if (!_balanceTableV) {
-        _balanceTableV = [[WMTableView alloc] initWithFrame:CGRectMake(0, 10, kScreenW, _scrollView.height) style:UITableViewStylePlain];
+        _balanceTableV = [[WMTableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, _scrollView.height-64) style:UITableViewStylePlain];
         _balanceTableV.delegate = self;
         _balanceTableV.dataSource = self;
         _balanceTableV.backgroundColor = [UIColor clearColor];
@@ -128,7 +129,7 @@
 - (WMTableView *)pointTableV
 {
     if (!_pointTableV) {
-        _pointTableV = [[WMTableView alloc] initWithFrame:CGRectMake(kScreenW, 10, kScreenW, _scrollView.height-74) style:UITableViewStylePlain];
+        _pointTableV = [[WMTableView alloc] initWithFrame:CGRectMake(kScreenW, 64, kScreenW, _scrollView.height-64) style:UITableViewStylePlain];
         _pointTableV.delegate = self;
         _pointTableV.dataSource = self;
         _pointTableV.backgroundColor = [UIColor clearColor];
