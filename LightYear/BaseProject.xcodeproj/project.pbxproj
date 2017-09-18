@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002F347E1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */; };
+		002F34811F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */; };
+		002F34841F6E9AC8007E93FA /* FeedBackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */; };
+		002F34991F6E9FDB007E93FA /* IKEA Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34861F6E9FDB007E93FA /* IKEA Sans Bold.ttf */; };
+		002F349A1F6E9FDB007E93FA /* IKEA Sans Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34871F6E9FDB007E93FA /* IKEA Sans Heavy.ttf */; };
+		002F349B1F6E9FDB007E93FA /* IKEASans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34881F6E9FDB007E93FA /* IKEASans-Regular.ttf */; };
+		002F349C1F6E9FDB007E93FA /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34891F6E9FDB007E93FA /* NotoSans-Bold.ttf */; };
+		002F349D1F6E9FDB007E93FA /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348A1F6E9FDB007E93FA /* NotoSans-BoldItalic.ttf */; };
+		002F349E1F6E9FDB007E93FA /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348B1F6E9FDB007E93FA /* NotoSans-Italic.ttf */; };
+		002F349F1F6E9FDB007E93FA /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348C1F6E9FDB007E93FA /* NotoSans-Regular.ttf */; };
+		002F34A01F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348D1F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf */; };
+		002F34A11F6E9FDB007E93FA /* SourceHanSansCN-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348E1F6E9FDB007E93FA /* SourceHanSansCN-ExtraLight.ttf */; };
+		002F34A21F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F348F1F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf */; };
+		002F34A31F6E9FDB007E93FA /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34901F6E9FDB007E93FA /* SourceHanSansCN-Light.ttf */; };
+		002F34A41F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34911F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf */; };
+		002F34A51F6E9FDB007E93FA /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34921F6E9FDB007E93FA /* SourceHanSansCN-Normal.ttf */; };
+		002F34A61F6E9FDB007E93FA /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34931F6E9FDB007E93FA /* SourceHanSansCN-Regular.ttf */; };
+		002F34A71F6E9FDB007E93FA /* Verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34941F6E9FDB007E93FA /* Verdana.ttf */; };
+		002F34A81F6E9FDB007E93FA /* Verdana_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34951F6E9FDB007E93FA /* Verdana_0.ttf */; };
+		002F34A91F6E9FDB007E93FA /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34961F6E9FDB007E93FA /* verdanab.ttf */; };
+		002F34AA1F6E9FDB007E93FA /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34971F6E9FDB007E93FA /* verdanab_0.ttf */; };
+		002F34AB1F6E9FDB007E93FA /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34981F6E9FDB007E93FA /* verdanai_0.ttf */; };
+		002F34B11F6EA725007E93FA /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34B01F6EA725007E93FA /* FeedBackModel.m */; };
+		002F34B41F6EAD56007E93FA /* EditFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */; };
 		00445EB21F68DC65009BD830 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EB11F68DC65009BD830 /* UserInfoViewController.m */; };
 		00445EB61F68E710009BD830 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EB41F68E710009BD830 /* DateView.m */; };
 		00445EB71F68E710009BD830 /* DateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00445EB51F68E710009BD830 /* DateView.xib */; };
@@ -131,6 +155,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002F347C1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressViewController.h; sourceTree = "<group>"; };
+		002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressViewController.m; sourceTree = "<group>"; };
+		002F347F1F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressTableViewCell.h; sourceTree = "<group>"; };
+		002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressTableViewCell.m; sourceTree = "<group>"; };
+		002F34821F6E9AC8007E93FA /* FeedBackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackTableViewCell.h; sourceTree = "<group>"; };
+		002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackTableViewCell.m; sourceTree = "<group>"; };
+		002F34861F6E9FDB007E93FA /* IKEA Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Bold.ttf"; sourceTree = "<group>"; };
+		002F34871F6E9FDB007E93FA /* IKEA Sans Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Heavy.ttf"; sourceTree = "<group>"; };
+		002F34881F6E9FDB007E93FA /* IKEASans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEASans-Regular.ttf"; sourceTree = "<group>"; };
+		002F34891F6E9FDB007E93FA /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		002F348A1F6E9FDB007E93FA /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		002F348B1F6E9FDB007E93FA /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		002F348C1F6E9FDB007E93FA /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		002F348D1F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Bold.ttf"; sourceTree = "<group>"; };
+		002F348E1F6E9FDB007E93FA /* SourceHanSansCN-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-ExtraLight.ttf"; sourceTree = "<group>"; };
+		002F348F1F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Heavy.ttf"; sourceTree = "<group>"; };
+		002F34901F6E9FDB007E93FA /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
+		002F34911F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; };
+		002F34921F6E9FDB007E93FA /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		002F34931F6E9FDB007E93FA /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; };
+		002F34941F6E9FDB007E93FA /* Verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana.ttf; sourceTree = "<group>"; };
+		002F34951F6E9FDB007E93FA /* Verdana_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana_0.ttf; sourceTree = "<group>"; };
+		002F34961F6E9FDB007E93FA /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
+		002F34971F6E9FDB007E93FA /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
+		002F34981F6E9FDB007E93FA /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
+		002F34AF1F6EA725007E93FA /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackModel.h; path = "BaseProject/Classes/MyCenter&Login/Views/FeedBackModel.h"; sourceTree = SOURCE_ROOT; };
+		002F34B01F6EA725007E93FA /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackModel.m; path = "BaseProject/Classes/MyCenter&Login/Views/FeedBackModel.m"; sourceTree = SOURCE_ROOT; };
+		002F34B21F6EAD56007E93FA /* EditFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFeedBackViewController.h; sourceTree = "<group>"; };
+		002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFeedBackViewController.m; sourceTree = "<group>"; };
 		00445EB01F68DC65009BD830 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		00445EB11F68DC65009BD830 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		00445EB31F68E710009BD830 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
@@ -369,9 +422,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002F34851F6E9FDB007E93FA /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				002F34861F6E9FDB007E93FA /* IKEA Sans Bold.ttf */,
+				002F34871F6E9FDB007E93FA /* IKEA Sans Heavy.ttf */,
+				002F34881F6E9FDB007E93FA /* IKEASans-Regular.ttf */,
+				002F34891F6E9FDB007E93FA /* NotoSans-Bold.ttf */,
+				002F348A1F6E9FDB007E93FA /* NotoSans-BoldItalic.ttf */,
+				002F348B1F6E9FDB007E93FA /* NotoSans-Italic.ttf */,
+				002F348C1F6E9FDB007E93FA /* NotoSans-Regular.ttf */,
+				002F348D1F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf */,
+				002F348E1F6E9FDB007E93FA /* SourceHanSansCN-ExtraLight.ttf */,
+				002F348F1F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf */,
+				002F34901F6E9FDB007E93FA /* SourceHanSansCN-Light.ttf */,
+				002F34911F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf */,
+				002F34921F6E9FDB007E93FA /* SourceHanSansCN-Normal.ttf */,
+				002F34931F6E9FDB007E93FA /* SourceHanSansCN-Regular.ttf */,
+				002F34941F6E9FDB007E93FA /* Verdana.ttf */,
+				002F34951F6E9FDB007E93FA /* Verdana_0.ttf */,
+				002F34961F6E9FDB007E93FA /* verdanab.ttf */,
+				002F34971F6E9FDB007E93FA /* verdanab_0.ttf */,
+				002F34981F6E9FDB007E93FA /* verdanai_0.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		00F49C931F663A9300F03EAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				002F34AF1F6EA725007E93FA /* FeedBackModel.h */,
+				002F34B01F6EA725007E93FA /* FeedBackModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -398,10 +479,14 @@
 				00445EBC1F696558009BD830 /* ChangePayPasswordViewController.m */,
 				00445EBE1F6966F1009BD830 /* FeedBackViewController.h */,
 				00445EBF1F6966F1009BD830 /* FeedBackViewController.m */,
+				002F34B21F6EAD56007E93FA /* EditFeedBackViewController.h */,
+				002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */,
 				00445EC11F69677A009BD830 /* DeliveryAddressViewController.h */,
 				00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */,
 				00E08DF91F699A93006B83F1 /* EditDeliveryAddressViewController.h */,
 				00E08DFA1F699A93006B83F1 /* EditDeliveryAddressViewController.m */,
+				002F347C1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.h */,
+				002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -418,6 +503,10 @@
 				00445EB51F68E710009BD830 /* DateView.xib */,
 				00E08DF61F698E97006B83F1 /* DeilveryAddressTableViewCell.h */,
 				00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */,
+				002F347F1F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.h */,
+				002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */,
+				002F34821F6E9AC8007E93FA /* FeedBackTableViewCell.h */,
+				002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -739,6 +828,7 @@
 		42C84EA61EF2DB060008189D /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				002F34851F6E9FDB007E93FA /* Font */,
 				42F795CA1F00CBDF00A11A69 /* Factory */,
 				42C84EA71EF2DB060008189D /* ConfigModel */,
 				42C84EA81EF2DB060008189D /* MainApi */,
@@ -999,11 +1089,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002F34A61F6E9FDB007E93FA /* SourceHanSansCN-Regular.ttf in Resources */,
 				42F795D81F00CC3E00A11A69 /* arrowdown@2x.png in Resources */,
+				002F34A71F6E9FDB007E93FA /* Verdana.ttf in Resources */,
 				42F795D91F00CC3E00A11A69 /* arrowup@2x.png in Resources */,
+				002F34A31F6E9FDB007E93FA /* SourceHanSansCN-Light.ttf in Resources */,
+				002F349F1F6E9FDB007E93FA /* NotoSans-Regular.ttf in Resources */,
 				42A444431EF133E000F90791 /* LaunchScreen.storyboard in Resources */,
+				002F349E1F6E9FDB007E93FA /* NotoSans-Italic.ttf in Resources */,
+				002F34A11F6E9FDB007E93FA /* SourceHanSansCN-ExtraLight.ttf in Resources */,
+				002F34A81F6E9FDB007E93FA /* Verdana_0.ttf in Resources */,
+				002F34A51F6E9FDB007E93FA /* SourceHanSansCN-Normal.ttf in Resources */,
+				002F349A1F6E9FDB007E93FA /* IKEA Sans Heavy.ttf in Resources */,
+				002F34991F6E9FDB007E93FA /* IKEA Sans Bold.ttf in Resources */,
+				002F34A91F6E9FDB007E93FA /* verdanab.ttf in Resources */,
 				42A444401EF133E000F90791 /* Assets.xcassets in Resources */,
+				002F34A41F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf in Resources */,
 				00445EB71F68E710009BD830 /* DateView.xib in Resources */,
+				002F349B1F6E9FDB007E93FA /* IKEASans-Regular.ttf in Resources */,
+				002F34A01F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf in Resources */,
+				002F349C1F6E9FDB007E93FA /* NotoSans-Bold.ttf in Resources */,
+				002F34AA1F6E9FDB007E93FA /* verdanab_0.ttf in Resources */,
+				002F34A21F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf in Resources */,
+				002F34AB1F6E9FDB007E93FA /* verdanai_0.ttf in Resources */,
+				002F349D1F6E9FDB007E93FA /* NotoSans-BoldItalic.ttf in Resources */,
 				42A4443B1EF133E000F90791 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1083,6 +1192,7 @@
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
 				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
+				002F34841F6E9AC8007E93FA /* FeedBackTableViewCell.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
 				00445EBD1F696558009BD830 /* ChangePayPasswordViewController.m in Sources */,
 				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
@@ -1091,6 +1201,7 @@
 				00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */,
 				42C84ECA1EF2DD1A0008189D /* NSDictionary+Smart.m in Sources */,
 				42C84EC81EF2DD1A0008189D /* DIc.m in Sources */,
+				002F347E1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m in Sources */,
 				6B5F6D6B1F6282D7001BDC0E /* FavoriteGoodsViewController.m in Sources */,
 				6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */,
 				6B5F6DAA1F628D28001BDC0E /* UIColor+BGHexColor.m in Sources */,
@@ -1105,11 +1216,13 @@
 				00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */,
 				00445EB21F68DC65009BD830 /* UserInfoViewController.m in Sources */,
 				04654A9A1F6E66360023FF63 /* balancePointDetailsCell.m in Sources */,
+				002F34811F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m in Sources */,
 				6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */,
 				42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */,
 				42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */,
 				6B5F6DA61F628D28001BDC0E /* NSString+MD5.m in Sources */,
 				00445EBA1F68E9BD009BD830 /* ChangeUserInfoViewController.m in Sources */,
+				002F34B11F6EA725007E93FA /* FeedBackModel.m in Sources */,
 				42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */,
 				6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */,
 				42C84EAF1EF2DB060008189D /* ViewController.m in Sources */,
@@ -1124,6 +1237,7 @@
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
 				6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */,
 				6B5F6DAC1F628D28001BDC0E /* UIImage+Category.m in Sources */,
+				002F34B41F6EAD56007E93FA /* EditFeedBackViewController.m in Sources */,
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */,
 				6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */,
@@ -1322,6 +1436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F79BCDCE7109E930EA932FB6 /* Pods-BaseProject.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1341,6 +1456,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A2BC379B4929E517CCEBBD81 /* Pods-BaseProject.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

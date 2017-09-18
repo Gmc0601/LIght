@@ -7,7 +7,7 @@
 //
 
 #import "EditDeliveryAddressViewController.h"
-
+#import "ChoiceDeliveryAddressViewController.h"
 #import "BaseTextField.h"
 
 @interface EditDeliveryAddressViewController ()<BaseTextFieldDelegate>
@@ -121,7 +121,8 @@
 }
 //选取收货地址
 - (void)arrowAction:(UIButton *)button{
-    
+    ChoiceDeliveryAddressViewController * choiceAddressVC = [[ChoiceDeliveryAddressViewController alloc] init];
+    [self.navigationController pushViewController:choiceAddressVC animated:YES];
 }
 //默认选取
 - (void)normalAction:(UIButton *)button{
