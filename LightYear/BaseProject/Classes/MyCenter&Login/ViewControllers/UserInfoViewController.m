@@ -10,13 +10,14 @@
 #import "ChangeUserInfoViewController.h"
 
 #import "DateView.h"
-
-@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,DateViewDelegate>
+#import "UserInfoPicketView.h"
+@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,DateViewDelegate,UserInfoPicketViewDelegate>
 {
     UITableView * myTableView;
     NSMutableArray * dataArray;
     UIImage * userHeadImage;
     DateView * dateView;
+    UserInfoPicketView * picketView;
 }
 
 
@@ -119,9 +120,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         //头像
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择照片来源" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
-        sheet.tag = 10;
-        [sheet showInView:self.view];
+        NSMutableArray * array = [NSMutableArray arrayWithObjects:@"拍照",@"相册", nil];
+        picketView = [[UserInfoPicketView alloc] init];
+        picketView.delegate = self;
+        picketView.tag = 10;
+        picketView.picketTitle = @"选择照片来源";
+        picketView.pickViewTextArray = array;
+        picketView.picketType = PicketViewTypeDefault;
+        [self.view addSubview:picketView];
     }else if (indexPath.section == 1){
         //姓名
         ChangeUserInfoViewController * changeUserInfoVC = [[ChangeUserInfoViewController alloc] init];
@@ -129,9 +135,14 @@
         [self.navigationController pushViewController:changeUserInfoVC animated:YES];
     }else if (indexPath.section == 2){
         //性别
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择你的性别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
-        sheet.tag = 20;
-        [sheet showInView:self.view];
+        NSMutableArray * array = [NSMutableArray arrayWithObjects:@"男",@"女", nil];
+        picketView = [[UserInfoPicketView alloc] init];
+        picketView.delegate = self;
+        picketView.tag = 20;
+        picketView.picketTitle = @"选择性别";
+        picketView.pickViewTextArray = array;
+        picketView.picketType = PicketViewTypeDefault;
+        [self.view addSubview:picketView];
     }else if (indexPath.section == 3){
         //生日
         if (!dateView) {
@@ -148,6 +159,38 @@
         changeUserInfoVC.type = UserInfoTypePayPassword;
         [self.navigationController pushViewController:changeUserInfoVC animated:YES];
     }
+}
+#pragma mark -- UserInfoPicketViewDelegate
+-(void)PickerSelectorIndex:(NSInteger)index contentString:(NSString *)str{
+    NSLog(@"PickerView:%ld 选中的是:%ld===%@",picketView.tag,index,str);
+    if (picketView.tag == 10) {//头像
+        if (index == 1) { //系统相册
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+                [imagePicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
+                imagePicker.delegate = self;
+                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                imagePicker.allowsEditing = YES;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            }
+        } else if (index == 0){ //照相机
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                [imagePicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
+                imagePicker.allowsEditing = YES;
+                imagePicker.mediaTypes = [NSArray arrayWithObjects:@"public.image", nil];
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePicker.delegate = self;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的设备不支持拍照!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+        }
+    }else if (picketView.tag == 20){//性别
+        
+    }
+    picketView = nil;
 }
 // 控制dateView是否显示隐藏
 - (void)showDatePickerView {
@@ -178,41 +221,6 @@
     NSString *resultStr=[Formatter stringFromDate:dateStr];
     NSLog(@"%@",resultStr);
     [self hideDatePickerView];
-}
-#pragma mark UIActionSheet
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == 10) {
-        if (buttonIndex == 1) { //系统相册
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
-                [imagePicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
-                imagePicker.delegate = self;
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                imagePicker.allowsEditing = YES;
-                [self presentViewController:imagePicker animated:YES completion:nil];
-            }
-        } else if (buttonIndex == 0){ //照相机
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [imagePicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
-                imagePicker.allowsEditing = YES;
-                imagePicker.mediaTypes = [NSArray arrayWithObjects:@"public.image", nil];
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                imagePicker.delegate = self;
-                [self presentViewController:imagePicker animated:YES completion:nil];
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的设备不支持拍照!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }
-    }else if (actionSheet.tag == 20){
-        if (buttonIndex == 1) { //女
-            
-        } else if (buttonIndex == 0){ //男
-            
-        }
-    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

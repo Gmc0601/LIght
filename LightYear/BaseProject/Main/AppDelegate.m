@@ -23,7 +23,7 @@
     
     UINavigationController * na;
     
-    if ([ConfigModel getBoolObjectforKey:IsLogin] != YES) {
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
         na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
     }else{
         na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];

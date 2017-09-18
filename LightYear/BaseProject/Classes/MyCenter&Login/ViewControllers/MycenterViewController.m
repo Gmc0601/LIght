@@ -12,12 +12,14 @@
 #import "MycenterHeadView.h"
 #import "DeliveryAddressViewController.h"
 #import "FeedBackViewController.h"
-@interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate>
+#import "UserInfoPicketView.h"
+@interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate,UserInfoPicketViewDelegate>
 {
     UIButton * bottomButton;
     UITableView * myTableView;
     NSMutableArray * dataArray;
     MycenterHeadView * headView;
+    UserInfoPicketView * picketView;
 }
 @end
 
@@ -138,14 +140,42 @@
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }else if (indexPath.section == 2){
         //联系我们
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0571-0000999"];
-        UIWebView * callWebview = [[UIWebView alloc] init];
-        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-        [self.view addSubview:callWebview];
+        NSMutableArray * array = [NSMutableArray arrayWithObjects:@"13879888888",@"13097890000", nil];
+        picketView = [[UserInfoPicketView alloc] init];
+        picketView.delegate = self;
+        picketView.tag = 10;
+        picketView.picketTitle = @"联系我们";
+        picketView.sureButtonTitle = @"立即联系";
+        picketView.pickViewTextArray = array;
+        picketView.picketType = PicketViewTypeDefault;
+        [self.view addSubview:picketView];
     }else if (indexPath.section == 3){
         //分享
+        NSMutableArray * array = [NSMutableArray arrayWithObjects:@"朋友圈",@"微信好友", @"QQ好友",@"QQ空间",nil];
+        NSMutableArray * imgArray = [NSMutableArray arrayWithObjects:@"icon_fx_pyq",@"icon_fx_wx", @"icon_fx_qq",@"icon_fx_qqkj",nil];
+        picketView = [[UserInfoPicketView alloc] init];
+        picketView.delegate = self;
+        picketView.pickViewTextArray = array;
+        picketView.pickViewImageArray = imgArray;
+        picketView.picketType = PicketViewTypeNormal;
+        [self.view addSubview:picketView];
     }
 }
+#pragma mark -- UserInfoPicketViewDelegate
+-(void)PickerSelectorIndex:(NSInteger)index contentString:(NSString *)str{
+    if (picketView.tag == 10) {
+        //联系我们
+        NSMutableString * mStr=[[NSMutableString alloc] initWithFormat:@"tel:%@",str];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:mStr]]];
+        [self.view addSubview:callWebview];
+    }else if (picketView.tag == 20){
+        //分享
+    }
+    NSLog(@"PickerView:%ld 选中的是:%ld===%@",picketView.tag,index,str);
+    picketView = nil;
+}
+
 //退出登录
 - (void)exitLoginAction{
     [ConfigModel saveBoolObject:NO forKey:IsLogin];

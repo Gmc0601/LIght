@@ -39,6 +39,7 @@
 		00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EBF1F6966F1009BD830 /* FeedBackViewController.m */; };
 		00445EC31F69677A009BD830 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */; };
 		008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 008A7DD41F68512A000806F8 /* MycenterHeadView.m */; };
+		00D226A71F6F77C20042E0DD /* UserInfoPicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */; };
 		00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */; };
 		00E08DFB1F699A93006B83F1 /* EditDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E08DFA1F699A93006B83F1 /* EditDeliveryAddressViewController.m */; };
 		00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C971F663A9300F03EAA /* LoginViewController.m */; };
@@ -199,6 +200,8 @@
 		00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
 		008A7DD31F68512A000806F8 /* MycenterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterHeadView.h; sourceTree = "<group>"; };
 		008A7DD41F68512A000806F8 /* MycenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterHeadView.m; sourceTree = "<group>"; };
+		00D226A51F6F77C20042E0DD /* UserInfoPicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPicketView.h; sourceTree = "<group>"; };
+		00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPicketView.m; sourceTree = "<group>"; };
 		00E08DF61F698E97006B83F1 /* DeilveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeilveryAddressTableViewCell.h; sourceTree = "<group>"; };
 		00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeilveryAddressTableViewCell.m; sourceTree = "<group>"; };
 		00E08DF91F699A93006B83F1 /* EditDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDeliveryAddressViewController.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */,
 				002F34821F6E9AC8007E93FA /* FeedBackTableViewCell.h */,
 				002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */,
+				00D226A51F6F77C20042E0DD /* UserInfoPicketView.h */,
+				00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1281,6 +1286,7 @@
 				6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */,
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
+				00D226A71F6F77C20042E0DD /* UserInfoPicketView.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,
 				42C84F1E1EF2EB650008189D /* SBJSON.m in Sources */,
 				00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */,
