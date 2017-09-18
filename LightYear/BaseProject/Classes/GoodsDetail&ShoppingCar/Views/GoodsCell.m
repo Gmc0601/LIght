@@ -93,35 +93,6 @@
         make.width.equalTo(@(_imgSize.width));
     }];
     
-    if (_model.outOfStack) {
-        UIView *layerView = [UIView new];
-        layerView.backgroundColor = [UIColor colorWithHexString:@"1000000"];
-        layerView.alpha = 0.6;
-        
-        [_img addSubview:layerView];
-        [layerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_img.mas_left);
-            make.top.equalTo(_img.mas_top);
-            make.bottom.equalTo(_img.mas_bottom);
-            make.right.equalTo(_img);
-        }];
-        
-        UILabel *lblOutOfStack = [UILabel new];
-        lblOutOfStack.font = SourceHanSansCNMedium(SizeWidth(13));
-        lblOutOfStack.textColor = [UIColor colorWithHexString:@"#ffffff"];
-        lblOutOfStack.textAlignment = NSTextAlignmentCenter;
-        lblOutOfStack.text = @"已售完";
-        [layerView addSubview:lblOutOfStack];
-        
-        [lblOutOfStack mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(layerView);
-            make.centerY.equalTo(layerView);
-            make.height.equalTo(@(SizeHeigh(13)));
-            make.width.equalTo(@(SizeWidth(100)));
-        }];
-        
-    }
-    
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -327,12 +298,11 @@
     [self addSubview:backgroudView];
     
     [backgroudView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self);
-        make.left.equalTo(self);
-        make.right.equalTo(self);
-        make.bottom.equalTo(self);
+        make.top.equalTo(_img);
+        make.left.equalTo(_img);
+        make.right.equalTo(_img);
+        make.bottom.equalTo(_img);
     }];
-    
     
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
@@ -342,8 +312,8 @@
     [self addSubview:lblTitle];
     
     [backgroudView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.centerY.equalTo(self);
+        make.centerX.equalTo(_img);
+        make.centerY.equalTo(_img);
         make.height.equalTo(@(SizeHeigh(15)));
         make.width.equalTo(@(SizeWidth(100)));
     }];

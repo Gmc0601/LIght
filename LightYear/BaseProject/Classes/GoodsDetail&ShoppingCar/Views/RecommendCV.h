@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RecommendCV : UIView
-@property(retain,atomic) NSString *_id;
+-(void)reload;
 @end

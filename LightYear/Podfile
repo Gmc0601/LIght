@@ -9,8 +9,14 @@ pod 'MJExtension'
 pod 'IQKeyboardManager'
 pod 'ZYBannerView'
 pod 'PopupDialog', '~> 0.5'
+<<<<<<< 271e4f90a4e6520cf679394906bad5376ebd8057
 pod 'JSONModel'
 
+=======
+pod 'KLCPopup'
+pod 'WechatOpenSDK'
+pod 'TWRPickerSlider’, ‘~> 1.0’
+>>>>>>> update
 use_frameworks!
 
 end

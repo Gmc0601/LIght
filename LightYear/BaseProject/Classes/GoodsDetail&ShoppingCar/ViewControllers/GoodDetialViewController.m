@@ -13,11 +13,15 @@
 #import "GoodsCell.h"
 #import <ZYBannerView/ZYBannerView.h>
 #import "NSString+Category.h"
+#import "KLCPopup.h"
+#import "RecommendCV.h"
+
 
 #define TAG 100
 #define ARROW_TAG 1000
 #define Detail_TAG 10001
 #define Remaind_TAG 10002
+#define Share_TAG 100000
 
 @interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource>{
     
@@ -43,7 +47,9 @@
 @property(retain,atomic) UIButton *btnFaveritor;
 @property(retain,atomic) UIView *choosePanel;
 @property(retain,atomic) UIView *purchasePanel;
-
+@property(retain,atomic) KLCPopup* sharePopup;
+@property(retain,atomic) KLCPopup* choosePopup;
+@property(retain,atomic) RecommendCV* recommendCV;
 @end
 
 @implementation GoodDetialViewController
@@ -124,7 +130,7 @@
             
             break;
         case 3:
-            
+            [self addRecommendViewToCell:cell];
             break;
             
         default:
@@ -157,7 +163,7 @@
         }
     }
     
-    return  SizeHeigh(271);
+    return  SizeHeigh(350);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -346,6 +352,7 @@
 }
 
 -(void) setHeader:(UITableViewHeaderFooterView *) header withSection:(NSInteger) section withText:(NSString *) text isShowing:(BOOL) show{
+    [header removeAllSubviews];
     UILabel *lblTitle = [header viewWithTag:TAG + section];
     if (lblTitle == nil) {
         lblTitle = [self addLableToHeaderView:header  withIndex:section];
@@ -451,7 +458,7 @@
 -(void) addShareButtonToCell:(UIView *) superView{
     UIButton *btnShare = [UIButton new];
     [btnShare setImage:[UIImage imageNamed:@"icon_xq_fx"] forState:UIControlStateNormal];
-    
+    [btnShare addTarget:self action:@selector(showShareView) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:btnShare];
     
     [btnShare mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -467,6 +474,9 @@
     _choosePanel = [UIView new];
     [superView addSubview:_choosePanel];
     
+    _choosePanel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showChooseView)];
+    [_choosePanel addGestureRecognizer:tapGuesture];
     [_choosePanel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(superView);
         make.right.equalTo(superView);
@@ -654,7 +664,7 @@
 -(UIView *) getDotViewWithHighlight:(BOOL) highlight{
     UIView *dotView = [UIView new];
     dotView.layer.cornerRadius = SizeWidth(10/2);
-
+    
     
     if (highlight) {
         dotView.backgroundColor = [UIColor colorWithHexString:@"#4ead35"];
@@ -706,5 +716,165 @@
 
 -(void) buy{
     
+}
+
+-(void) showShareView{
+    if (_sharePopup == nil) {
+        UIView* contentView = [[UIView alloc] init];
+        contentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+        CGFloat width = SizeWidth(686/2);
+        contentView.frame = CGRectMake(self.view.centerX, self.view.centerY, width, SizeHeigh(450/2));
+
+        [self addCloseButtonTo:contentView];
+        
+        CGFloat offset = - SizeWidth(88+62+62/2+88/2)/2;
+        [self addButtonToShareView:contentView withImage:@"icon_fx_pyq" withTitle:@"朋友圈" withLeft:offset withIndex:1];
+        offset = -SizeWidth(62/2+88/2)/2;
+        [self addButtonToShareView:contentView withImage:@"icon_fx_wx" withTitle:@"微信好友" withLeft:offset withIndex:2];
+        
+        offset = SizeWidth(62/2+88/2)/2;
+        [self addButtonToShareView:contentView withImage:@"icon_fx_qq" withTitle:@"QQ好友" withLeft:offset withIndex:3];
+        offset = SizeWidth(88+62+62/2+88/2)/2;
+
+        [self addButtonToShareView:contentView withImage:@"icon_fx_qqkj" withTitle:@"QQ空间" withLeft:offset withIndex:4];
+        
+        _sharePopup = [KLCPopup popupWithContentView:contentView];
+        _sharePopup.showType = KLCPopupShowTypeSlideInFromTop;
+        _sharePopup.dismissType = KLCPopupDismissTypeSlideOutToTop;
+    }
+    
+    [_sharePopup show];
+}
+
+-(void) addButtonToShareView:(UIView *) superView withImage:(NSString *) img withTitle:(NSString *) title withLeft:(CGFloat) offset withIndex:(NSInteger) index{
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:img]];
+    imgView.tag = Share_TAG + index;
+    [superView addSubview:imgView];
+    
+    UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapShareButton:)];
+    [imgView addGestureRecognizer:tapGuesture];
+    
+    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView.mas_centerX).offset(offset);
+        make.top.equalTo(superView).offset(SizeHeigh(172/2));
+        make.width.equalTo(@(SizeWidth(88/2)));
+        make.height.equalTo(@(SizeHeigh(88/2)));
+    }];
+    
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNLight(SizeWidth(12));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#8f8f8f"];
+    lblTitle.textAlignment = NSTextAlignmentLeft;
+    lblTitle.text = title;
+    [superView addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(imgView.mas_centerX);
+        make.top.equalTo(imgView.mas_bottom).offset(SizeHeigh(48/2));
+        make.width.equalTo(@(SizeWidth(70)));
+        make.height.equalTo(@(SizeHeigh(12)));
+    }];
+}
+
+-(void) dismissPopup{
+    if ([_sharePopup isShowing]) {
+        [_sharePopup dismiss:YES];
+    }else{
+        [_choosePopup dismiss:YES];
+    }
+}
+
+-(void) tapShareButton:(UITapGestureRecognizer *) gesture{
+   
+}
+
+-(void) showChooseView{
+    if (_choosePopup == nil) {
+        UIView* contentView = [[UIView alloc] init];
+        contentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+        CGFloat width = SizeWidth(686/2);
+        contentView.frame = CGRectMake(self.view.centerX, self.view.centerY, width, SizeHeigh(674/2));
+        
+        [self addSubViewsToChooseView:contentView];
+        _choosePopup = [KLCPopup popupWithContentView:contentView];
+        _choosePopup.showType = KLCPopupShowTypeSlideInFromTop;
+        _choosePopup.dismissType = KLCPopupDismissTypeSlideOutToTop;
+    }
+    
+    [_choosePopup show];
+}
+
+-(void) addSubViewsToChooseView:(UIView *) superView{
+    [self addCloseButtonTo:superView];
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    lblTitle.text = @"选择商品属性";
+    [superView addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView.mas_centerX);
+        make.top.equalTo(superView.mas_top).offset(SizeHeigh(32/2));
+        make.width.equalTo(@(SizeWidth(150)));
+        make.height.equalTo(@(SizeHeigh(15)));
+    }];
+    
+    UIButton *btnComplete = [UIButton new];
+    [btnComplete setTitle:@"完成" forState:UIControlStateNormal];
+    btnComplete.backgroundColor = [UIColor colorWithHexString:@"3e7bb1"];
+    btnComplete.titleLabel.font = SourceHanSansCNMedium(SizeWidth(15));
+    [btnComplete setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+    [btnComplete addTarget:self action:@selector(dismissPopup) forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:btnComplete];
+    
+    [btnComplete mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView);
+        make.bottom.equalTo(superView.mas_bottom).offset(-SizeHeigh(40/2));
+        make.width.equalTo(@(SizeWidth(630/2)));
+        make.height.equalTo(@(SizeHeigh(88/2)));
+    }];
+
+}
+
+-(void) addCloseButtonTo:(UIView *) superView{
+    UIButton *btnClose = [UIButton new];
+    [btnClose setImage:[UIImage imageNamed:@"sg_ic_quxiao"] forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(dismissPopup) forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:btnClose];
+    [btnClose mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(superView.mas_right).offset(SizeWidth(-30/2));
+        make.top.equalTo(superView.mas_top).offset(SizeHeigh(30/2));
+        make.width.equalTo(@(SizeWidth(34/2)));
+        make.height.equalTo(@(SizeHeigh(34/2)));
+    }];
+}
+
+-(void) addRecommendViewToCell:(UITableViewCell *) cell{
+    [cell removeAllSubviews];
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    lblTitle.text = @"推荐";
+    [cell addSubview:lblTitle];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(cell.mas_centerX);
+        make.top.equalTo(cell.mas_top).offset(SizeHeigh(38/2));
+        make.width.equalTo(@(SizeWidth(70)));
+        make.height.equalTo(@(SizeHeigh(14)));
+    }];
+    
+    _recommendCV = [RecommendCV new];
+    _recommendCV.backgroundColor = [UIColor whiteColor];
+    [cell addSubview:_recommendCV];
+    
+    [_recommendCV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(cell);
+        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(38/2));
+        make.right.equalTo(cell).offset(-SizeWidth(15));
+        make.left.equalTo(cell).offset(SizeWidth(15));
+    }];
 }
 @end

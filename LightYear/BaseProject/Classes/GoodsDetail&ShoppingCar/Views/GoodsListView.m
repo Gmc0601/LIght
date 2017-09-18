@@ -105,6 +105,7 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     GoodsModel *model = (GoodsModel *) _dataSource[indexPath.row];
     [self.delegate didSelectGoods:model._id];
 }
