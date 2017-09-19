@@ -24,6 +24,14 @@
     [self resetFather];
     
     [self createView];
+    
+    NSDictionary *dic = @{
+                          @"mobile" : @"15668035535"
+                          };
+    
+    [HttpRequest postPath:@"_sms_002" params:dic resultBlock:^(id responseObject, NSError *error) {
+        NSLog(@"....%@", responseObject);
+    }];
 }
 
 - (void)resetFather {

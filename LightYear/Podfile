@@ -10,8 +10,13 @@ pod 'IQKeyboardManager'
 pod 'ZYBannerView'
 pod 'PopupDialog', '~> 0.5'
 pod 'JSONModel'
-
+pod 'TMCache'
 pod 'KLCPopup'
+pod ‘UMengUShare/UI’
+pod ‘UMengUShare/Social/ReducedWeChat'
+pod ‘UMengUShare/Social/ReducedQQ'
+pod ‘UMengUShare/Social/ReducedSina'
+
 use_frameworks!
 
 end
