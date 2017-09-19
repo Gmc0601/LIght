@@ -54,7 +54,15 @@
 }
 
 -(UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel *lbl;
+    UILabel *lblTitle;
+    
+    if (view == nil) {
+        lblTitle = [UILabel new];
+        lblTitle.font = SourceHanSansCNRegular(SizeWidth(18));
+        lblTitle.textColor = [UIColor colorWithHexString:@"#999999"];
+        lblTitle.textAlignment = NSTextAlignmentLeft;
+        lblTitle.highlightedTextColor = [UIColor colorWithRed:51/255 green:51/255 blue:51/255 alpha:1];
+    }
 //    
 //    if (view == nil){
 //        let frame:CGRect = pickerView.bounds
@@ -73,7 +81,7 @@
 //    
 //    return lblText;
     
-    return lbl;
+    return lblTitle;
 }
 
 -(void) addTitleWithText:(NSString *) text withOffSet:(CGFloat) offset{
