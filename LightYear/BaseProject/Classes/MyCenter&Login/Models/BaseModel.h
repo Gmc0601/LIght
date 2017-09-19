@@ -11,6 +11,5 @@
 @interface BaseModel : JSONModel
 
 @property (nonatomic , assign) NSInteger error;
-@property (nonatomic , assign) NSString * info;
 
 @end

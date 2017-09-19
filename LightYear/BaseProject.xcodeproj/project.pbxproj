@@ -26,7 +26,6 @@
 		002F34A91F6E9FDB007E93FA /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34961F6E9FDB007E93FA /* verdanab.ttf */; };
 		002F34AA1F6E9FDB007E93FA /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34971F6E9FDB007E93FA /* verdanab_0.ttf */; };
 		002F34AB1F6E9FDB007E93FA /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34981F6E9FDB007E93FA /* verdanai_0.ttf */; };
-		00A952781F7024F800DEE0F6 /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952521F7024F800DEE0F6 /* FeedBackModel.m */; };
 		00A952791F7024F800DEE0F6 /* ChangePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */; };
 		00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */; };
 		00A9527B1F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952591F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m */; };
@@ -47,6 +46,7 @@
 		00A9528A1F7024F800DEE0F6 /* UserInfoPicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952771F7024F800DEE0F6 /* UserInfoPicketView.m */; };
 		00A9528D1F70253500DEE0F6 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528C1F70253500DEE0F6 /* BaseModel.m */; };
 		00A952901F70258500DEE0F6 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528F1F70258500DEE0F6 /* UserModel.m */; };
+		00BFA90B1F70B17B007284DA /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BFA90A1F70B17B007284DA /* FeedBackModel.m */; };
 		04654A951F6E66280023FF63 /* WMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A901F6E66280023FF63 /* WMScrollView.m */; };
 		04654A961F6E66280023FF63 /* WMSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A921F6E66280023FF63 /* WMSegmentView.m */; };
 		04654A971F6E66280023FF63 /* WMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A941F6E66280023FF63 /* WMTableView.m */; };
@@ -177,8 +177,6 @@
 		002F34961F6E9FDB007E93FA /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
 		002F34971F6E9FDB007E93FA /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
 		002F34981F6E9FDB007E93FA /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
-		00A952511F7024F800DEE0F6 /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackModel.h; sourceTree = "<group>"; };
-		00A952521F7024F800DEE0F6 /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackModel.m; sourceTree = "<group>"; };
 		00A952541F7024F800DEE0F6 /* ChangePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPasswordViewController.h; sourceTree = "<group>"; };
 		00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPasswordViewController.m; sourceTree = "<group>"; };
 		00A952561F7024F800DEE0F6 /* ChangeUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserInfoViewController.h; sourceTree = "<group>"; };
@@ -218,6 +216,8 @@
 		00A9528C1F70253500DEE0F6 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		00A9528E1F70258500DEE0F6 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		00A9528F1F70258500DEE0F6 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		00BFA9091F70B17B007284DA /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackModel.h; sourceTree = "<group>"; };
+		00BFA90A1F70B17B007284DA /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackModel.m; sourceTree = "<group>"; };
 		04654A8F1F6E66280023FF63 /* WMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMScrollView.h; sourceTree = "<group>"; };
 		04654A901F6E66280023FF63 /* WMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMScrollView.m; sourceTree = "<group>"; };
 		04654A911F6E66280023FF63 /* WMSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSegmentView.h; sourceTree = "<group>"; };
@@ -467,10 +467,10 @@
 		00A952501F7024F800DEE0F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				00BFA9091F70B17B007284DA /* FeedBackModel.h */,
+				00BFA90A1F70B17B007284DA /* FeedBackModel.m */,
 				00A9528B1F70253500DEE0F6 /* BaseModel.h */,
 				00A9528C1F70253500DEE0F6 /* BaseModel.m */,
-				00A952511F7024F800DEE0F6 /* FeedBackModel.h */,
-				00A952521F7024F800DEE0F6 /* FeedBackModel.m */,
 				00A9528E1F70258500DEE0F6 /* UserModel.h */,
 				00A9528F1F70258500DEE0F6 /* UserModel.m */,
 			);
@@ -1253,6 +1253,7 @@
 				42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */,
 				6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */,
 				42C84EAF1EF2DB060008189D /* ViewController.m in Sources */,
+				00BFA90B1F70B17B007284DA /* FeedBackModel.m in Sources */,
 				42C84EB91EF2DCD90008189D /* MainApi.m in Sources */,
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
 				04654A971F6E66280023FF63 /* WMTableView.m in Sources */,
@@ -1319,7 +1320,6 @@
 				00A9528D1F70253500DEE0F6 /* BaseModel.m in Sources */,
 				6B5F6DA91F628D28001BDC0E /* UIButton+Category.m in Sources */,
 				42C84EC71EF2DD1A0008189D /* GTMBase64.m in Sources */,
-				00A952781F7024F800DEE0F6 /* FeedBackModel.m in Sources */,
 				00A952801F7024F800DEE0F6 /* LoginViewController.m in Sources */,
 				6B5F6D9F1F628D28001BDC0E /* NSData+CommonCryptor.m in Sources */,
 			);

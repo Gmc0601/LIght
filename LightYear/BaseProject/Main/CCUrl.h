@@ -11,7 +11,7 @@
 /*
  接口文档
  */
-#define TokenKey @"1e56c95504a9a846e4c7043704a20f25"
+#define TokenKey @"32a0357b12de425b9b957b25f66cf002"
 
 #define UDID     0
 
@@ -23,7 +23,7 @@
 
 #if HHTest
 
-#define    BaseApi       @"http://112.74.166.250:81/index.php"
+#define    BaseApi       @"http://139.224.70.219:83/index.php"
 
 #else
 
@@ -44,7 +44,6 @@
  */
 
 #define IsLogin @"islogin"
-#define UserInfo @"userInfo"
 
 #define UserToken @"userTOken"
 // 经纬度  地理位置信息

@@ -35,7 +35,7 @@
         NSString *value = [NSString stringWithFormat:@"%@", parameters[key]];
         token = [token stringByAppendingString:value];
     }
-    token = [token stringByAppendingString:@"1e56c95504a9a846e4c7043704a20f25"];
+    token = [token stringByAppendingString:TokenKey];
     token = [token md5String];
     
     

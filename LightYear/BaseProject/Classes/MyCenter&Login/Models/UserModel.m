@@ -8,6 +8,27 @@
 
 #import "UserModel.h"
 
+@implementation UserInfo
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+//+ (JSONKeyMapper*)keyMapper {
+//    
+//    return [[JSONKeyMapper alloc]
+//            initWithDictionary:@{
+//                                 @"id": @"pid",
+//                                 @"description": @"sectionDescription",
+//                                 }];
+//}
+
+@end
+
 @implementation UserModel
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
 
 @end

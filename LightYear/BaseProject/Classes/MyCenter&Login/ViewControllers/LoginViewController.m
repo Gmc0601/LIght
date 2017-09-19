@@ -180,8 +180,7 @@
         UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
         [ConfigModel hideHud:self];
         if (userModel.error == 0) {
-             NSLog(@"LoginSuccess");
-            //UserModel * infoDic = [[UserModel alloc] initWithDictionary:datadic[@"info"] error:nil];
+            NSLog(@"LoginSuccess");
             [ConfigModel saveBoolObject:YES forKey:IsLogin];
 //            [ConfigModel saveString:dict[@"userToken"] forKey:User_Token];
 //            [ConfigModel saveString:dict[@"mobile"] forKey:User_Mobile];
@@ -191,7 +190,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
         }else {
             [ConfigModel hideHud:self];
-            [ConfigModel mbProgressHUD:userModel.info andView:nil];
+//            [ConfigModel mbProgressHUD:userModel.info andView:nil];
         }
     }];
 }
@@ -209,7 +208,7 @@
                 _verificationButton.userInteractionEnabled = NO;
                 [ConfigModel hideHud:self];
             }else {
-                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+//                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
             }
         }];
     }else{
