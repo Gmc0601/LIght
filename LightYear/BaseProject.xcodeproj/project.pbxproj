@@ -95,6 +95,7 @@
 		42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D31F00CC3E00A11A69 /* TBRefreshFootView.m */; };
 		42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D51F00CC3E00A11A69 /* TBRefreshHeadView.m */; };
 		42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D71F00CC3E00A11A69 /* UIScrollView+TBRefresh.m */; };
+		6B13A05D1F701B1C00C11EF4 /* PropertyPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B13A05C1F701B1C00C11EF4 /* PropertyPickView.m */; };
 		6B5F6D651F628143001BDC0E /* ShopBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D641F628143001BDC0E /* ShopBaseViewController.m */; };
 		6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D671F6281BC001BDC0E /* FirstLevelGoodsViewController.m */; };
 		6B5F6D6B1F6282D7001BDC0E /* FavoriteGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D6A1F6282D7001BDC0E /* FavoriteGoodsViewController.m */; };
@@ -316,6 +317,8 @@
 		42F795D51F00CC3E00A11A69 /* TBRefreshHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRefreshHeadView.m; sourceTree = "<group>"; };
 		42F795D61F00CC3E00A11A69 /* UIScrollView+TBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TBRefresh.h"; sourceTree = "<group>"; };
 		42F795D71F00CC3E00A11A69 /* UIScrollView+TBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TBRefresh.m"; sourceTree = "<group>"; };
+		6B13A05B1F701B1C00C11EF4 /* PropertyPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPickView.h; sourceTree = "<group>"; };
+		6B13A05C1F701B1C00C11EF4 /* PropertyPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPickView.m; sourceTree = "<group>"; };
 		6B5F6D631F628143001BDC0E /* ShopBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopBaseViewController.h; sourceTree = "<group>"; };
 		6B5F6D641F628143001BDC0E /* ShopBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopBaseViewController.m; sourceTree = "<group>"; };
 		6B5F6D661F6281BC001BDC0E /* FirstLevelGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLevelGoodsViewController.h; sourceTree = "<group>"; };
@@ -622,6 +625,8 @@
 				6BB114B21F6D0D5F00C9C886 /* HistoryTableView.m */,
 				6BB114B41F6D25CC00C9C886 /* SearchResultView.h */,
 				6BB114B51F6D25CC00C9C886 /* SearchResultView.m */,
+				6B13A05B1F701B1C00C11EF4 /* PropertyPickView.h */,
+				6B13A05C1F701B1C00C11EF4 /* PropertyPickView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1001,7 +1006,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42A4445D1EF133E100F90791 /* Build configuration list for PBXNativeTarget "BaseProject" */;
 			buildPhases = (
+<<<<<<< 41861fb51fbb5214c82cc04c5e2553869ce45f62
 				4DE19C8B634D029AC6AFF96D /* [CP] Check Pods Manifest.lock */,
+=======
+				CFB812F1BBFDD03597361BB0 /* [CP] Check Pods Manifest.lock */,
+>>>>>>> update
 				42A444291EF133E000F90791 /* Sources */,
 				42A4442A1EF133E000F90791 /* Frameworks */,
 				42A4442B1EF133E000F90791 /* Resources */,
@@ -1180,6 +1189,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CFB812F1BBFDD03597361BB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		DB7B00028533D42E221FAC6D /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1227,6 +1251,11 @@
 				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
 				428D51BB1F6296D40001B3C8 /* CouponViewController.m in Sources */,
 				42A24FCD1F5F0CE5005130DC /* UIButton+YX.m in Sources */,
+<<<<<<< 41861fb51fbb5214c82cc04c5e2553869ce45f62
+=======
+				00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */,
+				6B13A05D1F701B1C00C11EF4 /* PropertyPickView.m in Sources */,
+>>>>>>> update
 				42C84ECA1EF2DD1A0008189D /* NSDictionary+Smart.m in Sources */,
 				00A952811F7024F800DEE0F6 /* MycenterViewController.m in Sources */,
 				42C84EC81EF2DD1A0008189D /* DIc.m in Sources */,

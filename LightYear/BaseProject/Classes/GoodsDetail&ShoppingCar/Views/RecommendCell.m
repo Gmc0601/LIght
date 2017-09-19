@@ -176,7 +176,7 @@
     [self addSubview:lbl];
     
     [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(constraintView).offset(SizeHeigh(-1));
+        make.top.equalTo(constraintView);
         make.left.equalTo(constraintView.mas_right).offset(leftMargin);
         make.height.equalTo(@(SizeHeigh(8)));
         make.width.equalTo(@(SizeHeigh(70)));

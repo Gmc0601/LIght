@@ -42,13 +42,21 @@
     for (int i=0; i<10; i++) {
         GoodsModel *model = [GoodsModel new];
         model._id = @"1";
-        model.name = @"小龙虾";
+        model.name = @"小龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾";
         model.canTakeBySelf = YES;
         model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
         model.price = @"111";
-        model.memberPrice = @"1";
+        if (i%2 == 0) {
+            model.memberPrice = @"1";
+        }
+        
+        if (i%3 == 0) {
+            model.isNew = YES;
+        }
+        
+        if (i%4 == 0) {
+            model.canDelivery = YES;
+        }
         [_dataSource addObject:model];
     }
     

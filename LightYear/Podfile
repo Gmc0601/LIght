@@ -13,7 +13,6 @@ pod 'JSONModel'
 
 pod 'KLCPopup'
 pod 'WechatOpenSDK'
-pod 'TWRPickerSlider’, ‘~> 1.0’
 use_frameworks!
 
 end

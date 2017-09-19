@@ -43,9 +43,7 @@
 
 -(void) setModel:(GoodsModel *)model{
     _model = model;
-    for (UIView *subView in self.subviews) {
-        [subView removeFromSuperview];
-    }
+    [self removeAllSubviews];
     
     _img = nil;
     _lblTitle = nil;
@@ -105,7 +103,7 @@
         make.left.equalTo(_img.mas_right).offset(SizeWidth(16));
         make.top.equalTo(_img.mas_top);
         make.height.equalTo(@(SizeHeigh(15)));
-        make.right.equalTo(self.mas_right).offset(SizeWidth(15));
+        make.right.equalTo(self.mas_right).offset(-SizeWidth(15));
     }];
     
     [self addCanDeliveryLable:_model.canDelivery];
@@ -206,7 +204,7 @@
     [self addSubview:_lblPrice1];
     
     
-    if ([_model.memberPrice isEqualToString:@""]) {
+    if (_model.memberPrice == nil || [_model.memberPrice isEqualToString:@""]) {
         _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.price];
     }
     
@@ -224,18 +222,19 @@
     }];
     
     if (!_model.isNew) {
-        if ([_model.memberPrice isEqualToString:@""]) {
-            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
-        }else{
+        if (_model.memberPrice != nil && ![_model.memberPrice isEqualToString:@""]) {
             _lblPrice1.textColor = [UIColor colorWithHexString:@"#ff9e23"];;
             [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(5)];
             [self addPriceLabel2];
+
+        }else{
+            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
         }
     }else{
         _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
         _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
         
-        if (![_model.memberPrice isEqualToString:@""]) {
+        if (_model.memberPrice != nil && ![_model.memberPrice isEqualToString:@""]) {
             [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(10)];
             [self addPriceLabel2];
         }
@@ -281,9 +280,9 @@
     [self addSubview:lbl];
     
     [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(constraintView).offset(SizeHeigh(-1));
+        make.bottom.equalTo(constraintView);
         make.left.equalTo(constraintView.mas_right).offset(leftMargin);
-        make.height.equalTo(@(SizeHeigh(16)));
+        make.height.equalTo(@(SizeHeigh(12)));
         make.width.equalTo(@(SizeHeigh(100)));
     }];
     

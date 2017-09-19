@@ -49,7 +49,7 @@
     for (int i=0; i<10; i++) {
         GoodsModel *model = [GoodsModel new];
         model._id = @"1";
-        model.name = @"小龙虾";
+        model.name = @"小龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾";
         model.canTakeBySelf = YES;
         model.hasDiscounts = YES;
         model.canDelivery = NO;
