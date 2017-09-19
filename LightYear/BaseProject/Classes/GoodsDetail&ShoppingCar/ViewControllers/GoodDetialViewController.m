@@ -15,6 +15,7 @@
 #import "NSString+Category.h"
 #import "KLCPopup.h"
 #import "RecommendCV.h"
+#import "PropertyPickView.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -22,7 +23,7 @@
 #define Remaind_TAG 10002
 #define Share_TAG 100000
 
-@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource>{
+@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource,PropertyPickViewDelegate>{
     
 }
 @property(retain,atomic) UITableView *tb;
@@ -819,20 +820,16 @@
         make.height.equalTo(@(SizeHeigh(15)));
     }];
     
-    
-//    TWRSliderStackedView *stack = [[TWRSliderStackedView alloc] init];
-//    TWRPickerSlider *slider1 = [self getSlider:@[@"1",@"2",@"3"]];
-//    TWRPickerSlider *slider2 = [self getSlider:@[@"1",@"2",@"3"]];
-//    TWRPickerSlider *slider3 = [self getSlider:@[@"1",@"2",@"3"]];
-//    stack.sliders = @[slider1, slider2, slider3];
-//    [superView addSubview:stack];
-//    
-//    [stack mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(superView).offset(SizeWidth(15));
-//        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
-//        make.right.equalTo(superView).offset(-SizeWidth(15));
-//        make.height.equalTo(@(SizeHeigh(180)));
-//    }];
+    PropertyPickView *pickView = [PropertyPickView new];
+    pickView.delegate = self;
+    [pickView setDatasource: @[@[@"1",@"2",@"3"]] withSelectValues:@[@"1",@"2",@"3"]];
+    [superView addSubview:pickView];
+    [pickView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(superView).offset(SizeWidth(15));
+                make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
+                make.right.equalTo(superView).offset(-SizeWidth(15));
+                make.height.equalTo(@(SizeHeigh(180)));
+            }];
     
     UIButton *btnComplete = [UIButton new];
     [btnComplete setTitle:@"完成" forState:UIControlStateNormal];
@@ -890,4 +887,10 @@
         make.left.equalTo(cell).offset(SizeWidth(15));
     }];
 }
+
+
+-(void) didSelectValue:(NSArray *)selectvalue{
+    NSLog(@"%@",selectvalue);
+}
+
 @end

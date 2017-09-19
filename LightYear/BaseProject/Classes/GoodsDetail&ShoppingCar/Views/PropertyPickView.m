@@ -8,41 +8,70 @@
 
 #import "PropertyPickView.h"
 #import "UIColor+BGHexColor.h"
+#import <Masonry/Masonry.h>
 
 @interface PropertyPickView()<UIPickerViewDelegate,UIPickerViewDataSource>
-@property(retain,atomic) NSArray *datasource1;
-@property(retain,atomic) NSArray *datasource2;
-@property(retain,atomic) NSArray *datasource3;
+@property(retain,atomic) UIPickerView *pickerView;
+@property(assign,atomic) BOOL hasIntial;
+@property(retain,atomic) NSMutableArray *pickViews;
+@property(retain,atomic) NSMutableArray *selectValue;
+@property(retain,atomic) NSArray *datasource;
 @end
 
 @implementation PropertyPickView
+-(void) setDatasource:(NSArray *)datasource withSelectValues:(NSArray *) selectValue{
+    _datasource = datasource;
+    _selectValue = [NSMutableArray arrayWithArray:selectValue] ;
+    
+    if (!_hasIntial) {
+        _hasIntial = YES;
+        _pickViews = [NSMutableArray arrayWithCapacity:_datasource.count];
+        CGFloat offSet = SizeWidth(626/2)/_datasource.count;
+        if (_datasource.count == 3) {
+            [self addTitleWithText:@"数量" withOffSet:-offSet withIndex:2];
+            [self addTitleWithText:@"属性" withOffSet:0 withIndex:1];
+            [self addTitleWithText:@"属性" withOffSet:offSet withIndex:0];
+        }else if(_datasource.count == 2){
+            [self addTitleWithText:@"数量" withOffSet:-offSet/2 withIndex:1];
+            [self addTitleWithText:@"属性" withOffSet:offSet/2 withIndex:0];
+        }else{
+            [self addTitleWithText:@"数量" withOffSet:0 withIndex:0];
+        }
+    }
+}
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        
+        _hasIntial = NO;
     }
     return self;
 }
 
--(void) setDataSource:(NSArray *)datasource1 withSecond:(NSArray *)datasource2 withThird:(NSArray *)datasource3{
-    if (datasource3 != nil) {
-        
-    }
-}
-
 -(void) addPickView{
-    UIPickerView *pickerView = [UIPickerView new];
-    pickerView.delegate = self;
-    pickerView.dataSource = self;
+    _pickerView = [UIPickerView new];
+    _pickerView.delegate = self;
+    _pickerView.dataSource = self;
+
+//    [_pickerView selectRow:1 inComponent:0 animated:NO];
+//    [_pickerView selectRow:1 inComponent:1 animated:NO];
+//    [_pickerView selectRow:1 inComponent:2 animated:NO];
+    [self addSubview:_pickerView];
+    [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(SizeHeigh(30));
+        make.left.equalTo(self);
+        make.right.equalTo(self);
+        make.height.equalTo(@(SizeHeigh(70)));
+    }];
 }
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 2;
+    return ((NSArray *)_datasource[pickerView.tag]).count;
 }
 
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 3;
+    return 1;
 }
 
 -(CGFloat) pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -50,45 +79,44 @@
 }
 
 -(CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
-    return SizeWidth(100);
+    return SizeWidth(50);
+}
+
+-(NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return  @"tes";
 }
 
 -(UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *lblTitle;
     
     if (view == nil) {
-        lblTitle = [UILabel new];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SizeWidth(75/2), SizeHeigh(30))];
         lblTitle.font = SourceHanSansCNRegular(SizeWidth(18));
-        lblTitle.textColor = [UIColor colorWithHexString:@"#999999"];
-        lblTitle.textAlignment = NSTextAlignmentLeft;
-        lblTitle.highlightedTextColor = [UIColor colorWithRed:51/255 green:51/255 blue:51/255 alpha:1];
+        lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
+        lblTitle.textAlignment = NSTextAlignmentCenter;
+        lblTitle.textColor = [UIColor colorWithRed:51/255 green:51/255 blue:51/255 alpha:1];
+    }else{
+        lblTitle = (UILabel *) view;
     }
-//    
-//    if (view == nil){
-//        let frame:CGRect = pickerView.bounds
-//        lblText = UILabel(frame: frame);
-//        lblText.highlightedTextColor = UIColor.greenColor();
-//        lblText.textAlignment = NSTextAlignment.Center;
-//        lblText.backgroundColor = backColor;
-//        lblText.font = UIFont(name: fontName, size: fontSize);
-//        (pickerView.subviews[1] ).hidden = true;
-//        (pickerView.subviews[2] ).hidden = true;
-//        
-//    }else{
-//        lblText = view as! UILabel
-//    }
-//    lblText.text = items[row % items.count] ;
-//    
-//    return lblText;
+    
+    lblTitle.text = _datasource[component][row];
     
     return lblTitle;
 }
 
--(void) addTitleWithText:(NSString *) text withOffSet:(CGFloat) offset{
+-(void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    NSArray *values = (NSArray *) _datasource[pickerView.tag];
+    NSString *selectValue = (NSString *) values[row];
+
+    _selectValue[pickerView.tag] = selectValue;
+    [self.delegate didSelectValue:_selectValue];
+}
+
+-(void) addTitleWithText:(NSString *) text withOffSet:(CGFloat) offset withIndex:(NSInteger) index{
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
     lblTitle.textColor = [UIColor colorWithRed:62/255 green:123/255 blue:177/255 alpha:1];
-    lblTitle.textAlignment = NSTextAlignmentLeft;
+    lblTitle.textAlignment = NSTextAlignmentCenter;
     lblTitle.text = text;
     [self addSubview:lblTitle];
     
@@ -96,7 +124,26 @@
         make.top.equalTo(self);
         make.centerX.equalTo(self).offset(offset);
         make.width.equalTo(@(SizeWidth(70)));
-        make.height.equalTo(@(SizeHeigh(13)));
+        make.height.equalTo(@(SizeHeigh(15)));
+    }];
+    
+    UIPickerView *pickerView = [UIPickerView new];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    pickerView.tag = index;
+    
+    NSArray *values = (NSArray *) _datasource[index];
+    NSString *selectValue = (NSString *) _selectValue[index];
+    NSInteger selectIndex = [values indexOfObject:selectValue];
+    [pickerView selectRow:selectIndex inComponent:0 animated:NO];
+    [_pickViews addObject:pickerView];
+    
+    [self addSubview:pickerView];
+    [pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(SizeHeigh(30));
+        make.centerX.equalTo(lblTitle.mas_centerX);
+        make.width.equalTo(@(SizeWidth(80)));
+        make.height.equalTo(@(SizeHeigh(110)));
     }];
 }
 

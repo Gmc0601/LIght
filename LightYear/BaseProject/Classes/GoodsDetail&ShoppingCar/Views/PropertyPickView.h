@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PropertyPickViewDelegate <NSObject>
+
+-(void) didSelectValue:(NSArray *) selectvalue;
+
+@end
+
 @interface PropertyPickView : UIView
--(void) setDataSource:(NSArray *) datasource1 withSecond:(NSArray *) datasource2 withThird:(NSArray *) datasource3;
+-(void) setDatasource:(NSArray *)datasource withSelectValues:(NSArray *) selectValue;
+@property(weak,nonatomic) id<PropertyPickViewDelegate> delegate;
 @end
