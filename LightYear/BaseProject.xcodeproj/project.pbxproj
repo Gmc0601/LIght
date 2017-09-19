@@ -1006,11 +1006,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42A4445D1EF133E100F90791 /* Build configuration list for PBXNativeTarget "BaseProject" */;
 			buildPhases = (
-<<<<<<< 41861fb51fbb5214c82cc04c5e2553869ce45f62
-				4DE19C8B634D029AC6AFF96D /* [CP] Check Pods Manifest.lock */,
-=======
+
 				CFB812F1BBFDD03597361BB0 /* [CP] Check Pods Manifest.lock */,
->>>>>>> update
 				42A444291EF133E000F90791 /* Sources */,
 				42A4442A1EF133E000F90791 /* Frameworks */,
 				42A4442B1EF133E000F90791 /* Resources */,
@@ -1251,11 +1248,9 @@
 				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
 				428D51BB1F6296D40001B3C8 /* CouponViewController.m in Sources */,
 				42A24FCD1F5F0CE5005130DC /* UIButton+YX.m in Sources */,
-<<<<<<< 41861fb51fbb5214c82cc04c5e2553869ce45f62
-=======
+
 				00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */,
 				6B13A05D1F701B1C00C11EF4 /* PropertyPickView.m in Sources */,
->>>>>>> update
 				42C84ECA1EF2DD1A0008189D /* NSDictionary+Smart.m in Sources */,
 				00A952811F7024F800DEE0F6 /* MycenterViewController.m in Sources */,
 				42C84EC81EF2DD1A0008189D /* DIc.m in Sources */,

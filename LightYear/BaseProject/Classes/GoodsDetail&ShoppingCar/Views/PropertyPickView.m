@@ -55,23 +55,25 @@
 
 -(UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *lbl;
+//    
+//    if (view == nil){
+//        let frame:CGRect = pickerView.bounds
+//        lblText = UILabel(frame: frame);
+//        lblText.highlightedTextColor = UIColor.greenColor();
+//        lblText.textAlignment = NSTextAlignment.Center;
+//        lblText.backgroundColor = backColor;
+//        lblText.font = UIFont(name: fontName, size: fontSize);
+//        (pickerView.subviews[1] ).hidden = true;
+//        (pickerView.subviews[2] ).hidden = true;
+//        
+//    }else{
+//        lblText = view as! UILabel
+//    }
+//    lblText.text = items[row % items.count] ;
+//    
+//    return lblText;
     
-    if (view == nil){
-        let frame:CGRect = pickerView.bounds
-        lblText = UILabel(frame: frame);
-        lblText.highlightedTextColor = UIColor.greenColor();
-        lblText.textAlignment = NSTextAlignment.Center;
-        lblText.backgroundColor = backColor;
-        lblText.font = UIFont(name: fontName, size: fontSize);
-        (pickerView.subviews[1] ).hidden = true;
-        (pickerView.subviews[2] ).hidden = true;
-        
-    }else{
-        lblText = view as! UILabel
-    }
-    lblText.text = items[row % items.count] ;
-    
-    return lblText;
+    return lbl;
 }
 
 -(void) addTitleWithText:(NSString *) text withOffSet:(CGFloat) offset{

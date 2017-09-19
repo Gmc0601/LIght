@@ -820,19 +820,19 @@
     }];
     
     
-    TWRSliderStackedView *stack = [[TWRSliderStackedView alloc] init];
-    TWRPickerSlider *slider1 = [self getSlider:@[@"1",@"2",@"3"]];
-    TWRPickerSlider *slider2 = [self getSlider:@[@"1",@"2",@"3"]];
-    TWRPickerSlider *slider3 = [self getSlider:@[@"1",@"2",@"3"]];
-    stack.sliders = @[slider1, slider2, slider3];
-    [superView addSubview:stack];
-    
-    [stack mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(superView).offset(SizeWidth(15));
-        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
-        make.right.equalTo(superView).offset(-SizeWidth(15));
-        make.height.equalTo(@(SizeHeigh(180)));
-    }];
+//    TWRSliderStackedView *stack = [[TWRSliderStackedView alloc] init];
+//    TWRPickerSlider *slider1 = [self getSlider:@[@"1",@"2",@"3"]];
+//    TWRPickerSlider *slider2 = [self getSlider:@[@"1",@"2",@"3"]];
+//    TWRPickerSlider *slider3 = [self getSlider:@[@"1",@"2",@"3"]];
+//    stack.sliders = @[slider1, slider2, slider3];
+//    [superView addSubview:stack];
+//    
+//    [stack mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(superView).offset(SizeWidth(15));
+//        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
+//        make.right.equalTo(superView).offset(-SizeWidth(15));
+//        make.height.equalTo(@(SizeHeigh(180)));
+//    }];
     
     UIButton *btnComplete = [UIButton new];
     [btnComplete setTitle:@"完成" forState:UIControlStateNormal];
@@ -848,13 +848,6 @@
         make.width.equalTo(@(SizeWidth(630/2)));
         make.height.equalTo(@(SizeHeigh(88/2)));
     }];
-}
-
--(TWRPickerSlider *) getSlider:(NSArray *) datasource{
-    TWRPickerSlider *slider1 = [[TWRPickerSlider alloc] init];
-    slider1.pickerObjects = datasource;
-    
-    return slider1;
 }
 
 -(void) addCloseButtonTo:(UIView *) superView{
