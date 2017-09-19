@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "BaseTextField.h"
+#import "UserModel.h"
 @interface LoginViewController ()<BaseTextFieldDelegate>
 {
     BaseTextField * _userTextField;
@@ -107,11 +108,10 @@
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
     _loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _loginButton.backgroundColor = UIColorFromHex(0x3e7bb1);
+    _loginButton.backgroundColor = [UIColor grayColor];
     _loginButton.layer.cornerRadius = 4.0f;
     _loginButton.layer.masksToBounds = YES;
-    //_loginButton.userInteractionEnabled = NO;
-    //_loginButton.alpha = 0.5f;
+    _loginButton.userInteractionEnabled = NO;
     [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginButton];
     [_loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,22 +170,18 @@
 }
 //登录
 - (void)loginAction:(UIButton *)sender{
-//    [ConfigModel showHud:self];
-//    NSDictionary *logindic = @{
-//                               @"username": _userTextField.text,
-//                               @"code": _passTextField.text,
-//                               };
-//    [HttpRequest postPath:LoginURL params:logindic resultBlock:^(id responseObject, NSError *error) {
-//        
-//        if([error isEqual:[NSNull null]] || error == nil){
-//            NSLog(@"LoginSuccess");
-//        }
-//        NSDictionary *datadic = responseObject;
-//        
-//        [ConfigModel hideHud:self];
-//        if ([datadic[@"error"] intValue] == 0) {
-//            //UserModel * infoDic = [[UserModel alloc] initWithDictionary:datadic[@"info"] error:nil];
-//            NSDictionary * dict = datadic[@"info"];
+    [ConfigModel showHud:self];
+    NSDictionary *logindic = @{
+                               @"username": _userTextField.text,
+                               @"code": _passTextField.text,
+                               };
+    [HttpRequest postPath:CodeLoginURL params:logindic resultBlock:^(id responseObject, NSError *error) {
+        
+        UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
+        [ConfigModel hideHud:self];
+        if (userModel.error == 0) {
+             NSLog(@"LoginSuccess");
+            //UserModel * infoDic = [[UserModel alloc] initWithDictionary:datadic[@"info"] error:nil];
             [ConfigModel saveBoolObject:YES forKey:IsLogin];
 //            [ConfigModel saveString:dict[@"userToken"] forKey:User_Token];
 //            [ConfigModel saveString:dict[@"mobile"] forKey:User_Mobile];
@@ -193,25 +189,38 @@
 //            [ConfigModel saveString:dict[@"avatar_url"] forKey:User_Logo];
 //            
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
-//        }else {
-//            NSString *info = datadic[@"info"];
-//            [ConfigModel mbProgressHUD:info andView:nil];
-//        }
-//    }];
+        }else {
+            [ConfigModel hideHud:self];
+            [ConfigModel mbProgressHUD:userModel.info andView:nil];
+        }
+    }];
 }
 //发送验证码
 - (void)getValidationCodeAction:(UIButton *)sender{
-//    if (_userTextField.text.length == 11 ) {
-//        [self HttpRequestWithPath:GetCodeURL Params:@{@"mobile":_userTextField.text,@"userToken": [ConfigModel getStringforKey:User_Token]}];
-//    }else{
-//        [ConfigModel mbProgressHUD:@"您输入的手机号错误" andView:nil];
-//    }
+    if (_userTextField.text.length == 11 ) {
+        [ConfigModel showHud:self];
+        NSDictionary * params = @{@"mobile":_userTextField.text};
+        [HttpRequest postPath:GetCodeURL params:params resultBlock:^(id responseObject, NSError *error) {
+            [ConfigModel hideHud:self];
+            BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+            if (baseModel.error == 0) {
+                self.timeCount = 60;
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reduceTime:) userInfo:_verificationButton repeats:YES];
+                _verificationButton.userInteractionEnabled = NO;
+                [ConfigModel hideHud:self];
+            }else {
+                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+            }
+        }];
+    }else{
+        [ConfigModel hideHud:self];
+        [ConfigModel mbProgressHUD:@"您输入的手机号错误" andView:nil];
+    }
 }
 - (void)reduceTime:(NSTimer *)codeTimer {
     self.timeCount--;
     if (self.timeCount == 0) {
         [_verificationButton setTitle:@"发送验证码" forState:UIControlStateNormal];
-        [_verificationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         UIButton * info = codeTimer.userInfo;
         info.enabled = YES;
         _verificationButton.userInteractionEnabled = YES;
@@ -231,11 +240,11 @@
     }else{
         if (textField.text.length == 4) {
             [self.view endEditing:YES];
-            //_loginButton.userInteractionEnabled = YES;
-            //_loginButton.alpha = 1.0f;
+            _loginButton.userInteractionEnabled = YES;
+            _loginButton.backgroundColor = UIColorFromHex(0x3e7bb1);
         }else{
-            //_loginButton.userInteractionEnabled = NO;
-            //_loginButton.alpha = 0.5f;
+            _loginButton.userInteractionEnabled = NO;
+            _loginButton.backgroundColor = [UIColor grayColor];
         }
     }
 }

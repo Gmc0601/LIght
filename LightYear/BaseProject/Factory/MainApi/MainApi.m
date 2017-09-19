@@ -60,6 +60,7 @@ static MainApi *request = nil;
     NSMutableDictionary *mutArr = [NSMutableDictionary dictionaryWithDictionary:parameters];
         [mutArr addEntriesFromDictionary:@{@"apiCode":URLString}];
         if ([ConfigModel getBoolObjectforKey:IsLogin]) {
+            
             NSString *usertoken = [ConfigModel getStringforKey:UserToken];
             [mutArr addEntriesFromDictionary:@{@"userToken":usertoken}];
 #if UDID

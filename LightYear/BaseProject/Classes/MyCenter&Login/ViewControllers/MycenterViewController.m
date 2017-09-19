@@ -170,7 +170,8 @@
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:mStr]]];
         [self.view addSubview:callWebview];
     }else if (picketView.tag == 20){
-        //分享
+        //分享 index=0=@"朋友圈",index=1=@"微信好友", index=2=@"QQ好友",index=3=@"QQ空间"
+        
     }
     NSLog(@"PickerView:%ld 选中的是:%ld===%@",picketView.tag,index,str);
     picketView = nil;

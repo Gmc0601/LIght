@@ -9,8 +9,7 @@
 #import "UserInfoPicketView.h"
 
 @interface UserInfoPicketView ()<UIPickerViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
-/** 数组 */
-@property (nonatomic,strong) NSMutableArray *proTitleList;
+
 /** 选择框 */
 @property (nonatomic,strong) UIPickerView *pickerView;
 /** 显示视图 */

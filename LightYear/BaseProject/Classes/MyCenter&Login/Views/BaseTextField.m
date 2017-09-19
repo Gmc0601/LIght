@@ -46,29 +46,29 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     //增加监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillShow:)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:nil];
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    if (isChangeSupViewFrame == YES) {
-        isChangeSupViewFrame = NO;
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        // 初始化一个数组,UIWindow的所有子视图
-        NSArray *array = appDelegate.window.subviews;
-        // 获取当前Controller的view视图
-        UIView *view = appDelegate.window.subviews[array.count - 1];
-        // 初始化一个frame,大小为UIWindow的frame
-        CGRect windowFrame = appDelegate.window.frame;
-        windowFrame.origin.y = 0;
-        // 根据yOffset判断键盘是弹出还是收回
-        // 键盘弹出,改变当前Controller的view的frame
-        [UIView animateWithDuration:.2f animations:^{
-            view.frame = windowFrame;
-        }];
-    }
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+//    if (isChangeSupViewFrame == YES) {
+//        isChangeSupViewFrame = NO;
+//        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        // 初始化一个数组,UIWindow的所有子视图
+//        NSArray *array = appDelegate.window.subviews;
+//        // 获取当前Controller的view视图
+//        UIView *view = appDelegate.window.subviews[array.count - 1];
+//        // 初始化一个frame,大小为UIWindow的frame
+//        CGRect windowFrame = appDelegate.window.frame;
+//        windowFrame.origin.y = 0;
+//        // 根据yOffset判断键盘是弹出还是收回
+//        // 键盘弹出,改变当前Controller的view的frame
+//        [UIView animateWithDuration:.2f animations:^{
+//            view.frame = windowFrame;
+//        }];
+//    }
 }
 //当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
