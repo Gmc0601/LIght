@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002F347E1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */; };
-		002F34811F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */; };
-		002F34841F6E9AC8007E93FA /* FeedBackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */; };
 		002F34991F6E9FDB007E93FA /* IKEA Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34861F6E9FDB007E93FA /* IKEA Sans Bold.ttf */; };
 		002F349A1F6E9FDB007E93FA /* IKEA Sans Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34871F6E9FDB007E93FA /* IKEA Sans Heavy.ttf */; };
 		002F349B1F6E9FDB007E93FA /* IKEASans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34881F6E9FDB007E93FA /* IKEASans-Regular.ttf */; };
@@ -29,22 +26,27 @@
 		002F34A91F6E9FDB007E93FA /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34961F6E9FDB007E93FA /* verdanab.ttf */; };
 		002F34AA1F6E9FDB007E93FA /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34971F6E9FDB007E93FA /* verdanab_0.ttf */; };
 		002F34AB1F6E9FDB007E93FA /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002F34981F6E9FDB007E93FA /* verdanai_0.ttf */; };
-		002F34B11F6EA725007E93FA /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34B01F6EA725007E93FA /* FeedBackModel.m */; };
-		002F34B41F6EAD56007E93FA /* EditFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */; };
-		00445EB21F68DC65009BD830 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EB11F68DC65009BD830 /* UserInfoViewController.m */; };
-		00445EB61F68E710009BD830 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EB41F68E710009BD830 /* DateView.m */; };
-		00445EB71F68E710009BD830 /* DateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00445EB51F68E710009BD830 /* DateView.xib */; };
-		00445EBA1F68E9BD009BD830 /* ChangeUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EB91F68E9BD009BD830 /* ChangeUserInfoViewController.m */; };
-		00445EBD1F696558009BD830 /* ChangePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EBC1F696558009BD830 /* ChangePayPasswordViewController.m */; };
-		00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EBF1F6966F1009BD830 /* FeedBackViewController.m */; };
-		00445EC31F69677A009BD830 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */; };
-		008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 008A7DD41F68512A000806F8 /* MycenterHeadView.m */; };
-		00D226A71F6F77C20042E0DD /* UserInfoPicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */; };
-		00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */; };
-		00E08DFB1F699A93006B83F1 /* EditDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E08DFA1F699A93006B83F1 /* EditDeliveryAddressViewController.m */; };
-		00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C971F663A9300F03EAA /* LoginViewController.m */; };
-		00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C991F663A9300F03EAA /* MycenterViewController.m */; };
-		00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F49C9C1F663A9300F03EAA /* BaseTextField.m */; };
+		00A952781F7024F800DEE0F6 /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952521F7024F800DEE0F6 /* FeedBackModel.m */; };
+		00A952791F7024F800DEE0F6 /* ChangePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */; };
+		00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */; };
+		00A9527B1F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952591F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m */; };
+		00A9527C1F7024F800DEE0F6 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9525B1F7024F800DEE0F6 /* DeliveryAddressViewController.m */; };
+		00A9527D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9525D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m */; };
+		00A9527E1F7024F800DEE0F6 /* EditFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9525F1F7024F800DEE0F6 /* EditFeedBackViewController.m */; };
+		00A9527F1F7024F800DEE0F6 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952611F7024F800DEE0F6 /* FeedBackViewController.m */; };
+		00A952801F7024F800DEE0F6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952631F7024F800DEE0F6 /* LoginViewController.m */; };
+		00A952811F7024F800DEE0F6 /* MycenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952651F7024F800DEE0F6 /* MycenterViewController.m */; };
+		00A952821F7024F800DEE0F6 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952671F7024F800DEE0F6 /* UserInfoViewController.m */; };
+		00A952831F7024F800DEE0F6 /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9526A1F7024F800DEE0F6 /* BaseTextField.m */; };
+		00A952841F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9526C1F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.m */; };
+		00A952851F7024F800DEE0F6 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9526E1F7024F800DEE0F6 /* DateView.m */; };
+		00A952861F7024F800DEE0F6 /* DateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A9526F1F7024F800DEE0F6 /* DateView.xib */; };
+		00A952871F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952711F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m */; };
+		00A952881F7024F800DEE0F6 /* FeedBackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952731F7024F800DEE0F6 /* FeedBackTableViewCell.m */; };
+		00A952891F7024F800DEE0F6 /* MycenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952751F7024F800DEE0F6 /* MycenterHeadView.m */; };
+		00A9528A1F7024F800DEE0F6 /* UserInfoPicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952771F7024F800DEE0F6 /* UserInfoPicketView.m */; };
+		00A9528D1F70253500DEE0F6 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528C1F70253500DEE0F6 /* BaseModel.m */; };
+		00A952901F70258500DEE0F6 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528F1F70258500DEE0F6 /* UserModel.m */; };
 		04654A951F6E66280023FF63 /* WMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A901F6E66280023FF63 /* WMScrollView.m */; };
 		04654A961F6E66280023FF63 /* WMSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A921F6E66280023FF63 /* WMSegmentView.m */; };
 		04654A971F6E66280023FF63 /* WMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A941F6E66280023FF63 /* WMTableView.m */; };
@@ -156,12 +158,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002F347C1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressViewController.h; sourceTree = "<group>"; };
-		002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressViewController.m; sourceTree = "<group>"; };
-		002F347F1F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressTableViewCell.h; sourceTree = "<group>"; };
-		002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressTableViewCell.m; sourceTree = "<group>"; };
-		002F34821F6E9AC8007E93FA /* FeedBackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackTableViewCell.h; sourceTree = "<group>"; };
-		002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackTableViewCell.m; sourceTree = "<group>"; };
 		002F34861F6E9FDB007E93FA /* IKEA Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Bold.ttf"; sourceTree = "<group>"; };
 		002F34871F6E9FDB007E93FA /* IKEA Sans Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Heavy.ttf"; sourceTree = "<group>"; };
 		002F34881F6E9FDB007E93FA /* IKEASans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEASans-Regular.ttf"; sourceTree = "<group>"; };
@@ -181,37 +177,47 @@
 		002F34961F6E9FDB007E93FA /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
 		002F34971F6E9FDB007E93FA /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
 		002F34981F6E9FDB007E93FA /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
-		002F34AF1F6EA725007E93FA /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackModel.h; path = "BaseProject/Classes/MyCenter&Login/Views/FeedBackModel.h"; sourceTree = SOURCE_ROOT; };
-		002F34B01F6EA725007E93FA /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackModel.m; path = "BaseProject/Classes/MyCenter&Login/Views/FeedBackModel.m"; sourceTree = SOURCE_ROOT; };
-		002F34B21F6EAD56007E93FA /* EditFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFeedBackViewController.h; sourceTree = "<group>"; };
-		002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFeedBackViewController.m; sourceTree = "<group>"; };
-		00445EB01F68DC65009BD830 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
-		00445EB11F68DC65009BD830 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
-		00445EB31F68E710009BD830 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
-		00445EB41F68E710009BD830 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
-		00445EB51F68E710009BD830 /* DateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateView.xib; sourceTree = "<group>"; };
-		00445EB81F68E9BD009BD830 /* ChangeUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserInfoViewController.h; sourceTree = "<group>"; };
-		00445EB91F68E9BD009BD830 /* ChangeUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserInfoViewController.m; sourceTree = "<group>"; };
-		00445EBB1F696558009BD830 /* ChangePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPasswordViewController.h; sourceTree = "<group>"; };
-		00445EBC1F696558009BD830 /* ChangePayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPasswordViewController.m; sourceTree = "<group>"; };
-		00445EBE1F6966F1009BD830 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
-		00445EBF1F6966F1009BD830 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
-		00445EC11F69677A009BD830 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
-		00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
-		008A7DD31F68512A000806F8 /* MycenterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterHeadView.h; sourceTree = "<group>"; };
-		008A7DD41F68512A000806F8 /* MycenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterHeadView.m; sourceTree = "<group>"; };
-		00D226A51F6F77C20042E0DD /* UserInfoPicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPicketView.h; sourceTree = "<group>"; };
-		00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPicketView.m; sourceTree = "<group>"; };
-		00E08DF61F698E97006B83F1 /* DeilveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeilveryAddressTableViewCell.h; sourceTree = "<group>"; };
-		00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeilveryAddressTableViewCell.m; sourceTree = "<group>"; };
-		00E08DF91F699A93006B83F1 /* EditDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDeliveryAddressViewController.h; sourceTree = "<group>"; };
-		00E08DFA1F699A93006B83F1 /* EditDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDeliveryAddressViewController.m; sourceTree = "<group>"; };
-		00F49C961F663A9300F03EAA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		00F49C971F663A9300F03EAA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		00F49C981F663A9300F03EAA /* MycenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterViewController.h; sourceTree = "<group>"; };
-		00F49C991F663A9300F03EAA /* MycenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterViewController.m; sourceTree = "<group>"; };
-		00F49C9B1F663A9300F03EAA /* BaseTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextField.h; sourceTree = "<group>"; };
-		00F49C9C1F663A9300F03EAA /* BaseTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTextField.m; sourceTree = "<group>"; };
+		00A952511F7024F800DEE0F6 /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackModel.h; sourceTree = "<group>"; };
+		00A952521F7024F800DEE0F6 /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackModel.m; sourceTree = "<group>"; };
+		00A952541F7024F800DEE0F6 /* ChangePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPasswordViewController.h; sourceTree = "<group>"; };
+		00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPasswordViewController.m; sourceTree = "<group>"; };
+		00A952561F7024F800DEE0F6 /* ChangeUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserInfoViewController.h; sourceTree = "<group>"; };
+		00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeUserInfoViewController.m; sourceTree = "<group>"; };
+		00A952581F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressViewController.h; sourceTree = "<group>"; };
+		00A952591F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressViewController.m; sourceTree = "<group>"; };
+		00A9525A1F7024F800DEE0F6 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
+		00A9525B1F7024F800DEE0F6 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
+		00A9525C1F7024F800DEE0F6 /* EditDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDeliveryAddressViewController.h; sourceTree = "<group>"; };
+		00A9525D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDeliveryAddressViewController.m; sourceTree = "<group>"; };
+		00A9525E1F7024F800DEE0F6 /* EditFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFeedBackViewController.h; sourceTree = "<group>"; };
+		00A9525F1F7024F800DEE0F6 /* EditFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFeedBackViewController.m; sourceTree = "<group>"; };
+		00A952601F7024F800DEE0F6 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		00A952611F7024F800DEE0F6 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		00A952621F7024F800DEE0F6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		00A952631F7024F800DEE0F6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		00A952641F7024F800DEE0F6 /* MycenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterViewController.h; sourceTree = "<group>"; };
+		00A952651F7024F800DEE0F6 /* MycenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterViewController.m; sourceTree = "<group>"; };
+		00A952661F7024F800DEE0F6 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		00A952671F7024F800DEE0F6 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		00A952691F7024F800DEE0F6 /* BaseTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextField.h; sourceTree = "<group>"; };
+		00A9526A1F7024F800DEE0F6 /* BaseTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTextField.m; sourceTree = "<group>"; };
+		00A9526B1F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceDeliveryAddressTableViewCell.h; sourceTree = "<group>"; };
+		00A9526C1F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceDeliveryAddressTableViewCell.m; sourceTree = "<group>"; };
+		00A9526D1F7024F800DEE0F6 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
+		00A9526E1F7024F800DEE0F6 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
+		00A9526F1F7024F800DEE0F6 /* DateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateView.xib; sourceTree = "<group>"; };
+		00A952701F7024F800DEE0F6 /* DeilveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeilveryAddressTableViewCell.h; sourceTree = "<group>"; };
+		00A952711F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeilveryAddressTableViewCell.m; sourceTree = "<group>"; };
+		00A952721F7024F800DEE0F6 /* FeedBackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackTableViewCell.h; sourceTree = "<group>"; };
+		00A952731F7024F800DEE0F6 /* FeedBackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackTableViewCell.m; sourceTree = "<group>"; };
+		00A952741F7024F800DEE0F6 /* MycenterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycenterHeadView.h; sourceTree = "<group>"; };
+		00A952751F7024F800DEE0F6 /* MycenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycenterHeadView.m; sourceTree = "<group>"; };
+		00A952761F7024F800DEE0F6 /* UserInfoPicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPicketView.h; sourceTree = "<group>"; };
+		00A952771F7024F800DEE0F6 /* UserInfoPicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPicketView.m; sourceTree = "<group>"; };
+		00A9528B1F70253500DEE0F6 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		00A9528C1F70253500DEE0F6 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		00A9528E1F70258500DEE0F6 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		00A9528F1F70258500DEE0F6 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		04654A8F1F6E66280023FF63 /* WMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMScrollView.h; sourceTree = "<group>"; };
 		04654A901F6E66280023FF63 /* WMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMScrollView.m; sourceTree = "<group>"; };
 		04654A911F6E66280023FF63 /* WMSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSegmentView.h; sourceTree = "<group>"; };
@@ -451,67 +457,71 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		00F49C931F663A9300F03EAA /* Models */ = {
+		00A9524F1F7024F800DEE0F6 /* Ulits */ = {
 			isa = PBXGroup;
 			children = (
-				002F34AF1F6EA725007E93FA /* FeedBackModel.h */,
-				002F34B01F6EA725007E93FA /* FeedBackModel.m */,
+			);
+			path = Ulits;
+			sourceTree = "<group>";
+		};
+		00A952501F7024F800DEE0F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				00A9528B1F70253500DEE0F6 /* BaseModel.h */,
+				00A9528C1F70253500DEE0F6 /* BaseModel.m */,
+				00A952511F7024F800DEE0F6 /* FeedBackModel.h */,
+				00A952521F7024F800DEE0F6 /* FeedBackModel.m */,
+				00A9528E1F70258500DEE0F6 /* UserModel.h */,
+				00A9528F1F70258500DEE0F6 /* UserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		00F49C941F663A9300F03EAA /* Uilts */ = {
+		00A952531F7024F800DEE0F6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = Uilts;
-			sourceTree = "<group>";
-		};
-		00F49C951F663A9300F03EAA /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				00F49C961F663A9300F03EAA /* LoginViewController.h */,
-				00F49C971F663A9300F03EAA /* LoginViewController.m */,
-				00F49C981F663A9300F03EAA /* MycenterViewController.h */,
-				00F49C991F663A9300F03EAA /* MycenterViewController.m */,
-				00445EB01F68DC65009BD830 /* UserInfoViewController.h */,
-				00445EB11F68DC65009BD830 /* UserInfoViewController.m */,
-				00445EB81F68E9BD009BD830 /* ChangeUserInfoViewController.h */,
-				00445EB91F68E9BD009BD830 /* ChangeUserInfoViewController.m */,
-				00445EBB1F696558009BD830 /* ChangePayPasswordViewController.h */,
-				00445EBC1F696558009BD830 /* ChangePayPasswordViewController.m */,
-				00445EBE1F6966F1009BD830 /* FeedBackViewController.h */,
-				00445EBF1F6966F1009BD830 /* FeedBackViewController.m */,
-				002F34B21F6EAD56007E93FA /* EditFeedBackViewController.h */,
-				002F34B31F6EAD56007E93FA /* EditFeedBackViewController.m */,
-				00445EC11F69677A009BD830 /* DeliveryAddressViewController.h */,
-				00445EC21F69677A009BD830 /* DeliveryAddressViewController.m */,
-				00E08DF91F699A93006B83F1 /* EditDeliveryAddressViewController.h */,
-				00E08DFA1F699A93006B83F1 /* EditDeliveryAddressViewController.m */,
-				002F347C1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.h */,
-				002F347D1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m */,
+				00A952541F7024F800DEE0F6 /* ChangePayPasswordViewController.h */,
+				00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */,
+				00A952561F7024F800DEE0F6 /* ChangeUserInfoViewController.h */,
+				00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */,
+				00A952581F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.h */,
+				00A952591F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m */,
+				00A9525A1F7024F800DEE0F6 /* DeliveryAddressViewController.h */,
+				00A9525B1F7024F800DEE0F6 /* DeliveryAddressViewController.m */,
+				00A9525C1F7024F800DEE0F6 /* EditDeliveryAddressViewController.h */,
+				00A9525D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m */,
+				00A9525E1F7024F800DEE0F6 /* EditFeedBackViewController.h */,
+				00A9525F1F7024F800DEE0F6 /* EditFeedBackViewController.m */,
+				00A952601F7024F800DEE0F6 /* FeedBackViewController.h */,
+				00A952611F7024F800DEE0F6 /* FeedBackViewController.m */,
+				00A952621F7024F800DEE0F6 /* LoginViewController.h */,
+				00A952631F7024F800DEE0F6 /* LoginViewController.m */,
+				00A952641F7024F800DEE0F6 /* MycenterViewController.h */,
+				00A952651F7024F800DEE0F6 /* MycenterViewController.m */,
+				00A952661F7024F800DEE0F6 /* UserInfoViewController.h */,
+				00A952671F7024F800DEE0F6 /* UserInfoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		00F49C9A1F663A9300F03EAA /* Views */ = {
+		00A952681F7024F800DEE0F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				00F49C9B1F663A9300F03EAA /* BaseTextField.h */,
-				00F49C9C1F663A9300F03EAA /* BaseTextField.m */,
-				008A7DD31F68512A000806F8 /* MycenterHeadView.h */,
-				008A7DD41F68512A000806F8 /* MycenterHeadView.m */,
-				00445EB31F68E710009BD830 /* DateView.h */,
-				00445EB41F68E710009BD830 /* DateView.m */,
-				00445EB51F68E710009BD830 /* DateView.xib */,
-				00E08DF61F698E97006B83F1 /* DeilveryAddressTableViewCell.h */,
-				00E08DF71F698E97006B83F1 /* DeilveryAddressTableViewCell.m */,
-				002F347F1F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.h */,
-				002F34801F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m */,
-				002F34821F6E9AC8007E93FA /* FeedBackTableViewCell.h */,
-				002F34831F6E9AC8007E93FA /* FeedBackTableViewCell.m */,
-				00D226A51F6F77C20042E0DD /* UserInfoPicketView.h */,
-				00D226A61F6F77C20042E0DD /* UserInfoPicketView.m */,
+				00A952691F7024F800DEE0F6 /* BaseTextField.h */,
+				00A9526A1F7024F800DEE0F6 /* BaseTextField.m */,
+				00A9526B1F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.h */,
+				00A9526C1F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.m */,
+				00A9526D1F7024F800DEE0F6 /* DateView.h */,
+				00A9526E1F7024F800DEE0F6 /* DateView.m */,
+				00A9526F1F7024F800DEE0F6 /* DateView.xib */,
+				00A952701F7024F800DEE0F6 /* DeilveryAddressTableViewCell.h */,
+				00A952711F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m */,
+				00A952721F7024F800DEE0F6 /* FeedBackTableViewCell.h */,
+				00A952731F7024F800DEE0F6 /* FeedBackTableViewCell.m */,
+				00A952741F7024F800DEE0F6 /* MycenterHeadView.h */,
+				00A952751F7024F800DEE0F6 /* MycenterHeadView.m */,
+				00A952761F7024F800DEE0F6 /* UserInfoPicketView.h */,
+				00A952771F7024F800DEE0F6 /* UserInfoPicketView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -641,10 +651,10 @@
 		4299411E1F5EAC4F0009ADDA /* MyCenter&Login */ = {
 			isa = PBXGroup;
 			children = (
-				00F49C931F663A9300F03EAA /* Models */,
-				00F49C941F663A9300F03EAA /* Uilts */,
-				00F49C951F663A9300F03EAA /* ViewControllers */,
-				00F49C9A1F663A9300F03EAA /* Views */,
+				00A9524F1F7024F800DEE0F6 /* Ulits */,
+				00A952501F7024F800DEE0F6 /* Models */,
+				00A952531F7024F800DEE0F6 /* ViewControllers */,
+				00A952681F7024F800DEE0F6 /* Views */,
 			);
 			path = "MyCenter&Login";
 			sourceTree = "<group>";
@@ -991,12 +1001,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42A4445D1EF133E100F90791 /* Build configuration list for PBXNativeTarget "BaseProject" */;
 			buildPhases = (
+				4DE19C8B634D029AC6AFF96D /* [CP] Check Pods Manifest.lock */,
 				42A444291EF133E000F90791 /* Sources */,
 				42A4442A1EF133E000F90791 /* Frameworks */,
 				42A4442B1EF133E000F90791 /* Resources */,
 				6BA87D59C4CCF9CC6B80990B /* [CP] Embed Pods Frameworks */,
 				DB7B00028533D42E221FAC6D /* 📦 Embed Pods Frameworks */,
-				DBFB35C7AB65B340397D675A /* 📦 Copy Pods Resources */,
+				DBFB35C7AB65B340397D675A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1110,10 +1121,10 @@
 				002F34A91F6E9FDB007E93FA /* verdanab.ttf in Resources */,
 				42A444401EF133E000F90791 /* Assets.xcassets in Resources */,
 				002F34A41F6E9FDB007E93FA /* SourceHanSansCN-Medium.ttf in Resources */,
-				00445EB71F68E710009BD830 /* DateView.xib in Resources */,
 				002F349B1F6E9FDB007E93FA /* IKEASans-Regular.ttf in Resources */,
 				002F34A01F6E9FDB007E93FA /* SourceHanSansCN-Bold.ttf in Resources */,
 				002F349C1F6E9FDB007E93FA /* NotoSans-Bold.ttf in Resources */,
+				00A952861F7024F800DEE0F6 /* DateView.xib in Resources */,
 				002F34AA1F6E9FDB007E93FA /* verdanab_0.ttf in Resources */,
 				002F34A21F6E9FDB007E93FA /* SourceHanSansCN-Heavy.ttf in Resources */,
 				002F34AB1F6E9FDB007E93FA /* verdanai_0.ttf in Resources */,
@@ -1139,6 +1150,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4DE19C8B634D029AC6AFF96D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		6BA87D59C4CCF9CC6B80990B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1169,14 +1195,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DBFB35C7AB65B340397D675A /* 📦 Copy Pods Resources */ = {
+		DBFB35C7AB65B340397D675A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1191,43 +1217,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A9527B1F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m in Sources */,
 				42F795BC1F00C8B200A11A69 /* BaseViewController.m in Sources */,
-				00F49C9E1F663A9300F03EAA /* MycenterViewController.m in Sources */,
 				42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */,
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
 				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
-				002F34841F6E9AC8007E93FA /* FeedBackTableViewCell.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
-				00445EBD1F696558009BD830 /* ChangePayPasswordViewController.m in Sources */,
 				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
 				428D51BB1F6296D40001B3C8 /* CouponViewController.m in Sources */,
 				42A24FCD1F5F0CE5005130DC /* UIButton+YX.m in Sources */,
-				00E08DF81F698E97006B83F1 /* DeilveryAddressTableViewCell.m in Sources */,
 				42C84ECA1EF2DD1A0008189D /* NSDictionary+Smart.m in Sources */,
+				00A952811F7024F800DEE0F6 /* MycenterViewController.m in Sources */,
 				42C84EC81EF2DD1A0008189D /* DIc.m in Sources */,
-				002F347E1F6E84D1007E93FA /* ChoiceDeliveryAddressViewController.m in Sources */,
 				6B5F6D6B1F6282D7001BDC0E /* FavoriteGoodsViewController.m in Sources */,
 				6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */,
 				6B5F6DAA1F628D28001BDC0E /* UIColor+BGHexColor.m in Sources */,
 				6B5F6DA11F628D28001BDC0E /* NSMutableArray+Category.m in Sources */,
 				6B5F6DA81F628D28001BDC0E /* NSTimer+Category.m in Sources */,
 				6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */,
+				00A952891F7024F800DEE0F6 /* MycenterHeadView.m in Sources */,
 				42F795BB1F00C8B200A11A69 /* BaseTableView.m in Sources */,
 				6B5F6DA51F628D28001BDC0E /* NSString+DisplayTime.m in Sources */,
 				6BB114BC1F6D8DDE00C9C886 /* CLImageViewPopup.m in Sources */,
 				6B5F6DB31F628D28001BDC0E /* UIView+Category.m in Sources */,
 				4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */,
-				00445EC01F6966F1009BD830 /* FeedBackViewController.m in Sources */,
-				00445EB21F68DC65009BD830 /* UserInfoViewController.m in Sources */,
 				04654A9A1F6E66360023FF63 /* balancePointDetailsCell.m in Sources */,
-				002F34811F6E9788007E93FA /* ChoiceDeliveryAddressTableViewCell.m in Sources */,
 				6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */,
 				42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */,
 				42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */,
 				6B5F6DA61F628D28001BDC0E /* NSString+MD5.m in Sources */,
-				00445EBA1F68E9BD009BD830 /* ChangeUserInfoViewController.m in Sources */,
-				002F34B11F6EA725007E93FA /* FeedBackModel.m in Sources */,
+				00A952841F7024F800DEE0F6 /* ChoiceDeliveryAddressTableViewCell.m in Sources */,
+				00A952821F7024F800DEE0F6 /* UserInfoViewController.m in Sources */,
+				00A952791F7024F800DEE0F6 /* ChangePayPasswordViewController.m in Sources */,
 				42B5F4C01F6233960072FF36 /* OrderAlterView.m in Sources */,
 				6B5F6DB91F629ABF001BDC0E /* SecondLevelGoodsViewController.m in Sources */,
 				42C84EAF1EF2DB060008189D /* ViewController.m in Sources */,
@@ -1235,50 +1257,54 @@
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
 				04654A971F6E66280023FF63 /* WMTableView.m in Sources */,
 				42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */,
-				00F49C9D1F663A9300F03EAA /* LoginViewController.m in Sources */,
 				6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */,
+				00A9527C1F7024F800DEE0F6 /* DeliveryAddressViewController.m in Sources */,
 				42B5F4BC1F62301F0072FF36 /* OrderDetialViewController.m in Sources */,
 				6B5F6D9E1F628D28001BDC0E /* NSData+Category.m in Sources */,
 				4214BDDE1F5FA74E00FA1F85 /* OrderViewController.m in Sources */,
 				6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */,
 				6B5F6DAC1F628D28001BDC0E /* UIImage+Category.m in Sources */,
-				002F34B41F6EAD56007E93FA /* EditFeedBackViewController.m in Sources */,
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				425F203C1F613BD900D0E44D /* OrderTableViewCell.m in Sources */,
 				6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */,
 				42C84F1C1EF2EB650008189D /* NSObject+SBJSON.m in Sources */,
 				6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */,
 				6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */,
+				00A9527D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m in Sources */,
 				42A4443E1EF133E000F90791 /* BaseProject.xcdatamodeld in Sources */,
+				00A9527F1F7024F800DEE0F6 /* FeedBackViewController.m in Sources */,
 				04654AA31F6E97230023FF63 /* couponDetailsCell.m in Sources */,
 				42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */,
 				6BB114B31F6D0D5F00C9C886 /* HistoryTableView.m in Sources */,
 				04654A961F6E66280023FF63 /* WMSegmentView.m in Sources */,
-				00445EB61F68E710009BD830 /* DateView.m in Sources */,
 				6B5F6DA31F628D28001BDC0E /* NSMutableDictionary+Category.m in Sources */,
 				42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */,
+				00A9527E1F7024F800DEE0F6 /* EditFeedBackViewController.m in Sources */,
 				6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */,
+				00A952881F7024F800DEE0F6 /* FeedBackTableViewCell.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
-				008A7DD51F68512A000806F8 /* MycenterHeadView.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
+				00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */,
 				6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
 				6B5F6DAB1F628D28001BDC0E /* UIControl+ResponseTime.m in Sources */,
-				00E08DFB1F699A93006B83F1 /* EditDeliveryAddressViewController.m in Sources */,
 				6B5F6D9D1F628D28001BDC0E /* NSAttributedString+Category.m in Sources */,
 				6B5F6D651F628143001BDC0E /* ShopBaseViewController.m in Sources */,
 				6B5F6DAE1F628D28001BDC0E /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				42C84EB11EF2DB060008189D /* main.m in Sources */,
 				428D51BC1F6296D40001B3C8 /* MakeOrderViewController.m in Sources */,
 				42C84EC91EF2DD1A0008189D /* DicToString.m in Sources */,
+				00A952851F7024F800DEE0F6 /* DateView.m in Sources */,
 				6B5F6DA41F628D28001BDC0E /* NSString+Category.m in Sources */,
 				428D51BF1F6296EB0001B3C8 /* CouponTableViewCell.m in Sources */,
+				00A952871F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m in Sources */,
 				42A24FCF1F5F0CE5005130DC /* UIView+Frame.m in Sources */,
+				00A952831F7024F800DEE0F6 /* BaseTextField.m in Sources */,
 				6B5F6DB11F628D28001BDC0E /* UIView+Animation.m in Sources */,
 				6B5F6DAF1F628D28001BDC0E /* UITableViewCell+CellAnimation.m in Sources */,
 				6B5F6DAD1F628D28001BDC0E /* UIMenuItem+Category.m in Sources */,
+				00A952901F70258500DEE0F6 /* UserModel.m in Sources */,
 				42A24FD01F5F0CE5005130DC /* UIView+Utils.m in Sources */,
-				00445EC31F69677A009BD830 /* DeliveryAddressViewController.m in Sources */,
 				42A24FCE1F5F0CE5005130DC /* UILabel+Width.m in Sources */,
 				04654A9D1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m in Sources */,
 				425F203F1F61955100D0E44D /* OrderModel.m in Sources */,
@@ -1286,13 +1312,15 @@
 				6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */,
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
-				00D226A71F6F77C20042E0DD /* UserInfoPicketView.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,
+				00A9528A1F7024F800DEE0F6 /* UserInfoPicketView.m in Sources */,
 				42C84F1E1EF2EB650008189D /* SBJSON.m in Sources */,
-				00F49C9F1F663A9300F03EAA /* BaseTextField.m in Sources */,
 				6B5F6D9C1F628D28001BDC0E /* NSArray+Category.m in Sources */,
+				00A9528D1F70253500DEE0F6 /* BaseModel.m in Sources */,
 				6B5F6DA91F628D28001BDC0E /* UIButton+Category.m in Sources */,
 				42C84EC71EF2DD1A0008189D /* GTMBase64.m in Sources */,
+				00A952781F7024F800DEE0F6 /* FeedBackModel.m in Sources */,
+				00A952801F7024F800DEE0F6 /* LoginViewController.m in Sources */,
 				6B5F6D9F1F628D28001BDC0E /* NSData+CommonCryptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,7 +34,8 @@
 #pragma mark - 接口地址 -
 
 #define LoginURL @"_login_001"
-
+#define CodeLoginURL @"_login_002"
+#define GetCodeURL @"_sms_002"
 #define BrandList @"_brandlist_001"
 
 
@@ -43,6 +44,7 @@
  */
 
 #define IsLogin @"islogin"
+#define UserInfo @"userInfo"
 
 #define UserToken @"userTOken"
 // 经纬度  地理位置信息
