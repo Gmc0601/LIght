@@ -180,13 +180,7 @@
         UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
         [ConfigModel hideHud:self];
         if (userModel.error == 0) {
-            NSLog(@"LoginSuccess");
-            [ConfigModel saveBoolObject:YES forKey:IsLogin];
-//            [ConfigModel saveString:dict[@"userToken"] forKey:User_Token];
-//            [ConfigModel saveString:dict[@"mobile"] forKey:User_Mobile];
-//            [ConfigModel saveString:dict[@"nickname"] forKey:User_Nick];
-//            [ConfigModel saveString:dict[@"avatar_url"] forKey:User_Logo];
-//            
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
         }else {
             [ConfigModel hideHud:self];

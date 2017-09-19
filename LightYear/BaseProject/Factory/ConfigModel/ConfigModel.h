@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
 @interface ConfigModel : NSObject
 
 + (void)showHud:(UIViewController *)vc;

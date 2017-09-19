@@ -179,7 +179,6 @@
 
 //退出登录
 - (void)exitLoginAction{
-    [ConfigModel saveBoolObject:NO forKey:IsLogin];
     [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(1)];
 }
 //获取当前时间

@@ -45,8 +45,12 @@
      */
     UINavigationController * na;
     if ([aNote.object isEqual:@0]) {
+        NSLog(@"LoginSuccess");
+        [ConfigModel saveBoolObject:YES forKey:IsLogin];
         na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
     }else if ([aNote.object isEqual:@1]){
+        NSLog(@"LoginFailed");
+        [ConfigModel saveBoolObject:NO forKey:IsLogin];
         na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
     }
     self.window.rootViewController = na;
