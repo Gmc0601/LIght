@@ -11,21 +11,31 @@
 #import "BaseTextField.h"
 
 @interface ChangePayPasswordViewController ()<BaseTextFieldDelegate>
-
+{
+    UserInfo * userModel;
+}
 @end
 
 @implementation ChangePayPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.titleLab.text = @"修改支付密码";
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    if (userModel.is_trade == 0) {
+        self.titleLab.text = @"设置支付密码";
+    }else{
+        self.titleLab.text = @"修改支付密码";
+    }
     [self createBaseView];
 }
 - (void)createBaseView{
     for (int i = 0; i < 2; i++) {
         UILabel * baseLabel = [UILabel new];
-        baseLabel.text = @[@"新密码:",@"确认密码:"][i];
+        if (userModel.is_trade == 0) {
+            baseLabel.text = @[@"输入密码:",@"确认密码:"][i];
+        }else{
+            baseLabel.text = @[@"新密码:",@"确认密码:"][i];
+        }
         baseLabel.font = [UIFont boldSystemFontOfSize:16];
         baseLabel.textColor = UIColorFromHex(0x666666);
         [self.view addSubview:baseLabel];
@@ -36,6 +46,7 @@
         }];
         
         BaseTextField * baseTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@[@"6位纯数字",@"请再次输入密码"][i] isBorder:YES];
+        baseTextField.tag = 10+i;
         baseTextField.keyboardType = UIKeyboardTypeDefault;
         baseTextField.textDelegate = self;
         baseTextField.font = [UIFont systemFontOfSize:16];
@@ -66,7 +77,34 @@
 }
 //确定
 - (void)sureAction:(UIButton *)button{
-    
+    BaseTextField * firstTextField = [self.view viewWithTag:10];
+    if (firstTextField.text.length == 0) {
+        [ConfigModel mbProgressHUD:@"密码为空" andView:nil];
+        return;
+    }
+    BaseTextField * secondTextField = [self.view viewWithTag:11];
+    if (secondTextField.text.length == 0) {
+        [ConfigModel mbProgressHUD:@"确认密码为空" andView:nil];
+        return;
+    }
+    if (![firstTextField.text isEqualToString:secondTextField.text]) {
+        [ConfigModel mbProgressHUD:@"两次输入的密码不一致" andView:nil];
+        return;
+    }
+    [ConfigModel showHud:self];
+    NSDictionary * params = @{@"mobile":userModel.username,@"code":self.code,@"newPwd":secondTextField.text};
+    [HttpRequest postPath:ChangePayCodeURL params:params resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:self];
+        BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+        if (baseModel.error == 0) {
+            userModel.is_trade = 1;
+            [[TMCache sharedCache] setObject:userModel forKey:UserInfoModel];
+            UIViewController * viewController = self.navigationController.childViewControllers[2];
+            [self.navigationController popToViewController:viewController animated:YES];
+        }else {
+            //                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+        }
+    }];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

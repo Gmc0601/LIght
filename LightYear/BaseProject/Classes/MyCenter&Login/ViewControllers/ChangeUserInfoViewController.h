@@ -13,8 +13,12 @@ typedef enum : NSUInteger {
     UserInfoTypePayPassword,
 } UserInfoType;
 
+typedef void(^ChangeUserNameBlock)(NSString * name);
+
 @interface ChangeUserInfoViewController : CCBaseViewController
 
 @property (nonatomic , assign) UserInfoType type;
+
+@property (nonatomic, copy) ChangeUserNameBlock finishBlock;
 
 @end

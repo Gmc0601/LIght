@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-
 @interface ConfigModel : NSObject
 
 + (void)showHud:(UIViewController *)vc;
@@ -33,6 +32,5 @@
 + (void)saveIntegerObject:(NSInteger)Object forKey:(NSString *)key;
 
 + (int)getIntObjectforKey:(NSString *)key;
-
 
 @end

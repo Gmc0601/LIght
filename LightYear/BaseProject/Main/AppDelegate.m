@@ -10,6 +10,8 @@
 #import "FirstViewViewController.h"
 #import "LoginViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface AppDelegate ()
 @end
@@ -36,6 +38,9 @@
     [IQKeyboardManager sharedManager].enable = YES;
     [self.window makeKeyAndVisible];
     
+    //设置地图
+    [AMapServices sharedServices].apiKey = AMapKey;
+    
     return YES;
 }
 
@@ -49,7 +54,7 @@
         [ConfigModel saveBoolObject:YES forKey:IsLogin];
         na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
     }else if ([aNote.object isEqual:@1]){
-        NSLog(@"LoginFailed");
+        NSLog(@"OutLoginSuccess");
         [ConfigModel saveBoolObject:NO forKey:IsLogin];
         na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
     }

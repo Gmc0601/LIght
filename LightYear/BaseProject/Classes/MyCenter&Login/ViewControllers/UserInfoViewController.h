@@ -8,6 +8,10 @@
 
 #import "CCBaseViewController.h"
 
+typedef void(^ChangeUserHeadImgBlock)(UIImage * headImg);
+
 @interface UserInfoViewController : CCBaseViewController
+
+@property (nonatomic, copy) ChangeUserHeadImgBlock finishBlock;
 
 @end

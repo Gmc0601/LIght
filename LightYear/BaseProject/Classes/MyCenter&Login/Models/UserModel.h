@@ -21,8 +21,11 @@
 @property (nonatomic , copy) NSString * realname;
 @property (nonatomic , assign) NSInteger sex;
 @property (nonatomic , assign) NSInteger userId;
-@property (nonatomic , assign) NSInteger userToken;
+@property (nonatomic , copy) NSString * userToken;
 @property (nonatomic , copy) NSString * username;
+@property (nonatomic , copy) NSString * avatar_url;
+//本地数据
+@property (nonatomic , strong) UIImage * avatarImg;
 
 @end
 

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 
 @interface ChoiceDeliveryAddressTableViewCell : UITableViewCell
+
+@property (nonatomic , strong) AMapPOI * pointModel;
 
 @end

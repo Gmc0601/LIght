@@ -91,7 +91,7 @@
         make.height.mas_offset(40);
     }];
     
-    _passTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入6位验证码" isBorder:YES];
+    _passTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入4位验证码" isBorder:YES];
     _passTextField.keyboardType = UIKeyboardTypeNumberPad;
     _passTextField.tag = 101;
     _passTextField.isChangeKeyBoard = YES;
@@ -176,14 +176,13 @@
                                @"code": _passTextField.text,
                                };
     [HttpRequest postPath:CodeLoginURL params:logindic resultBlock:^(id responseObject, NSError *error) {
-        
         UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
+        [ConfigModel saveString:userModel.info.userToken forKey:UserToken];
+        [[TMCache sharedCache] setObject:userModel.info forKey:UserInfoModel];
         [ConfigModel hideHud:self];
         if (userModel.error == 0) {
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
         }else {
-            [ConfigModel hideHud:self];
 //            [ConfigModel mbProgressHUD:userModel.info andView:nil];
         }
     }];

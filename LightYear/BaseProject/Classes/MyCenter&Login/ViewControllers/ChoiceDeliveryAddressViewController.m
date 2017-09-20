@@ -11,12 +11,32 @@
 #import "ChoiceDeliveryAddressTableViewCell.h"
 #import "BaseTextField.h"
 
-@interface ChoiceDeliveryAddressViewController ()<BaseTextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+#define CELL_HEIGHT                     55.f
+
+@interface ChoiceDeliveryAddressViewController ()<BaseTextFieldDelegate,UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate>
 {
     BaseTextField * searchField;
     UIButton * searchButton;
     UITableView * myTableView;
     NSMutableArray * dataArray;
+    // 选中的IndexPath
+    NSIndexPath *_selectedIndexPath;
+    // 搜索API
+    AMapSearchAPI *_searchAPI;
+    //定位
+    AMapLocationManager * _locationManager;
+    //当前地理位置
+    CLLocation *_currentLocation;
+    //当前地址详情
+    AMapLocationReGeocode * _currentRegeocode;
+    // 搜索页数
+    NSInteger searchPage;
+    // 搜索页数
+    NSInteger textSearchPage;
+    // 搜索结果数组
+    NSMutableArray * searchResultArray;
+    //开始搜索
+    BOOL isSearchData;
 }
 @end
 
@@ -26,8 +46,45 @@
     [super viewDidLoad];
     
     self.titleLab.text = @"选择收货地址";
+    
+    searchPage = 1;
+    textSearchPage = 1;
+    
     dataArray = [NSMutableArray array];
+    searchResultArray = [NSMutableArray array];
+    
+    _searchAPI = [[AMapSearchAPI alloc] init];
+    _searchAPI.delegate = self;
+    
+    [self getLocationData];
     [self createBaseView];
+}
+- (void)getLocationData{
+    _locationManager = [[AMapLocationManager alloc] init];
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    //   定位超时时间，最低2s，此处设置为2s
+    _locationManager.locationTimeout =2;
+    //   逆地理请求超时时间，最低2s，此处设置为2s
+    _locationManager.reGeocodeTimeout = 2;
+    // 带逆地理（返回坐标和地址信息）。将下面代码中的 YES 改成 NO ，则不会返回地址信息。
+    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        _currentLocation = location;
+        _currentRegeocode = regeocode;
+        
+        AMapGeoPoint *point = [AMapGeoPoint locationWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude];
+        [self searchReGeocodeWithAMapGeoPoint:point];
+        [self searchPoiByAMapGeoPoint:point];
+
+    }];
 }
 - (void)createBaseView{
     UIView * searchView = [UIView new];
@@ -98,8 +155,25 @@
         make.left.right.bottom.mas_offset(0);
     }];
 }
+#pragma mark BaseTextFieldDelegate
+- (void)textFieldTextChange:(UITextField *)textField{
+    if (textField.text.length == 0) {
+        isSearchData = NO;
+        [myTableView reloadData];
+    }
+}
+//搜索按钮点击事件
 - (void)searchButtonAction:(UIButton *)button{
-    
+    [ConfigModel showHud:self];
+    isSearchData = YES;
+    [searchResultArray removeAllObjects];
+    //POI关键字搜索
+    AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
+    request.keywords = searchField.text;
+    request.city = _currentRegeocode.city;
+    request.cityLimit = YES;
+    request.page = textSearchPage;
+    [_searchAPI AMapPOIKeywordsSearch:request];
 }
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -126,8 +200,10 @@
     return 1;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //return dataArray.count;
-    return 5;
+    if (isSearchData) {
+        return searchResultArray.count;
+    }
+    return dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -137,15 +213,97 @@
     if(cell == nil){
         cell = [[ChoiceDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
+    AMapPOI * point;
+    if (isSearchData){
+        point = searchResultArray[indexPath.section];
+    }else{
+        point = dataArray[indexPath.section];
+    }
+    cell.pointModel = point;
     //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
+    AMapPOI * point;
+    if (isSearchData){
+        point = searchResultArray[indexPath.section];
+    }else{
+        point = dataArray[indexPath.section];
+    }
+    if (self.finishBlock) {
+        self.finishBlock(point);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+- (void)loadMorePOI
+{
+    searchPage++;
+    AMapGeoPoint *point = [AMapGeoPoint locationWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude];
+    [self searchPoiByAMapGeoPoint:point];
+}
+// 搜索中心点坐标周围的POI-AMapGeoPoint
+- (void)searchPoiByAMapGeoPoint:(AMapGeoPoint *)location
+{
+    [ConfigModel showHud:self];
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+    request.location = location;
+    // 搜索半径
+    request.radius = 1000;
+    // 搜索结果排序
+    request.sortrule = 0;
+    // 当前页数
+    request.page = searchPage;
+    [_searchAPI AMapPOIAroundSearch:request];
+}
+
+// 搜索逆向地理编码-AMapGeoPoint
+- (void)searchReGeocodeWithAMapGeoPoint:(AMapGeoPoint *)location
+{
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    regeo.location = location;
+    // 返回扩展信息
+    regeo.requireExtension = YES;
+    [_searchAPI AMapReGoecodeSearch:regeo];
+}
+#pragma mark - AMapSearchDelegate
+- (void)onPOISearchDone:(AMapPOISearchBaseRequest *)request response:(AMapPOISearchResponse *)response
+{
+    // 刷新POI后默认第一行为打勾状态
+    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+
+//    // 判断搜索结果是否来自于下拉刷新
+//    if (isFromMoreLoadRequest) {
+//        isFromMoreLoadRequest = NO;
+//    }
+//    else{
+//        //保留数组第一行数据
+//        if (_searchPoiArray.count > 1) {
+//            [_searchPoiArray removeObjectsInRange:NSMakeRange(1, _searchPoiArray.count-1)];
+//        }
+//    }
+//    
+//    // 刷新完成,没有数据时不显示footer
+//    if (response.pois.count == 0) {
+//        _tableView.mj_footer.state = MJRefreshStateNoMoreData;
+//    }
+//    else {
+//        _tableView.mj_footer.state = MJRefreshStateIdle;
+//    }
+    
+    // 添加数据并刷新TableView
+    [response.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
+        if (isSearchData) {
+            [searchResultArray addObject:obj];
+        }else{
+            [dataArray addObject:obj];
+        }
+    }];
+    [myTableView reloadData];
+    [ConfigModel hideHud:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

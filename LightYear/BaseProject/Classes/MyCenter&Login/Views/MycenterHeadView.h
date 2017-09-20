@@ -20,4 +20,6 @@
 
 @property (nonatomic, weak) id<MycenterHeadViewDelegate> delegate;
 
+@property (nonatomic, strong) UIImageView * headImage;
+
 @end

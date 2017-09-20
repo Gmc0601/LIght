@@ -60,9 +60,14 @@
     [self initTbaleViewHeadView];
 }
 - (void)initTbaleViewHeadView{
+    UserInfo * userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     headView = [[MycenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH*0.35)];
     headView.backgroundColor = [UIColor whiteColor];
     headView.delegate = self;
+    headView.headImage.image = [UIImage imageNamed:@"icon_grzx_tx"];
+    if (userModel.avatarImg && userModel.avatar_url.length == 0) {
+        headView.headImage.image = userModel.avatarImg;
+    }
     myTableView.tableHeaderView = headView;
 }
 #pragma mark MycenterHeadViewDelegate
@@ -70,6 +75,9 @@
     if (button.tag == 10) {
         //个人中心
         UserInfoViewController * userInfoVC = [[UserInfoViewController alloc] init];
+        [userInfoVC setFinishBlock:^(UIImage * headImg){
+            headView.headImage.image = headImg;
+        }];
         [self.navigationController pushViewController:userInfoVC animated:YES];
     }else{
         //订单 20--24

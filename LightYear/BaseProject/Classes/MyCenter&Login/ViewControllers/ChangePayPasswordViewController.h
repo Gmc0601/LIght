@@ -10,4 +10,6 @@
 
 @interface ChangePayPasswordViewController : CCBaseViewController
 
+@property (nonatomic , copy) NSString * code;
+
 @end

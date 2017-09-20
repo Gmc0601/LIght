@@ -11,6 +11,12 @@
 #import "BaseTextField.h"
 #import "NSString+Category.h"
 @interface ChangeUserInfoViewController ()<BaseTextFieldDelegate>
+{
+    UserInfo * userModel;
+    UIButton * verificationButton;
+}
+@property (assign, nonatomic) NSInteger timeCount;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -19,14 +25,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     if (self.type == UserInfoTypeName) {
         self.titleLab.text = @"修改昵称";
     }else if (self.type == UserInfoTypePayPassword){
-        self.titleLab.text = @"修改支付密码";
+        if (userModel.is_trade == 0) {
+            self.titleLab.text = @"设置支付密码";
+        }else{
+            self.titleLab.text = @"修改支付密码";
+        }
     }
     [self createBaseView];
 }
 - (void)createBaseView{
+
     if (self.type == UserInfoTypeName) {
         for (int i = 0; i < 2; i++) {
             UILabel * baseLabel = [UILabel new];
@@ -41,6 +53,7 @@
             }];
             
             BaseTextField * baseTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@[@"请输入姓氏",@"请输入姓名"][i] isBorder:YES];
+            baseTextField.tag = 10+i;
             baseTextField.keyboardType = UIKeyboardTypeDefault;
             baseTextField.textDelegate = self;
             baseTextField.font = [UIFont systemFontOfSize:16];
@@ -96,7 +109,7 @@
             }];
             if (i == 0) {
                 UILabel * telephoneLabel = [UILabel new];
-                telephoneLabel.text = [NSString getSecrectStringWithPhoneNumber:@"17611308925"];
+                telephoneLabel.text = [NSString getSecrectStringWithPhoneNumber:userModel.username];
                 telephoneLabel.font = [UIFont systemFontOfSize:15];
                 telephoneLabel.textColor = UIColorFromHex(0x666666);
                 [self.view addSubview:telephoneLabel];
@@ -106,7 +119,7 @@
                     make.height.mas_offset(40);
                 }];
                 
-                UIButton * verificationButton = [UIButton new];
+                verificationButton = [UIButton new];
                 verificationButton.layer.masksToBounds = YES;
                 verificationButton.layer.cornerRadius = 3.0f;
                 verificationButton.layer.borderWidth = 0.5f;
@@ -120,11 +133,13 @@
                     make.right.mas_offset(-20);
                     make.top.mas_equalTo(baseLabel.mas_top).offset(5);
                     make.height.mas_offset(30);
+                    make.width.mas_equalTo(80);
                 }];
             }else{
                 BaseTextField * baseTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入4位验证码" isBorder:YES];
                 baseTextField.keyboardType = UIKeyboardTypeNumberPad;
                 baseTextField.textDelegate = self;
+                baseTextField.tag = 12;
                 baseTextField.font = [UIFont systemFontOfSize:16];
                 [self.view addSubview:baseTextField];
                 [baseTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,15 +172,61 @@
 //确定
 - (void)sureAction:(UIButton *)button{
     if (self.type == UserInfoTypeName) {
-        
+        BaseTextField * firstTextField = [self.view viewWithTag:10];
+        if (firstTextField.text.length == 0) {
+            [ConfigModel mbProgressHUD:@"姓氏不能为空" andView:nil];
+            return;
+        }
+        BaseTextField * secondTextField = [self.view viewWithTag:11];
+        if (secondTextField.text.length == 0) {
+            [ConfigModel mbProgressHUD:@"姓名不能为空" andView:nil];
+            return;
+        }
+        NSString * name = [NSString stringWithFormat:@"%@,%@",firstTextField.text,secondTextField.text];
+        if (self.finishBlock) {
+            self.finishBlock(name);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }else if (self.type == UserInfoTypePayPassword){
-        ChangePayPasswordViewController * payPasswordVC = [[ChangePayPasswordViewController alloc] init];
-        [self.navigationController pushViewController:payPasswordVC animated:YES];
+        BaseTextField * thirdTextField = [self.view viewWithTag:12];
+        if (thirdTextField.text.length == 4) {
+            ChangePayPasswordViewController * payPasswordVC = [[ChangePayPasswordViewController alloc] init];
+            payPasswordVC.code = thirdTextField.text;
+            [self.navigationController pushViewController:payPasswordVC animated:YES];
+        }else{
+            [ConfigModel mbProgressHUD:@"验证码输入有误" andView:nil];
+        }
     }
 }
 //发送验证码
 - (void)getValidationCodeAction:(UIButton *)sender{
-    
+    [ConfigModel showHud:self];
+    NSDictionary * params = @{@"mobile":userModel.username};
+    [HttpRequest postPath:GetCodeURL params:params resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:self];
+        BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+        if (baseModel.error == 0) {
+            self.timeCount = 60;
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reduceTime:) userInfo:verificationButton repeats:YES];
+            verificationButton.userInteractionEnabled = NO;
+        }else {
+            //                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+        }
+    }];
+}
+- (void)reduceTime:(NSTimer *)codeTimer {
+    self.timeCount--;
+    if (self.timeCount == 0) {
+        [verificationButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        UIButton * info = codeTimer.userInfo;
+        info.enabled = YES;
+        verificationButton.userInteractionEnabled = YES;
+        verificationButton.enabled  = YES;
+        [self.timer invalidate];
+    } else {
+        NSString *str = [NSString stringWithFormat:@"%zus", (long)self.timeCount];
+        [verificationButton setTitle:str forState:UIControlStateNormal];
+    }
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

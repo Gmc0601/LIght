@@ -12,6 +12,10 @@
  接口文档
  */
 #define TokenKey @"32a0357b12de425b9b957b25f66cf002"
+/*
+ 地图key
+ */
+#define AMapKey @"9a93d147b3dc5956b850d713d1b25a26"
 
 #define UDID     0
 
@@ -33,18 +37,22 @@
 
 #pragma mark - 接口地址 -
 
+//模块A
 #define LoginURL @"_login_001"
 #define CodeLoginURL @"_login_002"
 #define GetCodeURL @"_sms_002"
-#define BrandList @"_brandlist_001"
+#define ChangeUserInfo @"_update_userinfo_001"
+#define ReceiptListURL @"_receipt_001"
+#define ChangePayCodeURL @"_change_pay_pwd_001"
 
+#define BrandList @"_brandlist_001"
 
 /*
  *   User Info
  */
 
 #define IsLogin @"islogin"
-
+#define UserInfoModel @"UserInfoModel"
 #define UserToken @"userTOken"
 // 经纬度  地理位置信息
 #define Longitude @"longitude"

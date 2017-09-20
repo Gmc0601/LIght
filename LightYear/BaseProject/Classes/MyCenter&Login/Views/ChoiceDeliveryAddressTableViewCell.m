@@ -28,7 +28,6 @@
 }
 - (void)makeView{
     nameLabel = [UILabel new];
-    nameLabel.text = @"杭州高新创业园";
     nameLabel.font = [UIFont boldSystemFontOfSize:16];
     nameLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:nameLabel];
@@ -39,7 +38,6 @@
     
     addressLabel = [UILabel new];
     addressLabel.numberOfLines = 0;
-    addressLabel.text = @"浙江省杭州市滨江区南环路2111号一号写字楼403";
     addressLabel.font = [UIFont systemFontOfSize:14];
     addressLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:addressLabel];
@@ -50,7 +48,10 @@
         make.right.bottom.mas_offset(-20);
     }];
 }
-
+- (void)setPointModel:(AMapPOI *)pointModel{
+    nameLabel.text = pointModel.name;
+    addressLabel.text = pointModel.address;
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -122,6 +122,9 @@
 //选取收货地址
 - (void)arrowAction:(UIButton *)button{
     ChoiceDeliveryAddressViewController * choiceAddressVC = [[ChoiceDeliveryAddressViewController alloc] init];
+    [choiceAddressVC setFinishBlock:^(AMapPOI * point){
+        
+    }];
     [self.navigationController pushViewController:choiceAddressVC animated:YES];
 }
 //默认选取

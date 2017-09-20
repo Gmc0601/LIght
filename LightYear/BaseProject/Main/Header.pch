@@ -16,6 +16,8 @@
 #import "Masonry.h"
 #import "BaseModel.h"
 #import "UserModel.h"
+#import <TMCache/TMCache.h>
+
 /*
  通用
  */

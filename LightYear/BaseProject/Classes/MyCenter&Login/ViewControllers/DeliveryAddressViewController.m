@@ -25,8 +25,16 @@
     
     self.titleLab.text = @"收货地址";
     dataArray = [NSMutableArray array];
+    [self getData];
     [self createBaseView];
 }
+
+- (void)getData{
+    [HttpRequest postPath:ReceiptListURL params:nil resultBlock:^(id responseObject, NSError *error) {
+        
+    }];
+}
+
 - (void)createBaseView{
     myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     myTableView.delegate = self;

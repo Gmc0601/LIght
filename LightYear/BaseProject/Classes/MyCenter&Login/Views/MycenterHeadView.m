@@ -9,9 +9,7 @@
 #import "MycenterHeadView.h"
 
 @implementation MycenterHeadView
-{
-    UIImageView * headImage;
-}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -32,21 +30,27 @@
         make.size.mas_offset(CGSizeMake(80, 80));
     }];
     
-    headImage = [UIImageView new];
-    headImage.image = [UIImage imageNamed:@"icon_grzx_tx"];
-    [headButton addSubview:headImage];
-    [headImage mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.headImage = [UIImageView new];
+    [headButton addSubview:self.headImage];
+    [self.headImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.mas_offset(5);
         make.top.left.mas_offset(-5);
     }];
     
+    UIImageView * titltImage = [UIImageView new];
+    titltImage.image = [UIImage imageNamed:@"img_tx_bj"];
+    [headButton addSubview:titltImage];
+    [titltImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(0);
+        make.left.right.mas_offset(0);
+        make.height.mas_offset(20);
+    }];
+    
     UILabel * headEditLabel = [UILabel new];
     headEditLabel.text = @"编辑";
-    headEditLabel.alpha = 0.5f;
     headEditLabel.textAlignment = NSTextAlignmentCenter;
     headEditLabel.font = [UIFont systemFontOfSize:13];
     headEditLabel.textColor = [UIColor whiteColor];
-    headEditLabel.backgroundColor = [UIColor blackColor];
     [headButton addSubview:headEditLabel];
     [headEditLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_offset(0);

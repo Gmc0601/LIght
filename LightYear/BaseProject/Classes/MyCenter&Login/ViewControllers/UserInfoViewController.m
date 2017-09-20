@@ -15,11 +15,11 @@
 {
     UITableView * myTableView;
     NSMutableArray * dataArray;
-    UIImage * userHeadImage;
     DateView * dateView;
     UserInfoPicketView * picketView;
+    UserInfo * userModel;
 }
-
+@property (nonatomic ,copy) void(^ChangeUserInfoBlock) (int status);
 
 @end
 
@@ -31,6 +31,15 @@
     self.titleLab.text = @"个人资料";
     dataArray = [NSMutableArray arrayWithObjects:@"头像",@"姓名",@"性别",@"生日", @"钱包支付密码",nil];
     [self createBaseView];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    [myTableView reloadData];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[TMCache sharedCache] setObject:userModel forKey:UserInfoModel];
 }
 - (void)createBaseView{
     myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -46,7 +55,33 @@
         make.left.right.bottom.mas_offset(0);
     }];
 }
-
+- (void)changeUserInfoWithKey:(NSString *)key Value:(NSString *)value{
+    [ConfigModel showHud:self];
+    NSDictionary * params = @{key:value};
+    [HttpRequest postPath:ChangeUserInfo params:params resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:self];
+        BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+        [ConfigModel hideHud:self];
+        if (baseModel.error == 0) {
+            if ([key isEqualToString:@"sex"]) {
+                userModel.sex = [value integerValue];
+            }else if ([key isEqualToString:@"birthday"]){
+                userModel.birthday = value;
+            }else if ([key isEqualToString:@"nickname"]){
+                NSMutableString * mutableStr = [[NSMutableString alloc] initWithString:value];
+                NSRange range = [mutableStr rangeOfString:@","];
+                [mutableStr deleteCharactersInRange:range];
+                userModel.nickname = mutableStr;
+            }else if ([key isEqualToString:@"avatar_id"]){
+                
+            }
+            [myTableView reloadData];
+            [ConfigModel mbProgressHUD:@"修改成功" andView:nil];
+        }else {
+            [ConfigModel mbProgressHUD:@"修改失败" andView:nil];
+        }
+    }];
+}
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -87,20 +122,27 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
+    for(UIView * view in [cell.textLabel subviews]){
+        [view removeFromSuperview];
+    }
     cell.textLabel.text = dataArray[indexPath.section];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     cell.contentView.backgroundColor = [UIColor whiteColor];
     
     if (indexPath.section == 0) {
         UIImageView * headImage = [UIImageView new];
+        headImage.layer.cornerRadius = 20.0f;
+        headImage.layer.masksToBounds = YES;
         headImage.image = [UIImage imageNamed:@"icon_grzl_tx"];
+        if (userModel.avatarImg && userModel.avatar_url.length == 0) {
+            headImage.image = userModel.avatarImg;
+        }
         [cell.textLabel addSubview:headImage];
         [headImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_offset(0);
             make.centerY.mas_offset(0);
             make.size.mas_offset(CGSizeMake(40, 40));
         }];
-
     }else{
         UILabel * detailLabel = [UILabel new];
         detailLabel.text = @"未设置";
@@ -111,6 +153,19 @@
             make.right.mas_offset(0);
             make.centerY.mas_offset(0);
         }];
+        if (indexPath.section == 1 && userModel.username.length > 0) {
+            detailLabel.text = userModel.nickname;
+        }else if (indexPath.section == 2 && userModel.sex > 0){
+            if (userModel.sex == 1) {
+                detailLabel.text = @"男";
+            }else{
+                detailLabel.text = @"女";
+            }
+        }else if (indexPath.section == 3 && userModel.birthday.length > 0){
+            detailLabel.text = userModel.birthday;
+        }else if (indexPath.section == 4 && userModel.is_trade == 1){
+            detailLabel.text = @"修改支付密码";
+        }
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -132,6 +187,9 @@
         //姓名
         ChangeUserInfoViewController * changeUserInfoVC = [[ChangeUserInfoViewController alloc] init];
         changeUserInfoVC.type = UserInfoTypeName;
+        [changeUserInfoVC setFinishBlock:^(NSString * name){
+            [self changeUserInfoWithKey:@"nickname" Value:name];
+        }];
         [self.navigationController pushViewController:changeUserInfoVC animated:YES];
     }else if (indexPath.section == 2){
         //性别
@@ -188,7 +246,7 @@
             }
         }
     }else if (picketView.tag == 20){//性别
-        
+        [self changeUserInfoWithKey:@"sex" Value:[NSString stringWithFormat:@"%ld",index+1]];
     }
     picketView = nil;
 }
@@ -219,14 +277,18 @@
     NSDateFormatter *Formatter=[[NSDateFormatter alloc] init];
     [Formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *resultStr=[Formatter stringFromDate:dateStr];
-    NSLog(@"%@",resultStr);
+    [self changeUserInfoWithKey:@"birthday" Value:resultStr];
     [self hideDatePickerView];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = info[UIImagePickerControllerEditedImage];
-    userHeadImage = image;
+    userModel.avatarImg = image;
+    if (self.finishBlock) {
+        self.finishBlock(image);
+    }
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [myTableView reloadData];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
