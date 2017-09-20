@@ -12,6 +12,7 @@ pod 'PopupDialog', '~> 0.5'
 pod 'JSONModel'
 pod 'TMCache'
 pod 'KLCPopup'
+pod 'PPNumberButton'
 pod ‘UMengUShare/UI’
 pod ‘UMengUShare/Social/ReducedWeChat'
 pod ‘UMengUShare/Social/ReducedQQ'
