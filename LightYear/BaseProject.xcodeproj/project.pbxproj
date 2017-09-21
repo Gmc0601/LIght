@@ -53,6 +53,9 @@
 		04654A9A1F6E66360023FF63 /* balancePointDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A991F6E66360023FF63 /* balancePointDetailsCell.m */; };
 		04654A9D1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */; };
 		04654AA31F6E97230023FF63 /* couponDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654AA21F6E97230023FF63 /* couponDetailsCell.m */; };
+		046C474B1F73D90A00FDCFF6 /* WMBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C474A1F73D90A00FDCFF6 /* WMBannerView.m */; };
+		046C474E1F73D92300FDCFF6 /* WMHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */; };
+		046C47511F73DE1700FDCFF6 /* WMHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */; };
 		4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */; };
 		4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */; };
 		4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDED1F5FA97A00FA1F85 /* FactorySet.m */; };
@@ -257,6 +260,12 @@
 		04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMBalancePointDetailsViewController.m; sourceTree = "<group>"; };
 		04654AA11F6E97230023FF63 /* couponDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = couponDetailsCell.h; sourceTree = "<group>"; };
 		04654AA21F6E97230023FF63 /* couponDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = couponDetailsCell.m; sourceTree = "<group>"; };
+		046C47491F73D90A00FDCFF6 /* WMBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMBannerView.h; sourceTree = "<group>"; };
+		046C474A1F73D90A00FDCFF6 /* WMBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMBannerView.m; sourceTree = "<group>"; };
+		046C474C1F73D92300FDCFF6 /* WMHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMHomePageViewController.h; sourceTree = "<group>"; };
+		046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMHomePageViewController.m; sourceTree = "<group>"; };
+		046C474F1F73DE1700FDCFF6 /* WMHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMHomeHeaderView.h; sourceTree = "<group>"; };
+		046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMHomeHeaderView.m; sourceTree = "<group>"; };
 		4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewViewController.h; sourceTree = "<group>"; };
 		4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewViewController.m; sourceTree = "<group>"; };
 		4214BDE81F5FA8A800FA1F85 /* ShoppingCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarViewController.h; sourceTree = "<group>"; };
@@ -694,10 +703,14 @@
 		04654A8D1F6E65F80023FF63 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				046C47491F73D90A00FDCFF6 /* WMBannerView.h */,
+				046C474A1F73D90A00FDCFF6 /* WMBannerView.m */,
 				04654AA11F6E97230023FF63 /* couponDetailsCell.h */,
 				04654AA21F6E97230023FF63 /* couponDetailsCell.m */,
 				04654A981F6E66360023FF63 /* balancePointDetailsCell.h */,
 				04654A991F6E66360023FF63 /* balancePointDetailsCell.m */,
+				046C474F1F73DE1700FDCFF6 /* WMHomeHeaderView.h */,
+				046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -806,6 +819,8 @@
 				04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */,
 				4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */,
 				4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */,
+				046C474C1F73D92300FDCFF6 /* WMHomePageViewController.h */,
+				046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1551,6 +1566,7 @@
 				42DDA3111F70D31E006A6A26 /* OrderTableViewCell.m in Sources */,
 				42F795BB1F00C8B200A11A69 /* BaseTableView.m in Sources */,
 				6B5F6DA51F628D28001BDC0E /* NSString+DisplayTime.m in Sources */,
+				046C474E1F73D92300FDCFF6 /* WMHomePageViewController.m in Sources */,
 				6BB114BC1F6D8DDE00C9C886 /* CLImageViewPopup.m in Sources */,
 				6B5F6DB31F628D28001BDC0E /* UIView+Category.m in Sources */,
 				4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */,
@@ -1575,12 +1591,14 @@
 				42C84EB91EF2DCD90008189D /* MainApi.m in Sources */,
 				6B5F6DB01F628D28001BDC0E /* UITextView+placeholder.m in Sources */,
 				04654A971F6E66280023FF63 /* WMTableView.m in Sources */,
+				046C474B1F73D90A00FDCFF6 /* WMBannerView.m in Sources */,
 				42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */,
 				6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */,
 				00A9527C1F7024F800DEE0F6 /* DeliveryAddressViewController.m in Sources */,
 				6B5F6D9E1F628D28001BDC0E /* NSData+Category.m in Sources */,
 				6B5F6DB61F6291B7001BDC0E /* GoodsCategory.m in Sources */,
 				6B5F6DAC1F628D28001BDC0E /* UIImage+Category.m in Sources */,
+				046C47511F73DE1700FDCFF6 /* WMHomeHeaderView.m in Sources */,
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */,
 				42C84F1C1EF2EB650008189D /* NSObject+SBJSON.m in Sources */,
