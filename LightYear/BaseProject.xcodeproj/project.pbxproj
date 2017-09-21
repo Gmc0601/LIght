@@ -26,6 +26,7 @@
 		002B21321F70FDA200652CAF /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211F1F70FDA200652CAF /* verdanab.ttf */; };
 		002B21331F70FDA200652CAF /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21201F70FDA200652CAF /* verdanab_0.ttf */; };
 		002B21341F70FDA200652CAF /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21211F70FDA200652CAF /* verdanai_0.ttf */; };
+		00A51EA31F72C28F00E383AF /* DeliveryAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A51EA21F72C28F00E383AF /* DeliveryAddressModel.m */; };
 		00A952791F7024F800DEE0F6 /* ChangePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */; };
 		00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */; };
 		00A9527B1F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952591F7024F800DEE0F6 /* ChoiceDeliveryAddressViewController.m */; };
@@ -207,6 +208,8 @@
 		002B211F1F70FDA200652CAF /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
 		002B21201F70FDA200652CAF /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
 		002B21211F70FDA200652CAF /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
+		00A51EA11F72C28F00E383AF /* DeliveryAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressModel.h; sourceTree = "<group>"; };
+		00A51EA21F72C28F00E383AF /* DeliveryAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressModel.m; sourceTree = "<group>"; };
 		00A952541F7024F800DEE0F6 /* ChangePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPasswordViewController.h; sourceTree = "<group>"; };
 		00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPasswordViewController.m; sourceTree = "<group>"; };
 		00A952561F7024F800DEE0F6 /* ChangeUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeUserInfoViewController.h; sourceTree = "<group>"; };
@@ -624,13 +627,6 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		00A9524F1F7024F800DEE0F6 /* Ulits */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Ulits;
-			sourceTree = "<group>";
-		};
 		00A952501F7024F800DEE0F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +636,8 @@
 				00A9528C1F70253500DEE0F6 /* BaseModel.m */,
 				00A9528E1F70258500DEE0F6 /* UserModel.h */,
 				00A9528F1F70258500DEE0F6 /* UserModel.m */,
+				00A51EA11F72C28F00E383AF /* DeliveryAddressModel.h */,
+				00A51EA21F72C28F00E383AF /* DeliveryAddressModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -691,6 +689,13 @@
 				00A952771F7024F800DEE0F6 /* UserInfoPicketView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		00B0B6511F736F6A000359FD /* Ulits */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ulits;
 			sourceTree = "<group>";
 		};
 		04654A8C1F6E65F80023FF63 /* Models */ = {
@@ -828,7 +833,7 @@
 		4299411E1F5EAC4F0009ADDA /* MyCenter&Login */ = {
 			isa = PBXGroup;
 			children = (
-				00A9524F1F7024F800DEE0F6 /* Ulits */,
+				00B0B6511F736F6A000359FD /* Ulits */,
 				00A952501F7024F800DEE0F6 /* Models */,
 				00A952531F7024F800DEE0F6 /* ViewControllers */,
 				00A952681F7024F800DEE0F6 /* Views */,
@@ -1381,7 +1386,7 @@
 		42A444251EF133E000F90791 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = cc;
 				TargetAttributes = {
 					42A4442C1EF133E000F90791 = {
@@ -1634,6 +1639,7 @@
 				42C84EB11EF2DB060008189D /* main.m in Sources */,
 				42C84EC91EF2DD1A0008189D /* DicToString.m in Sources */,
 				00A952851F7024F800DEE0F6 /* DateView.m in Sources */,
+				00A51EA31F72C28F00E383AF /* DeliveryAddressModel.m in Sources */,
 				6B5F6DA41F628D28001BDC0E /* NSString+Category.m in Sources */,
 				00A952871F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m in Sources */,
 				42A24FCF1F5F0CE5005130DC /* UIView+Frame.m in Sources */,
@@ -1720,7 +1726,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1728,7 +1736,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1769,7 +1781,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1777,7 +1791,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
