@@ -13,12 +13,19 @@
 @property(retain,atomic) NSString *name;
 @property(retain,atomic) NSString *img;
 @property(retain,atomic) NSString *price;
+@property(retain,atomic) NSString *specilPrice;
 @property(retain,atomic) NSString *memberPrice;
-@property(assign,atomic) BOOL canDelivery;
-@property(assign,atomic) BOOL canTakeBySelf;
-@property(assign,atomic) BOOL hasDiscounts;
+@property(assign,nonatomic) BOOL canDelivery;
+@property(assign,nonatomic) BOOL canTakeBySelf;
+@property(assign,nonatomic) BOOL hasDiscounts;
+@property(retain,atomic) NSString *couponid;
 @property(assign,atomic) BOOL isNew;
+@property(assign,atomic) BOOL isUser;
 @property(assign,atomic) BOOL outOfStack;
 @property(assign,atomic) int count;
 @property(retain,atomic) NSString *discountMessage;
+@property(retain,atomic) NSString *shopId;
+@property(assign,atomic) int stock;
+@property(assign,atomic) int shopStock;
+@property(assign,atomic) int centerStock;
 @end

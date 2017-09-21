@@ -92,7 +92,6 @@
 -(void) addTableView{
     _listView = [GoodsListView new];
     _listView.delegate = self;
-    _listView.datasource = self.datasource;
     [self addSubview:_listView];
     
     [_listView mas_makeConstraints:^(MASConstraintMaker *make) {

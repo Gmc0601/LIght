@@ -164,6 +164,7 @@
 		6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B51F6D25CC00C9C886 /* SearchResultView.m */; };
 		6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114B81F6D7E9A00C9C886 /* PurchaseCarViewController.m */; };
 		6BB114BC1F6D8DDE00C9C886 /* CLImageViewPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB114BB1F6D8DDE00C9C886 /* CLImageViewPopup.m */; };
+		6BB191171F737606001ED732 /* NetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB191161F737606001ED732 /* NetHelper.m */; };
 		6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */; };
 		6BBD89BB1F697AC700C8B7C3 /* RecommendCV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89B91F697AC700C8B7C3 /* RecommendCV.m */; };
 		6BBD89CA1F69928500C8B7C3 /* GoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD89C91F69928500C8B7C3 /* GoodsListView.m */; };
@@ -547,6 +548,8 @@
 		6BB114B81F6D7E9A00C9C886 /* PurchaseCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCarViewController.m; sourceTree = "<group>"; };
 		6BB114BA1F6D8DDE00C9C886 /* CLImageViewPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageViewPopup.h; sourceTree = "<group>"; };
 		6BB114BB1F6D8DDE00C9C886 /* CLImageViewPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageViewPopup.m; sourceTree = "<group>"; };
+		6BB191151F737606001ED732 /* NetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetHelper.h; path = "BaseProject/Classes/GoodsDetail&ShoppingCar/Views/NetHelper.h"; sourceTree = SOURCE_ROOT; };
+		6BB191161F737606001ED732 /* NetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetHelper.m; path = "BaseProject/Classes/GoodsDetail&ShoppingCar/Views/NetHelper.m"; sourceTree = SOURCE_ROOT; };
 		6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCell.h; sourceTree = "<group>"; };
 		6BBD89B71F697AC700C8B7C3 /* RecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendCell.m; sourceTree = "<group>"; };
 		6BBD89B81F697AC700C8B7C3 /* RecommendCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendCV.h; sourceTree = "<group>"; };
@@ -736,6 +739,7 @@
 		4214BDE51F5FA8A800FA1F85 /* GoodsDetail&ShoppingCar */ = {
 			isa = PBXGroup;
 			children = (
+				6BB191181F739193001ED732 /* Utils */,
 				4214BDE71F5FA8A800FA1F85 /* ViewControllers */,
 				4214BDEA1F5FA8A800FA1F85 /* Views */,
 				4214BDE61F5FA8A800FA1F85 /* Models */,
@@ -1292,6 +1296,15 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
+		6BB191181F739193001ED732 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6BB191151F737606001ED732 /* NetHelper.h */,
+				6BB191161F737606001ED732 /* NetHelper.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		7F5FE81AF3930B1D8AB68F96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1629,6 +1642,7 @@
 				00A952881F7024F800DEE0F6 /* FeedBackTableViewCell.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
+				6BB191171F737606001ED732 /* NetHelper.m in Sources */,
 				00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */,
 				6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,

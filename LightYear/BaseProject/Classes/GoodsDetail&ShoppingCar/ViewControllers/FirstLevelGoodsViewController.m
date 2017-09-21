@@ -14,7 +14,8 @@
 
 @interface FirstLevelGoodsViewController () <UITableViewDelegate,UITableViewDataSource>{
     NSString *_cellIdentifier;
-    NSMutableArray *_dataSource;
+    NSArray *_dataSource;
+    int pageIndex;
 }
 @property(retain,atomic) UITableView *tb;
 
@@ -24,13 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self mockData];
     [self addBottomView];
     [self addFavoriteButton];
     [self addSearchButton];
     [self addTableView];
     self.searchBar.enable = NO;
-    
+    pageIndex = 1;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoSearchViewController)];
     
     [self.searchBar addGestureRecognizer:tap];
@@ -39,23 +39,31 @@
     __weak FirstLevelGoodsViewController *weakSelf = self;
 
     [_tb addRefreshHeaderWithBlock:^{
+        pageIndex = 1;
+        [weakSelf fetchDate];
         [weakSelf.tb.header endHeadRefresh];
     }];
     
     [_tb addRefreshFootWithBlock:^{
+        pageIndex++;
+        [weakSelf fetchDate];
         [weakSelf.tb.footer endFooterRefreshing];
     }];
+    
+    [_tb.header beginRefreshing];
 }
 
--(void) mockData{
-    _dataSource = [NSMutableArray arrayWithCapacity:10];
-
-    for (int i=0; i<10; i++) {
-        GoodsCategory *c = [GoodsCategory new];
-        c._id = @"1";
-        c.text = @"一级目录";
-        [_dataSource addObject:c];
-    }
+-(void) fetchDate{
+    [ConfigModel showHud:self];
+    [NetHelper getCategoryListWithId:@"0" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+        [ConfigModel hideHud:self];
+        if (error != nil) {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }else{
+            _dataSource = data;
+            [_tb reloadData];
+        }
+    }];
 }
 
 -(void) addTableView{

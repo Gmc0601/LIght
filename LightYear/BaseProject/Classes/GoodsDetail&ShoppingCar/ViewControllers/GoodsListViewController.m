@@ -24,47 +24,22 @@
 @implementation GoodsListViewController
 @synthesize categry = _categry;
 -(void) setCategry:(GoodsCategory *)categry{
+    if (_list == nil) {
+        [self addTableView];
+    }
     _categry = categry;
     self.titleLab.text = _categry.text;
+    _list.goodsType = _categry._id;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addFavoriteButton];
     [self addBottomView];
-    [self addTableView];
-    [self mockData];
-}
-
--(void) mockData{
-    _dataSource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.price = @"111";
-        if (i%2 == 0) {
-            model.memberPrice = @"1";
-        }
-        
-        if (i%3 == 0) {
-            model.isNew = YES;
-        }
-        
-        if (i%4 == 0) {
-            model.canDelivery = YES;
-        }
-        [_dataSource addObject:model];
-    }
-    
-    _list.datasource = _dataSource;
 }
 
 -(void) addTableView{
-    _list = [GoodsListView new];
+    _list = [[GoodsListView alloc] init:self];
     _list.delegate = self;
     [self.view addSubview:_list];
     

@@ -10,6 +10,7 @@
 #import "SearchBarView.h"
 #import "ConfigModel.h"
 #import "TBRefresh.h"
+#import "NetHelper.h"
 
 @interface ShopBaseViewController : CCBaseViewController
 @property(retain,atomic) SearchBarView *searchBar;

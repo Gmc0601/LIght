@@ -17,7 +17,7 @@
 
 @interface GoodsListView : UIView
 @property(weak,nullable) id<GoodsListViewDelegate> delegate;
-@property(retain,nonatomic) NSMutableArray *datasource;
+@property(retain,nonatomic) NSString *goodsType;
 @property(assign,nonatomic) BOOL isFavorite;
-
+- (instancetype)init:(UIViewController *) owner;
 @end

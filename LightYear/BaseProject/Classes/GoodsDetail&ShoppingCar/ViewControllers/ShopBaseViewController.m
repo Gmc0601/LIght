@@ -87,7 +87,7 @@
         _rightView.frame = CGRectMake(x, _rightView.frame.origin.y, _rightView.bounds.size.width, _rightView.bounds.size.height);
     }];
     
-    _rightView.datasource = [self mockData1];
+//    _rightView.c = [self mockData1];
 }
 
 -(NSMutableArray *) mockData1{

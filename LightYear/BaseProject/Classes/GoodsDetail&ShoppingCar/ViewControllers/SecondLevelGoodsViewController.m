@@ -14,7 +14,8 @@
 
 @interface SecondLevelGoodsViewController () <UITableViewDelegate,UITableViewDataSource>{
     NSString *_cellIdentifier;
-    NSMutableArray *_dataSource;
+    NSArray *_dataSource;
+    int pageIndex;
 }
 
 @property(retain,atomic) UITableView *tb;
@@ -29,31 +30,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self mockData];
     [self addBottomView];
     [self addFavoriteButton];
     [self addTableView];
     __weak SecondLevelGoodsViewController *weakSelf = self;
     
     [_tb addRefreshHeaderWithBlock:^{
+        pageIndex = 1;
+        [weakSelf fetchDate];
         [weakSelf.tb.header endHeadRefresh];
     }];
     
     [_tb addRefreshFootWithBlock:^{
+        pageIndex++;
+        [weakSelf fetchDate];
         [weakSelf.tb.footer endFooterRefreshing];
+    }];
+    
+    [_tb.header beginRefreshing];
+}
+
+-(void) fetchDate{
+    [ConfigModel showHud:self];
+    [NetHelper getCategoryListWithId:self.categry._id withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+        [ConfigModel hideHud:self];
+        if (error != nil) {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }else{
+            if (data.count > 0) {
+                _dataSource = data;
+                [_tb reloadData];
+            }
+        }
     }];
 }
 
--(void) mockData{
-    _dataSource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsCategory *c = [GoodsCategory new];
-        c._id = @"1";
-        c.text = @"二级级目录";
-        [_dataSource addObject:c];
-    }
-}
 
 -(void) addTableView{
     _cellIdentifier = @"cell";

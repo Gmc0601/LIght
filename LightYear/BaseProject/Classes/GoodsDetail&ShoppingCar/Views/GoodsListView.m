@@ -10,56 +10,47 @@
 #import "GoodsModel.h"
 #import "GoodsCell.h"
 #import "TBRefresh.h"
+#import "NetHelper.h"
 
 @interface GoodsListView ()<UITableViewDelegate,UITableViewDataSource>{
     NSString *_cellIdentifier;
+    int pageIndex;
 }
 @property(retain,atomic)     UITableView *tb;
+@property(retain,atomic)     UIViewController *owner;
+@property(retain,atomic)     NSArray *datasource;
 @end
 @implementation GoodsListView
 
-@synthesize datasource = _dataSource;
--(void) setDatasource:(NSMutableArray *)datasource{
-    _dataSource = datasource;
-    [_tb reloadData];
+@synthesize goodsType = _goodsType;
+-(void) setGoodsType:(NSString *)goodsType{
+    _goodsType = goodsType;
+    [_tb.header beginRefreshing];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self addTableView];
-    }
-    return self;
+-(void) fetchDate{
+    [ConfigModel showHud:_owner];
+    [NetHelper getGoodsListWithId:_goodsType withShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+        [ConfigModel hideHud:_owner];
+        if (error != nil) {
+            [ConfigModel mbProgressHUD:error andView:_owner.view];
+        }else{
+            if(data != nil && data.count > 0){
+                _datasource = data;
+                [_tb reloadData];
+            }
+        }
+    }];
 }
 
-- (instancetype)init
+- (instancetype)init:(UIViewController *) owner
 {
     self = [super init];
     if (self) {
+        _owner = owner;
         [self addTableView];
-//        [self mockData];
     }
     return self;
-}
-
--(void) mockData{
-    _dataSource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
-        model.price = @"111";
-        model.memberPrice = @"1";
-        [_dataSource addObject:model];
-    }
-    
-    [_tb reloadData];
 }
 
 -(void) addTableView{
@@ -82,31 +73,34 @@
     }];
     
     __weak GoodsListView *weakSelf = self;
-
     [_tb addRefreshHeaderWithBlock:^{
+        pageIndex = 1;
+        [weakSelf fetchDate];
         [weakSelf.tb.header endHeadRefresh];
     }];
     
     [_tb addRefreshFootWithBlock:^{
+        pageIndex++;
+        [weakSelf fetchDate];
         [weakSelf.tb.footer endFooterRefreshing];
     }];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  _dataSource.count;
+    return  _datasource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    cell.model = _dataSource[indexPath.row];
+    cell.model = _datasource[indexPath.row];
     cell.isFavorite = self.isFavorite;
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    GoodsModel *model = (GoodsModel *) _dataSource[indexPath.row];
+    GoodsModel *model = (GoodsModel *) _datasource[indexPath.row];
     [self.delegate didSelectGoods:model._id];
 }
 @end
