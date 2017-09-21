@@ -10,7 +10,7 @@
 
 @protocol HomeBannerViewDelegate <NSObject>
 
-- (void)didSelectBanner:(WMHomeBannerList *)list;
+- (void)didSelectBanner:(NSArray *)list;
 
 @end
 

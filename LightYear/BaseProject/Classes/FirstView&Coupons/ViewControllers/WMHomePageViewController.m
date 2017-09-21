@@ -71,7 +71,7 @@
 
 
 #pragma mark - HomeBannerViewDelegate
-- (void)didSelectBanner:(id)list {
+- (void)didSelectBanner:(NSArray *)list {
     
 }
 
