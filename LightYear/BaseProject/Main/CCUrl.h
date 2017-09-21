@@ -44,6 +44,7 @@
 #define ChangeUserInfo @"_update_userinfo_001"
 #define ReceiptListURL @"_receipt_001"
 #define ChangePayCodeURL @"_change_pay_pwd_001"
+#define SetReceiptURL @"_set_receipt_001"
 
 #define BrandList @"_brandlist_001"
 

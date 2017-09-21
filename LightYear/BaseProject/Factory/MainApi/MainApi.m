@@ -70,7 +70,6 @@ static MainApi *request = nil;
             [mutArr addEntriesFromDictionary:@{@"device_number":udidStr}];
 #else
 #endif
-            
         }
         NSString *jsStr = [DicToString parametersString:mutArr];
         NSDictionary *jsDic = @{@"json" : jsStr};
