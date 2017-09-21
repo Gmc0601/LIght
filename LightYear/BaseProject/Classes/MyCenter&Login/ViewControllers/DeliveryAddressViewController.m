@@ -9,6 +9,7 @@
 #import "DeliveryAddressViewController.h"
 #import "DeilveryAddressTableViewCell.h"
 #import "EditDeliveryAddressViewController.h"
+#import "DeliveryAddressModel.h"
 @interface DeliveryAddressViewController ()<UITableViewDelegate,UITableViewDataSource,DeilveryAddressTableViewCellDelegate>
 {
     UITableView * myTableView;
@@ -30,8 +31,14 @@
 }
 
 - (void)getData{
+    [ConfigModel showHud:self];
     [HttpRequest postPath:ReceiptListURL params:nil resultBlock:^(id responseObject, NSError *error) {
-        
+        DeliveryAddressModel * model = [[DeliveryAddressModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            [dataArray addObjectsFromArray:model.info];
+        }
+        [ConfigModel hideHud:self];
+        [myTableView reloadData];
     }];
 }
 
@@ -81,7 +88,17 @@
 //新建收货地址
 - (void)addDeliveryAddressAction:(UIButton *)button{
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
-    editAddressVC.isEdit = NO;
+    [editAddressVC setFinishBlock:^(DeliveryAddressInfo *model) {
+        if (model.isdefault == 1) {
+            for (DeliveryAddressInfo * info in dataArray) {
+                info.isdefault = 0;
+            }
+            [dataArray insertObject:model atIndex:0];
+        }else{
+            [dataArray addObject:model];
+        }
+        [myTableView reloadData];
+    }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
 }
 #pragma mark UITableViewDelegate
@@ -109,8 +126,7 @@
     return 1;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //return dataArray.count;
-    return 5;
+    return dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -120,22 +136,35 @@
     if(cell == nil){
         cell = [[DeilveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+    cell.model = dataArray[indexPath.section];
     cell.delegate = self;
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   
 }
+
 #pragma mark DeilveryAddressTableViewCellDelegate
 - (void)didDeilveryAddressTableViewCellEditButton:(UIButton *)button{
     CGPoint point = button.center;
     point = [myTableView convertPoint:point fromView:button.superview];
     NSIndexPath* indexPath = [myTableView indexPathForRowAtPoint:point];
-    NSLog(@"%ld",indexPath.section);
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
-    editAddressVC.isEdit = YES;
+    editAddressVC.addressModel = dataArray[indexPath.section];
+    [editAddressVC setFinishBlock:^(DeliveryAddressInfo *model) {
+        if (model.isdefault == 1) {
+            [dataArray removeObject:dataArray[indexPath.section]];
+            for (DeliveryAddressInfo * info in dataArray) {
+                info.isdefault = 0;
+            }
+            [dataArray insertObject:model atIndex:0];
+        }else{
+            [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
+        }
+        [myTableView reloadData];
+    }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
 }
 

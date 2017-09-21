@@ -26,7 +26,7 @@
 }
 - (void)makeView{
     nameLabel = [UILabel new];
-    nameLabel.text = @"李霸天";
+    
     nameLabel.font = [UIFont boldSystemFontOfSize:16];
     nameLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:nameLabel];
@@ -36,7 +36,6 @@
     }];
 
     telephoneLabel = [UILabel new];
-    telephoneLabel.text = @"18356478765";
     telephoneLabel.font = [UIFont boldSystemFontOfSize:16];
     telephoneLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:telephoneLabel];
@@ -68,16 +67,34 @@
     
     addressLabel = [UILabel new];
     addressLabel.numberOfLines = 0;
-    addressLabel.text = @"浙江省杭州市滨江区南环路2111号一号写字楼403";
     addressLabel.font = [UIFont systemFontOfSize:14];
     addressLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:addressLabel];
     [addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(nameLabel.mas_bottom).offset(15);
-        //make.left.mas_equalTo(normalLabel.mas_right).offset(0);
         make.left.mas_offset(20);
         make.right.bottom.mas_offset(-20);
     }];
+}
+- (void)setModel:(DeliveryAddressInfo *)model{
+    if (model.isdefault == 1) {
+        normalLabel.hidden = NO;
+        [addressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(nameLabel.mas_bottom).offset(15);
+            make.left.mas_equalTo(normalLabel.mas_right).offset(0);
+            make.right.bottom.mas_offset(-20);
+        }];
+    }else{
+        normalLabel.hidden = YES;
+        [addressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(nameLabel.mas_bottom).offset(15);
+            make.left.mas_offset(20);
+            make.right.bottom.mas_offset(-20);
+        }];
+    }
+    nameLabel.text = model.username;
+    telephoneLabel.text = model.phone;
+    addressLabel.text = model.address;
 }
 - (void)editAction:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(didDeilveryAddressTableViewCellEditButton:)]) {

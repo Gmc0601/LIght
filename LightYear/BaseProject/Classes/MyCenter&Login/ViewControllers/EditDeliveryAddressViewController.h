@@ -7,9 +7,14 @@
 //
 
 #import "CCBaseViewController.h"
+#import "DeliveryAddressModel.h"
+
+typedef void(^EditDeliveryAddressBlock)(DeliveryAddressInfo * model);
 
 @interface EditDeliveryAddressViewController : CCBaseViewController
 
-@property (nonatomic , assign) BOOL isEdit;
+@property (nonatomic , strong) DeliveryAddressInfo * addressModel;
+
+@property (nonatomic , copy) EditDeliveryAddressBlock finishBlock;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeliveryAddressModel.h"
 
 @protocol DeilveryAddressTableViewCellDelegate <NSObject>
 
@@ -19,5 +20,6 @@
 @interface DeilveryAddressTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) id<DeilveryAddressTableViewCellDelegate> delegate;
+@property (nonatomic, strong) DeliveryAddressInfo * model;
 
 @end
