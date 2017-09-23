@@ -105,7 +105,7 @@
         _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.price];
     }
     
-    CGFloat width = [_lblPrice1.text widthWithFontSize:SizeWidth(15) height:SizeWidth(15)];
+    CGFloat width = [_lblPrice1.text widthWithFont:_lblPrice1.font height:SizeWidth(15)];
     if (_model.isNew) {
         width += SizeWidth(6);
         _lblPrice1.textAlignment = NSTextAlignmentCenter;
@@ -155,7 +155,7 @@
     _lblPrice2.text = [NSString stringWithFormat:@"￥%@",_model.price];
     
     [self addSubview:_lblPrice2];
-    CGFloat width = [_lblPrice2.text widthWithFontSize:SizeWidth(12) height:SizeWidth(10)] + SizeWidth(5);
+    CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(10)] + SizeWidth(5);
     [_lblPrice2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_lblPrice1.mas_bottom).offset(SizeHeigh(10));
         make.left.equalTo(_lblPrice1);

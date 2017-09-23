@@ -11,7 +11,7 @@
 @interface GoodsModel : NSObject
 @property(retain,atomic) NSString *_id;
 @property(retain,atomic) NSString *name;
-@property(retain,atomic) NSString *img;
+@property(retain,atomic) NSArray *img;
 @property(retain,atomic) NSString *price;
 @property(retain,atomic) NSString *specilPrice;
 @property(retain,atomic) NSString *memberPrice;

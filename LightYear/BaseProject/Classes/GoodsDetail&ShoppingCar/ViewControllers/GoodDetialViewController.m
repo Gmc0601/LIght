@@ -16,6 +16,7 @@
 #import "KLCPopup.h"
 #import "RecommendCV.h"
 #import "PropertyPickView.h"
+#import "NSMutableAttributedString+Category.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -67,14 +68,14 @@
 
 -(void) mockData{
     _model = [GoodsModel new];
-    _model._id = @"1";
+    _model._id = @"2";
     _model.name = @"小龙虾";
     _model.canTakeBySelf = YES;
     _model.hasDiscounts = YES;
     _model.canDelivery = NO;
     _model.isNew = NO;
     _model.price = @"111";
-    _model.memberPrice = @"1";
+    _model.memberPrice = @"2";
 }
 
 
@@ -231,29 +232,51 @@
 }
 
 -(void) addPriceLableToCell:(UITableViewCell *) cell{
+    CGFloat offset = 0;
     CGFloat heightOfPricePanel = SizeHeigh(28);
     _pricePanel = [UIView new];
     [cell addSubview:_pricePanel];
     
+    NSString *price1 = _model.memberPrice;
+    NSString *price2 = nil;
     _lblPrice1 = [UILabel new];
-    _lblPrice1.font = VerdanaBold(SizeWidth(28));
     _lblPrice1.textAlignment = NSTextAlignmentLeft;
-    _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.memberPrice];
     
-    [cell addSubview:_lblPrice1];
+    [_pricePanel addSubview:_lblPrice1];
     
-    
-    if ([self noMemberPriceLable]) {
-        _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.price];
-        heightOfPricePanel = SizeHeigh(33);
-    }
-    
-    CGFloat width = [_lblPrice1.text widthWithFontSize:SizeWidth(28) height:SizeWidth(28)];
-    if (_model.isNew) {
-        width += SizeWidth(22);
+    if (_model.specilPrice == nil) {
+        if(_model.memberPrice == nil){
+            price1 = _model.price;
+            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
+        }else{
+            price1 = _model.memberPrice;
+            price2 = _model.price;
+            _lblPrice1.textColor = [UIColor colorWithHexString:@"#ff9e23"];;
+            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(5)];
+            [self addPriceLabel2:price2];
+        }
+    }else{
+        if (_model.isUser) {
+            price1 = _model.specilPrice;
+        }else{
+            price1 = _model.specilPrice;
+            price2 = _model.specilPrice;
+        }
+        
+        _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
+        _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
+        _lblPrice1.layer.shadowOpacity = 1.0;
+        _lblPrice1.layer.shadowRadius = 0.0;
+        _lblPrice1.layer.shadowColor = [UIColor colorWithHexString:@"#ff3b30"].CGColor;
+        _lblPrice1.layer.shadowOffset = CGSizeMake(SizeWidth(5), SizeHeigh(5));
         _lblPrice1.textAlignment = NSTextAlignmentCenter;
+        if (price2 != nil) {
+            [self addPriceLabel2:price2];
+            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(15)];
+        }
     }
     
+    CGFloat width = [price1 widthWithFont:VerdanaBold(SizeWidth(28)) height:SizeWidth(28)] + SizeWidth(28);
     [_lblPrice1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_pricePanel);
         make.left.equalTo(_pricePanel);
@@ -261,28 +284,7 @@
         make.width.equalTo(@(width));
     }];
     
-    if (!_model.isNew) {
-        if ([self noMemberPriceLable]) {
-            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
-        }else{
-            _lblPrice1.textColor = [UIColor colorWithHexString:@"#ff9e23"];;
-            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(5) toCell:_pricePanel];
-            [self addPriceLabel2ToCell:cell];
-        }
-    }else{
-        _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
-        _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
-        
-        if (![self noMemberPriceLable]) {
-            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(10) toCell:cell];
-            [self addPriceLabel2ToCell:cell];
-        }
-        
-        _lblPrice1.layer.shadowOpacity = 1.0;
-        _lblPrice1.layer.shadowRadius = 0.0;
-        _lblPrice1.layer.shadowColor = [UIColor colorWithHexString:@"#ff3b30"].CGColor;
-        _lblPrice1.layer.shadowOffset = CGSizeMake(SizeWidth(5), SizeHeigh(5));
-    }
+    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(28)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(28)) suffixColor:_lblPrice1.textColor];
     
     [_pricePanel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_lblTitle.mas_bottom).offset(SizeHeigh(20));
@@ -290,6 +292,49 @@
         make.height.equalTo(@(heightOfPricePanel));
         make.width.equalTo(@(SizeWidth(400)));
     }];
+}
+
+
+-(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin{
+    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
+}
+
+-(void) addPriceLabel2:(NSString *) price{
+    _lblPrice2 = [UILabel new];
+//    _lblPrice2.font = VerdanaBold(SizeWidth(15));
+    _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
+    _lblPrice2.textAlignment = NSTextAlignmentLeft;
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice2.textColor];
+    
+    [_pricePanel addSubview:_lblPrice2];
+    CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);
+    [_lblPrice2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_lblPrice1.mas_bottom).offset(SizeHeigh(18));
+        make.left.equalTo(_lblPrice1);
+        make.height.equalTo(@(SizeHeigh(15)));
+        make.width.equalTo(@(width));
+    }];
+    
+    [self getLabeForMemberAndNoMemberLabel:[UIColor colorWithHexString:@"#333333"] withText:@"非会员" withConstraintView:_lblPrice2 withLeftMargin:SizeWidth(2)];
+}
+
+-(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin{
+    UILabel *lbl = [UILabel new];
+    lbl.font = SourceHanSansCNLight(SizeWidth(12));
+    lbl.textColor = fontColor;
+    lbl.textAlignment = NSTextAlignmentLeft;
+    lbl.text = text;
+    
+    [_pricePanel addSubview:lbl];
+    
+    [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(constraintView);
+        make.left.equalTo(constraintView.mas_right).offset(leftMargin);
+        make.height.equalTo(@(SizeHeigh(12)));
+        make.width.equalTo(@(SizeHeigh(100)));
+    }];
+    
+    return lbl;
 }
 
 -(void) addNewImageToCell:(UITableViewCell *) cell{
@@ -311,25 +356,6 @@
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{
     [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin toCell:cell];
-}
-
--(void) addPriceLabel2ToCell:(UIView *) cell{
-    _lblPrice2 = [UILabel new];
-    _lblPrice2.font = VerdanaBold(SizeWidth(15));
-    _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
-    _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.text = [NSString stringWithFormat:@"￥%@",_model.price];
-    
-    [cell addSubview:_lblPrice2];
-    CGFloat width = [_lblPrice2.text widthWithFontSize:SizeWidth(15) height:SizeWidth(15)] + SizeWidth(10);
-    [_lblPrice2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_lblPrice1.mas_bottom).offset(SizeHeigh(18));
-        make.left.equalTo(_lblPrice1);
-        make.height.equalTo(@(SizeHeigh(15)));
-        make.width.equalTo(@(width));
-    }];
-    
-    [self getLabeForMemberAndNoMemberLabel:[UIColor colorWithHexString:@"#333333"] withText:@"非会员" withConstraintView:_lblPrice2 withLeftMargin:SizeWidth(2) toCell:cell];
 }
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{
@@ -544,7 +570,7 @@
     
     [_purchasePanel addSubview:lblTitle];
     
-    CGFloat width = [lblTitle.text widthWithFontSize:SizeWidth(15) height:SizeHeigh(15)];
+    CGFloat width = [lblTitle.text widthWithFont:lblTitle.font height:SizeHeigh(15)];
     [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_purchasePanel.mas_centerY);
         make.centerX.equalTo(_purchasePanel.mas_centerX).offset(SizeWidth(54/2));

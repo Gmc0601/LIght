@@ -52,7 +52,7 @@
     [params setObject:@"64" forKey:@"shopid"];
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"page"];
     [params setObject:@"10" forKey:@"size"];
-
+    
     [HttpRequest postPath:@"_goods_001" params:params resultBlock:^(id responseObject, NSError *error) {
         NSDictionary *datadic = responseObject;
         
@@ -60,6 +60,10 @@
             NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
             NSDictionary *infoDic = datadic[@"info"];
             for (NSDictionary *dict in infoDic) {
+                if (dict[@"special_price"]  == [NSNull null] && dict[@"user_price"]  == [NSNull null] &&
+                    dict[@"price"]  == [NSNull null]) {
+                    continue ;
+                }
                 GoodsModel *model = [GoodsModel new];
                 model._id = dict[@"id"];
                 model.name = dict[@"good_name"];
@@ -67,11 +71,13 @@
                 model.isNew = [dict[@"isnew"]  isEqual: @"1"];
                 model.memberPrice = dict[@"user_price"] == [NSNull null] ? nil:dict[@"user_price"];
                 model.specilPrice = dict[@"special_price"]  == [NSNull null] ? nil:dict[@"special_price"];
+                model.price = dict[@"price"]  == [NSNull null] ? nil:dict[@"price"];
                 model.isUser = dict[@"is_user"];
                 model.shopId = dict[@"shopid"];
                 model.stock = ((NSString *)dict[@"stock"]).intValue;
                 model.shopStock = ((NSString *)dict[@"stock"]).intValue;
                 model.centerStock = ((NSString *)dict[@"stock"]).intValue;
+                model.img = dict[@"img_path"];
                 [arr addObject:model];
             }
             

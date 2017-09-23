@@ -11,6 +11,7 @@
 #import "UIColor+BGHexColor.h"
 #import "NSString+Category.h"
 #import "UIImageView+WebCache.h"
+#import "NSMutableAttributedString+Category.h"
 
 @interface GoodsCell(){
     UIImageView *_img;
@@ -80,8 +81,7 @@
     }];
     
     _img = [UIImageView new];
-    _img.backgroundColor = [UIColor redColor];
-    [_img sd_setImageWithURL:[NSURL URLWithString:_model.img]];
+    [_img sd_setImageWithURL:[NSURL URLWithString:_model.img[0]]];
     [self addSubview:_img];
     
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,24 +196,46 @@
 }
 
 -(void) addPriceLable{
+    NSString *price1 = _model.memberPrice;
+    NSString *price2 = nil;
     _lblPrice1 = [UILabel new];
-    _lblPrice1.font = VerdanaBold(SizeWidth(28));
     _lblPrice1.textAlignment = NSTextAlignmentLeft;
-    _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.memberPrice];
     
     [self addSubview:_lblPrice1];
     
-    
-    if (_model.memberPrice == nil || [_model.memberPrice isEqualToString:@""]) {
-        _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.price];
-    }
-    
-    CGFloat width = [_lblPrice1.text widthWithFontSize:SizeWidth(28) height:SizeWidth(28)];
-    if (_model.isNew) {
-        width += SizeWidth(22);
+    if (_model.specilPrice == nil) {
+        if(_model.memberPrice == nil){
+            price1 = _model.price;
+            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
+        }else{
+            price1 = _model.memberPrice;
+            price2 = _model.price;
+            _lblPrice1.textColor = [UIColor colorWithHexString:@"#ff9e23"];;
+            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(5)];
+            [self addPriceLabel2:price2];
+        }
+    }else{
+        if (_model.isUser) {
+            price1 = _model.specilPrice;
+        }else{
+            price1 = _model.specilPrice;
+            price2 = _model.specilPrice;
+        }
+        
+        _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
+        _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
+        _lblPrice1.layer.shadowOpacity = 1.0;
+        _lblPrice1.layer.shadowRadius = 0.0;
+        _lblPrice1.layer.shadowColor = [UIColor colorWithHexString:@"#ff3b30"].CGColor;
+        _lblPrice1.layer.shadowOffset = CGSizeMake(SizeWidth(5), SizeHeigh(5));
         _lblPrice1.textAlignment = NSTextAlignmentCenter;
+        if (price2 != nil) {
+            [self addPriceLabel2:price2];
+            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(15)];
+        }
     }
     
+    CGFloat width = [price1 widthWithFont:VerdanaBold(SizeWidth(28)) height:SizeWidth(28)] + SizeWidth(28);
     [_lblPrice1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_lblTakeBySelf.mas_bottom).offset(SizeHeigh(16));
         make.left.equalTo(_lblTitle.mas_left);
@@ -221,45 +243,22 @@
         make.width.equalTo(@(width));
     }];
     
-    if (!_model.isNew) {
-        if (_model.memberPrice != nil && ![_model.memberPrice isEqualToString:@""]) {
-            _lblPrice1.textColor = [UIColor colorWithHexString:@"#ff9e23"];;
-            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(5)];
-            [self addPriceLabel2];
-
-        }else{
-            _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
-        }
-    }else{
-        _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
-        _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
-        
-        if (_model.memberPrice != nil && ![_model.memberPrice isEqualToString:@""]) {
-            [self addMemberLabel:_lblPrice1.textColor withLeftMargin:SizeWidth(10)];
-            [self addPriceLabel2];
-        }
-        
-        _lblPrice1.layer.shadowOpacity = 1.0;
-        _lblPrice1.layer.shadowRadius = 0.0;
-        _lblPrice1.layer.shadowColor = [UIColor colorWithHexString:@"#ff3b30"].CGColor;
-        _lblPrice1.layer.shadowOffset = CGSizeMake(SizeWidth(5), SizeHeigh(5));
-        
-    }
+    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(28)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(28)) suffixColor:_lblPrice1.textColor];
 }
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin{
     [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
 }
 
--(void) addPriceLabel2{
+-(void) addPriceLabel2:(NSString *) price{
     _lblPrice2 = [UILabel new];
     _lblPrice2.font = VerdanaBold(SizeWidth(15));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.text = [NSString stringWithFormat:@"￥%@",_model.price];
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice1.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice1.textColor];
     
     [self addSubview:_lblPrice2];
-    CGFloat width = [_lblPrice2.text widthWithFontSize:SizeWidth(15) height:SizeWidth(15)] + SizeWidth(10);
+    CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);
     [_lblPrice2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_lblPrice1.mas_bottom).offset(SizeHeigh(18));
         make.left.equalTo(_lblPrice1);
