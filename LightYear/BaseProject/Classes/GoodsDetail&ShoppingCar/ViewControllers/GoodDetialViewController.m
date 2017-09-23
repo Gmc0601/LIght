@@ -903,7 +903,7 @@
     
     PropertyPickView *pickView = [PropertyPickView new];
     pickView.delegate = self;
-    [pickView setDatasource: @[@[@"1",@"2",@"3"]] withSelectValues:@[@"1",@"2",@"3"]];
+    [self bindDataToPickView:pickView];
     [superView addSubview:pickView];
     [pickView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(superView).offset(SizeWidth(15));
@@ -994,6 +994,51 @@
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
     }];
+}
+
+-(void) bindDataToPickView:(PropertyPickView *) pickView{
+    int stock = _model.shopStock + _model.centerStock;
+    NSString *key1 = nil;
+    NSMutableArray *datasource = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *arr1 = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *arr2 = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *arr3 = [NSMutableArray arrayWithCapacity:stock];
+    NSMutableArray *initialValue = [NSMutableArray arrayWithCapacity:stock];
+    
+    for (SKU *sku in _skuList) {
+        if (key1 == nil) {
+            key1 = sku.name;
+            [arr1 addObject:sku];
+        }else if(key1 == sku.name){
+            [arr1 addObject:sku];
+        }else{
+            [arr2 addObject:sku];
+        }
+    }
+    
+    for (int i=1; i<=stock; i++) {
+        [arr3 addObject:[NSString stringWithFormat:@"%d",i]];
+    }
+    
+    if (arr1.count > 0) {
+        [datasource addObject:arr1];
+        [initialValue addObject:arr1[0]];
+    }
+    
+    if (arr2.count > 0) {
+        [datasource addObject:arr2];
+        [initialValue addObject:arr2[0]];
+    }
+    
+    if (arr3.count > 0) {
+        [datasource addObject:arr3];
+        [initialValue addObject:arr3[0]];
+    }
+    
+    if (datasource.count >0) {
+        [pickView setDatasource:datasource withSelectValues:initialValue];
+    }
+    
 }
 
 @end
