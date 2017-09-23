@@ -17,6 +17,7 @@
 #import "BaseModel.h"
 #import "UserModel.h"
 #import <TMCache/TMCache.h>
+#import "UIImageView+WebCache.h"
 
 /*
  通用
