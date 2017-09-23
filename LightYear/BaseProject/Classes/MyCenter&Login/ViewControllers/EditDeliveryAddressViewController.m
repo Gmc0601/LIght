@@ -181,13 +181,14 @@
     NSDictionary * params = @{@"default":@(_addressModel.isdefault).stringValue,@"tablet":_addressModel.tablet,@"address":_addressModel.address,@"phone":_addressModel.phone,@"username":_addressModel.username,@"id":addressID,@"lat":_addressModel.lat,@"lng":_addressModel.lng};
     [HttpRequest postPath:SetReceiptURL params:params resultBlock:^(id responseObject, NSError *error) {
         BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
-        NSLog(@"%@",responseObject[@"info"]);
         [ConfigModel hideHud:self];
         if (model.error == 0) {
             if (self.finishBlock) {
                 self.finishBlock(_addressModel);
             }
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
         }
     }];
 }

@@ -8,6 +8,26 @@
 
 #import "FeedBackModel.h"
 
+@implementation FeedBackInfo
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
++ (JSONKeyMapper*)keyMapper {
+
+    return [[JSONKeyMapper alloc]
+            initWithDictionary:@{
+                                 @"id": @"fid"
+                                 }];
+}
+
+@end
+
 @implementation FeedBackModel
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
 
 @end

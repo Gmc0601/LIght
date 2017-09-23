@@ -36,6 +36,8 @@
         DeliveryAddressModel * model = [[DeliveryAddressModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
             [dataArray addObjectsFromArray:model.info];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
         }
         [ConfigModel hideHud:self];
         [myTableView reloadData];

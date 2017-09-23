@@ -8,7 +8,6 @@
 
 #import "UserInfoViewController.h"
 #import "ChangeUserInfoViewController.h"
-
 #import "DateView.h"
 #import "UserInfoPicketView.h"
 @interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,DateViewDelegate,UserInfoPicketViewDelegate>
@@ -73,7 +72,10 @@
                 [mutableStr deleteCharactersInRange:range];
                 userModel.nickname = mutableStr;
             }else if ([key isEqualToString:@"avatar_id"]){
-                
+                userModel.avatar_url = responseObject[@"info"];
+                if (self.finishBlock) {
+                    self.finishBlock(userModel.avatar_url);
+                }
             }
             [myTableView reloadData];
             [ConfigModel mbProgressHUD:@"修改成功" andView:nil];
@@ -133,10 +135,7 @@
         UIImageView * headImage = [UIImageView new];
         headImage.layer.cornerRadius = 20.0f;
         headImage.layer.masksToBounds = YES;
-        headImage.image = [UIImage imageNamed:@"icon_grzl_tx"];
-        if (userModel.avatarImg && userModel.avatar_url.length == 0) {
-            headImage.image = userModel.avatarImg;
-        }
+        [headImage sd_setImageWithURL:[NSURL URLWithString:userModel.avatar_url] placeholderImage:[UIImage imageNamed:@"icon_grzl_tx"]];
         [cell.textLabel addSubview:headImage];
         [headImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_offset(0);
@@ -283,12 +282,10 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = info[UIImagePickerControllerEditedImage];
-    userModel.avatarImg = image;
-    if (self.finishBlock) {
-        self.finishBlock(image);
-    }
+    NSData * mydata = UIImageJPEGRepresentation(image , 0.4);
+    NSString * pictureDataString = [mydata base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    [self changeUserInfoWithKey:@"avatar_id" Value:pictureDataString];
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [myTableView reloadData];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];

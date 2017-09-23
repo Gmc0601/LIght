@@ -19,7 +19,7 @@
 
 @interface FeedBackTableViewCell : UITableViewCell
 
-@property (nonatomic , strong) FeedBackModel * model;
+@property (nonatomic , strong) FeedBackInfo * model;
 @property (nonatomic, weak) id<FeedBackTableViewCellDelegate> delegate;
 
 @end

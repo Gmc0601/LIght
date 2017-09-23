@@ -183,7 +183,7 @@
         if (userModel.error == 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
         }else {
-//            [ConfigModel mbProgressHUD:userModel.info andView:nil];
+            [ConfigModel mbProgressHUD:userModel.message andView:nil];
         }
     }];
 }
@@ -201,7 +201,7 @@
                 _verificationButton.userInteractionEnabled = NO;
                 [ConfigModel hideHud:self];
             }else {
-//                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+            [ConfigModel mbProgressHUD:baseModel.message andView:nil];
             }
         }];
     }else{

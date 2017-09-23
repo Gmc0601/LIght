@@ -210,7 +210,7 @@
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reduceTime:) userInfo:verificationButton repeats:YES];
             verificationButton.userInteractionEnabled = NO;
         }else {
-            //                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+            [ConfigModel mbProgressHUD:baseModel.message andView:nil];
         }
     }];
 }

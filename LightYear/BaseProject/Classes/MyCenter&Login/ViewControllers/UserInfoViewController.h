@@ -8,7 +8,7 @@
 
 #import "CCBaseViewController.h"
 
-typedef void(^ChangeUserHeadImgBlock)(UIImage * headImg);
+typedef void(^ChangeUserHeadImgBlock)(NSString * headImg);
 
 @interface UserInfoViewController : CCBaseViewController
 

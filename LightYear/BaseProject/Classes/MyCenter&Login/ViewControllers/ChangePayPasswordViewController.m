@@ -102,7 +102,7 @@
             UIViewController * viewController = self.navigationController.childViewControllers[2];
             [self.navigationController popToViewController:viewController animated:YES];
         }else {
-            //                [ConfigModel mbProgressHUD:baseModel.info andView:nil];
+            [ConfigModel mbProgressHUD:baseModel.message andView:nil];
         }
     }];
 }

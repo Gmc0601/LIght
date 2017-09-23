@@ -11,7 +11,7 @@
 
 #import "MycenterHeadView.h"
 #import "DeliveryAddressViewController.h"
-#import "FeedBackViewController.h"
+#import "EditFeedBackViewController.h"
 #import "UserInfoPicketView.h"
 @interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate,UserInfoPicketViewDelegate>
 {
@@ -65,9 +65,7 @@
     headView.backgroundColor = [UIColor whiteColor];
     headView.delegate = self;
     headView.headImage.image = [UIImage imageNamed:@"icon_grzx_tx"];
-    if (userModel.avatarImg && userModel.avatar_url.length == 0) {
-        headView.headImage.image = userModel.avatarImg;
-    }
+    [headView.headImage sd_setImageWithURL:[NSURL URLWithString:userModel.avatar_url] placeholderImage:[UIImage imageNamed:@"icon_grzl_tx"]];
     myTableView.tableHeaderView = headView;
 }
 #pragma mark MycenterHeadViewDelegate
@@ -75,8 +73,8 @@
     if (button.tag == 10) {
         //个人中心
         UserInfoViewController * userInfoVC = [[UserInfoViewController alloc] init];
-        [userInfoVC setFinishBlock:^(UIImage * headImg){
-            headView.headImage.image = headImg;
+        [userInfoVC setFinishBlock:^(NSString * headImg){
+            [headView.headImage sd_setImageWithURL:[NSURL URLWithString:headImg] placeholderImage:[UIImage imageNamed:@"icon_grzl_tx"]];
         }];
         [self.navigationController pushViewController:userInfoVC animated:YES];
     }else{
@@ -119,17 +117,17 @@
     }
     cell.textLabel.text = dataArray[indexPath.section];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
-    if (indexPath.section == 2) {
-        UILabel * detailLabel = [UILabel new];
-        detailLabel.text = @"0571-0000999";
-        detailLabel.textColor = UIColorFromHex(0x999999);
-        detailLabel.font = [UIFont systemFontOfSize:14];
-        [cell.textLabel addSubview:detailLabel];
-        [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_offset(0);
-            make.centerY.mas_offset(0);
-        }];
-    }
+//    if (indexPath.section == 2) {
+//        UILabel * detailLabel = [UILabel new];
+//        detailLabel.text = @"0571-0000999";
+//        detailLabel.textColor = UIColorFromHex(0x999999);
+//        detailLabel.font = [UIFont systemFontOfSize:14];
+//        [cell.textLabel addSubview:detailLabel];
+//        [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_offset(0);
+//            make.centerY.mas_offset(0);
+//        }];
+//    }
     cell.contentView.backgroundColor = [UIColor whiteColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -144,7 +142,7 @@
         [self.navigationController pushViewController:addressVC animated:YES];
     }else if (indexPath.section == 1){
         //意见反馈
-        FeedBackViewController * feedBackVC = [[FeedBackViewController alloc] init];
+        EditFeedBackViewController * feedBackVC = [[EditFeedBackViewController alloc] init];
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }else if (indexPath.section == 2){
         //联系我们

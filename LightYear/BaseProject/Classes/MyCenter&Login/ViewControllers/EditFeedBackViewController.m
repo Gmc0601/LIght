@@ -7,7 +7,7 @@
 //
 
 #import "EditFeedBackViewController.h"
-
+#import "FeedBackViewController.h"
 #import "FeedBackTableViewCell.h"
 #import "FeedBackModel.h"
 
@@ -29,7 +29,7 @@
     dataArray = [NSMutableArray array];
     
     for (int i = 0; i < 5; i++) {
-        FeedBackModel * model = [[FeedBackModel alloc] init];
+        FeedBackInfo * model = [[FeedBackInfo alloc] init];
         model.isLookMore = NO;
         [dataArray addObject:model];
     }
@@ -140,8 +140,30 @@
         currentTitleBtn = button;
     }
 }
+//确定
 - (void)sureAction:(UIButton *)button{
-    
+    if ([contentTextView.text isEqualToString:@"请描述你的问题，我们将会及时处理！"]) {
+        contentTextView.text = @"";
+    }
+    if (contentTextView.text.length == 0) {
+        [ConfigModel mbProgressHUD:@"问题反馈不能为空" andView:nil];
+        return;
+    }
+    NSDictionary * params = @{@"type":@(currentTitleBtn.tag+1),@"content":contentTextView.text};
+    [ConfigModel showHud:self];
+    [HttpRequest postPath:SetFeedBackURL params:params resultBlock:^(id responseObject, NSError *error) {
+        BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+        [ConfigModel hideHud:self];
+        if (model.error == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [ConfigModel mbProgressHUD:@"提交成功" andView:nil];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+    }];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 #pragma mark UITextViewDelegate
 //开始编辑
@@ -180,6 +202,10 @@
 {
     
 }
+- (void)lookMoreButtonAction:(UIButton *)button{
+    FeedBackViewController * feedBackVC = [[FeedBackViewController alloc] init];
+    [self.navigationController pushViewController:feedBackVC animated:YES];
+}
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.000001;
@@ -192,27 +218,47 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * view = [UIView new];
     view.backgroundColor = [UIColor whiteColor];
+    if (dataArray.count > 3) {
+        UIButton * lookMoreBtn = [UIButton new];
+        lookMoreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [lookMoreBtn setTitle:@"查看更多反馈" forState:UIControlStateNormal];
+        [lookMoreBtn setTitleColor:UIColorFromHex(0x3e7bb1) forState:UIControlStateNormal];
+        [lookMoreBtn addTarget:self action:@selector(lookMoreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:lookMoreBtn];
+        [lookMoreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_offset(0);
+        }];
+    }
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 15;
+    if (dataArray.count > 3) {
+        return 30;
+    }
+    return 0.000001;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return dataArray.count;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (dataArray.count > 3) {
+        return 3;
+    }
+    return dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FeedBackTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if(cell == nil){
         cell = [[FeedBackTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    FeedBackModel * model = dataArray[indexPath.section];
+    FeedBackInfo * model = dataArray[indexPath.row];
     cell.model = model;
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.view endEditing:YES];
 }
 #pragma mark FeedBackTableViewCellDelegate
 - (void)didFeedBackTableViewCellMoreButton:(UIButton *)button{
@@ -220,11 +266,11 @@
     point = [myTableView convertPoint:point fromView:button.superview];
     NSIndexPath* indexPath = [myTableView indexPathForRowAtPoint:point];
     
-    FeedBackModel * model = dataArray[indexPath.section];
+    FeedBackInfo* model = dataArray[indexPath.row];
     model.isLookMore = button.selected;
     
-//    NSIndexSet * indexSet = [[NSIndexSet alloc]initWithIndex:indexPath.section];
-//    [myTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    NSIndexPath * index = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+    [myTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -24,8 +24,6 @@
 @property (nonatomic , copy) NSString * userToken;
 @property (nonatomic , copy) NSString * username;
 @property (nonatomic , copy) NSString * avatar_url;
-//本地数据
-@property (nonatomic , strong) UIImage * avatarImg;
 
 @end
 
