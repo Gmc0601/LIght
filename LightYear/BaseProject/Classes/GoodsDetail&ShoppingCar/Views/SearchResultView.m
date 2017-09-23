@@ -7,14 +7,13 @@
 //
 
 #import "SearchResultView.h"
-#import "GoodsListView.h"
 #import "UIColor+BGHexColor.h"
 #import <Masonry/Masonry.h>
 
-@interface SearchResultView()<GoodsListViewDelegate>{
+@interface SearchResultView()<SearchListViewViewDelegate>{
     NSString *_cellIdentifier;
 }
-@property(retain,strong) GoodsListView *listView;
+@property(retain,strong) SearchListView *listView;
 
 @end
 
@@ -90,8 +89,10 @@
 }
 
 -(void) addTableView{
-    _listView = [GoodsListView new];
+    _listView = [SearchListView new];
     _listView.delegate = self;
+    _listView.datasource = self.datasource;
+
     [self addSubview:_listView];
     
     [_listView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,5 +111,8 @@
     [self.delegate didSelectGoods:goodsId];
 }
 
+-(void) reloadData:(SearchListView *)sender PageIndex:(int)index{
+    [self.delegate reloadData:sender PageIndex:index];
+}
 
 @end

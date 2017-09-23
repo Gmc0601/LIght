@@ -120,6 +120,7 @@
 -(void) didSelectGoods:(NSString *)goodsId{
     [self dismissRightView];
     GoodDetialViewController *newVC = [GoodDetialViewController new];
+    [newVC setGoodsId:goodsId withShopId:@"64"];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 

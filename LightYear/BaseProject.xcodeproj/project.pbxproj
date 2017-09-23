@@ -128,6 +128,9 @@
 		42F795DA1F00CC3E00A11A69 /* TBRefreshFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D31F00CC3E00A11A69 /* TBRefreshFootView.m */; };
 		42F795DB1F00CC3E00A11A69 /* TBRefreshHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D51F00CC3E00A11A69 /* TBRefreshHeadView.m */; };
 		42F795DC1F00CC3E00A11A69 /* UIScrollView+TBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F795D71F00CC3E00A11A69 /* UIScrollView+TBRefresh.m */; };
+		6B015A231F764A6000CDEA16 /* SKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B015A221F764A6000CDEA16 /* SKU.m */; };
+		6B015A261F764AB900CDEA16 /* SKUPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B015A251F764AB900CDEA16 /* SKUPrice.m */; };
+		6B015A291F76A75100CDEA16 /* SearchListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B015A281F76A75100CDEA16 /* SearchListView.m */; };
 		6B13A05D1F701B1C00C11EF4 /* PropertyPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B13A05C1F701B1C00C11EF4 /* PropertyPickView.m */; };
 		6B5F6D651F628143001BDC0E /* ShopBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D641F628143001BDC0E /* ShopBaseViewController.m */; };
 		6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5F6D671F6281BC001BDC0E /* FirstLevelGoodsViewController.m */; };
@@ -480,6 +483,12 @@
 		42F795D51F00CC3E00A11A69 /* TBRefreshHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRefreshHeadView.m; sourceTree = "<group>"; };
 		42F795D61F00CC3E00A11A69 /* UIScrollView+TBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TBRefresh.h"; sourceTree = "<group>"; };
 		42F795D71F00CC3E00A11A69 /* UIScrollView+TBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TBRefresh.m"; sourceTree = "<group>"; };
+		6B015A211F764A6000CDEA16 /* SKU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKU.h; sourceTree = "<group>"; };
+		6B015A221F764A6000CDEA16 /* SKU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKU.m; sourceTree = "<group>"; };
+		6B015A241F764AB900CDEA16 /* SKUPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUPrice.h; sourceTree = "<group>"; };
+		6B015A251F764AB900CDEA16 /* SKUPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUPrice.m; sourceTree = "<group>"; };
+		6B015A271F76A75100CDEA16 /* SearchListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchListView.h; sourceTree = "<group>"; };
+		6B015A281F76A75100CDEA16 /* SearchListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchListView.m; sourceTree = "<group>"; };
 		6B13A05B1F701B1C00C11EF4 /* PropertyPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPickView.h; sourceTree = "<group>"; };
 		6B13A05C1F701B1C00C11EF4 /* PropertyPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPickView.m; sourceTree = "<group>"; };
 		6B5F6D631F628143001BDC0E /* ShopBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopBaseViewController.h; sourceTree = "<group>"; };
@@ -763,6 +772,10 @@
 				6B5F6DB51F6291B7001BDC0E /* GoodsCategory.m */,
 				6B5F6DC31F63D5F1001BDC0E /* GoodsModel.h */,
 				6B5F6DC41F63D5F1001BDC0E /* GoodsModel.m */,
+				6B015A211F764A6000CDEA16 /* SKU.h */,
+				6B015A221F764A6000CDEA16 /* SKU.m */,
+				6B015A241F764AB900CDEA16 /* SKUPrice.h */,
+				6B015A251F764AB900CDEA16 /* SKUPrice.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -795,6 +808,8 @@
 		4214BDEA1F5FA8A800FA1F85 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6B015A271F76A75100CDEA16 /* SearchListView.h */,
+				6B015A281F76A75100CDEA16 /* SearchListView.m */,
 				6BD887191F72C1DC00871019 /* PurcharseCell.h */,
 				6BD8871A1F72C1DC00871019 /* PurcharseCell.m */,
 				6BBD89B61F697AC700C8B7C3 /* RecommendCell.h */,
@@ -1577,6 +1592,7 @@
 				42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */,
 				42DDA5AE1F70F265006A6A26 /* Order.m in Sources */,
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
+				6B015A261F764AB900CDEA16 /* SKUPrice.m in Sources */,
 				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
 				04274F7B1F766732009DF308 /* SelectShopCell.m in Sources */,
@@ -1653,12 +1669,14 @@
 				6BD8871B1F72C1DC00871019 /* PurcharseCell.m in Sources */,
 				6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */,
 				00A952881F7024F800DEE0F6 /* FeedBackTableViewCell.m in Sources */,
+				6B015A291F76A75100CDEA16 /* SearchListView.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
 				6BB191171F737606001ED732 /* NetHelper.m in Sources */,
 				00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */,
 				6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
+				6B015A231F764A6000CDEA16 /* SKU.m in Sources */,
 				6B5F6DAB1F628D28001BDC0E /* UIControl+ResponseTime.m in Sources */,
 				6B5F6D9D1F628D28001BDC0E /* NSAttributedString+Category.m in Sources */,
 				6B5F6D651F628143001BDC0E /* ShopBaseViewController.m in Sources */,

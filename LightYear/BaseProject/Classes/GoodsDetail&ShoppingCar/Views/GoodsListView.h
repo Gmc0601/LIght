@@ -11,8 +11,6 @@
 @protocol GoodsListViewDelegate <NSObject>
 
 -(void) didSelectGoods:(NSString *) goodsId;
--(void) refreshHeader:(GoodsListView *) sender;
--(void) refreshFooter:(GoodsListView *) sender;
 @end
 
 @interface GoodsListView : UIView

@@ -17,6 +17,8 @@
 #import "RecommendCV.h"
 #import "PropertyPickView.h"
 #import "NSMutableAttributedString+Category.h"
+#import "UIImageView+WebCache.h"
+#import "SKU.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -51,6 +53,11 @@
 @property(retain,atomic) KLCPopup* sharePopup;
 @property(retain,atomic) KLCPopup* choosePopup;
 @property(retain,atomic) RecommendCV* recommendCV;
+@property(retain,atomic) NSArray* skuList;
+@property(retain,atomic) NSArray* skuPriceList;
+@property (retain,nonatomic) NSString *goodsId;
+@property (retain,nonatomic) NSString *shopId;
+@property (retain,nonatomic) SKU *sku;
 @end
 
 @implementation GoodDetialViewController
@@ -61,23 +68,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self mockData];
     [self addTableView];
     self.rightBar.hidden = YES;
 }
-
--(void) mockData{
-    _model = [GoodsModel new];
-    _model._id = @"2";
-    _model.name = @"小龙虾";
-    _model.canTakeBySelf = YES;
-    _model.hasDiscounts = YES;
-    _model.canDelivery = NO;
-    _model.isNew = NO;
-    _model.price = @"111";
-    _model.memberPrice = @"2";
-}
-
 
 -(void) addTableView{
     _cellIdentifier = @"cell";
@@ -119,23 +112,25 @@
         [self addSeperatorToView:cell];
     }
     
-    switch (indexPath.section) {
-        case 0:
-            [self addBannerToCell:cell];
-            [self addGoodsDetailToCell:cell];
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            [self addRecommendViewToCell:cell];
-            break;
-            
-        default:
-            break;
+    if (_model != nil) {
+        switch (indexPath.section) {
+            case 0:
+                [self addBannerToCell:cell];
+                [self addGoodsDetailToCell:cell];
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                [self addRecommendViewToCell:cell];
+                break;
+                
+            default:
+                break;
+        }
     }
     
     return cell;
@@ -152,6 +147,7 @@
         return SizeHeigh(625);
     }else if(indexPath.section == 1){
         if (_showDetail) {
+//            [_model.desc heightWithFontSize:<#(CGFloat)#> width:<#(CGFloat)#>]
             return SizeHeigh(_heightOfDetail + 100);
         }else{
             return 0;
@@ -193,6 +189,7 @@
     _banner = [ZYBannerView new];
     _banner.dataSource = self;
     _banner.delegate = self;
+    _banner.backgroundColor = [UIColor whiteColor];
     _banner.pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#cccccc"];
     _banner.pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"#333333"];
     [cell addSubview:_banner];
@@ -203,6 +200,17 @@
         make.right.equalTo(cell);
         make.height.equalTo(@(SizeHeigh(227)));
     }];
+}
+
+-(NSInteger) numberOfItemsInBanner:(ZYBannerView *)banner{
+    return _model.img.count;
+}
+
+- (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index{
+    UIImageView *img = [UIImageView new];
+    [img sd_setImageWithURL:[NSURL URLWithString:_model.img[index]]];
+    
+    return img;
 }
 
 -(void) addGoodsDetailToCell:(UITableViewCell *) cell{
@@ -232,7 +240,6 @@
 }
 
 -(void) addPriceLableToCell:(UITableViewCell *) cell{
-    CGFloat offset = 0;
     CGFloat heightOfPricePanel = SizeHeigh(28);
     _pricePanel = [UIView new];
     [cell addSubview:_pricePanel];
@@ -525,6 +532,8 @@
         make.width.equalTo(@(SizeWidth(50)));
     }];
     
+    
+    
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_xq_xzsx"]];
     
     [_choosePanel addSubview:imgView];
@@ -534,6 +543,23 @@
         make.right.equalTo(_choosePanel.mas_right).offset(-SizeWidth(15));
         make.height.equalTo(@(SizeHeigh(16)));
         make.width.equalTo(@(SizeWidth(8)));
+    }];
+}
+
+-(void) addSKUValueLableWith:(NSString *) text withLetView:(UIView *) leftView withLeftMargin:(CGFloat)  left{
+    UILabel *lblTitle = [UILabel new];
+    lblTitle.font = SourceHanSansCNRegular(SizeWidth(13));
+    lblTitle.textColor = [UIColor colorWithHexString:@"#999999"];
+    lblTitle.textAlignment = NSTextAlignmentLeft;
+    lblTitle.text = text;
+    [_choosePanel addSubview:lblTitle];
+    CGFloat width = [text widthWithFont:lblTitle.font height:SizeHeigh(15)];
+    
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(leftView.mas_centerY);
+        make.left.equalTo(leftView.mas_right).offset(left);
+        make.width.equalTo(@(width));
+        make.height.equalTo(@(SizeHeigh(15)));
     }];
 }
 
@@ -917,6 +943,28 @@
 
 -(void) didSelectValue:(NSArray *)selectvalue{
     NSLog(@"%@",selectvalue);
+}
+
+-(void) setGoodsId:(NSString *)goodsId withShopId:(NSString *) shopId{
+    _goodsId = goodsId;
+    _shopId = shopId;
+    [self loadData];
+}
+
+-(void) loadData{
+    [ConfigModel showHud:self];
+    
+    [NetHelper getGoodsDetailWithId:_goodsId withShopId:_shopId callBack:^(NSString *error, NSArray *skuList, NSArray *skuPriceList, GoodsModel *model) {
+        [ConfigModel hideHud:self];
+        if (error == nil) {
+            _model = model;
+            _skuList = skuList;
+            _skuPriceList = skuPriceList;
+            [_tb reloadData];
+        }else{
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
+    }];
 }
 
 @end

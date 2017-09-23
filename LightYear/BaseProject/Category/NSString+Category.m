@@ -35,6 +35,17 @@
     return  [self boundingRectWithSize:CGSizeMake(width, 0) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.height;
 }
 
+-(CGFloat)heightWithFont:(UIFont *)font width:(CGFloat)width
+{
+    CGSize frameSize = CGSizeMake(width, 10000);
+    
+    CGRect idealFrame = [self boundingRectWithSize:frameSize
+                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                        attributes:@{ NSFontAttributeName:font }
+                                           context:nil];
+    return idealFrame.size.width;
+}
+
 -(CGFloat)widthWithFont:(UIFont *)font height:(CGFloat)height
 {
     CGSize frameSize = CGSizeMake(300, height);
@@ -44,8 +55,6 @@
                                         attributes:@{ NSFontAttributeName:font }
                                            context:nil];
     return idealFrame.size.width;
-//    NSDictionary *attrs = @{NSFontAttributeName:font};
-//    return  [self boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, height) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.width;
 }
 
 /*抹除运费小数末尾的0*/

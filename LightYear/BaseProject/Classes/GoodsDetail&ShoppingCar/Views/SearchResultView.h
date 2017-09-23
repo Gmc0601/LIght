@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchListView.h"
 
 @protocol SearchResultViewDelegate <NSObject>
 
 -(void) gotoFirstCategory;
 -(void) didSelectGoods:(NSString *) goodsId;
-
+-(void) reloadData:(SearchListView *)sender PageIndex:(int)index;
 @end
 
 @interface SearchResultView : UIView

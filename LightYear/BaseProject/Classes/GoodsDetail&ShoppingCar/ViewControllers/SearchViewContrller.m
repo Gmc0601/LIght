@@ -11,6 +11,7 @@
 #import "SearchResultView.h"
 #import "GoodDetialViewController.h"
 #import "GoodsModel.h"
+#import "SearchListView.h"
 
 @interface SearchViewContrller()<SearchBarViewDelegate
 ,HistoryTableViewDelegate,SearchResultViewDelegate>{
@@ -24,15 +25,16 @@
 -(void) viewDidLoad{
     historyKey = @"search_history";
     [super viewDidLoad];
+    self.rightBar.hidden = YES;
     [self addSearchButton];
     self.searchBar.delegate = self;
     [self addInitialView];
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self reloadSearchResultView];
-}
+//-(void) viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    [self reloadSearchResultView];
+//}
 
 -(void) addInitialView{
     _initialView = [HistoryTableView new];
@@ -61,7 +63,6 @@
     [ConfigModel saveArr:history forKey:historyKey];
     
     if (_searchResult== nil) {
-        
         _searchResult = [SearchResultView new];
         _searchResult.delegate = self;
         [self.view addSubview:_searchResult];
@@ -74,8 +75,16 @@
         }];
     }
     
-    [self reloadSearchResultView];
+    [NetHelper searchBy:self.searchBar.keyword withShopId:@"64" withPage:1 callBack:^(NSString *error, NSArray *datasource) {
+        [ConfigModel hideHud:self];
+        if (error != nil) {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }else{
+            _searchResult.datasource = datasource;
+        }
+    }];
 }
+
 
 -(void) didSelect:(NSString *)keyworkd{
     self.searchBar.keyword = keyworkd;
@@ -92,29 +101,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(NSMutableArray *) mockData{
-    NSMutableArray *datasource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
-        model.price = @"111";
-        model.memberPrice = @"1";
-        [datasource addObject:model];
-    }
-    
-    return datasource;
-}
-
--(void) reloadSearchResultView{
-    if (_searchResult == nil) {
-        return;
-    }
-    _searchResult.datasource = [self mockData];
+-(void) reloadData:(SearchListView *)sender PageIndex:(int)index{
+    [ConfigModel showHud:self];
+    [NetHelper searchBy:self.searchBar.keyword withShopId:@"64" withPage:index callBack:^(NSString *error, NSArray *datasource) {
+        [ConfigModel hideHud:self];
+        if (error != nil) {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }else{
+            if(datasource != nil && datasource.count > 0){
+                sender.datasource = datasource;
+                [sender.tb reloadData];
+            }
+        }
+    }];
 }
 @end
