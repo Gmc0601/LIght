@@ -6,8 +6,8 @@
 //  Copyright © 2017年 cc. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "CCBaseViewController.h"
 
-@interface WMBalancePointDetailsViewController : BaseViewController
+@interface WMBalancePointDetailsViewController : CCBaseViewController
 
 @end

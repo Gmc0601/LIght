@@ -7,25 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002B21221F70FDA200652CAF /* IKEA Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B210F1F70FDA200652CAF /* IKEA Sans Bold.ttf */; };
-		002B21231F70FDA200652CAF /* IKEA Sans Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21101F70FDA200652CAF /* IKEA Sans Heavy.ttf */; };
-		002B21241F70FDA200652CAF /* IKEASans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21111F70FDA200652CAF /* IKEASans-Regular.ttf */; };
-		002B21251F70FDA200652CAF /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21121F70FDA200652CAF /* NotoSans-Bold.ttf */; };
-		002B21261F70FDA200652CAF /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21131F70FDA200652CAF /* NotoSans-BoldItalic.ttf */; };
-		002B21271F70FDA200652CAF /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21141F70FDA200652CAF /* NotoSans-Italic.ttf */; };
-		002B21281F70FDA200652CAF /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21151F70FDA200652CAF /* NotoSans-Regular.ttf */; };
-		002B21291F70FDA200652CAF /* SourceHanSansCN-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21161F70FDA200652CAF /* SourceHanSansCN-Bold.ttf */; };
-		002B212A1F70FDA200652CAF /* SourceHanSansCN-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21171F70FDA200652CAF /* SourceHanSansCN-ExtraLight.ttf */; };
-		002B212B1F70FDA200652CAF /* SourceHanSansCN-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21181F70FDA200652CAF /* SourceHanSansCN-Heavy.ttf */; };
-		002B212C1F70FDA200652CAF /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21191F70FDA200652CAF /* SourceHanSansCN-Light.ttf */; };
-		002B212D1F70FDA200652CAF /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211A1F70FDA200652CAF /* SourceHanSansCN-Medium.ttf */; };
-		002B212E1F70FDA200652CAF /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211B1F70FDA200652CAF /* SourceHanSansCN-Normal.ttf */; };
-		002B212F1F70FDA200652CAF /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211C1F70FDA200652CAF /* SourceHanSansCN-Regular.ttf */; };
-		002B21301F70FDA200652CAF /* Verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211D1F70FDA200652CAF /* Verdana.ttf */; };
-		002B21311F70FDA200652CAF /* Verdana_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211E1F70FDA200652CAF /* Verdana_0.ttf */; };
-		002B21321F70FDA200652CAF /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B211F1F70FDA200652CAF /* verdanab.ttf */; };
-		002B21331F70FDA200652CAF /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21201F70FDA200652CAF /* verdanab_0.ttf */; };
-		002B21341F70FDA200652CAF /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002B21211F70FDA200652CAF /* verdanai_0.ttf */; };
 		00A51EA31F72C28F00E383AF /* DeliveryAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A51EA21F72C28F00E383AF /* DeliveryAddressModel.m */; };
 		00A952791F7024F800DEE0F6 /* ChangePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952551F7024F800DEE0F6 /* ChangePayPasswordViewController.m */; };
 		00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A952571F7024F800DEE0F6 /* ChangeUserInfoViewController.m */; };
@@ -48,6 +29,10 @@
 		00A9528D1F70253500DEE0F6 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528C1F70253500DEE0F6 /* BaseModel.m */; };
 		00A952901F70258500DEE0F6 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9528F1F70258500DEE0F6 /* UserModel.m */; };
 		00BFA90B1F70B17B007284DA /* FeedBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BFA90A1F70B17B007284DA /* FeedBackModel.m */; };
+		04274F721F7654A1009DF308 /* MemberCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F711F7654A1009DF308 /* MemberCardViewController.m */; };
+		04274F751F765FE9009DF308 /* MemberRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F741F765FE9009DF308 /* MemberRechargeViewController.m */; };
+		04274F781F766716009DF308 /* SelectShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F771F766716009DF308 /* SelectShopViewController.m */; };
+		04274F7B1F766732009DF308 /* SelectShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F7A1F766732009DF308 /* SelectShopCell.m */; };
 		04654A951F6E66280023FF63 /* WMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A901F6E66280023FF63 /* WMScrollView.m */; };
 		04654A961F6E66280023FF63 /* WMSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A921F6E66280023FF63 /* WMSegmentView.m */; };
 		04654A971F6E66280023FF63 /* WMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04654A941F6E66280023FF63 /* WMTableView.m */; };
@@ -57,6 +42,25 @@
 		046C474B1F73D90A00FDCFF6 /* WMBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C474A1F73D90A00FDCFF6 /* WMBannerView.m */; };
 		046C474E1F73D92300FDCFF6 /* WMHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */; };
 		046C47511F73DE1700FDCFF6 /* WMHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */; };
+		04DBE7061F76A23400E57A2C /* IKEA Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F31F76A23400E57A2C /* IKEA Sans Bold.ttf */; };
+		04DBE7071F76A23400E57A2C /* IKEA Sans Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F41F76A23400E57A2C /* IKEA Sans Heavy.ttf */; };
+		04DBE7081F76A23400E57A2C /* IKEASans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F51F76A23400E57A2C /* IKEASans-Regular.ttf */; };
+		04DBE7091F76A23400E57A2C /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F61F76A23400E57A2C /* NotoSans-Bold.ttf */; };
+		04DBE70A1F76A23400E57A2C /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F71F76A23400E57A2C /* NotoSans-BoldItalic.ttf */; };
+		04DBE70B1F76A23400E57A2C /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F81F76A23400E57A2C /* NotoSans-Italic.ttf */; };
+		04DBE70C1F76A23400E57A2C /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6F91F76A23400E57A2C /* NotoSans-Regular.ttf */; };
+		04DBE70D1F76A23400E57A2C /* SourceHanSansCN-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FA1F76A23400E57A2C /* SourceHanSansCN-Bold.ttf */; };
+		04DBE70E1F76A23400E57A2C /* SourceHanSansCN-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FB1F76A23400E57A2C /* SourceHanSansCN-ExtraLight.ttf */; };
+		04DBE70F1F76A23400E57A2C /* SourceHanSansCN-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FC1F76A23400E57A2C /* SourceHanSansCN-Heavy.ttf */; };
+		04DBE7101F76A23400E57A2C /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FD1F76A23400E57A2C /* SourceHanSansCN-Light.ttf */; };
+		04DBE7111F76A23400E57A2C /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FE1F76A23400E57A2C /* SourceHanSansCN-Medium.ttf */; };
+		04DBE7121F76A23400E57A2C /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE6FF1F76A23400E57A2C /* SourceHanSansCN-Normal.ttf */; };
+		04DBE7131F76A23400E57A2C /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7001F76A23400E57A2C /* SourceHanSansCN-Regular.ttf */; };
+		04DBE7141F76A23400E57A2C /* Verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7011F76A23400E57A2C /* Verdana.ttf */; };
+		04DBE7151F76A23400E57A2C /* Verdana_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7021F76A23400E57A2C /* Verdana_0.ttf */; };
+		04DBE7161F76A23400E57A2C /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7031F76A23400E57A2C /* verdanab.ttf */; };
+		04DBE7171F76A23400E57A2C /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7041F76A23400E57A2C /* verdanab_0.ttf */; };
+		04DBE7181F76A23400E57A2C /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04DBE7051F76A23400E57A2C /* verdanai_0.ttf */; };
 		4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */; };
 		4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */; };
 		4214BDEE1F5FA97A00FA1F85 /* FactorySet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214BDED1F5FA97A00FA1F85 /* FactorySet.m */; };
@@ -190,25 +194,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002B210F1F70FDA200652CAF /* IKEA Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Bold.ttf"; sourceTree = "<group>"; };
-		002B21101F70FDA200652CAF /* IKEA Sans Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Heavy.ttf"; sourceTree = "<group>"; };
-		002B21111F70FDA200652CAF /* IKEASans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEASans-Regular.ttf"; sourceTree = "<group>"; };
-		002B21121F70FDA200652CAF /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
-		002B21131F70FDA200652CAF /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		002B21141F70FDA200652CAF /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
-		002B21151F70FDA200652CAF /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
-		002B21161F70FDA200652CAF /* SourceHanSansCN-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Bold.ttf"; sourceTree = "<group>"; };
-		002B21171F70FDA200652CAF /* SourceHanSansCN-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-ExtraLight.ttf"; sourceTree = "<group>"; };
-		002B21181F70FDA200652CAF /* SourceHanSansCN-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Heavy.ttf"; sourceTree = "<group>"; };
-		002B21191F70FDA200652CAF /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
-		002B211A1F70FDA200652CAF /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; };
-		002B211B1F70FDA200652CAF /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
-		002B211C1F70FDA200652CAF /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; };
-		002B211D1F70FDA200652CAF /* Verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana.ttf; sourceTree = "<group>"; };
-		002B211E1F70FDA200652CAF /* Verdana_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana_0.ttf; sourceTree = "<group>"; };
-		002B211F1F70FDA200652CAF /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
-		002B21201F70FDA200652CAF /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
-		002B21211F70FDA200652CAF /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
 		00A51EA11F72C28F00E383AF /* DeliveryAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressModel.h; sourceTree = "<group>"; };
 		00A51EA21F72C28F00E383AF /* DeliveryAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressModel.m; sourceTree = "<group>"; };
 		00A952541F7024F800DEE0F6 /* ChangePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPasswordViewController.h; sourceTree = "<group>"; };
@@ -252,6 +237,14 @@
 		00A9528F1F70258500DEE0F6 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		00BFA9091F70B17B007284DA /* FeedBackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackModel.h; sourceTree = "<group>"; };
 		00BFA90A1F70B17B007284DA /* FeedBackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackModel.m; sourceTree = "<group>"; };
+		04274F701F7654A1009DF308 /* MemberCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCardViewController.h; sourceTree = "<group>"; };
+		04274F711F7654A1009DF308 /* MemberCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCardViewController.m; sourceTree = "<group>"; };
+		04274F731F765FE9009DF308 /* MemberRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRechargeViewController.h; sourceTree = "<group>"; };
+		04274F741F765FE9009DF308 /* MemberRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberRechargeViewController.m; sourceTree = "<group>"; };
+		04274F761F766716009DF308 /* SelectShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectShopViewController.h; sourceTree = "<group>"; };
+		04274F771F766716009DF308 /* SelectShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectShopViewController.m; sourceTree = "<group>"; };
+		04274F791F766732009DF308 /* SelectShopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectShopCell.h; sourceTree = "<group>"; };
+		04274F7A1F766732009DF308 /* SelectShopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectShopCell.m; sourceTree = "<group>"; };
 		04654A8F1F6E66280023FF63 /* WMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMScrollView.h; sourceTree = "<group>"; };
 		04654A901F6E66280023FF63 /* WMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMScrollView.m; sourceTree = "<group>"; };
 		04654A911F6E66280023FF63 /* WMSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSegmentView.h; sourceTree = "<group>"; };
@@ -270,6 +263,25 @@
 		046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMHomePageViewController.m; sourceTree = "<group>"; };
 		046C474F1F73DE1700FDCFF6 /* WMHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMHomeHeaderView.h; sourceTree = "<group>"; };
 		046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMHomeHeaderView.m; sourceTree = "<group>"; };
+		04DBE6F31F76A23400E57A2C /* IKEA Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Bold.ttf"; sourceTree = "<group>"; };
+		04DBE6F41F76A23400E57A2C /* IKEA Sans Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Heavy.ttf"; sourceTree = "<group>"; };
+		04DBE6F51F76A23400E57A2C /* IKEASans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEASans-Regular.ttf"; sourceTree = "<group>"; };
+		04DBE6F61F76A23400E57A2C /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		04DBE6F71F76A23400E57A2C /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		04DBE6F81F76A23400E57A2C /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		04DBE6F91F76A23400E57A2C /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		04DBE6FA1F76A23400E57A2C /* SourceHanSansCN-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Bold.ttf"; sourceTree = "<group>"; };
+		04DBE6FB1F76A23400E57A2C /* SourceHanSansCN-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-ExtraLight.ttf"; sourceTree = "<group>"; };
+		04DBE6FC1F76A23400E57A2C /* SourceHanSansCN-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Heavy.ttf"; sourceTree = "<group>"; };
+		04DBE6FD1F76A23400E57A2C /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
+		04DBE6FE1F76A23400E57A2C /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; };
+		04DBE6FF1F76A23400E57A2C /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		04DBE7001F76A23400E57A2C /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; };
+		04DBE7011F76A23400E57A2C /* Verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana.ttf; sourceTree = "<group>"; };
+		04DBE7021F76A23400E57A2C /* Verdana_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana_0.ttf; sourceTree = "<group>"; };
+		04DBE7031F76A23400E57A2C /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
+		04DBE7041F76A23400E57A2C /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
+		04DBE7051F76A23400E57A2C /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
 		4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewViewController.h; sourceTree = "<group>"; };
 		4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewViewController.m; sourceTree = "<group>"; };
 		4214BDE81F5FA8A800FA1F85 /* ShoppingCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarViewController.h; sourceTree = "<group>"; };
@@ -604,32 +616,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		002B210E1F70FDA200652CAF /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				002B210F1F70FDA200652CAF /* IKEA Sans Bold.ttf */,
-				002B21101F70FDA200652CAF /* IKEA Sans Heavy.ttf */,
-				002B21111F70FDA200652CAF /* IKEASans-Regular.ttf */,
-				002B21121F70FDA200652CAF /* NotoSans-Bold.ttf */,
-				002B21131F70FDA200652CAF /* NotoSans-BoldItalic.ttf */,
-				002B21141F70FDA200652CAF /* NotoSans-Italic.ttf */,
-				002B21151F70FDA200652CAF /* NotoSans-Regular.ttf */,
-				002B21161F70FDA200652CAF /* SourceHanSansCN-Bold.ttf */,
-				002B21171F70FDA200652CAF /* SourceHanSansCN-ExtraLight.ttf */,
-				002B21181F70FDA200652CAF /* SourceHanSansCN-Heavy.ttf */,
-				002B21191F70FDA200652CAF /* SourceHanSansCN-Light.ttf */,
-				002B211A1F70FDA200652CAF /* SourceHanSansCN-Medium.ttf */,
-				002B211B1F70FDA200652CAF /* SourceHanSansCN-Normal.ttf */,
-				002B211C1F70FDA200652CAF /* SourceHanSansCN-Regular.ttf */,
-				002B211D1F70FDA200652CAF /* Verdana.ttf */,
-				002B211E1F70FDA200652CAF /* Verdana_0.ttf */,
-				002B211F1F70FDA200652CAF /* verdanab.ttf */,
-				002B21201F70FDA200652CAF /* verdanab_0.ttf */,
-				002B21211F70FDA200652CAF /* verdanai_0.ttf */,
-			);
-			path = Font;
-			sourceTree = "<group>";
-		};
 		00A952501F7024F800DEE0F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,13 +687,6 @@
 			path = Ulits;
 			sourceTree = "<group>";
 		};
-		04654A8C1F6E65F80023FF63 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		04654A8D1F6E65F80023FF63 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +698,8 @@
 				04654A991F6E66360023FF63 /* balancePointDetailsCell.m */,
 				046C474F1F73DE1700FDCFF6 /* WMHomeHeaderView.h */,
 				046C47501F73DE1700FDCFF6 /* WMHomeHeaderView.m */,
+				04274F791F766732009DF308 /* SelectShopCell.h */,
+				04274F7A1F766732009DF308 /* SelectShopCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -734,6 +715,32 @@
 				04654A941F6E66280023FF63 /* WMTableView.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		04DBE6F21F76A23400E57A2C /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				04DBE6F31F76A23400E57A2C /* IKEA Sans Bold.ttf */,
+				04DBE6F41F76A23400E57A2C /* IKEA Sans Heavy.ttf */,
+				04DBE6F51F76A23400E57A2C /* IKEASans-Regular.ttf */,
+				04DBE6F61F76A23400E57A2C /* NotoSans-Bold.ttf */,
+				04DBE6F71F76A23400E57A2C /* NotoSans-BoldItalic.ttf */,
+				04DBE6F81F76A23400E57A2C /* NotoSans-Italic.ttf */,
+				04DBE6F91F76A23400E57A2C /* NotoSans-Regular.ttf */,
+				04DBE6FA1F76A23400E57A2C /* SourceHanSansCN-Bold.ttf */,
+				04DBE6FB1F76A23400E57A2C /* SourceHanSansCN-ExtraLight.ttf */,
+				04DBE6FC1F76A23400E57A2C /* SourceHanSansCN-Heavy.ttf */,
+				04DBE6FD1F76A23400E57A2C /* SourceHanSansCN-Light.ttf */,
+				04DBE6FE1F76A23400E57A2C /* SourceHanSansCN-Medium.ttf */,
+				04DBE6FF1F76A23400E57A2C /* SourceHanSansCN-Normal.ttf */,
+				04DBE7001F76A23400E57A2C /* SourceHanSansCN-Regular.ttf */,
+				04DBE7011F76A23400E57A2C /* Verdana.ttf */,
+				04DBE7021F76A23400E57A2C /* Verdana_0.ttf */,
+				04DBE7031F76A23400E57A2C /* verdanab.ttf */,
+				04DBE7041F76A23400E57A2C /* verdanab_0.ttf */,
+				04DBE7051F76A23400E57A2C /* verdanai_0.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		4214BDE51F5FA8A800FA1F85 /* GoodsDetail&ShoppingCar */ = {
@@ -814,7 +821,6 @@
 			isa = PBXGroup;
 			children = (
 				04654A8E1F6E66280023FF63 /* Utils */,
-				04654A8C1F6E65F80023FF63 /* Models */,
 				04654A8D1F6E65F80023FF63 /* Views */,
 				429941181F5EAC4F0009ADDA /* ViewControllers */,
 			);
@@ -830,6 +836,12 @@
 				4214BDDA1F5FA27400FA1F85 /* FirstViewViewController.m */,
 				046C474C1F73D92300FDCFF6 /* WMHomePageViewController.h */,
 				046C474D1F73D92300FDCFF6 /* WMHomePageViewController.m */,
+				04274F701F7654A1009DF308 /* MemberCardViewController.h */,
+				04274F711F7654A1009DF308 /* MemberCardViewController.m */,
+				04274F731F765FE9009DF308 /* MemberRechargeViewController.h */,
+				04274F741F765FE9009DF308 /* MemberRechargeViewController.m */,
+				04274F761F766716009DF308 /* SelectShopViewController.h */,
+				04274F771F766716009DF308 /* SelectShopViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -984,7 +996,7 @@
 		42C84EA61EF2DB060008189D /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				002B210E1F70FDA200652CAF /* Font */,
+				04DBE6F21F76A23400E57A2C /* Font */,
 				42F795CA1F00CBDF00A11A69 /* Factory */,
 				42C84EA71EF2DB060008189D /* ConfigModel */,
 				42C84EA81EF2DB060008189D /* MainApi */,
@@ -1444,31 +1456,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				002B21291F70FDA200652CAF /* SourceHanSansCN-Bold.ttf in Resources */,
-				002B21251F70FDA200652CAF /* NotoSans-Bold.ttf in Resources */,
-				002B212F1F70FDA200652CAF /* SourceHanSansCN-Regular.ttf in Resources */,
-				002B212E1F70FDA200652CAF /* SourceHanSansCN-Normal.ttf in Resources */,
-				002B21321F70FDA200652CAF /* verdanab.ttf in Resources */,
-				002B21221F70FDA200652CAF /* IKEA Sans Bold.ttf in Resources */,
+				04DBE70D1F76A23400E57A2C /* SourceHanSansCN-Bold.ttf in Resources */,
+				04DBE7091F76A23400E57A2C /* NotoSans-Bold.ttf in Resources */,
+				04DBE7131F76A23400E57A2C /* SourceHanSansCN-Regular.ttf in Resources */,
+				04DBE7121F76A23400E57A2C /* SourceHanSansCN-Normal.ttf in Resources */,
+				04DBE7161F76A23400E57A2C /* verdanab.ttf in Resources */,
+				04DBE7061F76A23400E57A2C /* IKEA Sans Bold.ttf in Resources */,
 				42F795D81F00CC3E00A11A69 /* arrowdown@2x.png in Resources */,
 				42F795D91F00CC3E00A11A69 /* arrowup@2x.png in Resources */,
 				42DDA5AA1F70F265006A6A26 /* AlipaySDK.bundle in Resources */,
-				002B212D1F70FDA200652CAF /* SourceHanSansCN-Medium.ttf in Resources */,
-				002B21241F70FDA200652CAF /* IKEASans-Regular.ttf in Resources */,
-				002B21341F70FDA200652CAF /* verdanai_0.ttf in Resources */,
-				002B21301F70FDA200652CAF /* Verdana.ttf in Resources */,
-				002B21261F70FDA200652CAF /* NotoSans-BoldItalic.ttf in Resources */,
-				002B212A1F70FDA200652CAF /* SourceHanSansCN-ExtraLight.ttf in Resources */,
-				002B212B1F70FDA200652CAF /* SourceHanSansCN-Heavy.ttf in Resources */,
+				04DBE7111F76A23400E57A2C /* SourceHanSansCN-Medium.ttf in Resources */,
+				04DBE7081F76A23400E57A2C /* IKEASans-Regular.ttf in Resources */,
+				04DBE7181F76A23400E57A2C /* verdanai_0.ttf in Resources */,
+				04DBE7141F76A23400E57A2C /* Verdana.ttf in Resources */,
+				04DBE70A1F76A23400E57A2C /* NotoSans-BoldItalic.ttf in Resources */,
+				04DBE70E1F76A23400E57A2C /* SourceHanSansCN-ExtraLight.ttf in Resources */,
+				04DBE70F1F76A23400E57A2C /* SourceHanSansCN-Heavy.ttf in Resources */,
 				42A444431EF133E000F90791 /* LaunchScreen.storyboard in Resources */,
-				002B21331F70FDA200652CAF /* verdanab_0.ttf in Resources */,
-				002B212C1F70FDA200652CAF /* SourceHanSansCN-Light.ttf in Resources */,
-				002B21231F70FDA200652CAF /* IKEA Sans Heavy.ttf in Resources */,
-				002B21311F70FDA200652CAF /* Verdana_0.ttf in Resources */,
+				04DBE7171F76A23400E57A2C /* verdanab_0.ttf in Resources */,
+				04DBE7101F76A23400E57A2C /* SourceHanSansCN-Light.ttf in Resources */,
+				04DBE7071F76A23400E57A2C /* IKEA Sans Heavy.ttf in Resources */,
+				04DBE7151F76A23400E57A2C /* Verdana_0.ttf in Resources */,
 				42A444401EF133E000F90791 /* Assets.xcassets in Resources */,
 				00A952861F7024F800DEE0F6 /* DateView.xib in Resources */,
-				002B21271F70FDA200652CAF /* NotoSans-Italic.ttf in Resources */,
-				002B21281F70FDA200652CAF /* NotoSans-Regular.ttf in Resources */,
+				04DBE70B1F76A23400E57A2C /* NotoSans-Italic.ttf in Resources */,
+				04DBE70C1F76A23400E57A2C /* NotoSans-Regular.ttf in Resources */,
 				42DDA5441F70F19A006A6A26 /* README.txt in Resources */,
 				42A4443B1EF133E000F90791 /* Main.storyboard in Resources */,
 			);
@@ -1518,7 +1530,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DB7B00028533D42E221FAC6D /* 📦 Embed Pods Frameworks */ = {
@@ -1567,6 +1579,7 @@
 				6B5F6DA01F628D28001BDC0E /* NSDictionary+Category.m in Sources */,
 				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
+				04274F7B1F766732009DF308 /* SelectShopCell.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
 				6BB114B61F6D25CC00C9C886 /* SearchResultView.m in Sources */,
 				42A24FCD1F5F0CE5005130DC /* UIButton+YX.m in Sources */,
@@ -1653,7 +1666,9 @@
 				42C84EB11EF2DB060008189D /* main.m in Sources */,
 				42C84EC91EF2DD1A0008189D /* DicToString.m in Sources */,
 				00A952851F7024F800DEE0F6 /* DateView.m in Sources */,
+				04274F751F765FE9009DF308 /* MemberRechargeViewController.m in Sources */,
 				00A51EA31F72C28F00E383AF /* DeliveryAddressModel.m in Sources */,
+				04274F721F7654A1009DF308 /* MemberCardViewController.m in Sources */,
 				6B5F6DA41F628D28001BDC0E /* NSString+Category.m in Sources */,
 				00A952871F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m in Sources */,
 				42A24FCF1F5F0CE5005130DC /* UIView+Frame.m in Sources */,
@@ -1667,6 +1682,7 @@
 				04654A9D1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m in Sources */,
 				04654A951F6E66280023FF63 /* WMScrollView.m in Sources */,
 				6B5F6DBF1F62A027001BDC0E /* GoodDetialViewController.m in Sources */,
+				04274F781F766716009DF308 /* SelectShopViewController.m in Sources */,
 				429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */,
 				4214BDEB1F5FA8A800FA1F85 /* ShoppingCarViewController.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,

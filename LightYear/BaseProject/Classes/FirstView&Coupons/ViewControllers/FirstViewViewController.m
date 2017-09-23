@@ -11,7 +11,7 @@
 #import "OrderViewController.h"
 #import "MycenterViewController.h"
 #import "FirstLevelGoodsViewController.h"
-#import "WMBalancePointDetailsViewController.h"
+#import "WMHomePageViewController.h"
 
 @interface FirstViewViewController ()
 
@@ -65,7 +65,7 @@
         }
             break;
         case 3:{//  C 首页等
-            to = [WMBalancePointDetailsViewController new];
+            to = [WMHomePageViewController new];
         }
             break;
         default:

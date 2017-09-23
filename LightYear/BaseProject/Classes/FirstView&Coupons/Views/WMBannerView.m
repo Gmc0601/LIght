@@ -31,7 +31,6 @@
         _selectedImageIndex = -1;
         
         [self addSubview:self.imageScrollView];
-        _imageScrollView.frame = frame;
         [self addSubview:self.pageControl];
     }
     return self;
@@ -39,7 +38,7 @@
 
 - (UIScrollView *)imageScrollView {
     if (!_imageScrollView) {
-        _imageScrollView = [[UIScrollView alloc] init];
+        _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake( (self.width-SizeWidth(345))/2, 0, SizeWidth(345), SizeWidth(310))];
         _imageScrollView.backgroundColor = [UIColor clearColor];
         _imageScrollView.showsHorizontalScrollIndicator = NO;
         _imageScrollView.showsVerticalScrollIndicator = NO;

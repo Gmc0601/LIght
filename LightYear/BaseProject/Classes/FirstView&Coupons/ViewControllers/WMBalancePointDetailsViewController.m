@@ -34,6 +34,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _segmentView.currentIndex = _segmentCurrentIndex;
+    [self.rightBar removeFromSuperview];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -88,7 +89,7 @@
 
 - (void)setupSubView
 {
-    self.navigationItem.titleView = self.segmentView;
+    [self.navigationView addSubview:self.segmentView];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.balanceTableV];
     [self.scrollView addSubview:self.pointTableV];
@@ -97,7 +98,9 @@
 - (WMSegmentView *)segmentView
 {
     if (!_segmentView) {
-        _segmentView = [[WMSegmentView alloc] initWithFrame:CGRectMake(0, 0, SizeWidth(185), SizeHeigh(35))];
+        _segmentView = [[WMSegmentView alloc] initWithFrame:CGRectMake( 0, 0, SizeWidth(185), SizeHeigh(35))];
+        _segmentView.centerX = self.navigationView.centerX;
+        _segmentView.centerY = self.navigationView.centerY;
         _segmentView.items = @[@"余额明细",@"积分明细"];
         _segmentView.delegate = self;
     }
@@ -107,7 +110,7 @@
 - (WMScrollView *)scrollView
 {
     if (!_scrollView) {
-        _scrollView = [[WMScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH)];
+        _scrollView = [[WMScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH-64)];
         _scrollView.contentSize = CGSizeMake(kScreenW*2, 0);
         _scrollView.delegate = self;
     }
@@ -117,7 +120,7 @@
 - (WMTableView *)balanceTableV
 {
     if (!_balanceTableV) {
-        _balanceTableV = [[WMTableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, _scrollView.height-64) style:UITableViewStylePlain];
+        _balanceTableV = [[WMTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, _scrollView.height) style:UITableViewStylePlain];
         _balanceTableV.delegate = self;
         _balanceTableV.dataSource = self;
         _balanceTableV.backgroundColor = [UIColor clearColor];
@@ -129,7 +132,7 @@
 - (WMTableView *)pointTableV
 {
     if (!_pointTableV) {
-        _pointTableV = [[WMTableView alloc] initWithFrame:CGRectMake(kScreenW, 64, kScreenW, _scrollView.height-64) style:UITableViewStylePlain];
+        _pointTableV = [[WMTableView alloc] initWithFrame:CGRectMake(kScreenW, 0, kScreenW, _scrollView.height) style:UITableViewStylePlain];
         _pointTableV.delegate = self;
         _pointTableV.dataSource = self;
         _pointTableV.backgroundColor = [UIColor clearColor];
