@@ -33,8 +33,8 @@
     self.headImage = [UIImageView new];
     [headButton addSubview:self.headImage];
     [self.headImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.mas_offset(5);
-        make.top.left.mas_offset(-5);
+        make.bottom.right.mas_offset(0);
+        make.top.left.mas_offset(0);
     }];
     
     UIImageView * titltImage = [UIImageView new];
