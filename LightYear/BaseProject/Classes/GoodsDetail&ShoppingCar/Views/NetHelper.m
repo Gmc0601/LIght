@@ -188,4 +188,47 @@
     
     return  arr;
 }
+
++(void) addToFavoriteWithGoodsId:(NSString *) _id withShopId:(NSString *) shopId  callBack:(void(^)(NSString *error,NSString *message)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if (![_id  isEqual: @"0"]) {
+        [params setObject:_id forKey:@"good_id"];
+    }
+    
+    if (![shopId  isEqual: @"0"]) {
+        [params setObject:shopId forKey:@"shopid"];
+    }
+    
+    [HttpRequest postPath:@"_follow_add_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,datadic[@"info"]);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
++(void) cancelFavoriteWithGoodsId:(NSString *) _id withShopId:(NSString *) shopId  callBack:(void(^)(NSString *error,NSString *message)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if (![_id  isEqual: @"0"]) {
+        [params setObject:_id forKey:@"good_id"];
+    }
+    
+    if (![shopId  isEqual: @"0"]) {
+        [params setObject:shopId forKey:@"shopid"];
+    }
+    
+    [HttpRequest postPath:@"_follow_cancel_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,datadic[@"info"]);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
 @end

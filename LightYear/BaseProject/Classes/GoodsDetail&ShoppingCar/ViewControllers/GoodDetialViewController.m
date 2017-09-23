@@ -473,6 +473,8 @@
 -(void) addFavoriteButtonToCell:(UIView *) superView{
     _btnFaveritor = [UIButton new];
     [_btnFaveritor setImage:[UIImage imageNamed:@"icon_xq_sc"] forState:UIControlStateNormal];
+    [_btnFaveritor setImage:[UIImage imageNamed:@"icon_xq_sc_pre"] forState:UIControlStateSelected];
+    [_btnFaveritor addTarget:self action:@selector(tapFavoriteButton) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:_btnFaveritor];
     
     [_btnFaveritor mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -486,6 +488,33 @@
         make.width.equalTo(@(SizeWidth(22)));
         make.height.equalTo(@(SizeHeigh(22)));
     }];
+}
+
+-(void) tapFavoriteButton{
+    [ConfigModel showHud:self];
+    if (_btnFaveritor.selected) {
+        [NetHelper cancelFavoriteWithGoodsId:_model._id withShopId:_model.shopId callBack:^(NSString *error, NSString *message) {
+            [ConfigModel hideHud:self];
+            
+            if (error == nil) {
+                [_btnFaveritor setSelected:NO];
+                [ConfigModel mbProgressHUD:message andView:self.view];
+            }else{
+                [ConfigModel mbProgressHUD:error andView:self.view];
+            }
+        }];
+    }else{
+        [NetHelper addToFavoriteWithGoodsId:_model._id withShopId:_model.shopId callBack:^(NSString *error, NSString *message) {
+            [ConfigModel hideHud:self];
+            
+            if (error == nil) {
+                [_btnFaveritor setSelected:YES];
+                [ConfigModel mbProgressHUD:message andView:self.view];
+            }else{
+                [ConfigModel mbProgressHUD:error andView:self.view];
+            }
+        }];
+    }
 }
 
 -(void) addShareButtonToCell:(UIView *) superView{
