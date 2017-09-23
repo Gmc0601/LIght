@@ -23,4 +23,9 @@
 -(BOOL) canTakeBySelf{
     return self.shopStock > 0;
 }
+
+@synthesize count = _count;
+-(int) count{
+    return _shopStock + _centerStock;
+}
 @end

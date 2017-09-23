@@ -15,7 +15,6 @@
 @property(retain,atomic) UIPickerView *pickerView;
 @property(assign,atomic) BOOL hasIntial;
 @property(retain,atomic) NSMutableArray *pickViews;
-@property(retain,atomic) NSMutableArray *selectValue;
 @property(retain,atomic) NSArray *datasource;
 @end
 
@@ -110,7 +109,6 @@
     NSString *selectValue = (NSString *) values[row];
 
     _selectValue[pickerView.tag] = selectValue;
-    [self.delegate didSelectValue:_selectValue];
 }
 
 -(void) addTitleWithText:(NSString *) text withOffSet:(CGFloat) offset withIndex:(NSInteger) index{

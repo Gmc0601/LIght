@@ -26,7 +26,7 @@
 #define Remaind_TAG 10002
 #define Share_TAG 100000
 
-@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource,PropertyPickViewDelegate>{
+@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource>{
     
 }
 @property(retain,atomic) UITableView *tb;
@@ -58,6 +58,9 @@
 @property (retain,nonatomic) NSString *goodsId;
 @property (retain,nonatomic) NSString *shopId;
 @property (retain,nonatomic) SKU *sku;
+@property(retain,atomic) NSMutableArray *skuLableArray;
+@property(retain,atomic) PropertyPickView *pickView;
+@property(retain,atomic) NSMutableArray *skuSelectValue;
 @end
 
 @implementation GoodDetialViewController
@@ -553,16 +556,15 @@
     lblName.text = @"已选";
     
     [_choosePanel addSubview:lblName];
-    
+    CGFloat width = [lblName.text widthWithFont:lblName.font height:SizeHeigh(15)];
     [lblName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_choosePanel.mas_centerY);
         make.left.equalTo(_lblTitle);
         make.height.equalTo(@(SizeHeigh(15)));
-        make.width.equalTo(@(SizeWidth(50)));
+        make.width.equalTo(@(width));
     }];
     
-    
-    
+    [self addSkuLable:lblName];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_xq_xzsx"]];
     
     [_choosePanel addSubview:imgView];
@@ -575,7 +577,24 @@
     }];
 }
 
--(void) addSKUValueLableWith:(NSString *) text withLetView:(UIView *) leftView withLeftMargin:(CGFloat)  left{
+-(void) addSkuLable:(UIView *) leftView{
+    NSArray *data = [self getDataSourceForSKU];
+    _skuLableArray = [NSMutableArray arrayWithCapacity:data.count];
+    UIView *left = leftView;
+    int index = 0;
+    for (NSArray *arr in data) {
+        NSString *value = ((SKU *)arr[0]).value;
+        if (index == 2) {
+            value = [NSString stringWithFormat:@"x%@",value];
+        }
+        
+        left = [self addSKUValueLableWith:value withLetView:left withLeftMargin:SizeWidth(10)];
+        [_skuLableArray addObject:left];
+        index++;
+    }
+}
+
+-(UILabel *) addSKUValueLableWith:(NSString *) text withLetView:(UIView *) leftView withLeftMargin:(CGFloat)  left{
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNRegular(SizeWidth(13));
     lblTitle.textColor = [UIColor colorWithHexString:@"#999999"];
@@ -590,6 +609,8 @@
         make.width.equalTo(@(width));
         make.height.equalTo(@(SizeHeigh(15)));
     }];
+    
+    return lblTitle;
 }
 
 -(void) addPurchasePanelToCell:(UIView *) superView{
@@ -604,7 +625,13 @@
         make.centerX.equalTo(superView);
     }];
     
-    if (_model.count > 0) {
+    [self resetPurchasePanel:_model.count];
+}
+
+-(void) resetPurchasePanel:(int) stock{
+    [_purchasePanel removeAllSubviews];
+    
+    if (stock > 0) {
         _purchasePanel.backgroundColor = [UIColor colorWithHexString:@"#3e7bb1"];
         [self addPurchaseButtonToPurchasePanel];
     }else{
@@ -857,6 +884,20 @@
     }];
 }
 
+-(void) tapComplete{
+    int index = 0;
+    _skuSelectValue = _pickView.selectValue;
+    for (UILabel *lbl in _skuLableArray) {
+        NSString *value = ((SKU *)_skuSelectValue[index]).value;
+        if (index == 2) {
+            value = [NSString stringWithFormat:@"x%@",value];
+        }
+        lbl.text = value;
+        index++;
+    }
+    [self dismissPopup];
+}
+
 -(void) dismissPopup{
     if ([_sharePopup isShowing]) {
         [_sharePopup dismiss:YES];
@@ -901,11 +942,10 @@
         make.height.equalTo(@(SizeHeigh(15)));
     }];
     
-    PropertyPickView *pickView = [PropertyPickView new];
-    pickView.delegate = self;
-    [self bindDataToPickView:pickView];
-    [superView addSubview:pickView];
-    [pickView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _pickView = [PropertyPickView new];
+    [self bindDataToPickView:_pickView];
+    [superView addSubview:_pickView];
+    [_pickView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(superView).offset(SizeWidth(15));
                 make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
                 make.right.equalTo(superView).offset(-SizeWidth(15));
@@ -917,7 +957,7 @@
     btnComplete.backgroundColor = [UIColor colorWithHexString:@"3e7bb1"];
     btnComplete.titleLabel.font = SourceHanSansCNMedium(SizeWidth(15));
     [btnComplete setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
-    [btnComplete addTarget:self action:@selector(dismissPopup) forControlEvents:UIControlEventTouchUpInside];
+    [btnComplete addTarget:self action:@selector(tapComplete) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:btnComplete];
     
     [btnComplete mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -969,11 +1009,6 @@
     }];
 }
 
-
--(void) didSelectValue:(NSArray *)selectvalue{
-    NSLog(@"%@",selectvalue);
-}
-
 -(void) setGoodsId:(NSString *)goodsId withShopId:(NSString *) shopId{
     _goodsId = goodsId;
     _shopId = shopId;
@@ -997,13 +1032,20 @@
 }
 
 -(void) bindDataToPickView:(PropertyPickView *) pickView{
+    NSArray *data = [self getDataSourceForSKU];
+    
+    if (data.count >0) {
+        [pickView setDatasource:data withSelectValues:_skuSelectValue];
+    }
+}
+
+-(NSArray *) getDataSourceForSKU{
     int stock = _model.shopStock + _model.centerStock;
     NSString *key1 = nil;
     NSMutableArray *datasource = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray *arr1 = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray *arr2 = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray *arr3 = [NSMutableArray arrayWithCapacity:stock];
-    NSMutableArray *initialValue = [NSMutableArray arrayWithCapacity:stock];
     
     for (SKU *sku in _skuList) {
         if (key1 == nil) {
@@ -1022,23 +1064,24 @@
     
     if (arr1.count > 0) {
         [datasource addObject:arr1];
-        [initialValue addObject:arr1[0]];
     }
     
     if (arr2.count > 0) {
         [datasource addObject:arr2];
-        [initialValue addObject:arr2[0]];
     }
     
     if (arr3.count > 0) {
         [datasource addObject:arr3];
-        [initialValue addObject:arr3[0]];
     }
     
-    if (datasource.count >0) {
-        [pickView setDatasource:datasource withSelectValues:initialValue];
+    if (_skuSelectValue == nil) {
+        _skuSelectValue = [NSMutableArray arrayWithCapacity:datasource.count];
+        for (NSArray *arr in datasource) {
+            [_skuSelectValue addObject:arr[0]];
+        }
     }
-    
+
+    return datasource;
 }
 
 @end
