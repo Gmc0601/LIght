@@ -19,6 +19,7 @@
 #import "NSMutableAttributedString+Category.h"
 #import "UIImageView+WebCache.h"
 #import "SKU.h"
+#import "SKUPrice.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -64,6 +65,7 @@
 @property(retain,atomic) NSMutableArray *skuSelectValue;
 @property(retain,atomic) UIWebView *infoWebView;
 @property(retain,atomic) UIWebView *descWebView;
+@property(retain,atomic)  SKUPrice *skuPrice;
 @end
 
 @implementation GoodDetialViewController
@@ -122,7 +124,6 @@
     if (_model != nil) {
         switch (indexPath.section) {
             case 0:
-                [self addBannerToCell:cell];
                 [self addGoodsDetailToCell:cell];
                 break;
             case 1:
@@ -226,10 +227,8 @@
 }
 
 -(void) addGoodsDetailToCell:(UITableViewCell *) cell{
-    if (_lblTitle !=nil) {
-        return;
-    }
-    [self addSeperatorToView:cell];
+    [cell removeAllSubviews];
+    [self addBannerToCell:cell];
     [self addTitleToCell:cell];
     [self addPriceLableToCell:cell];
     [self addFavoriteButtonToCell:cell];
@@ -237,6 +236,7 @@
     [self addChoosePanelToCell:cell];
     [self addPurchasePanelToCell:cell];
     [self addDDPanelToCell:cell];
+    [self addSeperatorToView:cell];
 }
 
 -(void) addTitleToCell:(UITableViewCell *) cell{
@@ -260,6 +260,14 @@
     CGFloat heightOfPricePanel = SizeHeigh(28);
     _pricePanel = [UIView new];
     [cell addSubview:_pricePanel];
+    
+    if (_skuPrice != nil) {
+        _model.price = _skuPrice.price;
+        _model.memberPrice = _skuPrice.memberPrice;
+        _model.isUser = _skuPrice.isUser;
+        _model.price = _skuPrice.price;
+        _model.price = _skuPrice.price;
+    }
     
     NSString *price1 = _model.memberPrice;
     NSString *price2 = nil;
@@ -562,9 +570,14 @@
         make.left.equalTo(superView);
         make.right.equalTo(superView);
         make.height.equalTo(@(SizeHeigh(92/2)));
-        make.top.equalTo(_pricePanel.mas_bottom).offset(SizeHeigh(40));;
+        make.top.equalTo(_pricePanel.mas_bottom).offset(SizeHeigh(40));
     }];
-    
+     
+     [self resetSubViewsToChoosePanel];
+}
+
+-(void) resetSubViewsToChoosePanel{
+    [_choosePanel removeAllSubviews];
     UILabel *lblName = [UILabel new];
     lblName.font = SourceHanSansCNMedium(SizeWidth(15));
     lblName.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -594,12 +607,15 @@
 }
 
 -(void) addSkuLable:(UIView *) leftView{
-    NSArray *data = [self getDataSourceForSKU];
-    _skuLableArray = [NSMutableArray arrayWithCapacity:data.count];
+    if (_skuSelectValue == nil) {
+        [self getDataSourceForSKU];
+    }
+    _skuLableArray = [NSMutableArray arrayWithCapacity:_skuSelectValue.count];
+
     UIView *left = leftView;
     int index = 0;
-    for (NSArray *arr in data) {
-        NSString *value = ((SKU *)arr[0]).value;
+    for (SKU *obj in _skuSelectValue) {
+        NSString *value = obj.value;
         if (index == 2) {
             value = [NSString stringWithFormat:@"x%@",value];
         }
@@ -824,7 +840,9 @@
 }
 
 -(void) buy{
-    
+//    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount: withId:nil withSKUId:<#(NSString *)#> callBack:^(NSString *error, NSString *) {
+//        
+//    }];
 }
 
 -(void) showShareView{
@@ -886,16 +904,8 @@
 }
 
 -(void) tapComplete{
-    int index = 0;
     _skuSelectValue = _pickView.selectValue;
-    for (UILabel *lbl in _skuLableArray) {
-        NSString *value = ((SKU *)_skuSelectValue[index]).value;
-        if (index == 2) {
-            value = [NSString stringWithFormat:@"x%@",value];
-        }
-        lbl.text = value;
-        index++;
-    }
+    [self resetSubViewsToChoosePanel];
     [self dismissPopup];
 }
 
@@ -1132,5 +1142,27 @@
     
     [_tb beginUpdates];
     [_tb endUpdates];
+}
+
+-(void) restPrice{
+//    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
+    if (_skuSelectValue.count > 1) {
+        for (SKUPrice *price in _skuPriceList) {
+            if (price.skuIdList.count == 2) {
+                NSString * value1 = ((SKU *)_skuSelectValue[0])._id;
+                NSString * value2 = ((SKU *)_skuSelectValue[1])._id;
+                if (price.skuIdList[0] == value1 && price.skuIdList[1] == value2) {
+                    _skuPrice = price;
+                    break;
+                }
+            }else{
+                NSString * value1 = ((SKU *)_skuSelectValue[0])._id;
+                if (price.skuIdList[0] == value1) {
+                    _skuPrice = price;
+                    break;
+                }
+            }
+        }
+    }
 }
 @end

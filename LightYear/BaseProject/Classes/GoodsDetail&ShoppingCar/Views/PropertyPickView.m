@@ -28,12 +28,12 @@
         _pickViews = [NSMutableArray arrayWithCapacity:_datasource.count];
         CGFloat offSet = SizeWidth(626/2)/_datasource.count;
         if (_datasource.count == 3) {
-            [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:-offSet withIndex:2];
+            [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:-offSet withIndex:0];
             [self addTitleWithText:((SKU *)_datasource[1][0]).name withOffSet:0 withIndex:1];
-            [self addTitleWithText:((SKU *)_datasource[2][0]).name withOffSet:offSet withIndex:0];
+            [self addTitleWithText:((SKU *)_datasource[2][0]).name withOffSet:offSet withIndex:2];
         }else if(_datasource.count == 2){
-            [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:-offSet/2 withIndex:1];
-            [self addTitleWithText:((SKU *)_datasource[1][0]).name withOffSet:offSet/2 withIndex:0];
+            [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:-offSet/2 withIndex:0];
+            [self addTitleWithText:((SKU *)_datasource[1][0]).name withOffSet:offSet/2 withIndex:1];
         }else{
             [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:0 withIndex:0];
         }
