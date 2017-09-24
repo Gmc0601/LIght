@@ -34,7 +34,6 @@
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [self addBottomView];
     [self addTableView];
-    [self mockData];
 }
 
 
@@ -102,26 +101,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
--(void) mockData{
-    _dataSource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
-        model.price = @"111";
-        model.memberPrice = @"1";
-        [_dataSource addObject:model];
-    }
-    
-    [_tb reloadData];
-}
-
 -(void) addTableView{
     _cellIdentifier = @"cell";
     _tb = [[UITableView alloc] init];
@@ -144,11 +123,22 @@
     __weak PurchaseCarViewController *weakSelf = self;
     
     [_tb addRefreshHeaderWithBlock:^{
+        [weakSelf fetchData];
         [weakSelf.tb.header endHeadRefresh];
     }];
     
     [_tb addRefreshFootWithBlock:^{
+        [weakSelf fetchData];
         [weakSelf.tb.footer endFooterRefreshing];
+    }];
+    
+    [_tb.header beginRefreshing];
+}
+
+-(void) fetchData{
+    [ConfigModel showHud:self];
+    [NetHelper getGoodsListFromCard:^(NSString *error, NSArray *datasource) {
+        [ConfigModel hideHud:self];
     }];
 }
 

@@ -15,6 +15,7 @@
 @interface ShopBaseViewController ()<GoodsListViewDelegate>
 @property(retain,atomic) UIView *rightView;
 @property(retain,atomic) UIView *rightBackgroundView;
+@property(retain,atomic) UILabel *lblCount;
 @end
 
 @implementation ShopBaseViewController
@@ -165,6 +166,8 @@
         make.height.equalTo(@(SizeHeigh(57/2)));
     }];
     
+    [self addLableCountToImage:imgView withText:@"12"];
+    
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNRegular(SizeWidth(15));
     lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -203,5 +206,21 @@
     transition.subtype = kCATransitionFromTop;
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController pushViewController:newVC animated:YES];
+}
+
+-(void) addLableCountToImage:(UIImageView *) img withText:(NSString *)  text{
+    _lblCount = [UILabel new];
+    _lblCount.font = Verdana(SizeWidth(9));
+    _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
+    _lblCount.textAlignment = NSTextAlignmentCenter;
+    _lblCount.text = text;
+    [img addSubview:_lblCount];
+    
+    [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(img).offset(SizeWidth(2));
+        make.bottom.equalTo(img).offset(-SizeHeigh(3));
+        make.width.equalTo(@(SizeWidth(20)));
+        make.height.equalTo(@(SizeHeigh(10)));
+    }];
 }
 @end

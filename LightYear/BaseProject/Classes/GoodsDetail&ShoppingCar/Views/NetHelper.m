@@ -251,4 +251,20 @@
     }];
 }
 
++(void) getGoodsListFromCard:(void(^)(NSString *error,NSArray *)) callback{
+    
+    [HttpRequest postPath:@"_card_list_001" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            NSDictionary *infoDic = datadic[@"info"];
+            NSArray *arr = [self jsonToGoodsModelList:infoDic];
+            
+            callback(nil,arr);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
 @end
