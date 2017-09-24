@@ -26,7 +26,7 @@
 #define Remaind_TAG 10002
 #define Share_TAG 100000
 
-@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource>{
+@interface GoodDetialViewController () <UITableViewDelegate,UITableViewDataSource,ZYBannerViewDelegate,ZYBannerViewDataSource,UIWebViewDelegate>{
     
 }
 @property(retain,atomic) UITableView *tb;
@@ -45,7 +45,8 @@
 @property(retain,atomic) GoodsModel *model;
 @property(assign,nonatomic) BOOL showDetail;
 @property(assign,nonatomic) BOOL showReminder;
-@property(assign,nonatomic) CGFloat heightOfDetail;
+@property(assign,nonatomic) CGFloat heightOfInfo;
+@property(assign,nonatomic) CGFloat heightOfDesc;
 @property(retain,atomic) UIView *pricePanel;
 @property(retain,atomic) UIButton *btnFaveritor;
 @property(retain,atomic) UIView *choosePanel;
@@ -61,6 +62,8 @@
 @property(retain,atomic) NSMutableArray *skuLableArray;
 @property(retain,atomic) PropertyPickView *pickView;
 @property(retain,atomic) NSMutableArray *skuSelectValue;
+@property(retain,atomic) UIWebView *infoWebView;
+@property(retain,atomic) UIWebView *descWebView;
 @end
 
 @implementation GoodDetialViewController
@@ -81,7 +84,10 @@
     _tb = [[UITableView alloc] init];
     _tb.delegate = self;
     _tb.dataSource = self;
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:_cellIdentifier];
+    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell1"];
+    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell2"];
+    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell3"];
+    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell4"];
     [_tb registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:_headerIdentifier];
     _tb.tableFooterView = [UIView new];
     _tb.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -109,11 +115,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    
-    if (indexPath.section != 3) {
-        [self addSeperatorToView:cell];
-    }
+    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+;
     
     if (_model != nil) {
         switch (indexPath.section) {
@@ -122,12 +125,15 @@
                 [self addGoodsDetailToCell:cell];
                 break;
             case 1:
-                
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+                _infoWebView = [self addWebViewToCell:cell withHtml:_model.info];
                 break;
             case 2:
-                
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+                _descWebView = [self addWebViewToCell:cell withHtml:_model.desc];
                 break;
             case 3:
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
                 [self addRecommendViewToCell:cell];
                 break;
                 
@@ -149,15 +155,17 @@
     if (indexPath.section == 0) {
         return SizeHeigh(625);
     }else if(indexPath.section == 1){
+        _infoWebView.hidden = !_showDetail;
+
         if (_showDetail) {
-//            [_model.desc heightWithFontSize:<#(CGFloat)#> width:<#(CGFloat)#>]
-            return SizeHeigh(_heightOfDetail + 100);
+            return _heightOfInfo +SizeHeigh(50);
         }else{
             return 0;
         }
     }else if(indexPath.section == 2){
+        _descWebView.hidden = !_showReminder;
         if (_showReminder) {
-            return SizeHeigh( _heightOfDetail + 100);
+            return _heightOfDesc + SizeHeigh(50);
         }else{
             return 0;
         }
@@ -217,6 +225,10 @@
 }
 
 -(void) addGoodsDetailToCell:(UITableViewCell *) cell{
+    if (_lblTitle !=nil) {
+        return;
+    }
+    [self addSeperatorToView:cell];
     [self addTitleToCell:cell];
     [self addPriceLableToCell:cell];
     [self addFavoriteButtonToCell:cell];
@@ -227,6 +239,7 @@
 }
 
 -(void) addTitleToCell:(UITableViewCell *) cell{
+
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -311,7 +324,7 @@
 
 -(void) addPriceLabel2:(NSString *) price{
     _lblPrice2 = [UILabel new];
-//    _lblPrice2.font = VerdanaBold(SizeWidth(15));
+    //    _lblPrice2.font = VerdanaBold(SizeWidth(15));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
     _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice2.textColor];
@@ -388,24 +401,26 @@
 }
 
 -(void) setHeader:(UITableViewHeaderFooterView *) header withSection:(NSInteger) section withText:(NSString *) text isShowing:(BOOL) show{
-    [header removeAllSubviews];
+  [header removeAllSubviews];
     UILabel *lblTitle = [header viewWithTag:TAG + section];
     if (lblTitle == nil) {
         lblTitle = [self addLableToHeaderView:header  withIndex:section];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeader:)];
         
         [header addGestureRecognizer:tapGesture];
+        header.backgroundView = [UIView new];
     }
     
     lblTitle.text = text;
     
-    header.backgroundView = [UIView new];
     UIImageView *img = [ self addImageToHeaderView:header withIndex:section];
+    
     if (show) {
         img.image = [UIImage imageNamed:@"sg_ic_down"];
-        header.contentView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f2"];
+        header.backgroundView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f2"];
     }else{
         img.image = [UIImage imageNamed:@"sg_ic_down_up"];
+        header.backgroundView.backgroundColor = [UIColor clearColor];
     }
 }
 
@@ -690,15 +705,18 @@
 }
 
 -(void) addDDPanelToCell:(UIView *) superView{
-    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(30) text:@"本商品支持配送"];
+    BOOL highlight = _model.centerStock > 0;
     
-    UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:@"本商品支持到店自取"];
+    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(30) text:@"本商品支持配送" withHighlight:highlight];
+    highlight = _model.shopStock > 0;
+    
+    UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:@"本商品支持到店自取" withHighlight:highlight];
     
     [self addDiscountPanel:superView preView:view2 top:SizeHeigh(25)];
     
 }
 
--(UIView *) addDilivery:(UIView *) superView preView:(UIView *) preView top:(CGFloat) top text:(NSString *) text{
+-(UIView *) addDilivery:(UIView *) superView preView:(UIView *) preView top:(CGFloat) top text:(NSString *) text withHighlight:(BOOL) highlight{
     UIView *view = [UIView new];
     [superView addSubview:view];
     
@@ -709,7 +727,6 @@
         make.height.equalTo(@(SizeHeigh(16)));
     }];
     
-    BOOL highlight = NO;
     
     UIView *dotView = [self getDotViewWithHighlight:highlight];
     
@@ -832,7 +849,7 @@
         contentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
         CGFloat width = SizeWidth(686/2);
         contentView.frame = CGRectMake(self.view.centerX, self.view.centerY, width, SizeHeigh(450/2));
-
+        
         [self addCloseButtonTo:contentView];
         
         CGFloat offset = - SizeWidth(88+62+62/2+88/2)/2;
@@ -843,7 +860,7 @@
         offset = SizeWidth(62/2+88/2)/2;
         [self addButtonToShareView:contentView withImage:@"icon_fx_qq" withTitle:@"QQ好友" withLeft:offset withIndex:3];
         offset = SizeWidth(88+62+62/2+88/2)/2;
-
+        
         [self addButtonToShareView:contentView withImage:@"icon_fx_qqkj" withTitle:@"QQ空间" withLeft:offset withIndex:4];
         
         _sharePopup = [KLCPopup popupWithContentView:contentView];
@@ -907,7 +924,7 @@
 }
 
 -(void) tapShareButton:(UITapGestureRecognizer *) gesture{
-   
+    
 }
 
 -(void) showChooseView{
@@ -946,11 +963,11 @@
     [self bindDataToPickView:_pickView];
     [superView addSubview:_pickView];
     [_pickView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(superView).offset(SizeWidth(15));
-                make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
-                make.right.equalTo(superView).offset(-SizeWidth(15));
-                make.height.equalTo(@(SizeHeigh(180)));
-            }];
+        make.left.equalTo(superView).offset(SizeWidth(15));
+        make.top.equalTo(lblTitle.mas_bottom).offset(SizeHeigh(60/2));
+        make.right.equalTo(superView).offset(-SizeWidth(15));
+        make.height.equalTo(@(SizeHeigh(180)));
+    }];
     
     UIButton *btnComplete = [UIButton new];
     [btnComplete setTitle:@"完成" forState:UIControlStateNormal];
@@ -982,7 +999,10 @@
 }
 
 -(void) addRecommendViewToCell:(UITableViewCell *) cell{
-    [cell removeAllSubviews];
+    if (_recommendCV != nil) {
+        return;
+    }
+    
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
     lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -1080,8 +1100,53 @@
             [_skuSelectValue addObject:arr[0]];
         }
     }
-
+    
     return datasource;
 }
 
+-(UIWebView *) addWebViewToCell:(UITableViewCell *) cell withHtml:(NSString *) html{
+    UIWebView *web  = nil;
+    for (UIView *view in cell.subviews) {
+        if ([view isKindOfClass:[UIWebView class]]) {
+            web = (UIWebView *)view;
+            break;
+        }
+    }
+    
+    if (web == nil) {
+        [self addSeperatorToView:cell];
+
+        web = [UIWebView new];
+        web.delegate = self;
+        [cell addSubview:web];
+        [web mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell).offset(SizeWidth(15));
+            make.right.equalTo(cell).offset(-SizeWidth(15));
+            make.top.equalTo(cell).offset(SizeHeigh(20));
+            make.bottom.equalTo(cell).offset(-SizeHeigh(30));
+        }];
+    }
+    
+    [web loadHTMLString:html baseURL:nil];
+    
+    return web;
+}
+
+-(void) webViewDidFinishLoad:(UIWebView *)webView{
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+    
+    if (webView == _descWebView) {
+        _heightOfDesc = fittingSize.height;
+    }else{
+        _heightOfInfo = fittingSize.height;
+    }
+    
+    [_tb beginUpdates];
+    [_tb endUpdates];
+}
 @end
