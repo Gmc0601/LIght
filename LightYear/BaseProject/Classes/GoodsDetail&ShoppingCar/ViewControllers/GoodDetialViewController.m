@@ -638,7 +638,7 @@
     [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(leftView.mas_centerY);
         make.left.equalTo(leftView.mas_right).offset(left);
-        make.width.equalTo(@(width));
+        make.width.equalTo(@(width + SizeWidth(5)));
         make.height.equalTo(@(SizeHeigh(15)));
     }];
     
@@ -840,9 +840,26 @@
 }
 
 -(void) buy{
-//    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount: withId:nil withSKUId:<#(NSString *)#> callBack:^(NSString *error, NSString *) {
-//        
-//    }];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
+    int count = 1;
+    for (NSInteger i = (_skuSelectValue.count - 1); i>=0; i--) {
+        SKU *s = ((SKU *) _skuSelectValue[i]);
+        if (i == (_skuSelectValue.count - 1)) {
+            count = s.value.intValue;
+        }else{
+            [arr addObject:s._id];
+        }
+    }
+    
+    [ConfigModel showHud:self];
+    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount:count withId:nil withSKUId:arr callBack:^(NSString *error, NSString *info) {
+        [ConfigModel hideHud:self];
+        if (error == nil) {
+            [ConfigModel mbProgressHUD:info andView:self.view];
+        }else{
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
+    }];
 }
 
 -(void) showShareView{
@@ -906,6 +923,7 @@
 -(void) tapComplete{
     _skuSelectValue = _pickView.selectValue;
     [self resetSubViewsToChoosePanel];
+    [self restPrice];
     [self dismissPopup];
 }
 
@@ -1038,6 +1056,11 @@
             _model = model;
             _skuList = skuList;
             _skuPriceList = skuPriceList;
+            
+            //TODO:
+            _model.stock = 10;
+            _model.centerStock = 10;
+            _model.shopStock = 10;
             [_tb reloadData];
         }else{
             [ConfigModel mbProgressHUD:error andView:self.view];
@@ -1073,7 +1096,9 @@
     }
     
     for (int i=1; i<=stock; i++) {
-        [arr3 addObject:[NSString stringWithFormat:@"%d",i]];
+        SKU *s = [SKU new];
+        s.value = [NSString stringWithFormat:@"%d",i];
+        [arr3 addObject:s];
     }
     
     if (arr1.count > 0) {
@@ -1163,6 +1188,8 @@
                 }
             }
         }
+        
+        [_tb reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 @end
