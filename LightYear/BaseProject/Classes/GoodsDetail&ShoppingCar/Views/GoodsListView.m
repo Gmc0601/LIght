@@ -17,7 +17,6 @@
     int pageIndex;
 }
 @property(retain,atomic)     UITableView *tb;
-@property(retain,atomic)     UIViewController *owner;
 @property(retain,atomic)     NSArray *datasource;
 @end
 @implementation GoodsListView
@@ -28,19 +27,40 @@
     [_tb.header beginRefreshing];
 }
 
+@synthesize isFavorite = _isFavorite;
+-(void) setIsFavorite:(BOOL)isFavorite{
+    _isFavorite = isFavorite;
+    [_tb.header beginRefreshing];
+}
+
 -(void) fetchDate{
     [ConfigModel showHud:_owner];
-    [NetHelper getGoodsListWithId:_goodsType withShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
-        [ConfigModel hideHud:_owner];
-        if (error != nil) {
-            [ConfigModel mbProgressHUD:error andView:_owner.view];
-        }else{
-            if(data != nil && data.count > 0){
-                _datasource = data;
-                [_tb reloadData];
+    
+    if (_isFavorite) {
+        [NetHelper getFavoriteListWithShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+            [ConfigModel hideHud:_owner];
+            if (error != nil) {
+                [ConfigModel mbProgressHUD:error andView:_owner.view];
+            }else{
+                if(data != nil && data.count > 0){
+                    _datasource = data;
+                    [_tb reloadData];
+                }
             }
-        }
-    }];
+        }];
+    }else{
+        [NetHelper getGoodsListWithId:_goodsType withShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+            [ConfigModel hideHud:_owner];
+            if (error != nil) {
+                [ConfigModel mbProgressHUD:error andView:_owner.view];
+            }else{
+                if(data != nil && data.count > 0){
+                    _datasource = data;
+                    [_tb reloadData];
+                }
+            }
+        }];
+    }
 }
 
 - (instancetype)init:(UIViewController *) owner
@@ -48,6 +68,15 @@
     self = [super init];
     if (self) {
         _owner = owner;
+        [self addTableView];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self addTableView];
     }
     return self;

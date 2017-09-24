@@ -16,4 +16,5 @@
 +(void) searchBy:(NSString *) keyWords withShopId:(NSString *)shopId withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback;
 +(void) addToFavoriteWithGoodsId:(NSString *) _id withShopId:(NSString *) shopId  callBack:(void(^)(NSString *error,NSString *message)) callback;
 +(void) cancelFavoriteWithGoodsId:(NSString *) _id withShopId:(NSString *) shopId  callBack:(void(^)(NSString *error,NSString *message)) callback;
++(void) getFavoriteListWithShopId:(NSString *) shopId withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback;
 @end

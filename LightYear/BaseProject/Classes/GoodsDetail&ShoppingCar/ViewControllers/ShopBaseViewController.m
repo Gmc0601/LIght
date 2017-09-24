@@ -13,7 +13,7 @@
 #import "PurchaseCarViewController.h"
 
 @interface ShopBaseViewController ()<GoodsListViewDelegate>
-@property(retain,atomic) GoodsListView *rightView;
+@property(retain,atomic) UIView *rightView;
 @property(retain,atomic) UIView *rightBackgroundView;
 @end
 
@@ -62,24 +62,43 @@
     
     if (_rightView == nil) {
         _rightBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        _rightBackgroundView.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+        _rightBackgroundView.alpha = 0.41;
+        [self.view insertSubview:_rightBackgroundView atIndex:self.view.subviews.count];
         
-        [self.view addSubview:_rightBackgroundView];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissRightView)];
         [_rightBackgroundView addGestureRecognizer:tapGesture];
         
-        UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(x, SizeHeigh(20), width, SizeHeigh(116/2 -20))];
+        _rightView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, 0, width, self.view.bounds.size.height)];
+        _rightView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_rightView];
+        
+        UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, width, SizeHeigh(116/2))];
         lblTitle.font = SourceHanSansCNMedium(SizeWidth(14));
         lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
         lblTitle.textAlignment = NSTextAlignmentCenter;
         lblTitle.backgroundColor = [UIColor whiteColor];
         lblTitle.text = @"喜爱";
         lblTitle.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
-        [_rightBackgroundView addSubview:lblTitle];
+        [_rightView addSubview:lblTitle];
+        [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_rightView.mas_centerX);
+            make.top.equalTo(_rightView.mas_top).offset(SizeHeigh(30));
+            make.height.equalTo(@(SizeHeigh(16)));
+            make.width.equalTo(@(SizeHeigh(50)));
+        }];
         
-        _rightView = [[GoodsListView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width, SizeHeigh(116/2), width, self.view.bounds.size.height - SizeHeigh(116/2))];
-        _rightView.isFavorite = true;
-        _rightView.delegate = self;
-        [self.view addSubview:_rightView];
+        GoodsListView *listView = [[GoodsListView alloc] init:self];
+        listView.delegate = self;
+        [_rightView insertSubview:listView atIndex:_rightView.subviews.count];
+        listView.isFavorite = true;
+        
+        [listView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_rightView);
+            make.right.equalTo(_rightView);
+            make.top.equalTo(lblTitle.mas_bottom);
+            make.bottom.equalTo(_rightView);
+        }];
     }
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -87,7 +106,7 @@
         _rightView.frame = CGRectMake(x, _rightView.frame.origin.y, _rightView.bounds.size.width, _rightView.bounds.size.height);
     }];
     
-//    _rightView.c = [self mockData1];
+    //    _rightView.c = [self mockData1];
 }
 
 -(NSMutableArray *) mockData1{

@@ -231,4 +231,24 @@
     }];
 }
 
++(void) getFavoriteListWithShopId:(NSString *) shopId withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    [params setObject:@"64" forKey:@"shopid"];
+    [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"page"];
+    [params setObject:@"10" forKey:@"size"];
+    
+    [HttpRequest postPath:@"_follow_list_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            NSDictionary *infoDic = datadic[@"info"];
+            NSArray *arr = [self jsonToGoodsModelList:infoDic];
+            
+            callback(nil,arr);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
 @end

@@ -18,4 +18,5 @@
 @property(retain,nonatomic) NSString *goodsType;
 @property(assign,nonatomic) BOOL isFavorite;
 - (instancetype)init:(UIViewController *) owner;
+@property(retain,atomic) UIViewController *owner;
 @end
