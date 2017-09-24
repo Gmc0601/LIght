@@ -48,8 +48,9 @@
 
 
 -(void) addCV{
+    CGFloat height = SizeHeigh(250);
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(SizeWidth(284/2), SizeHeigh(426/2));
+    layout.itemSize = CGSizeMake(SizeWidth(284/2), height);
     layout.minimumLineSpacing  = SizeWidth(32/2);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
@@ -65,7 +66,7 @@
         make.top.equalTo(self);
         make.left.equalTo(self);
         make.right.equalTo(self);
-        make.bottom.equalTo(self);
+        make.height.equalTo(@(height));
     }];
 }
 
