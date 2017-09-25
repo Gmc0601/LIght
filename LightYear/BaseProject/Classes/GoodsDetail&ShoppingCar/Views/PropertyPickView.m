@@ -132,8 +132,17 @@
     pickerView.tag = index;
     
     NSArray *values = (NSArray *) _datasource[index];
-    NSString *selectValue = (NSString *) _selectValue[index];
-    NSInteger selectIndex = [values indexOfObject:selectValue];
+    SKU *selectValue = (SKU *) _selectValue[index];
+    NSInteger selectIndex = 0;
+    
+    for (SKU *s in values) {
+        if (s._id == selectValue._id) {
+            break;
+        }
+        
+        selectIndex++;
+    }
+    
     [pickerView selectRow:selectIndex inComponent:0 animated:NO];
     [_pickViews addObject:pickerView];
     

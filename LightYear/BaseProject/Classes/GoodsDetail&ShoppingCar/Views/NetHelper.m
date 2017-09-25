@@ -267,7 +267,7 @@
     }];
 }
 
-+(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSArray *) skuId callBack:(void(^)(NSString *error,NSString *)) callback{
++(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSString *) skuId callBack:(void(^)(NSString *error,NSString *)) callback{
     NSMutableDictionary *params = [NSMutableDictionary new];
     if (_id != nil) {
         [params setObject:_id forKey:@"id"];
@@ -275,7 +275,10 @@
     
     [params setObject:goodsId forKey:@"good_id"];
     [params setObject:shopId forKey:@"shopid"];
-    [params setObject:skuId forKey:@"sku_id"];
+    if (skuId !=nil) {
+        [params setObject:skuId forKey:@"sku_id"];
+    }
+    
     [params setObject:[NSString stringWithFormat:@"%d",10] forKey:@"price"];
     [params setObject:[NSString stringWithFormat:@"%d",count] forKey:@"count"];
 
@@ -284,7 +287,7 @@
         NSDictionary *datadic = responseObject;
         
         if ([datadic[@"error"] intValue] == 0) {
-            callback(nil,datadic[@"info"]);
+            callback(nil,nil);
         }else{
             callback(datadic[@"info"],nil);
         }

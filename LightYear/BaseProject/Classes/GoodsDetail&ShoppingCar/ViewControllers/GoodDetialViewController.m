@@ -119,7 +119,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
-;
+    ;
     
     if (_model != nil) {
         switch (indexPath.section) {
@@ -158,7 +158,7 @@
         return SizeHeigh(625);
     }else if(indexPath.section == 1){
         _infoWebView.hidden = !_showDetail;
-
+        
         if (_showDetail) {
             return _heightOfInfo +SizeHeigh(50);
         }else{
@@ -199,6 +199,9 @@
 }
 
 -(void) addBannerToCell:(UITableViewCell *) cell{
+    if ([self hasView:_banner inSuperView:cell]) {
+        return;
+    }
     _banner = [ZYBannerView new];
     _banner.dataSource = self;
     _banner.delegate = self;
@@ -227,20 +230,24 @@
 }
 
 -(void) addGoodsDetailToCell:(UITableViewCell *) cell{
-    [cell removeAllSubviews];
+
     [self addBannerToCell:cell];
     [self addTitleToCell:cell];
     [self addPriceLableToCell:cell];
-    [self addFavoriteButtonToCell:cell];
-    [self addShareButtonToCell:cell];
-    [self addChoosePanelToCell:cell];
-    [self addPurchasePanelToCell:cell];
-    [self addDDPanelToCell:cell];
-    [self addSeperatorToView:cell];
+    if (![self hasView:_btnFaveritor inSuperView:cell]) {
+        [self addFavoriteButtonToCell:cell];
+        [self addShareButtonToCell:cell];
+        [self addChoosePanelToCell:cell];
+        [self addPurchasePanelToCell:cell];
+        [self addDDPanelToCell:cell];
+        [self addSeperatorToView:cell];
+    }
 }
 
 -(void) addTitleToCell:(UITableViewCell *) cell{
-
+    if ([self hasView:_lblTitle inSuperView:cell]) {
+        return;
+    }
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -258,8 +265,15 @@
 
 -(void) addPriceLableToCell:(UITableViewCell *) cell{
     CGFloat heightOfPricePanel = SizeHeigh(28);
-    _pricePanel = [UIView new];
-    [cell addSubview:_pricePanel];
+    
+    if (![self hasView:_pricePanel inSuperView:cell]) {
+        _pricePanel = [UIView new];
+        [cell addSubview:_pricePanel];
+    }else{
+        [_pricePanel removeAllSubviews];
+        [_pricePanel removeConstraints:_pricePanel.constraints];
+    }
+    
     
     if (_skuPrice != nil) {
         _model.price = _skuPrice.price;
@@ -410,7 +424,7 @@
 }
 
 -(void) setHeader:(UITableViewHeaderFooterView *) header withSection:(NSInteger) section withText:(NSString *) text isShowing:(BOOL) show{
-  [header removeAllSubviews];
+    [header removeAllSubviews];
     UILabel *lblTitle = [header viewWithTag:TAG + section];
     if (lblTitle == nil) {
         lblTitle = [self addLableToHeaderView:header  withIndex:section];
@@ -572,8 +586,8 @@
         make.height.equalTo(@(SizeHeigh(92/2)));
         make.top.equalTo(_pricePanel.mas_bottom).offset(SizeHeigh(40));
     }];
-     
-     [self resetSubViewsToChoosePanel];
+    
+    [self resetSubViewsToChoosePanel];
 }
 
 -(void) resetSubViewsToChoosePanel{
@@ -610,8 +624,14 @@
     if (_skuSelectValue == nil) {
         [self getDataSourceForSKU];
     }
+    
+    if (_skuLableArray != nil) {
+        for (UILabel *lbl in _skuLableArray) {
+            [lbl removeFromSuperview];
+        }
+    }
     _skuLableArray = [NSMutableArray arrayWithCapacity:_skuSelectValue.count];
-
+    
     UIView *left = leftView;
     int index = 0;
     for (SKU *obj in _skuSelectValue) {
@@ -840,22 +860,17 @@
 }
 
 -(void) buy{
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
-    int count = 1;
-    for (NSInteger i = (_skuSelectValue.count - 1); i>=0; i--) {
-        SKU *s = ((SKU *) _skuSelectValue[i]);
-        if (i == (_skuSelectValue.count - 1)) {
-            count = s.value.intValue;
-        }else{
-            [arr addObject:s._id];
-        }
+    if (_skuPrice == nil) {
+        _skuPrice = [self getSkuPrice];
     }
     
+    int count = ((SKU *)(_skuSelectValue[_skuSelectValue.count - 1])).value.intValue;
+    
     [ConfigModel showHud:self];
-    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount:count withId:nil withSKUId:arr callBack:^(NSString *error, NSString *info) {
+    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount:count withId:nil withSKUId:_skuPrice._id callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
-            [ConfigModel mbProgressHUD:info andView:self.view];
+            [ConfigModel mbProgressHUD:@"已添加到购物车" andView:self.view];
         }else{
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
@@ -922,7 +937,7 @@
 
 -(void) tapComplete{
     _skuSelectValue = _pickView.selectValue;
-    [self resetSubViewsToChoosePanel];
+//    [self resetSubViewsToChoosePanel];
     [self restPrice];
     [self dismissPopup];
 }
@@ -1098,6 +1113,8 @@
     for (int i=1; i<=stock; i++) {
         SKU *s = [SKU new];
         s.value = [NSString stringWithFormat:@"%d",i];
+        s.name = @"数量";
+        s._id = s.value;
         [arr3 addObject:s];
     }
     
@@ -1134,7 +1151,7 @@
     
     if (web == nil) {
         [self addSeperatorToView:cell];
-
+        
         web = [UIWebView new];
         web.delegate = self;
         [cell addSubview:web];
@@ -1170,8 +1187,16 @@
 }
 
 -(void) restPrice{
-//    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
+    //    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
     if (_skuSelectValue.count > 1) {
+        [self getSkuPrice];
+        
+        [_tb reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+-(SKUPrice *) getSkuPrice{
+    if (_skuSelectValue.count > 1 && _skuPriceList.count > 0) {
         for (SKUPrice *price in _skuPriceList) {
             if (price.skuIdList.count == 2) {
                 NSString * value1 = ((SKU *)_skuSelectValue[0])._id;
@@ -1188,8 +1213,17 @@
                 }
             }
         }
-        
-        [_tb reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     }
+    
+    return _skuPrice;
+}
+
+-(BOOL) hasView:(UIView *) view inSuperView:(UIView *) superView{
+    for (UIView *subView in superView.subviews) {
+        if (subView == view) {
+            return YES;
+        }
+    }
+    return NO;
 }
 @end
