@@ -513,6 +513,7 @@
 
 -(void) addFavoriteButtonToCell:(UIView *) superView{
     _btnFaveritor = [UIButton new];
+    [_btnFaveritor setSelected:_model.isFollow];
     [_btnFaveritor setImage:[UIImage imageNamed:@"icon_xq_sc"] forState:UIControlStateNormal];
     [_btnFaveritor setImage:[UIImage imageNamed:@"icon_xq_sc_pre"] forState:UIControlStateSelected];
     [_btnFaveritor addTarget:self action:@selector(tapFavoriteButton) forControlEvents:UIControlEventTouchUpInside];

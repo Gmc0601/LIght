@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GoodsModel.h"
-
+#import "PurchaseModel.h"
+@class PurcharseCell;
 @protocol PurcharseCellDelegate <NSObject>
 
--(void) didDelete:(NSString *) goodsId;
--(void) didChangeNumber:(NSString *) goodsId withNumber:(int) number;
+-(void) didDelete:(NSString *) _id;
+-(void) didChangeNumber:(PurchaseModel *) model withSender:(PurcharseCell *) sender;
 
 @end
 
 @interface PurcharseCell : UITableViewCell
-@property(retain,nonatomic) GoodsModel *model;
+@property(retain,nonatomic) PurchaseModel *model;
 @property(weak,nonatomic) id<PurcharseCellDelegate> delegate;
 @end
 

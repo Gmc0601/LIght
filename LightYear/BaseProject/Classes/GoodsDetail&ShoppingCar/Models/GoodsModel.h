@@ -30,4 +30,5 @@
 @property(assign,atomic) int centerStock;
 @property(retain,atomic) NSString *desc;
 @property(retain,atomic) NSString *info;
+@property(assign,atomic) BOOL isFollow;
 @end

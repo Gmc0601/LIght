@@ -20,6 +20,7 @@
     UILabel *_lblTakeBySelf;
     UILabel *_lblUserNeed;
     CGSize _imgSize;
+    UILabel *_lblCount;
 }
 
 @end
@@ -28,7 +29,7 @@
 
 @synthesize model = _model;
 
--(void) setModel:(GoodsModel *)model{
+-(void) setModel:(PurchaseModel *)model{
     _model = model;
     [self removeAllSubviews];
     
@@ -72,8 +73,7 @@
     }];
     
     _img = [UIImageView new];
-    _img.backgroundColor = [UIColor redColor];
-    [_img sd_setImageWithURL:[NSURL URLWithString:_model.img]];
+    [_img sd_setImageWithURL:[NSURL URLWithString:_model.img[0]]];
     [self addSubview:_img];
     
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +102,7 @@
     _lblUserNeed.font = SourceHanSansCNLight(SizeWidth(10));
     _lblUserNeed.textColor = [UIColor colorWithHexString:@"#999999"];
     _lblUserNeed.textAlignment = NSTextAlignmentLeft;
-    _lblUserNeed.text = _model.name;
+    _lblUserNeed.text = _model.sku;
     
     [self addSubview:_lblUserNeed];
     
@@ -113,12 +113,12 @@
         make.right.equalTo(self.mas_right).offset(-SizeWidth(15));
     }];
     
-    [self addCanDeliveryLable:_model.canDelivery];
-    [self addTakeBySelfLabel:_model.canTakeBySelf];
+    [self addCanDeliveryLable:_model.centerStock > 0];
+    [self addTakeBySelfLabel:_model.shopStock > 0];
     [self addPriceLable];
     
     [self addChangeNumberControl];
-    if (_model.outOfStack) {
+    if (_model.stock == 0) {
         [self addOutOfStackView];
     }
     
@@ -168,7 +168,7 @@
     _lblPrice1 = [UILabel new];
     _lblPrice1.font = VerdanaBold(SizeWidth(28));
     _lblPrice1.textAlignment = NSTextAlignmentLeft;
-    _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.memberPrice];
+    _lblPrice1.text = [NSString stringWithFormat:@"￥%@",_model.price];
     
     [self addSubview:_lblPrice1];
     
@@ -201,16 +201,16 @@
         make.height.equalTo(@(SizeHeigh(50/2)));
     }];
     
-    UILabel *lblTitle = [UILabel new];
-    lblTitle.font = Verdana(SizeWidth(13));
-    lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-    lblTitle.textAlignment = NSTextAlignmentCenter;
-    lblTitle.layer.borderWidth = SizeWidth(1);
-    lblTitle.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
-    lblTitle.text = @"1";
-    [self addSubview:lblTitle];
+    _lblCount = [UILabel new];
+    _lblCount.font = Verdana(SizeWidth(13));
+    _lblCount.textColor = [UIColor colorWithHexString:@"#333333"];
+    _lblCount.textAlignment = NSTextAlignmentCenter;
+    _lblCount.layer.borderWidth = SizeWidth(1);
+    _lblCount.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
+    _lblCount.text = [NSString stringWithFormat:@"%d",_model.count] ;
+    [self addSubview:_lblCount];
     
-    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(btnSubtract.mas_centerY);
         make.right.equalTo(btnSubtract.mas_left).offset(SizeWidth(1));
         make.width.equalTo(@(SizeWidth(80/2)));
@@ -230,18 +230,26 @@
     
     [btnPlus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(btnSubtract.mas_centerY);
-        make.right.equalTo(lblTitle.mas_left).offset(SizeWidth(1));
+        make.right.equalTo(_lblCount.mas_left).offset(SizeWidth(1));
         make.width.equalTo(@(SizeWidth(40/2)));
         make.height.equalTo(btnSubtract);
     }];
 }
 
 -(void) tapPlusButton{
-    
+    if ((_model.count - 1) > 0) {
+        _model.count -= 1;
+        _lblCount.text = [NSString stringWithFormat:@"%d",_model.count] ;
+        [self.delegate didChangeNumber:_model withSender:self];
+    }
 }
 
 -(void) tapSubtractButton{
-    
+    if ((_model.count + 1) <= _model.stock) {
+        _model.count += 1;
+        _lblCount.text = [NSString stringWithFormat:@"%d",_model.count] ;
+        [self.delegate didChangeNumber:_model withSender:self];
+    }
 }
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin{

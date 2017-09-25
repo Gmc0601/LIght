@@ -11,6 +11,7 @@
 #import "GoodsCategory.h"
 #import "SKU.h"
 #import "SKUPrice.h"
+#import "PurchaseModel.h"
 
 @implementation NetHelper
 +(void) getCategoryListWithId:(NSString *) _id withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback{
@@ -153,7 +154,7 @@
             model.img = goodinfo[@"img_path"];
             model.desc = goodinfo[@"img_desc"];
             model.info = goodinfo[@"info_desc"];
-            
+            model.isFollow = [goodinfo[@"isfollow"]  isEqual: @"1"];
             callback(nil,skuList,skuPriceList,model);
         }else{
             callback(datadic[@"info"],nil,nil,nil);
@@ -255,11 +256,29 @@
     
     [HttpRequest postPath:@"_card_list_001" params:nil resultBlock:^(id responseObject, NSError *error) {
         NSDictionary *datadic = responseObject;
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
         
         if ([datadic[@"error"] intValue] == 0) {
-            NSDictionary *infoDic = datadic[@"info"];
-            NSArray *arr = [self jsonToGoodsModelList:infoDic];
             
+            for (NSDictionary *infoDic in datadic[@"info"]) {
+                PurchaseModel *model = [PurchaseModel new];
+                model._id = infoDic[@"id"];
+                model.name = infoDic[@"title"];
+                model.couponid = infoDic[@"couponid"] == [NSNull null] ? nil:infoDic[@"couponid"];
+                model.price = infoDic[@"price"]  == [NSNull null] ? nil:infoDic[@"price"];
+                model.shopId = infoDic[@"shopid"];
+                model.stock = ((NSString *)infoDic[@"stock"]).intValue;
+                model.shopStock = ((NSString *)infoDic[@"s_stock"]).intValue;
+                model.centerStock = ((NSString *)infoDic[@"w_stock"]).intValue;
+                model.img = infoDic[@"img_path"];
+                model.goodsId = infoDic[@"good_id"];
+                model.count = ((NSString *)infoDic[@"count"]).intValue;
+                model.createDate = ((NSString *)infoDic[@"create_time"]).floatValue;
+                model.sku = infoDic[@"sku"];
+                model.userId = infoDic[@"user_id"];
+                model.categoryId = infoDic[@"sku_id"];
+                [arr addObject:model];
+            }
             callback(nil,arr);
         }else{
             callback(datadic[@"info"],nil);
@@ -281,13 +300,30 @@
     
     [params setObject:[NSString stringWithFormat:@"%d",10] forKey:@"price"];
     [params setObject:[NSString stringWithFormat:@"%d",count] forKey:@"count"];
-
+    
     
     [HttpRequest postPath:@"_set_crad_001" params:params resultBlock:^(id responseObject, NSError *error) {
         NSDictionary *datadic = responseObject;
         
         if ([datadic[@"error"] intValue] == 0) {
             callback(nil,nil);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
++(void) deleteGoodsFromCardWithId:(NSString *) _id callBack:(void(^)(NSString *error,NSString *info)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if (_id != nil) {
+        [params setObject:_id forKey:@"id"];
+    }
+    
+    [HttpRequest postPath:@"_delete_crad_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,datadic[@"info"]);
         }else{
             callback(datadic[@"info"],nil);
         }

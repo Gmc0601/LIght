@@ -9,15 +9,15 @@
 #import "PurchaseCarViewController.h"
 #import "FirstLevelGoodsViewController.h"
 
-#import "GoodsModel.h"
+#import "PurchaseModel.h"
 #import "PurcharseCell.h"
 #import "TBRefresh.h"
 
-@interface PurchaseCarViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface PurchaseCarViewController ()<UITableViewDelegate,UITableViewDataSource,PurcharseCellDelegate>{
     NSString *_cellIdentifier;
 }
 @property(retain,atomic)     UITableView *tb;
-@property(retain,atomic)     NSMutableArray *dataSource;
+@property(retain,atomic)     NSArray *dataSource;
 @end
 
 @implementation PurchaseCarViewController
@@ -139,6 +139,12 @@
     [ConfigModel showHud:self];
     [NetHelper getGoodsListFromCard:^(NSString *error, NSArray *datasource) {
         [ConfigModel hideHud:self];
+        if (error == nil) {
+            _dataSource = datasource;
+            [_tb reloadData];
+        } else {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
     }];
 }
 
@@ -150,12 +156,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PurcharseCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     cell.model = _dataSource[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    GoodsModel *model = (GoodsModel *) _dataSource[indexPath.row];
 }
 
 -(void) addBottomView{
@@ -246,5 +252,33 @@
 
 -(void) check{
     
+}
+
+-(void) didDelete:(NSString *) _id{
+    [ConfigModel showHud:self];
+    [NetHelper deleteGoodsFromCardWithId:_id callBack:^(NSString *error, NSString *info) {
+        [ConfigModel hideHud:self];
+        if (error == nil) {
+            [ConfigModel mbProgressHUD:info andView:self.view];
+            [_tb.header beginRefreshing];
+        } else {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
+    }];
+}
+
+-(void) didChangeNumber:(PurchaseModel *)model withSender:(PurcharseCell *)sender{
+    [NetHelper addGoodsToCardWithGoodsId:model.goodsId withShopId:model.shopId withCount:model.count withId:model._id withSKUId:model.categoryId callBack:^(NSString *error, NSString *info) {
+        [ConfigModel hideHud:self];
+        if (error == nil) {
+            for (PurchaseModel *m in _dataSource) {
+                if (m._id == model._id) {
+                    m.count = model.count;
+                }
+            }
+        } else {
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
+    }];
 }
 @end
