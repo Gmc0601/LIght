@@ -26,6 +26,11 @@
     // Do any additional setup after loading the view.
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadGoodsInPurchase];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -208,7 +213,7 @@
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
--(void) addLableCountToImage:(UIImageView *) img withText:(NSString *)  text{
+-(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
     _lblCount = [UILabel new];
     _lblCount.font = Verdana(SizeWidth(9));
     _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
@@ -221,6 +226,12 @@
         make.bottom.equalTo(img).offset(-SizeHeigh(3));
         make.width.equalTo(@(SizeWidth(20)));
         make.height.equalTo(@(SizeHeigh(10)));
+    }];
+}
+
+-(void) loadGoodsInPurchase{
+    [NetHelper getGoodsCountFromCard:^(NSString *error, NSString *count) {
+        self.lblCount.text = count;
     }];
 }
 @end

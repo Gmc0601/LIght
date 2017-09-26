@@ -872,6 +872,7 @@
         [ConfigModel hideHud:self];
         if (error == nil) {
             [ConfigModel mbProgressHUD:@"已添加到购物车" andView:self.view];
+            [self loadGoodsInPurchase];
         }else{
             [ConfigModel mbProgressHUD:error andView:self.view];
         }

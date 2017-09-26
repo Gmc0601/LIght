@@ -18,6 +18,8 @@
 }
 @property(retain,atomic)     UITableView *tb;
 @property(retain,atomic)     NSArray *dataSource;
+@property(retain,atomic)     UILabel *lblAmount;
+@property(retain,atomic)     UILabel *lblDiscount;
 @end
 
 @implementation PurchaseCarViewController
@@ -27,8 +29,11 @@
 //    [self addViewsForEmpty];
     self.navigationView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     self.titleLab.text = @"购物清单";
-    [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
-    
+    [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
+    self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(7), SizeWidth(-2), SizeWidth(-2), 0);
+    self.leftBar.userInteractionEnabled = NO;
+    [self addLableCountToImage:self.leftBar withText:@"1"];
+
     [self.rightBar setImage:[UIImage imageNamed:@"sg_ic_down_up_h"] forState:UIControlStateNormal];
     
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,6 +53,7 @@
         make.width.equalTo(@(SizeWidth(164/2)));
         make.height.equalTo(@(SizeHeigh(86/2)));
     }];
+    
     
     UILabel *lblMsg = [UILabel new];
     lblMsg.font = SourceHanSansCNRegular(SizeWidth(13));
@@ -190,14 +196,14 @@
         make.height.equalTo(@(SizeHeigh(14)));
     }];
     
-    UILabel *lblMoney = [UILabel new];
-    lblMoney.font = VerdanaBold(SizeWidth(18));
-    lblMoney.textColor = [UIColor colorWithHexString:@"#333333"];
-    lblMoney.textAlignment = NSTextAlignmentLeft;
-    lblMoney.text = @"1234";
-    [self.bottomView addSubview:lblMoney];
+    _lblAmount = [UILabel new];
+    _lblAmount.font = VerdanaBold(SizeWidth(18));
+    _lblAmount.textColor = [UIColor colorWithHexString:@"#333333"];
+    _lblAmount.textAlignment = NSTextAlignmentLeft;
+    _lblAmount.text = @"1234";
+    [self.bottomView addSubview:_lblAmount];
     
-    [lblMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_lblAmount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lblSum.mas_right).offset(SizeWidth(5));
         make.bottom.equalTo(lblSum.mas_bottom);
         make.width.equalTo(@(SizeWidth(70)));
@@ -219,15 +225,15 @@
     }];
 
     
-    UILabel *lblDiscount = [UILabel new];
-    lblDiscount.font = VerdanaBold(SizeWidth(12));
-    lblDiscount.textColor = [UIColor colorWithHexString:@"#ff543a"];
-    lblDiscount.textAlignment = NSTextAlignmentLeft;
-    lblDiscount.text = @"1223";
-    [self.bottomView addSubview:lblDiscount];
+    _lblDiscount = [UILabel new];
+    _lblDiscount.font = VerdanaBold(SizeWidth(12));
+    _lblDiscount.textColor = [UIColor colorWithHexString:@"#ff543a"];
+    _lblDiscount.textAlignment = NSTextAlignmentLeft;
+    _lblDiscount.text = @"1223";
+    [self.bottomView addSubview:_lblDiscount];
     
-    [lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(lblMoney);
+    [_lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(lblDiscountTitle);
         make.bottom.equalTo(lblDiscountTitle.mas_bottom);
         make.width.equalTo(@(SizeWidth(70)));
         make.height.equalTo(@(SizeHeigh(14)));
@@ -248,6 +254,9 @@
         make.width.equalTo(@(SizeWidth(196/2)));
         make.height.equalTo(@(SizeHeigh(88/2)));
     }];
+    
+    [self setAmount];
+    [self setDiscounts];
 }
 
 -(void) check{
@@ -276,9 +285,30 @@
                     m.count = model.count;
                 }
             }
+            
+//            [self loadGoodsInPurchase];
+            [self setAmount];
+            [self setDiscounts];
         } else {
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
     }];
+}
+
+-(void) setAmount{
+    int amount = 0;
+    for (PurchaseModel *model in _dataSource) {
+        amount += model.count * model.price.intValue;
+    }
+    _lblAmount.text = [NSString stringWithFormat:@"%d",amount];
+}
+
+-(void) setDiscounts{
+    int discount = 0;
+    for (PurchaseModel *model in _dataSource) {
+        discount += model.count * (model.oldPrice.intValue - model.price.intValue);
+    }
+    
+    _lblDiscount.text = [NSString stringWithFormat:@"%d",discount];
 }
 @end

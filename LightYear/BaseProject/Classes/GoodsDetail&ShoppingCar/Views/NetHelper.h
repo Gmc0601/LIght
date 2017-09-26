@@ -20,4 +20,5 @@
 +(void) getGoodsListFromCard:(void(^)(NSString *error,NSArray *)) callback;
 +(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSString *) skuId callBack:(void(^)(NSString *error,NSString *)) callback;
 +(void) deleteGoodsFromCardWithId:(NSString *) _id callBack:(void(^)(NSString *error,NSString *info)) callback;
++(void) getGoodsCountFromCard:(void(^)(NSString *error,NSString *count)) callback;
 @end

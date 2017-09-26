@@ -25,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _dataSource = [NSMutableArray arrayWithCapacity:0];
+
     [self addBottomView];
     [self addFavoriteButton];
     [self addSearchButton];
@@ -91,7 +93,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  _dataSource.count;
+    return  _dataSource == nil ? 0:_dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

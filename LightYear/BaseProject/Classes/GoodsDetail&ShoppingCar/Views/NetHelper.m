@@ -277,6 +277,7 @@
                 model.sku = infoDic[@"sku"];
                 model.userId = infoDic[@"user_id"];
                 model.categoryId = infoDic[@"sku_id"];
+                model.oldPrice = infoDic[@"old_price"];
                 [arr addObject:model];
             }
             callback(nil,arr);
@@ -326,6 +327,18 @@
             callback(nil,datadic[@"info"]);
         }else{
             callback(datadic[@"info"],nil);
+        }
+    }];
+}
+
++(void) getGoodsCountFromCard:(void(^)(NSString *error,NSString *count)) callback{
+    [HttpRequest postPath:@"_card_count_001" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,[NSString stringWithFormat:@"%@",datadic[@"info"]]);
+        }else{
+            callback(datadic[@"info"],@"0");
         }
     }];
 }
