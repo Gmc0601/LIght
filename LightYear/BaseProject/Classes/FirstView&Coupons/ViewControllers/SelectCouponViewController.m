@@ -1,32 +1,36 @@
 //
-//  MemberRechargeViewController.m
+//  SelectCouponViewController.m
 //  BaseProject
 //
-//  Created by wmk on 2017/9/23.
+//  Created by wmk on 2017/9/27.
 //  Copyright © 2017年 cc. All rights reserved.
 //
 
-#import "MemberRechargeViewController.h"
-#import "RechargeInfoCell.h"
+#import "SelectCouponViewController.h"
 #import "WMTableView.h"
+#import "CouponDefaultCell.h"
 
-@interface MemberRechargeViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface SelectCouponViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) WMTableView *tableV;
 
 @end
 
-@implementation MemberRechargeViewController
+@implementation SelectCouponViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLab.text = @"充值优惠";
-    [self.view addSubview:self.tableV];
+    self.titleLab.text = @"选择优惠券";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.rightBar removeFromSuperview];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 12;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -34,12 +38,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"RechargeInfoCell";
-    RechargeInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    static NSString *identifier = @"CouponDefaultCell";
+    CouponDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[RechargeInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[CouponDefaultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    [cell fillWithType:@""];
+    [cell fillWith:NO];
     return cell;
 }
 

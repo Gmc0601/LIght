@@ -152,9 +152,9 @@
 
 - (UIButton *)rechargeBtn {
     if (!_rechargeBtn) {
-        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(50), SizeHeigh(30))];
+        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(80), SizeHeigh(30))];
         _rechargeBtn.centerX = _balanceLabel.centerX;
-        [_rechargeBtn setTitle:@"充值" forState:UIControlStateNormal];
+        [_rechargeBtn setTitle:@"查看充值优惠" forState:UIControlStateNormal];
         _rechargeBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(12));
         [_rechargeBtn setTitleColor:UIColorFromHex(0x347bb1) forState:UIControlStateNormal];
         [_rechargeBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];

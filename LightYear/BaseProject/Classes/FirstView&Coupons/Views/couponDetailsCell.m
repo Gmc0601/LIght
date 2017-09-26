@@ -25,9 +25,29 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+        self.size = CGSizeMake(kScreenW, SizeHeigh(213));
+        self.contentView.size = CGSizeMake(kScreenW, SizeHeigh(213));
+        [self addSubview:self.bgImageV];
+        [self.bgImageV addSubview:self.titleLabel];
+        [self.bgImageV addSubview:self.stateLabel];
+        [self.bgImageV addSubview:self.promptLabel];
+        [self.bgImageV addSubview:self.conditionLabel];
+        [self.bgImageV addSubview:self.lineImgeV];
+        [self.bgImageV addSubview:self.timePromptLabel];
+        [self.bgImageV addSubview:self.timeLabel];
     }
     return self;
+}
+
+- (void)fillWith:(BOOL)isExpire {
+    if (isExpire) {
+        self.stateLabel.text = @"已过期";
+    }
+    self.titleLabel.text = @"领物券";
+    self.promptLabel.text = @"使用条件";
+    self.conditionLabel.text = @"到店选择需要领取的物品";
+    self.timePromptLabel.text = @"过期时间";
+    self.timeLabel.text = @"2017-09-01 24点前";
 }
 
 - (UIImage *)drawLineByImageView:(UIImageView *)imageView{
