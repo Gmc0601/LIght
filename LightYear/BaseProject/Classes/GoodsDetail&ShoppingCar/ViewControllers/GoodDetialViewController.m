@@ -866,9 +866,15 @@
     }
     
     int count = ((SKU *)(_skuSelectValue[_skuSelectValue.count - 1])).value.intValue;
+    NSString *price = _model.price;
+    if (_model.specilPrice !=nil) {
+            price = _model.specilPrice;
+    }else{
+        price = _model.memberPrice;
+    }
     
     [ConfigModel showHud:self];
-    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount:count withId:nil withSKUId:_skuPrice._id callBack:^(NSString *error, NSString *info) {
+    [NetHelper addGoodsToCardWithGoodsId:_model._id withShopId:_model.shopId withCount:count withId:nil withSKUId:_skuPrice._id withPrice:price callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
             [ConfigModel mbProgressHUD:@"已添加到购物车" andView:self.view];

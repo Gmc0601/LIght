@@ -286,7 +286,7 @@
     }];
 }
 
-+(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSString *) skuId callBack:(void(^)(NSString *error,NSString *)) callback{
++(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSString *) skuId withPrice:(NSString *) price callBack:(void(^)(NSString *error,NSString *)) callback{
     NSMutableDictionary *params = [NSMutableDictionary new];
     if (_id != nil) {
         [params setObject:_id forKey:@"id"];
@@ -298,7 +298,7 @@
         [params setObject:skuId forKey:@"sku_id"];
     }
     
-    [params setObject:[NSString stringWithFormat:@"%d",10] forKey:@"price"];
+    [params setObject:price forKey:@"price"];
     [params setObject:[NSString stringWithFormat:@"%d",count] forKey:@"count"];
     
     
