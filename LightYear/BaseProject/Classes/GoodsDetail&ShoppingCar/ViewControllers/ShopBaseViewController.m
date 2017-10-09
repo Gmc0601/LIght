@@ -16,6 +16,7 @@
 @property(retain,atomic) UIView *rightView;
 @property(retain,atomic) UIView *rightBackgroundView;
 @property(retain,atomic) UILabel *lblCount;
+@property(retain,atomic) UIImageView *imgCount;
 @end
 
 @implementation ShopBaseViewController
@@ -156,10 +157,10 @@
         make.height.equalTo(@(SizeHeigh(98/2)));
     }];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
-    [self.bottomView addSubview:imgView];
+    _imgCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
+    [self.bottomView addSubview:_imgCount];
     
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_imgCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomView).offset(SizeHeigh(27/2));
         make.left.equalTo(self.bottomView).offset(SizeWidth(38/2));
         make.width.equalTo(@(SizeWidth(57/2)));
@@ -193,17 +194,23 @@
     
     UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPurchaseCarViewController)];
     [self.bottomView addGestureRecognizer:tapGuesture];
-    [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
-        if (error == nil) {
-            [self addLableCountToImage:imgView withText:info];
-        }
-    }];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self refreshCountOfGoodsInCar];
 }
 
 -(void) refreshCountOfGoodsInCar{
     [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
         if (error == nil) {
-            self.lblCount.text = info;
+            if (info.intValue > 0) {
+                [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
+                [self addLableCountToImage:_imgCount withText:info];
+            }else{
+                [_imgCount removeAllSubviews];
+                [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
+            }
         }
     }];
 }
@@ -221,18 +228,21 @@
 }
 
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
-    _lblCount = [UILabel new];
-    _lblCount.font = Verdana(SizeWidth(9));
-    _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
-    _lblCount.textAlignment = NSTextAlignmentCenter;
-    _lblCount.text = [NSString stringWithFormat:@"%@",text];
-    [img addSubview:_lblCount];
+    if (_lblCount == nil) {
+        _lblCount = [UILabel new];
+        _lblCount.font = Verdana(SizeWidth(9));
+        _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
+        _lblCount.textAlignment = NSTextAlignmentCenter;
+        [img addSubview:_lblCount];
+        
+        [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(img).offset(SizeWidth(2.5));
+            make.bottom.equalTo(img).offset(-SizeHeigh(3));
+            make.width.equalTo(@(SizeWidth(20)));
+            make.height.equalTo(@(SizeHeigh(10)));
+        }];
+    }
     
-    [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(img).offset(SizeWidth(2.5));
-        make.bottom.equalTo(img).offset(-SizeHeigh(3));
-        make.width.equalTo(@(SizeWidth(20)));
-        make.height.equalTo(@(SizeHeigh(10)));
-    }];
+    _lblCount.text = [NSString stringWithFormat:@"%@",text];
 }
 @end
