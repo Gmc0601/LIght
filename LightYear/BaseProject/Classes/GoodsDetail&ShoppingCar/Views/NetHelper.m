@@ -277,6 +277,11 @@
                 model.sku = infoDic[@"sku"];
                 model.userId = infoDic[@"user_id"];
                 model.categoryId = infoDic[@"sku_id"];
+                if (infoDic[@"old_price"] != [NSNull null]) {
+                    model.oldPrice = ((NSString *)infoDic[@"old_price"]).intValue;
+                }else{
+                    model.oldPrice = model.price.intValue;
+                }
                 [arr addObject:model];
             }
             callback(nil,arr);

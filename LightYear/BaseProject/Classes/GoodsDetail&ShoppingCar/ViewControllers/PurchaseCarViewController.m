@@ -18,6 +18,8 @@
 }
 @property(retain,atomic)     UITableView *tb;
 @property(retain,atomic)     NSArray *dataSource;
+@property(retain,atomic)     UILabel *lblPrice;
+@property(retain,atomic)     UILabel *lblDiscount;
 @end
 
 @implementation PurchaseCarViewController
@@ -166,6 +168,7 @@
         if (error == nil) {
             _dataSource = datasource;
             [_tb reloadData];
+            [self setPrice];
         } else {
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
@@ -214,14 +217,14 @@
         make.height.equalTo(@(SizeHeigh(14)));
     }];
     
-    UILabel *lblMoney = [UILabel new];
-    lblMoney.font = VerdanaBold(SizeWidth(18));
-    lblMoney.textColor = [UIColor colorWithHexString:@"#333333"];
-    lblMoney.textAlignment = NSTextAlignmentLeft;
-    lblMoney.text = @"￥1234";
-    [self.bottomView addSubview:lblMoney];
+    _lblPrice = [UILabel new];
+    _lblPrice.font = VerdanaBold(SizeWidth(18));
+    _lblPrice.textColor = [UIColor colorWithHexString:@"#333333"];
+    _lblPrice.textAlignment = NSTextAlignmentLeft;
+    _lblPrice.text = @"￥1234";
+    [self.bottomView addSubview:_lblPrice];
     
-    [lblMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_lblPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lblSum.mas_right).offset(SizeWidth(5));
         make.bottom.equalTo(lblSum.mas_bottom);
         make.width.equalTo(@(SizeWidth(70)));
@@ -243,15 +246,15 @@
     }];
     
     
-    UILabel *lblDiscount = [UILabel new];
-    lblDiscount.font = VerdanaBold(SizeWidth(12));
-    lblDiscount.textColor = [UIColor colorWithHexString:@"#ff543a"];
-    lblDiscount.textAlignment = NSTextAlignmentLeft;
-    lblDiscount.text = @"￥1223";
-    [self.bottomView addSubview:lblDiscount];
+    _lblDiscount = [UILabel new];
+    _lblDiscount.font = VerdanaBold(SizeWidth(12));
+    _lblDiscount.textColor = [UIColor colorWithHexString:@"#ff543a"];
+    _lblDiscount.textAlignment = NSTextAlignmentLeft;
+    _lblDiscount.text = @"￥1223";
+    [self.bottomView addSubview:_lblDiscount];
     
-    [lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(lblMoney);
+    [_lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_lblPrice);
         make.bottom.equalTo(lblDiscountTitle.mas_bottom);
         make.width.equalTo(@(SizeWidth(70)));
         make.height.equalTo(@(SizeHeigh(12)));
@@ -304,5 +307,17 @@
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
     }];
+}
+
+-(void) setPrice{
+    int sum = 0;
+    int discount = 0;
+    for (PurchaseModel *model in _dataSource) {
+        sum += model.price.intValue;
+        discount += model.oldPrice - model.price.intValue;
+    }
+    
+    _lblPrice.text = [NSString stringWithFormat:@"￥%d",sum];
+    _lblDiscount.text = [NSString stringWithFormat:@"￥%d",discount];
 }
 @end

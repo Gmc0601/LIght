@@ -18,6 +18,7 @@
 @property(retain,atomic) NSString *sku;
 @property(retain,atomic) NSArray *img;
 @property(retain,atomic) NSString *price;
+@property(assign,atomic) int oldPrice;
 @property(retain,atomic) NSString *couponid;
 @property(assign,atomic) int count;
 @property(assign,atomic) int stock;

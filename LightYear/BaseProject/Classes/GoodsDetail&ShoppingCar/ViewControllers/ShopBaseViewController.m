@@ -228,6 +228,10 @@
 }
 
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
+    if (text == nil) {
+        return;
+    }
+    
     if (_lblCount == nil) {
         _lblCount = [UILabel new];
         _lblCount.font = Verdana(SizeWidth(9));
