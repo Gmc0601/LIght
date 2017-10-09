@@ -268,7 +268,7 @@
 }
 
 -(void) didChangeNumber:(PurchaseModel *)model withSender:(PurcharseCell *)sender{
-    [NetHelper addGoodsToCardWithGoodsId:model.goodsId withShopId:model.shopId withCount:model.count withId:model._id withSKUId:model.categoryId callBack:^(NSString *error, NSString *info) {
+    [NetHelper addGoodsToCardWithGoodsId:model.goodsId withShopId:model.shopId withCount:model.count withId:model._id withSKUId:model.categoryId withPrice:model.price callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
             for (PurchaseModel *m in _dataSource) {
