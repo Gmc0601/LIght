@@ -43,18 +43,18 @@
                                            options:NSStringDrawingUsesLineFragmentOrigin
                                         attributes:@{ NSFontAttributeName:font }
                                            context:nil];
-    return idealFrame.size.width;
+    return idealFrame.size.height;
 }
 
 -(CGFloat)widthWithFont:(UIFont *)font height:(CGFloat)height
 {
-    CGSize frameSize = CGSizeMake(300, height);
+    CGSize frameSize = CGSizeMake(100000, height);
     
     CGRect idealFrame = [self boundingRectWithSize:frameSize
                                            options:NSStringDrawingUsesLineFragmentOrigin
                                         attributes:@{ NSFontAttributeName:font }
                                            context:nil];
-    return idealFrame.size.width;
+    return idealFrame.size.width + SizeWidth(1);
 }
 
 /*抹除运费小数末尾的0*/

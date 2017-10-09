@@ -24,22 +24,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addViewsForEmpty];
+    //    [self addViewsForEmpty];
     self.navigationView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     self.titleLab.text = @"购物清单";
-    [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
-    self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(8), 0, 0, 0);
     
     [self.rightBar setImage:[UIImage imageNamed:@"sg_ic_down_up_h"] forState:UIControlStateNormal];
     
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
-    [self addBottomView];
-    [self addTableView];
     
-    
+    [self renderUI];
+}
+
+-(void) renderUI{
+    [ConfigModel showHud:self];
     [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
-        if (error == nil) {
+        if (error == nil && info.intValue > 0) {
+            if (_tb == nil) {
+                [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
+                self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(8), 0, 0, 0);
+                [self addBottomView];
+                [self addTableView];
+            }
+            
             [self addLableCountToImage:self.leftBar withText:info];
+            [_tb.header beginRefreshing];
+        }else{
+            [ConfigModel hideHud:self];
+            if (_tb !=nil) {
+                [_tb removeFromSuperview];
+                [self.bottomView removeFromSuperview];
+                _tb = nil;
+                self.bottomView = nil;
+            }
+            [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
+            [self addViewsForEmpty];
         }
     }];
 }
@@ -143,7 +161,6 @@
 }
 
 -(void) fetchData{
-    [ConfigModel showHud:self];
     [NetHelper getGoodsListFromCard:^(NSString *error, NSArray *datasource) {
         [ConfigModel hideHud:self];
         if (error == nil) {
@@ -173,7 +190,7 @@
 
 -(void) addBottomView{
     self.bottomView = [UIView new];
-//    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
+    //    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     [self.view addSubview:self.bottomView];
     
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -224,7 +241,7 @@
         make.width.equalTo(@(SizeWidth(35)));
         make.height.equalTo(@(SizeHeigh(12)));
     }];
-
+    
     
     UILabel *lblDiscount = [UILabel new];
     lblDiscount.font = VerdanaBold(SizeWidth(12));
@@ -266,8 +283,8 @@
     [NetHelper deleteGoodsFromCardWithId:_id callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
+            [self renderUI];
             [ConfigModel mbProgressHUD:info andView:self.view];
-            [_tb.header beginRefreshing];
         } else {
             [ConfigModel mbProgressHUD:error andView:self.view];
         }

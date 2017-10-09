@@ -200,6 +200,14 @@
     }];
 }
 
+-(void) refreshCountOfGoodsInCar{
+    [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
+        if (error == nil) {
+            self.lblCount.text = info;
+        }
+    }];
+}
+
 -(void) showPurchaseCarViewController{
     PurchaseCarViewController *newVC = [PurchaseCarViewController new];
     
@@ -217,7 +225,7 @@
     _lblCount.font = Verdana(SizeWidth(9));
     _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
     _lblCount.textAlignment = NSTextAlignmentCenter;
-    _lblCount.text = text;
+    _lblCount.text = [NSString stringWithFormat:@"%@",text];
     [img addSubview:_lblCount];
     
     [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
