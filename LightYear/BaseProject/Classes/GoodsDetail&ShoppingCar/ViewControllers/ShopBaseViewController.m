@@ -166,7 +166,6 @@
         make.height.equalTo(@(SizeHeigh(57/2)));
     }];
     
-    [self addLableCountToImage:imgView withText:@"12"];
     
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNRegular(SizeWidth(15));
@@ -194,6 +193,11 @@
     
     UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPurchaseCarViewController)];
     [self.bottomView addGestureRecognizer:tapGuesture];
+    [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
+        if (error == nil) {
+            [self addLableCountToImage:imgView withText:info];
+        }
+    }];
 }
 
 -(void) showPurchaseCarViewController{
@@ -208,7 +212,7 @@
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
--(void) addLableCountToImage:(UIImageView *) img withText:(NSString *)  text{
+-(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
     _lblCount = [UILabel new];
     _lblCount.font = Verdana(SizeWidth(9));
     _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
@@ -217,7 +221,7 @@
     [img addSubview:_lblCount];
     
     [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(img).offset(SizeWidth(2));
+        make.right.equalTo(img).offset(SizeWidth(2.5));
         make.bottom.equalTo(img).offset(-SizeHeigh(3));
         make.width.equalTo(@(SizeWidth(20)));
         make.height.equalTo(@(SizeHeigh(10)));

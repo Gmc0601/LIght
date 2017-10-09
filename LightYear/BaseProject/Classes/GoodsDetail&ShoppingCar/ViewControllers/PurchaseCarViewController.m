@@ -27,15 +27,22 @@
 //    [self addViewsForEmpty];
     self.navigationView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     self.titleLab.text = @"购物清单";
-    [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
+    [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
+    self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(8), 0, 0, 0);
     
     [self.rightBar setImage:[UIImage imageNamed:@"sg_ic_down_up_h"] forState:UIControlStateNormal];
     
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [self addBottomView];
     [self addTableView];
+    
+    
+    [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
+        if (error == nil) {
+            [self addLableCountToImage:self.leftBar withText:info];
+        }
+    }];
 }
-
 
 -(void) addViewsForEmpty{
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_qs"]];
@@ -186,7 +193,7 @@
     [lblSum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bottomView).offset(SizeWidth(15));
         make.top.equalTo(self.bottomView).offset(SizeHeigh(15));
-        make.width.equalTo(@(SizeWidth(30)));
+        make.width.equalTo(@(SizeWidth(40)));
         make.height.equalTo(@(SizeHeigh(14)));
     }];
     
@@ -194,7 +201,7 @@
     lblMoney.font = VerdanaBold(SizeWidth(18));
     lblMoney.textColor = [UIColor colorWithHexString:@"#333333"];
     lblMoney.textAlignment = NSTextAlignmentLeft;
-    lblMoney.text = @"1234";
+    lblMoney.text = @"￥1234";
     [self.bottomView addSubview:lblMoney];
     
     [lblMoney mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -214,7 +221,7 @@
     [lblDiscountTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lblSum.mas_left);
         make.top.equalTo(lblSum.mas_bottom).offset(SizeHeigh(8));
-        make.width.equalTo(@(SizeWidth(20)));
+        make.width.equalTo(@(SizeWidth(35)));
         make.height.equalTo(@(SizeHeigh(12)));
     }];
 
@@ -223,14 +230,14 @@
     lblDiscount.font = VerdanaBold(SizeWidth(12));
     lblDiscount.textColor = [UIColor colorWithHexString:@"#ff543a"];
     lblDiscount.textAlignment = NSTextAlignmentLeft;
-    lblDiscount.text = @"1223";
+    lblDiscount.text = @"￥1223";
     [self.bottomView addSubview:lblDiscount];
     
     [lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lblMoney);
         make.bottom.equalTo(lblDiscountTitle.mas_bottom);
         make.width.equalTo(@(SizeWidth(70)));
-        make.height.equalTo(@(SizeHeigh(14)));
+        make.height.equalTo(@(SizeHeigh(12)));
     }];
     
     UIButton *btnCheck = [UIButton new];

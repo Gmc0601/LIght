@@ -21,4 +21,5 @@
 -(void) addFavoriteButton;
 -(BOOL) hasBottomView;
 -(void) addSearchButton;
+-(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text;
 @end

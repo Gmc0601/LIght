@@ -330,4 +330,16 @@
     }];
 }
 
++(void) getCountOfGoodsInCar:(void(^)(NSString *error,NSString *info)) callback{
+    
+    [HttpRequest postPath:@"_card_count_001" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,datadic[@"info"]);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
 @end
