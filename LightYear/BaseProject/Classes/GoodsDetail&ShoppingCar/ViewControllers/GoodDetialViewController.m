@@ -1165,6 +1165,7 @@
         
         web = [UIWebView new];
         web.delegate = self;
+        web.scrollView.scrollEnabled = NO;
         [cell addSubview:web];
         [web mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(cell).offset(SizeWidth(15));

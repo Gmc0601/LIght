@@ -152,8 +152,8 @@
             model.shopStock = ((NSString *)goodinfo[@"w_stock"]).intValue;
             model.centerStock = ((NSString *)goodinfo[@"s_stock"]).intValue;
             model.img = goodinfo[@"img_path"];
-            model.desc = goodinfo[@"img_desc"];
-            model.info = goodinfo[@"info_desc"];
+            model.desc = goodinfo[@"img_desc"] == [NSNull null] ? @"":goodinfo[@"img_desc"];
+            model.info = goodinfo[@"info_desc"] == [NSNull null] ? @"":goodinfo[@"info_desc"];
             model.isFollow = [goodinfo[@"isfollow"]  isEqual: @"1"];
             callback(nil,skuList,skuPriceList,model);
         }else{
@@ -165,8 +165,8 @@
 +(NSArray *)jsonToGoodsModelList:(NSDictionary *) infoDic{
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
     for (NSDictionary *dict in infoDic) {
-        if (dict[@"special_price"]  == [NSNull null] && dict[@"user_price"]  == [NSNull null] &&
-            dict[@"price"]  == [NSNull null]) {
+        if ((dict[@"special_price"]  == [NSNull null] && dict[@"user_price"]  == [NSNull null] &&
+            dict[@"price"]  == [NSNull null]) || dict[@"id"]  == [NSNull null]) {
             continue ;
         }
         
