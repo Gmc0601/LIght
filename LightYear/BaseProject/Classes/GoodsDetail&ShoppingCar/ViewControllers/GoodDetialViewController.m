@@ -561,6 +561,7 @@
 
 -(void) addShareButtonToCell:(UIView *) superView{
     UIButton *btnShare = [UIButton new];
+    btnShare.hidden = YES;
     [btnShare setImage:[UIImage imageNamed:@"icon_xq_fx"] forState:UIControlStateNormal];
     [btnShare addTarget:self action:@selector(showShareView) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:btnShare];

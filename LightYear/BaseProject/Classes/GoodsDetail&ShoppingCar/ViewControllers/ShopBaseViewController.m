@@ -203,7 +203,7 @@
 
 -(void) refreshCountOfGoodsInCar{
     [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
-        if (error == nil) {
+        if (error == nil && _imgCount != nil) {
             if (info.intValue > 0) {
                 [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
                 [self addLableCountToImage:_imgCount withText:info];

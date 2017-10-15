@@ -347,4 +347,20 @@
         }
     }];
 }
+
++(void) addOrder:(NSString *) shopId withAmount:(NSString *) amount callBack:(void(^)(NSString *error,NSString *info)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+        [params setObject:shopId forKey:@"shopid"];
+    [params setObject:amount forKey:@"amount"];
+    
+    [HttpRequest postPath:@"_order_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            callback(nil,datadic[@"info"][@"id"]);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
 @end

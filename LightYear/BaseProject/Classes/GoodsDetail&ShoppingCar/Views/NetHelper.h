@@ -21,4 +21,5 @@
 +(void) addGoodsToCardWithGoodsId:(NSString *) goodsId withShopId:(NSString *) shopId withCount:(int) count withId:(NSString *) _id withSKUId:(NSString *) skuId withPrice:(NSString *) price  callBack:(void(^)(NSString *error,NSString *)) callback;
 +(void) deleteGoodsFromCardWithId:(NSString *) _id callBack:(void(^)(NSString *error,NSString *info)) callback;
 +(void) getCountOfGoodsInCar:(void(^)(NSString *error,NSString *info)) callback;
++(void) addOrder:(NSString *) shopId withAmount:(NSString *) amount callBack:(void(^)(NSString *error,NSString *info)) callback;
 @end

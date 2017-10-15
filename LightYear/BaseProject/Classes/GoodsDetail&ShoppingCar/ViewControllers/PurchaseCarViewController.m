@@ -8,6 +8,7 @@
 
 #import "PurchaseCarViewController.h"
 #import "FirstLevelGoodsViewController.h"
+#import "MakeOrderViewController.h"
 
 #import "PurchaseModel.h"
 #import "PurcharseCell.h"
@@ -34,6 +35,11 @@
     
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
+//    [self renderUI];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self renderUI];
 }
 
@@ -159,7 +165,6 @@
         [weakSelf.tb.footer endFooterRefreshing];
     }];
     
-    [_tb.header beginRefreshing];
 }
 
 -(void) fetchData{
@@ -278,7 +283,19 @@
 }
 
 -(void) check{
+    [ConfigModel showHud:self];
+    NSString *shopId = ((PurchaseModel *) _dataSource[0]).shopId;
     
+    [NetHelper addOrder:shopId withAmount:_lblPrice.text callBack:^(NSString *error, NSString *info) {
+        [ConfigModel hideHud:self];
+        if (error == nil) {
+            MakeOrderViewController *newVC = [MakeOrderViewController new];
+            newVC.OrderID = info;
+            [self.navigationController pushViewController:newVC animated:YES];
+        }else{
+            [ConfigModel mbProgressHUD:error andView:self.view];
+        }
+    }];
 }
 
 -(void) didDelete:(NSString *) _id{
