@@ -9,10 +9,12 @@
 #import "SelectShopViewController.h"
 #import "WMTableView.h"
 #import "SelectShopCell.h"
+#import "ShopListModel.h"
 
 @interface SelectShopViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) WMTableView *tableV;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
@@ -25,9 +27,37 @@
     [self.view addSubview:self.tableV];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _dataArray = [NSMutableArray array];
+    [self syncWithShopListRequest];
+}
+
+#pragma mark - Service
+- (void)syncWithShopListRequest {
+    [ConfigModel showHud:self];
+    NSDictionary *dic = @{
+//                        @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
+//                        @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
+                          @"lng": @"112.587329",
+                          @"lat": @"26.885513",
+                       };
+    [HttpRequest postPath:shoplistURL params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        ShopListModel * model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            [_dataArray addObjectsFromArray:model.info];
+            [self.tableV reloadData];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+    }];
+}
+
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 12;
+    return _dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -40,13 +70,14 @@
     if (!cell) {
         cell = [[SelectShopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    [cell fillWithData];
+    [cell fillWithData:_dataArray[indexPath.row]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ShopListInfo *info = _dataArray[indexPath.row];
     if (self.delegate && [self.delegate respondsToSelector:@selector(callbackWithSelectShop:code:)]) {
-        [self.delegate callbackWithSelectShop:@"浙江商店" code:@"adfa"];
+        [self.delegate callbackWithSelectShop:info.shopname code:info.aid];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

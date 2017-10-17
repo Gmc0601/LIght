@@ -50,6 +50,11 @@
 
 #define BrandList @"_brandlist_001"
 
+#define shoplistURL         @"_shoplist_001"
+#define homeShopURL         @"_index_recently_shop_001"
+#define memberInfoURL       @"_user_score_total_001"
+#define rechargeListInfo    @"_user_recharge_list_001"
+
 /*
  *   User Info
  */

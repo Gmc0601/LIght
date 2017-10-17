@@ -9,6 +9,7 @@
 #import "MemberCardViewController.h"
 #import "MemberRechargeViewController.h"
 #import "WMBalancePointDetailsViewController.h"
+#import "ShopListModel.h"
 
 @interface MemberCardViewController ()
 
@@ -34,6 +35,25 @@
     [super viewWillAppear:animated];
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
+    [self syncWithUserInfoRequest];
+}
+
+#pragma mark - Service
+- (void)syncWithUserInfoRequest {
+    [ConfigModel showHud:self];
+    [HttpRequest postPath:memberInfoURL params:nil resultBlock:^(id responseObject, NSError *error) {
+        
+        ShopListModel * model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            ShopListInfo *info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
+            _balanceLabel.text = info.amount;
+            _scroLabel.text = info.integral;
+            [_codeImageV sd_setImageWithURL:[NSURL URLWithString:info.barurl]];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+    }];
 }
 
 - (void)goToRecharge {
@@ -99,7 +119,7 @@
 
 - (UIImageView *)codeImageV {
     if (!_codeImageV) {
-        _codeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(35), SizeHeigh(60), SizeWidth(90), SizeHeigh(315))];
+        _codeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(30), SizeHeigh(65), SizeWidth(90), SizeHeigh(315))];
     }
     return _codeImageV;
 }
@@ -152,10 +172,11 @@
 
 - (UIButton *)rechargeBtn {
     if (!_rechargeBtn) {
-        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(50), SizeHeigh(30))];
+        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(100), SizeHeigh(30))];
         _rechargeBtn.centerX = _balanceLabel.centerX;
-        [_rechargeBtn setTitle:@"充值" forState:UIControlStateNormal];
-        _rechargeBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(12));
+        [_rechargeBtn setTitle:@"查看充值优惠" forState:UIControlStateNormal];
+        _rechargeBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(11));
+        _rechargeBtn.titleLabel.numberOfLines = 0;
         [_rechargeBtn setTitleColor:UIColorFromHex(0x347bb1) forState:UIControlStateNormal];
         [_rechargeBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [_rechargeBtn addTarget:self action:@selector(goToRecharge) forControlEvents:UIControlEventTouchUpInside];

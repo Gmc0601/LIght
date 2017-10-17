@@ -8,6 +8,7 @@
 
 #import "SelectShopCell.h"
 
+
 @interface SelectShopCell()
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -30,10 +31,10 @@
     return self;
 }
 
-- (void)fillWithData {
-    self.titleLabel.text = @"浙工商店";
-    self.distanceLabel.text = @"据您18km";
-    self.addressLabel.text = @"浙江工业大学商业街888号";
+- (void)fillWithData:(ShopListInfo *)info {
+    self.titleLabel.text = info.shopname;
+    self.distanceLabel.text = [NSString stringWithFormat:@"据您%.2fkm",info.distance];
+    self.addressLabel.text = info.address;
 }
 
 #pragma mark - lazyLoad
@@ -59,7 +60,7 @@
 
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
-        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), _titleLabel.origin.y+_titleLabel.height+SizeHeigh(10), SizeWidth(200), SizeHeigh(20))];
+        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), _titleLabel.origin.y+_titleLabel.height+SizeHeigh(10), SizeWidth(300), SizeHeigh(20))];
         _addressLabel.font = SourceHanSansCNRegular(SizeWidth(13));
         _addressLabel.textColor = UIColorFromHex(0x999999);
         _addressLabel.textAlignment = NSTextAlignmentLeft;

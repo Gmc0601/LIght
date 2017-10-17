@@ -38,6 +38,14 @@
     }
     return self;
 }
+
+- (void)changeLabelTitle:(NSString *)str {
+    self.addressLabel.text = str;
+    [self.addressLabel sizeToFit];
+    self.addressLabel.centerX = self.width/2+SizeWidth(10);
+    self.localImageV.origin = CGPointMake(_addressLabel.origin.x-SizeWidth(19.5), SizeHeigh(21));
+}
+
 #pragma mark - btnClick
 - (void)otherBtnClick {
     if (self.delegate && [self.delegate respondsToSelector:@selector(callbackOtherClick)]) {
@@ -60,7 +68,7 @@
 #pragma mark - lazyLoad
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
-        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake( _localImageV.origin.x+_localImageV.width+SizeWidth(10), 0, SizeWidth(185), SizeHeigh(20))];
+        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake( _localImageV.origin.x+_localImageV.width+SizeWidth(5), 0, SizeWidth(185), SizeHeigh(20))];
         _addressLabel.centerY = _localImageV.centerY;
         _addressLabel.font = SourceHanSansCNMedium(SizeWidth(18));
         _addressLabel.textColor = UIColorFromHex(0x333333);

@@ -10,4 +10,6 @@
 
 @interface couponDetailsCell : UITableViewCell
 
+- (void)fillWith:(BOOL)isExpire;
+
 @end

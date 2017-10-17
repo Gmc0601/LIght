@@ -22,4 +22,6 @@
 
 @property (nonatomic, assign) id<HomeHeaderDelegate> delegate;
 
+- (void)changeLabelTitle:(NSString *)str;
+
 @end

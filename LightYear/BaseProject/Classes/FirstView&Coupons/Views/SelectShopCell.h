@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShopListModel.h"
 
 @interface SelectShopCell : UITableViewCell
 
-- (void)fillWithData;
+- (void)fillWithData:(ShopListInfo *)info;
 
 @end

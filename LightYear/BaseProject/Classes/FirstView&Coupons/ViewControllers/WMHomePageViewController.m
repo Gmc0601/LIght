@@ -12,11 +12,20 @@
 #import "PurchaseCarViewController.h"
 #import "MemberCardViewController.h"
 #import "SelectShopViewController.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "ShopListModel.h"
 
-@interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>
+@interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
+    //定位
+    AMapLocationManager * _locationManager;
+    //当前地理位置
+    CLLocation *_currentLocation;
+}
 
 @property (nonatomic, strong) WMHomeHeaderView *headerView;
 @property (nonatomic, strong) WMBannerView *bannerView;
+@property (nonatomic, strong) ShopListInfo *info;
 @property(retain,atomic) UIView *bottomView;
 
 @end
@@ -36,6 +45,30 @@
     [super viewWillAppear:animated];
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
+    [self getLocationData];
+}
+
+- (void)getLocationData{
+    _locationManager = [[AMapLocationManager alloc] init];
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    //   定位超时时间，最低2s，此处设置为2s
+    _locationManager.locationTimeout =2;
+    //   逆地理请求超时时间，最低2s，此处设置为2s
+    _locationManager.reGeocodeTimeout = 2;
+    // 带逆地理（返回坐标和地址信息）。将下面代码中的 YES 改成 NO ，则不会返回地址信息。
+    [_locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        _currentLocation = location;
+        [self syncWithShopListRequest];
+    }];
 }
 
 - (void)addSubview {
@@ -72,11 +105,31 @@
 }
 
 #pragma mark - Service
-
+#pragma mark - Service
+- (void)syncWithShopListRequest {
+    [ConfigModel showHud:self];
+    NSDictionary *dic = @{
+//                          @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
+//                          @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
+                          @"lng": @"112.587329",
+                          @"lat": @"26.885513",
+                          };
+    [HttpRequest postPath:homeShopURL params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        ShopListModel *model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            _info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
+            [self.headerView changeLabelTitle:_info.shopname];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+    }];
+}
 
 #pragma mark - SelectShopDelegate
 - (void)callbackWithSelectShop:(NSString *)shopName code:(NSString *)shopCode {
-    self.headerView.addressLabel.text = shopName;
+    [self.headerView changeLabelTitle:shopName];
 }
 
 #pragma mark - HomeBannerViewDelegate
@@ -88,6 +141,7 @@
 - (void)callbackOtherClick {
     SelectShopViewController *selectVC = [[SelectShopViewController alloc] init];
     selectVC.delegate = self;
+    selectVC.currentLocation = _currentLocation;
     [self.navigationController pushViewController:selectVC animated:YES];
 }
 

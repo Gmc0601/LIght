@@ -7,6 +7,8 @@
 //
 
 #import "CCBaseViewController.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @protocol SelectShopDelegate <NSObject>
 
@@ -17,5 +19,6 @@
 @interface SelectShopViewController : CCBaseViewController
 
 @property (nonatomic, assign) id<SelectShopDelegate> delegate;
+@property (nonatomic, strong) CLLocation *currentLocation;
 
 @end
