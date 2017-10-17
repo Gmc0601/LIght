@@ -128,7 +128,7 @@
 -(UILabel *) getLableForTag:(BOOL) highlight{
     UIColor *fontColor = [UIColor colorWithHexString:@"#4ead35"];
     if (!highlight) {
-        fontColor = [UIColor colorWithHexString:@"#666666"];
+        fontColor = [UIColor colorWithHexString:@"#cccccc"];
     }
     
     UILabel *lblTitle = [UILabel new];

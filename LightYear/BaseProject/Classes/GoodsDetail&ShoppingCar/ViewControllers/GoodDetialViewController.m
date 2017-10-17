@@ -39,8 +39,6 @@
 @property(retain,atomic) UILabel *lblPrice2;
 @property(retain,atomic) UILabel *lblMember;
 @property(retain,atomic) UILabel *lblNoMember;
-@property(retain,atomic) UILabel *lblCanDelivery;
-@property(retain,atomic) UILabel *lblTakeBySelf;
 @property(retain,atomic) UIImageView *imgDiscounts;
 @property(retain,atomic) UIImageView *imgNew;
 @property(retain,atomic) GoodsModel *model;
@@ -381,23 +379,6 @@
     }];
     
     return lbl;
-}
-
--(void) addNewImageToCell:(UITableViewCell *) cell{
-    _imgNew = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sign_xq_xp"]];
-    [cell addSubview:_imgNew];
-    
-    [_imgNew mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (_imgDiscounts == nil) {
-            make.left.equalTo(_lblTakeBySelf.mas_right).offset(SizeWidth(10));
-        }else{
-            make.left.equalTo(_imgDiscounts.mas_right).offset(SizeWidth(10));
-        }
-        
-        make.centerY.equalTo(_lblTakeBySelf);
-        make.height.equalTo(@(SizeHeigh(16)));
-        make.width.equalTo(@(SizeHeigh(22)));
-    }];
 }
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{
