@@ -27,6 +27,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.size = CGSizeMake(kScreenW, SizeHeigh(213));
         self.contentView.size = CGSizeMake(kScreenW, SizeHeigh(213));
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubview:self.bgImageV];
         [self.bgImageV addSubview:self.titleLabel];
         [self.bgImageV addSubview:self.stateLabel];
@@ -48,6 +49,24 @@
     self.conditionLabel.text = @"到店选择需要领取的物品";
     self.timePromptLabel.text = @"过期时间";
     self.timeLabel.text = @"2017-09-01 24点前";
+}
+
+- (void)fillWithModel:(CouponInfo *)info WithExpire:(BOOL)isExpire{
+    [_bgImageV sd_setImageWithURL:[NSURL URLWithString:info.img]];
+    if (isExpire) {
+        self.stateLabel.text = @"已过期";
+    } else {
+        self.stateLabel.text = @"";
+    }
+    if ([info.full_type isEqualToString:@"1"]) {
+        self.conditionLabel.text = [NSString stringWithFormat:@"订单金额满%@优惠%@",info.condition,info.denomination];
+    } else {
+        self.conditionLabel.text = @"到店选择需要领取的物品";
+    }
+    self.titleLabel.text = info.title;
+    self.promptLabel.text = @"使用条件";
+    self.timePromptLabel.text = @"过期时间";
+    self.timeLabel.text = info.end_time;
 }
 
 - (UIImage *)drawLineByImageView:(UIImageView *)imageView{
@@ -74,6 +93,7 @@
     if (!_bgImageV) {
         _bgImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(10), kScreenW-SizeWidth(30), SizeHeigh(203))];
         _bgImageV.backgroundColor = [UIColor orangeColor];
+        _bgImageV.contentMode = UIViewContentModeScaleToFill;
         _bgImageV.layer.masksToBounds = YES;
         _bgImageV.layer.cornerRadius = SizeWidth(2.5);
     }
@@ -92,7 +112,7 @@
 
 - (UILabel *)stateLabel {
     if (!_stateLabel) {
-        _stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenW-SizeWidth(145), SizeHeigh(30), SizeWidth(120), SizeHeigh(20))];
+        _stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenW-SizeWidth(160), SizeHeigh(30), SizeWidth(120), SizeHeigh(20))];
         _stateLabel.font = SourceHanSansCNMedium(SizeWidth(13));
         _stateLabel.textAlignment = NSTextAlignmentRight;
         _stateLabel.textColor = UIColorFromHex(0xffffff);
@@ -102,7 +122,7 @@
 
 - (UILabel *)promptLabel {
     if (!_promptLabel) {
-        _promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, _titleLabel.origin.y+_titleLabel.height+SizeHeigh(49), SizeWidth(120), SizeHeigh(20))];
+        _promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, SizeHeigh(87), SizeWidth(120), SizeHeigh(20))];
         _promptLabel.font = PingFangSCMedium(SizeWidth(12));
         _promptLabel.textAlignment = NSTextAlignmentLeft;
         _promptLabel.textColor = UIColorFromHex(0xe6f9f9f9);
@@ -112,7 +132,7 @@
 
 - (UILabel *)conditionLabel {
     if (!_conditionLabel) {
-        _conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, _promptLabel.origin.y+_promptLabel.height+SizeHeigh(10), SizeWidth(120), SizeHeigh(20))];
+        _conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, SizeHeigh(109), SizeWidth(200), SizeHeigh(20))];
         _conditionLabel.font = PingFangSCMedium(SizeWidth(13));
         _conditionLabel.textAlignment = NSTextAlignmentLeft;
         _conditionLabel.textColor = UIColorFromHex(0xffffff);
@@ -122,7 +142,7 @@
 
 - (UIImageView *)lineImgeV {
     if (!_lineImgeV) {
-        _lineImgeV = [[UIImageView alloc] initWithFrame:CGRectMake( 0, _conditionLabel.origin.y+_conditionLabel.height+SizeHeigh(12), self.width, 1)];
+        _lineImgeV = [[UIImageView alloc] initWithFrame:CGRectMake( 0, SizeHeigh(138), self.width, 1)];
         _lineImgeV.image = [self drawLineByImageView:_lineImgeV];
     }
     return _lineImgeV;
@@ -130,7 +150,7 @@
 
 - (UILabel *)timePromptLabel {
     if (!_timePromptLabel) {
-        _timePromptLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, _lineImgeV.origin.y+_lineImgeV.height+SizeHeigh(14), SizeWidth(120), SizeHeigh(20))];
+        _timePromptLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, SizeHeigh(148), SizeWidth(120), SizeHeigh(20))];
         _timePromptLabel.font = PingFangSCMedium(SizeWidth(12));
         _timePromptLabel.textAlignment = NSTextAlignmentLeft;
         _timePromptLabel.textColor = UIColorFromHex(0xe6f9f9f9);
@@ -140,7 +160,7 @@
 
 - (UILabel *)timeLabel {
     if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, _timePromptLabel.origin.y+_timePromptLabel.height+SizeHeigh(10), SizeWidth(120), SizeHeigh(20))];
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_titleLabel.origin.x, SizeHeigh(170), SizeWidth(200), SizeHeigh(20))];
         _timeLabel.font = PingFangSCMedium(SizeWidth(13));
         _timeLabel.textAlignment = NSTextAlignmentLeft;
         _timeLabel.textColor = UIColorFromHex(0xffffff);

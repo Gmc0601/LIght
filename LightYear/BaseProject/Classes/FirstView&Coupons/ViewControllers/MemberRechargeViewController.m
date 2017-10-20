@@ -9,10 +9,12 @@
 #import "MemberRechargeViewController.h"
 #import "RechargeInfoCell.h"
 #import "WMTableView.h"
+#import "RechargeListModel.h"
 
 @interface MemberRechargeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) WMTableView *tableV;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
@@ -24,9 +26,35 @@
     [self.view addSubview:self.tableV];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.rightBar removeFromSuperview];
+    _dataArray = [NSMutableArray array];
+    [self syncWithQueryList];
+}
+
+#pragma mark - Service
+- (void)syncWithQueryList {
+    [ConfigModel showHud:self];
+    
+    [HttpRequest postPath:rechargeListURL params:nil resultBlock:^(id responseObject, NSError *error) {
+        
+        RechargeListModel * model = [[RechargeListModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            for (RechargeListInfo *info in model.info) {
+                [_dataArray addObject:info];
+            }
+            [self.tableV reloadData];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+    }];
+}
+
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 12;
+    return _dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -39,7 +67,8 @@
     if (!cell) {
         cell = [[RechargeInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    [cell fillWithType:@""];
+    RechargeListInfo *info = _dataArray[indexPath.row];
+    [cell fillWithType:info];
     return cell;
 }
 

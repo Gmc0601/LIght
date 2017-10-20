@@ -28,17 +28,26 @@
     return self;
 }
 
-- (void)fillWithType:(NSString *)type {
-    self.amountLabel.text = @"10";
-
-    if (type) {
-        self.giveMoneyLabel.text = @"充值即送5元";
-        self.couponLabel.text = @"送满减券";
-    } else if ([type isEqualToString:@""]) {
-        self.couponLabel.origin = CGPointMake(self.width-SizeWidth(64+31), SizeHeigh(17));
-        self.couponLabel.text = @"送满减券";
+- (void)fillWithType:(RechargeListInfo *)info {
+    self.amountLabel.text = info.money;
+    if (info.free_money.doubleValue > 0) {
+        self.giveMoneyLabel.text = [NSString stringWithFormat:@"充值即送￥%ld",info.free_money.integerValue];
+        if (info.couponInfo) {
+            if ([info.couponInfo.full_type isEqualToString:@"1"]) {
+                self.couponLabel.text = @"送满减券";
+            } else {
+                self.couponLabel.text = @"送领物券";
+            }
+        }
     } else {
-        self.giveMoneyLabel.text = @"充值即送5元";
+        self.couponLabel.origin = CGPointMake(self.width-SizeWidth(64+31), SizeHeigh(17));
+        if (info.couponInfo) {
+            if ([info.couponInfo.full_type isEqualToString:@"1"]) {
+                self.couponLabel.text = @"送满减券";
+            } else {
+                self.couponLabel.text = @"送领物券";
+            }
+        }
     }
 }
 
@@ -61,6 +70,7 @@
         _giveMoneyLabel.backgroundColor = UIColorFromHex(0xff543a);
         _giveMoneyLabel.layer.masksToBounds = YES;
         _giveMoneyLabel.layer.cornerRadius = SizeWidth(2.5);
+        _giveMoneyLabel.adjustsFontSizeToFitWidth = YES;
         _giveMoneyLabel.centerY = self.height/2;
         _giveMoneyLabel.font = SourceHanSansCNRegular(SizeWidth(12));
         _giveMoneyLabel.textColor = UIColorFromHex(0xffffff);
@@ -76,6 +86,7 @@
         _couponLabel.backgroundColor = UIColorFromHex(0xff543a);
         _couponLabel.layer.masksToBounds = YES;
         _couponLabel.layer.cornerRadius = SizeWidth(2.5);
+        _couponLabel.adjustsFontSizeToFitWidth = YES;
         _couponLabel.centerY = self.height/2;
         _couponLabel.font = SourceHanSansCNRegular(SizeWidth(12));
         _couponLabel.textColor = UIColorFromHex(0xffffff);

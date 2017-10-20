@@ -8,6 +8,7 @@
 
 #import "WMBannerView.h"
 #import "UIImageView+WebCache.h"
+#import "homeBannerModel.h"
 
 @interface WMBannerView ()
 
@@ -68,9 +69,9 @@
         [self invalidTimer];
         _selectedImageIndex = 0;
         [_bannerArray removeAllObjects];
-//        for (WMHomeBannerList *List in dataArray) {
-//            [_bannerArray addObject:List];
-//        }
+        for (bannerInfo *info in dataArray) {
+            [_bannerArray addObject:info];
+        }
         [self refreshScrollView];
         
         _pageControl.numberOfPages = [_bannerArray count];
@@ -114,10 +115,10 @@
         
         _imageScrollView.contentSize = CGSizeMake(SizeWidth(345) * _scrollDataArray.count, self.height);
         for (int i = 0; i < _scrollDataArray.count; i++) {
-//            WMHomeBannerList *list = _scrollDataArray[i];
+            bannerInfo *info = _scrollDataArray[i];
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345) * i, 0, _imageScrollView.width, _imageScrollView.height)];
             //        imageView.contentMode = UIViewContentModeCenter;
-//            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kWMGetImageURL,list.imageUrl]] placeholderImage:[UIImage imageNamed:@"default"]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:info.img_url]];
             imageView.backgroundColor = [UIColor whiteColor];
             imageView.userInteractionEnabled = YES;
             

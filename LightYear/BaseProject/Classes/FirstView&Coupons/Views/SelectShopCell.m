@@ -8,7 +8,6 @@
 
 #import "SelectShopCell.h"
 
-
 @interface SelectShopCell()
 
 @property (nonatomic, strong) UILabel *titleLabel;

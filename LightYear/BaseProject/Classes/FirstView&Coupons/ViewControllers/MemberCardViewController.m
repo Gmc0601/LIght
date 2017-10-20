@@ -172,7 +172,7 @@
 
 - (UIButton *)rechargeBtn {
     if (!_rechargeBtn) {
-        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(100), SizeHeigh(30))];
+        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(100), SizeHeigh(40))];
         _rechargeBtn.centerX = _balanceLabel.centerX;
         [_rechargeBtn setTitle:@"查看充值优惠" forState:UIControlStateNormal];
         _rechargeBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(11));

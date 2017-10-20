@@ -1,14 +1,14 @@
 //
-//  RechargeListModel.m
+//  integralListModel.m
 //  BaseProject
 //
-//  Created by wmk on 2017/9/29.
+//  Created by wmk on 2017/10/19.
 //  Copyright © 2017年 cc. All rights reserved.
 //
 
-#import "RechargeListModel.h"
+#import "integralListModel.h"
 
-@implementation RechargeListInfo
+@implementation integralListInfo
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation RechargeListModel
+@implementation integralListModel
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CouponListModel.h"
 
 @interface couponDetailsCell : UITableViewCell
 
-- (void)fillWith:(BOOL)isExpire;
+- (void)fillWithModel:(CouponInfo *)info WithExpire:(BOOL)isExpire;
 
 @end

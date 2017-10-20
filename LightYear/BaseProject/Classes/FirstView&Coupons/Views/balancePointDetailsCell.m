@@ -32,8 +32,24 @@
     return self;
 }
 
-- (void)fillDataWithModel {
-    
+- (void)fillWithPoint:(integralListInfo *)info {
+    if ([info.type isEqualToString:@"1"]) {
+        self.promptLabel.text = @"门店购物";
+        self.amountLabel.text = [NSString stringWithFormat:@"+%@",info.integral];
+    } else if ([info.type isEqualToString:@"2"]) {
+        self.promptLabel.text = @"线上购物";
+        self.amountLabel.text = [NSString stringWithFormat:@"+%@",info.integral];
+    } else {
+        self.promptLabel.text = @"门店消费";
+        self.amountLabel.text = [NSString stringWithFormat:@"-%@",info.integral];
+    }
+    self.timeLabel.text = info.create_time;
+}
+
+- (void)fillWithBalance:(tradeListInfo *)info {
+    self.promptLabel.text = @"购物消费";
+    self.amountLabel.text = info.money;
+    self.timeLabel.text = info.create_date;
 }
 
 #pragma mark - lazyLoad

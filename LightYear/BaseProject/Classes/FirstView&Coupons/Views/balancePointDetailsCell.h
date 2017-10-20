@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "tradeListModel.h"
+#import "integralListModel.h"
 
 @interface balancePointDetailsCell : UITableViewCell
 
-- (void)fillDataWithModel;
+- (void)fillWithPoint:(integralListInfo *)info;
+- (void)fillWithBalance:(tradeListInfo *)info;
 
 @end

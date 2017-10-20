@@ -7,7 +7,17 @@
 //
 
 #import "CCBaseViewController.h"
+#import "CouponListModel.h"
+
+@protocol SelectCouponDelegate <NSObject>
+
+- (void)callbackWithSelectCoupon:(CouponInfo *)info;
+
+@end
 
 @interface SelectCouponViewController : CCBaseViewController
+
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, assign) id<SelectCouponDelegate> delegate;
 
 @end

@@ -1,14 +1,14 @@
 //
-//  RechargeListModel.m
+//  tradeListModel.m
 //  BaseProject
 //
-//  Created by wmk on 2017/9/29.
+//  Created by wmk on 2017/10/19.
 //  Copyright © 2017年 cc. All rights reserved.
 //
 
-#import "RechargeListModel.h"
+#import "tradeListModel.h"
 
-@implementation RechargeListInfo
+@implementation tradeListInfo
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation RechargeListModel
+@implementation tradeListModel
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;

@@ -15,6 +15,7 @@
 @interface InspectCouponViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) WMTableView *tableV;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *selectArray;
 
 @end
@@ -25,11 +26,31 @@
     [super viewDidLoad];
     self.titleLab.text = @"优惠券";
     [self initRightBar];
+    @weakify(self)
+    [self.tableV addInfiniteScrollingWithActionHandler:^{
+        @strongify(self)
+        [self insertRowAtBottom];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.rightBar removeFromSuperview];
+    _dataArray = [NSMutableArray array];
+    _selectArray = [NSMutableArray array];
+    [self syncWithRequest];
+}
+
+- (void)insertRowAtBottom {
+    @weakify(self)
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        @strongify(self)
+//        [self syncWithRequest];
+        self.tableV.showsInfiniteScrolling = NO;
+        [self.tableV.infiniteScrollingView stopAnimating];
+    });
 }
 
 - (void)initRightBar {
@@ -47,32 +68,83 @@
     [self.navigationController pushViewController:expireVC animated:YES];
 }
 
+#pragma mark - Service
+- (void)syncWithRequest {
+    [ConfigModel showHud:self];
+    NSDictionary *dic = @{
+                          @"type":@"1",
+                          };
+    [HttpRequest postPath:couponListURL params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        CouponListModel * model = [[CouponListModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            for (CouponInfo *info in model.info) {
+                [_dataArray addObject:info];
+            }
+            for (int i = 0; i<_dataArray.count; i++) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                if (i == 0) {
+                    [dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%d",i]];
+                    [_selectArray addObject:dic];
+                } else {
+                    [dic setObject:@"NO" forKey:[NSString stringWithFormat:@"%d",i]];
+                    [_selectArray addObject:dic];
+                }
+            }
+            [self.tableV reloadData];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+    }];
+}
+
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return _dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SizeHeigh(68);
+    NSMutableDictionary *dic = _selectArray[indexPath.row];
+    NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+    if ([str isEqualToString:@"YES"]) {
+        return SizeHeigh(213);
+    } else {
+        return SizeHeigh(84);
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (1) {
-        static NSString *identifier = @"CouponDefaultCell";
-        CouponDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (!cell) {
-            cell = [[CouponDefaultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        }
-        [cell fillWith:NO];
-        return cell;
-    } else {
+    NSMutableDictionary *dic = _selectArray[indexPath.row];
+    NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+    CouponInfo *info = _dataArray[indexPath.row];
+    if ([str isEqualToString:@"YES"]) {
         static NSString *identifier = @"couponDetailsCell";
         couponDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
             cell = [[couponDetailsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-        [cell fillWith:NO];
+        [cell fillWithModel:info WithExpire:NO];
         return cell;
+    } else {
+        static NSString *identifier = @"CouponDefaultCell";
+        CouponDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[CouponDefaultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        [cell fillWithModel:info WithExpire:NO];
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *dic = _selectArray[indexPath.row];
+    NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+    if ([str isEqualToString:@"NO"]) {
+        [dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        [_selectArray replaceObjectAtIndex:indexPath.row withObject:dic];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+        [self.tableV reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -85,6 +157,7 @@
         _tableV.dataSource = self;
         _tableV.backgroundColor = [UIColor clearColor];
         _tableV.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_tableV];
     }
     return _tableV;
 }

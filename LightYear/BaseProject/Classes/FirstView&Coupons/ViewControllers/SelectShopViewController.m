@@ -25,6 +25,7 @@
     [self.rightBar removeFromSuperview];
     self.titleLab.text = @"选择门店";
     [self.view addSubview:self.tableV];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,6 +77,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ShopListInfo *info = _dataArray[indexPath.row];
+    [[TMCache sharedCache] setObject:info.aid forKey:kShopInfo];
     if (self.delegate && [self.delegate respondsToSelector:@selector(callbackWithSelectShop:code:)]) {
         [self.delegate callbackWithSelectShop:info.shopname code:info.aid];
     }

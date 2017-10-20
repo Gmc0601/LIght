@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RechargeListModel.h"
 
 @interface RechargeInfoCell : UITableViewCell
 
-- (void)fillWithType:(NSString *)type;
+- (void)fillWithType:(RechargeListInfo *)info;
 
 @end

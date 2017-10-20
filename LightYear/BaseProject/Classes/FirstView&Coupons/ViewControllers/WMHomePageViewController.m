@@ -15,6 +15,8 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "ShopListModel.h"
+#import "homeBannerModel.h"
+#import "InspectCouponViewController.h"
 
 @interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
     //定位
@@ -26,6 +28,7 @@
 @property (nonatomic, strong) WMHomeHeaderView *headerView;
 @property (nonatomic, strong) WMBannerView *bannerView;
 @property (nonatomic, strong) ShopListInfo *info;
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 @property(retain,atomic) UIView *bottomView;
 
 @end
@@ -39,13 +42,14 @@
     [self initRightBar];
     [self addSubview];
     [self addBottomView];
+    [self getLocationData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
-    [self getLocationData];
+    _bannerArray = [NSMutableArray array];
 }
 
 - (void)getLocationData{
@@ -74,8 +78,6 @@
 - (void)addSubview {
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.bannerView];
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"",@"",@"",@"", nil];
-    [_bannerView fillWithList:array];
 }
 
 - (void)initLeftNavBar {
@@ -101,7 +103,8 @@
 }
 
 - (void)rightBtnClick {
-    
+    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
+    [self.navigationController pushViewController:expireVC animated:YES];
 }
 
 #pragma mark - Service
@@ -119,7 +122,27 @@
         ShopListModel *model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
             _info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
+            [[TMCache sharedCache] setObject:_info.aid forKey:kShopInfo];
             [self.headerView changeLabelTitle:_info.shopname];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+        [self syncWithBannerListRequest:_info.aid];
+    }];
+}
+
+- (void)syncWithBannerListRequest:(NSString *)shopCode {
+    [ConfigModel showHud:self];
+    NSDictionary *dic = @{
+                          @"shopid":shopCode,
+                          };
+    [HttpRequest postPath:homeBannerURL params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        homeBannerModel *model = [[homeBannerModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            [_bannerArray addObjectsFromArray:model.info];
+            [self.bannerView fillWithList:_bannerArray];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }

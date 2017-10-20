@@ -17,6 +17,7 @@ pod ‘UMengUShare/UI’
 pod ‘UMengUShare/Social/ReducedWeChat'
 pod ‘UMengUShare/Social/ReducedQQ'
 pod ‘UMengUShare/Social/ReducedSina'
+pod ‘SVPullToRefresh'
 #高德地图相关SDK（无IDFA版）
 pod 'AMapLocation-NO-IDFA' 
 pod 'AMapSearch-NO-IDFA'

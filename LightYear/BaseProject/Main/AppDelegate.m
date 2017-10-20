@@ -12,6 +12,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "WMHomePageViewController.h"
 
 @interface AppDelegate ()
 @end
@@ -26,7 +27,7 @@
     UINavigationController * na;
     
     if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
-        na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
+        na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
     }else{
         na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
     }
@@ -52,7 +53,7 @@
     if ([aNote.object isEqual:@0]) {
         NSLog(@"LoginSuccess");
         [ConfigModel saveBoolObject:YES forKey:IsLogin];
-        na = [[UINavigationController alloc] initWithRootViewController:[FirstViewViewController new]];
+        na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
     }else if ([aNote.object isEqual:@1]){
         NSLog(@"OutLoginSuccess");
         [ConfigModel saveBoolObject:NO forKey:IsLogin];

@@ -55,6 +55,19 @@
 #define memberInfoURL       @"_user_score_total_001"
 #define rechargeListInfo    @"_user_recharge_list_001"
 
+//模块C
+#define shoplistURL         @"_shoplist_001"
+#define homeShopURL         @"_index_recently_shop_001"
+#define memberInfoURL       @"_user_score_total_001"
+#define rechargeListURL     @"_user_recharge_list_001"
+#define couponListURL       @"_coupon_list_001"
+#define tradeListURL        @"_trade_list_001"
+#define integralListURL     @"_user_integral_list_001"
+#define homeBannerURL       @"_active_index_001"
+
+
+#define kShopInfo           @"shopInfo"
+
 /*
  *   User Info
  */

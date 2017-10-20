@@ -7,20 +7,9 @@
 //
 
 #import "BaseModel.h"
-
-@protocol CouponInfo <NSObject>
-
-@end
+#import "CouponListModel.h"
 
 @protocol RechargeListInfo <NSObject>
-
-@end
-
-@interface CouponInfo : JSONModel
-
-@property (nonatomic, copy)NSString *full_type;
-@property (nonatomic, copy)NSString *denomination;
-@property (nonatomic, copy)NSString *condition;
 
 @end
 
@@ -28,6 +17,7 @@
 
 @property (nonatomic, copy)NSString *money;
 @property (nonatomic, copy)NSString *free_money;
+@property (nonatomic, strong) CouponInfo *couponInfo;
 
 @end
 
