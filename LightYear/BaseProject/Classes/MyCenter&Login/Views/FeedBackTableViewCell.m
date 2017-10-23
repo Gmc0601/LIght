@@ -101,8 +101,11 @@
     }];
 }
 - (void)setModel:(FeedBackInfo *)model{
-    CGFloat  labelHeightOne = [UILabel getHeightByWidth:kScreenW-60 title:@"小米MIX 2全陶瓷尊享版上手组图曝光IT之家9月17日消息 9月11日下午，小米在北京工业大学体育馆召开了新品发布会，发布了全面屏2.0手机小米MIX 2，售价3299元起" font:[UIFont systemFontOfSize:16]];
-    CGFloat  labelHeightTwo = [UILabel getHeightByWidth:kScreenW-60 title:@"据官方介绍，小米MIX2尊享版就像一整块浑然天成的玉。工艺难度和成本也超乎想象。每一块Unibody全陶瓷都要经过1400℃高温7天烧结；两层楼高的设备，240吨冲压成型；金刚砂刀头0.01mm反复雕琢，每加工一部手机，都要更换刀头。" font:[UIFont systemFontOfSize:16]];
+    if (model.contact_info.length == 0) {
+        model.contact_info = @"正在处理......";
+    }
+    CGFloat  labelHeightOne = [UILabel getHeightByWidth:kScreenW-60 title:model.content font:[UIFont systemFontOfSize:16]];
+    CGFloat  labelHeightTwo = [UILabel getHeightByWidth:kScreenW-60 title:model.contact_info font:[UIFont systemFontOfSize:16]];
     
     if (labelHeightOne > 20 || labelHeightTwo > 20) {
         moreButton.hidden = NO;
@@ -120,8 +123,8 @@
         answerLabel.numberOfLines = 1;
     }
     
-    questionLabel.text = @"小米MIX 2全陶瓷尊享版上手组图曝光IT之家9月17日消息 9月11日下午，小米在北京工业大学体育馆召开了新品发布会，发布了全面屏2.0手机小米MIX 2，售价3299元起";
-    answerLabel.text = @"据官方介绍，小米MIX2尊享版就像一整块浑然天成的玉。工艺难度和成本也超乎想象。每一块Unibody全陶瓷都要经过1400℃高温7天烧结；两层楼高的设备，240吨冲压成型；金刚砂刀头0.01mm反复雕琢，每加工一部手机，都要更换刀头。";
+    questionLabel.text = model.content;
+    answerLabel.text = model.contact_info;
     
     timeLabel.text = [NSString getStringWithTimestamp:[model.create_time integerValue] formatter:@"MM-dd"];
 }

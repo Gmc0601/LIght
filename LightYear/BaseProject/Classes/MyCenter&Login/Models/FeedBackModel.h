@@ -24,6 +24,7 @@
 @property (nonatomic , copy) NSString * create_time;//": "1448875275",
 @property (nonatomic , copy) NSString * update_time;//": "1448875275",
 @property (nonatomic , copy) NSString * status_text;//": "未处理"
+@property (nonatomic , copy) NSString * contact_info;//官方回复
 
 @property (nonatomic , assign) NSInteger status;//": "2",
 

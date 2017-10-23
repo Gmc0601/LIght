@@ -121,52 +121,52 @@
         make.height.mas_offset(50);
     }];
     
-    UILabel * tipLabel = [UILabel new];
-    tipLabel.text = @"或使用快捷登录";
-    tipLabel.font = [UIFont systemFontOfSize:14];
-    tipLabel.textColor = UIColorFromHex(0x999999);
-    [self.view addSubview:tipLabel];
-    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_offset(0);
-        make.top.mas_equalTo(_loginButton.mas_bottom).offset(20);
-    }];
-    
-    NSArray * imageArr = @[@"icon_dl_QQ",@"icon_dl_wx"];
-    NSArray * titleArr = @[@"QQ",@"微信"];
-    UIButton * baseButton;
-    for (int i = 0; i < 2; i++) {
-        UIButton * button = [UIButton new];
-        button.tag = 20+i;
-        button.backgroundColor = [UIColor whiteColor];
-        [button addTarget:self action:@selector(loginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:button];
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(tipLabel.mas_bottom).offset(20);
-            if (i == 0) {
-                make.centerX.mas_offset(-70);
-            }else{
-                make.centerX.mas_offset(70);
-            }
-        }];
-        baseButton = button;
-        
-        UIImageView * imageView = [UIImageView new];
-        imageView.image = [UIImage imageNamed:imageArr[i]];
-        [button addSubview:imageView];
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_offset(0);
-            make.top.mas_offset(0);
-        }];
-        
-        UILabel * titleLabel = [UILabel new];
-        titleLabel.text = titleArr[i];
-        titleLabel.font = [UIFont systemFontOfSize:14];
-        [button addSubview:titleLabel];
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(imageView.mas_bottom).offset(10);
-            make.centerX.mas_offset(0);
-        }];
-    }
+//    UILabel * tipLabel = [UILabel new];
+//    tipLabel.text = @"或使用快捷登录";
+//    tipLabel.font = [UIFont systemFontOfSize:14];
+//    tipLabel.textColor = UIColorFromHex(0x999999);
+//    [self.view addSubview:tipLabel];
+//    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_offset(0);
+//        make.top.mas_equalTo(_loginButton.mas_bottom).offset(20);
+//    }];
+//    
+//    NSArray * imageArr = @[@"icon_dl_QQ",@"icon_dl_wx"];
+//    NSArray * titleArr = @[@"QQ",@"微信"];
+//    UIButton * baseButton;
+//    for (int i = 0; i < 2; i++) {
+//        UIButton * button = [UIButton new];
+//        button.tag = 20+i;
+//        button.backgroundColor = [UIColor whiteColor];
+//        [button addTarget:self action:@selector(loginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:button];
+//        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(tipLabel.mas_bottom).offset(20);
+//            if (i == 0) {
+//                make.centerX.mas_offset(-70);
+//            }else{
+//                make.centerX.mas_offset(70);
+//            }
+//        }];
+//        baseButton = button;
+//        
+//        UIImageView * imageView = [UIImageView new];
+//        imageView.image = [UIImage imageNamed:imageArr[i]];
+//        [button addSubview:imageView];
+//        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.mas_offset(0);
+//            make.top.mas_offset(0);
+//        }];
+//        
+//        UILabel * titleLabel = [UILabel new];
+//        titleLabel.text = titleArr[i];
+//        titleLabel.font = [UIFont systemFontOfSize:14];
+//        [button addSubview:titleLabel];
+//        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(imageView.mas_bottom).offset(10);
+//            make.centerX.mas_offset(0);
+//        }];
+//    }
 }
 //登录
 - (void)loginAction:(UIButton *)sender{

@@ -28,13 +28,23 @@
     [super viewDidLoad];
     dataArray = [NSMutableArray array];
     
-    for (int i = 0; i < 5; i++) {
-        FeedBackInfo * model = [[FeedBackInfo alloc] init];
-        model.isLookMore = NO;
-        [dataArray addObject:model];
-    }
     self.titleLab.text = @"意见反馈";
     [self createBaseView];
+    [self getData];
+}
+- (void)getData{
+    [ConfigModel showHud:self];
+    NSDictionary * params = @{@"page":@"1",@"size":@"10"};
+    [HttpRequest postPath:FeedBackURL params:params resultBlock:^(id responseObject, NSError *error) {
+        FeedBackModel * model = [[FeedBackModel alloc] initWithDictionary:responseObject error:nil];
+        if (model.error == 0) {
+            [dataArray addObjectsFromArray:model.info];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+        [ConfigModel hideHud:self];
+        [myTableView reloadData];
+    }];
 }
 - (void)createBaseView{
     

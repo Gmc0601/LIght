@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     self.titleLab.text = [NSString stringWithFormat:@"%@！光年",[self getCurrentTime]];
-    dataArray = [NSMutableArray arrayWithObjects:@"收货地址",@"意见反馈",@"联系我们",@"分享App给朋友", nil];
+    dataArray = [NSMutableArray arrayWithObjects:@"收货地址",@"意见反馈",@"联系我们", nil];//,@"分享App给朋友
     [self createBaseView];
 }
 - (void)createBaseView{
