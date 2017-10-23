@@ -8,11 +8,12 @@
 
 #import "MycenterViewController.h"
 #import "UserInfoViewController.h"
-
 #import "MycenterHeadView.h"
 #import "DeliveryAddressViewController.h"
 #import "EditFeedBackViewController.h"
 #import "UserInfoPicketView.h"
+#import "OrderViewController.h"
+
 @interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate,UserInfoPicketViewDelegate>
 {
     UIButton * bottomButton;
@@ -79,6 +80,36 @@
         [self.navigationController pushViewController:userInfoVC animated:YES];
     }else{
         //订单 20--24
+        OrderViewController *vc = [[OrderViewController alloc] init];
+        /*
+         OrderList_All,            //  全部订单
+         OrderList_Distribution,   //  待配送
+         OrderList_Invite,         //  待自取
+         OrderList_Distributioning,//  配送中
+         OrderList_Topay           //  待支付
+         */
+        switch (button.tag) {
+            case 20:
+                vc.listType = OrderList_All;
+                break;
+            case 21:
+                vc.listType = OrderList_Distribution;
+                break;
+            case 22:
+                vc.listType = OrderList_Invite;
+                break;
+            case 23:
+                vc.listType = OrderList_Distributioning;
+                break;
+            case 24:
+                vc.listType = OrderList_Topay;
+                break;
+                
+            default:
+                break;
+        }
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark UITableViewDelegate

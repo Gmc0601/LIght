@@ -351,12 +351,13 @@
     [params setObject:amount forKey:@"amount"];
     
     [HttpRequest postPath:@"_order_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSLog(@".....%@", responseObject);
         NSDictionary *datadic = responseObject;
         
         if ([datadic[@"error"] intValue] == 0) {
             callback(nil,datadic[@"info"][@"id"]);
         }else{
-            callback(datadic[@"info"],nil);
+            callback(datadic[@"message"],nil);
         }
     }];
 }

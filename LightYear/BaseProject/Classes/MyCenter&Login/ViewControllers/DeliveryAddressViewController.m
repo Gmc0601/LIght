@@ -9,7 +9,6 @@
 #import "DeliveryAddressViewController.h"
 #import "DeilveryAddressTableViewCell.h"
 #import "EditDeliveryAddressViewController.h"
-#import "DeliveryAddressModel.h"
 @interface DeliveryAddressViewController ()<UITableViewDelegate,UITableViewDataSource,DeilveryAddressTableViewCellDelegate>
 {
     UITableView * myTableView;
@@ -145,6 +144,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    DeliveryAddressInfo *model = [[DeliveryAddressInfo alloc] init];
+    model = dataArray[indexPath.section];
+    if (self.addressBlock) {
+        self.addressBlock(model);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 

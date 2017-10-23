@@ -7,7 +7,10 @@
 //
 
 #import "CCBaseViewController.h"
+#import "DeliveryAddressModel.h"
 
 @interface DeliveryAddressViewController : CCBaseViewController
+
+@property (nonatomic, copy) void(^addressBlock)(DeliveryAddressInfo *model);
 
 @end

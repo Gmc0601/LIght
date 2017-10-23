@@ -15,6 +15,14 @@ typedef enum {
     
 }OrderFootType;
 
+typedef enum {
+    
+    Red,
+    Yellow,
+    Gray,
+    
+}OrderBtnStyle;
+
 @interface OrderFootView : UIView
 
 @property (nonatomic, retain) UIView *backView;
@@ -31,5 +39,6 @@ typedef enum {
 
 - (void)choiseType:(OrderFootType)type;
 
+- (void)changeBtnStyle:(OrderBtnStyle)type;
 
 @end

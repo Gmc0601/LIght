@@ -22,7 +22,7 @@
 @property (nonatomic , copy) NSString * aid;//有id就是修改 没有就是新增
 @property (nonatomic , copy) NSString * lng;
 @property (nonatomic , copy) NSString * lat;
-
+@property (nonatomic, copy) NSString *id;
 @property (nonatomic , copy) NSString * area;
 @property (nonatomic , copy) NSString * city;
 @property (nonatomic , copy) NSString * code;

@@ -18,7 +18,19 @@
     return self;
 }
 
-
+- (void)changeBtnStyle:(OrderBtnStyle)type {
+    
+    if (type == Red) {
+        self.payBtn.backgroundColor = UIColorFromHex(0xff543a);
+        [self.payBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }else if (type == Gray){
+        self.payBtn.backgroundColor = RGBColor(239, 240, 241);
+        [self.payBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }else if (type == Yellow){
+        self.payBtn.backgroundColor = RGBColor(252, 203, 66);
+        [self.payBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+}
 
 - (void)choiseType:(OrderFootType)type {
     if (type == FootOneLab) {

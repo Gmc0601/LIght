@@ -48,6 +48,8 @@
             ShopListInfo *info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
             _balanceLabel.text = info.amount;
             _scroLabel.text = info.integral;
+            _codeImageV.transform= CGAffineTransformMakeRotation(90*M_PI/180);
+            _codeImageV.frame = FRAME(SizeWidth(30), SizeHeigh(65), SizeWidth(90), SizeHeigh(315));
             [_codeImageV sd_setImageWithURL:[NSURL URLWithString:info.barurl]];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];

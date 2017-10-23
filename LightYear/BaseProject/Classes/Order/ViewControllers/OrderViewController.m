@@ -51,18 +51,58 @@
     
 }
 - (void)createData {
+   ////999全部订单2待支付4配送中3待配送5待自取6退款退货
+    NSDictionary *dic;
+    switch (self.listType) {
+        case OrderList_All:{//  全部订单
+            dic = @{
+                    @"status" : @"999",
+                    @"page" : @(page),
+                    @"size" : @"15",
+                    };
+        }
+            break;
+        case OrderList_Distribution:{//  待配送
+            dic = @{
+                    @"status" : @"3",
+                    @"page" : @(page),
+                    @"size" : @"15",
+                    };
+        }
+            break;
+        case OrderList_Invite:{//  待自取
+            dic = @{
+                    @"status" : @"5",
+                    @"page" : @(page),
+                    @"size" : @"15",
+                    };
+        }
+            break;
+        case OrderList_Distributioning:{//  配送中
+            dic = @{
+                    @"status" : @"4",
+                    @"page" : @(page),
+                    @"size" : @"15",
+                    };
+        }
+            break;
+        case OrderList_Topay:{ //  待支付
+            dic = @{
+                    @"status" : @"2",
+                    @"page" : @(page),
+                    @"size" : @"15",
+                    };
+        }
+            break;
+            
+        default:
+            break;
+    }
     
-    [ConfigModel saveString:@"73d00c923d17c96917697e6a4a8b89e7" forKey:UserToken];
-    
-    NSDictionary *dic = @{
-                          @"status" : @"999",
-                          @"page" : @(page),
-                          @"size" : @"15",
-                          };
     WeakSelf(weakself);
     [OrderDataHelper orderListWithparameter:dic callBack:^(BOOL success, NSArray *modelArr) {
         if (success) {
-            if (modelArr.count == 10) {
+            if (modelArr.count == 15) {
                 page ++;
             }
             [weakself.dataArr addObjectsFromArray:modelArr];

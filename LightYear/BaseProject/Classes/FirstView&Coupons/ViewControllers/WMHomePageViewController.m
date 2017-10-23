@@ -17,6 +17,8 @@
 #import "ShopListModel.h"
 #import "homeBannerModel.h"
 #import "InspectCouponViewController.h"
+#import "MycenterViewController.h"
+#import "FirstLevelGoodsViewController.h"
 
 @interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
     //定位
@@ -99,7 +101,8 @@
 }
 
 - (void)leftBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
+
+    [self.navigationController pushViewController:[MycenterViewController new] animated:YES];
 }
 
 - (void)rightBtnClick {
@@ -134,6 +137,9 @@
 
 - (void)syncWithBannerListRequest:(NSString *)shopCode {
     [ConfigModel showHud:self];
+    if (_bannerArray.count>0) {
+        [_bannerArray removeAllObjects];
+    }
     NSDictionary *dic = @{
                           @"shopid":shopCode,
                           };
@@ -169,7 +175,14 @@
 }
 
 - (void)callbackGoodsClick {
-    
+    FirstLevelGoodsViewController *cardVC = [[FirstLevelGoodsViewController alloc] init];
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromTop;
+    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+    [self.navigationController pushViewController:cardVC animated:YES];
 }
 
 - (void)callbackMemberClick {

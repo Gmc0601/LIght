@@ -14,11 +14,14 @@
 #import "OrderStoreInfoTableViewCell.h"
 #import "CouponViewController.h"
 #import "OrderDataHelper.h"
+#import "MemberRechargeViewController.h"
+#import "DeliveryAddressViewController.h"
+#import "PickerViewCustom.h"
 
-@interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource> {
+@interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate> {
     BOOL post; //  配送
     int canUseCouponNum , couponId;   //  可使用优惠券数量
-    float couponcut, amont, postmoney;//  优惠券减少金额 
+    float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
     NSString *getTime, *storeName, *couponInfo;  //  自取时间   商店名称   优惠券信息
 }
 
@@ -27,6 +30,7 @@
 @property (nonatomic, retain) NSArray *titleArr;
 @property (nonatomic, retain) OrderFootView *footView;
 @property (nonatomic, retain) OrderDetailModel *model;
+@property (nonatomic, retain) DeliveryAddressInfo *addressModle;
 @property (nonatomic, retain) UIButton *postBtn, *getBtn;   //  配送 自取
 
 @end
@@ -80,6 +84,9 @@
         }else {
             post = NO;
         }
+        [self changefootviewInfo];
+        //  j
+        
         NSDictionary *couDic = @{
                                  @"type" : @"1",
                                  @"amount" : @"",
@@ -103,6 +110,37 @@
     //   修改订单状态
 }
 
+- (void)changefootviewInfo {
+    float price;
+    if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
+        price = amont - couponcut;
+    }else {
+        price = amont + postmoney - couponcut;
+    }
+    self.footView.priceLab.text = [NSString stringWithFormat:@"%.2f", price];
+    self.footView.balanceLab.text = [NSString stringWithFormat:@"账户余额：￥%.2f", [self.model.userAmount floatValue]];
+    if ([self.model.userAmount floatValue]  < price) {
+        [self.footView.payBtn setTitle:@"账户余额不足" forState:UIControlStateNormal];
+        [self.footView changeBtnStyle:Gray];
+        return;
+    }
+    if (post) {
+        if (amont > [self.model.warehouseInfo.minprice floatValue]) {
+            [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+            [self.footView changeBtnStyle:Red];
+        }else {
+            float cut = amont - [self.model.warehouseInfo.minprice floatValue];
+            NSString * str = [NSString stringWithFormat:@"还差%.2f元起送", cut];
+            [self.footView.payBtn setTitle:str forState:UIControlStateNormal];
+            [self.footView changeBtnStyle:Gray];
+        }
+    }else {
+        [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+        [self.footView changeBtnStyle:Red];
+    }
+    topaymoney = price;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
@@ -114,7 +152,7 @@
         }
             break;
         case 1:{
-            return 2;
+            return self.goodsArr.count;
         }
             break;
         case 2:{
@@ -186,11 +224,15 @@
                         }
                     if (post) {
                         cell.textLabel.text = @"";
+                        cell.backgroundColor = RGBColor(239, 240, 241);
+                        cell.contentView.backgroundColor = RGBColor(239, 240, 241);
                         [cell updateinfo:self.model.receiptinfo];
-                         [cell update:Order_haveAddress];
+                        [cell update:Order_haveAddress];
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     }else {
                         [cell update:Order_Nothing];
                         cell.contentView.backgroundColor = [UIColor whiteColor];
+                        cell.accessoryType = UITableViewCellAccessoryNone;
                         cell.textLabel.text = @"门店地址";
                     }
                         return cell;
@@ -222,7 +264,6 @@
             }
             if (self.goodsArr.count > 0) {
                 NSDictionary *dic = self.goodsArr[indexPath.row];
-                
                 [cell updateinfo:dic];
             }
             
@@ -244,7 +285,11 @@
             cell.detailTextLabel.textColor = UIColorFromHex(0x333333);
             if (indexPath.row ==0) {
                 if (couponInfo.length == 0) {
-                    str = [NSString stringWithFormat:@"%d张可用", canUseCouponNum];
+                    if (self.couponArr.count ==0) {
+                        str = @"";
+                    }else {
+                     str = [NSString stringWithFormat:@"%d张可用", canUseCouponNum];
+                    }
                 }else {
                     str = couponInfo;
                 }
@@ -308,7 +353,34 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 2 && indexPath.row == 0) {
+    
+    if (indexPath.section == 0 && indexPath.row == 1 && !post) {
+        PickerViewCustom *customView = [[PickerViewCustom alloc]init];
+        customView.delegate = self;
+        [customView show];
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 2 && post) {
+        DeliveryAddressViewController *vc = [[DeliveryAddressViewController alloc] init];
+        WeakSelf(weakself);
+        vc.addressBlock = ^(DeliveryAddressInfo *model) {
+            NSDictionary *dic = @{
+                                  @"receipt_id": model.id,
+                                  @"invest_id": self.OrderID
+                                  };
+            [HttpRequest postPath:@"_setinvest_receipt_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+                NSLog(@"%@", responseObject);
+            }];
+            weakself.model.receiptinfo.phone = model.phone;
+            weakself.model.receiptinfo.username = model.username;
+            weakself.model.receiptinfo.address = model.address;
+            weakself.model.receiptinfo.id = model.id;
+            [weakself.noUseTableView reloadData];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.section == 2 && indexPath.row == 0 && self.couponArr.count > 0) {
         CouponViewController *view = [[CouponViewController alloc] init];
         view.amout = self.model.all_amount;
         view.couponBlock = ^(NSString *idStr, NSString *cutmoney) {
@@ -317,6 +389,11 @@
         };
         [self.navigationController pushViewController:view animated:YES];
     }
+}
+
+-(void)title:(NSString *)title
+{
+//    [self.button setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -375,14 +452,21 @@
 - (OrderFootView *)footView {
     if (!_footView) {
         _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW, SizeHeigh(54))];
+        WeakSelf(weakself);
         _footView.topupBlock = ^{
-            
+            MemberRechargeViewController *vc = [[MemberRechargeViewController alloc] init];
+            [weakself.navigationController pushViewController:vc animated:YES];
         };
         _footView.payBlock = ^{
             //  修改订单状态
+            [weakself updateOrderState];
         };
     }
     return _footView;
+}
+
+- (void)updateOrderState {
+    
 }
 
 - (NSMutableArray *)goodsArr {
