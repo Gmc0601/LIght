@@ -141,7 +141,9 @@
 -(void) didSelectGoods:(NSString *)goodsId{
     [self dismissRightView];
     GoodDetialViewController *newVC = [GoodDetialViewController new];
-    [newVC setGoodsId:goodsId withShopId:@"64"];
+    NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+
+    [newVC setGoodsId:goodsId withShopId:shopId];
     [self.navigationController pushViewController:newVC animated:YES];
 }
 

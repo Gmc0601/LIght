@@ -11,6 +11,7 @@
 #import "GoodsCell.h"
 #import "TBRefresh.h"
 #import "NetHelper.h"
+#import <TMCache/TMCache.h>
 
 @interface GoodsListView ()<UITableViewDelegate,UITableViewDataSource>{
     NSString *_cellIdentifier;
@@ -37,7 +38,8 @@
     [ConfigModel showHud:_owner];
     
     if (_isFavorite) {
-        [NetHelper getFavoriteListWithShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+        NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+        [NetHelper getFavoriteListWithShopId:shopId withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
             [ConfigModel hideHud:_owner];
             if (error != nil) {
                 [ConfigModel mbProgressHUD:error andView:_owner.view];
@@ -49,7 +51,8 @@
             }
         }];
     }else{
-        [NetHelper getGoodsListWithId:_goodsType withShopId:@"64" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
+        NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+        [NetHelper getGoodsListWithId:_goodsType withShopId:shopId withPage:pageIndex callBack:^(NSString *error, NSArray *data) {
             [ConfigModel hideHud:_owner];
             if (error != nil) {
                 [ConfigModel mbProgressHUD:error andView:_owner.view];
