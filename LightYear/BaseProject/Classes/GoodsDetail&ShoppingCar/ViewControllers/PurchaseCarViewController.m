@@ -285,8 +285,12 @@
 -(void) check{
     [ConfigModel showHud:self];
     NSString *shopId = ((PurchaseModel *) _dataSource[0]).shopId;
+    int sum = 0;
+    for (PurchaseModel *model in _dataSource) {
+        sum += model.price.intValue;
+    }
     
-    [NetHelper addOrder:shopId withAmount:_lblPrice.text callBack:^(NSString *error, NSString *info) {
+    [NetHelper addOrder:shopId withAmount:[NSString stringWithFormat:@"%d",sum] callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
             MakeOrderViewController *newVC = [MakeOrderViewController new];
