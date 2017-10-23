@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RecommendCV : UIView
--(void)reload;
+-(void) setDataSource:(NSArray *) dataSource;
 @end

@@ -64,6 +64,7 @@
 @property(retain,atomic) UIWebView *infoWebView;
 @property(retain,atomic) UIWebView *descWebView;
 @property(retain,atomic)  SKUPrice *skuPrice;
+@property(assign,atomic)  int *countOfCell;
 @end
 
 @implementation GoodDetialViewController
@@ -74,9 +75,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _countOfCell = 3;
+    [self addBottomView];
+
     [self addTableView];
     self.rightBar.hidden = YES;
-    [self addBottomView];
 }
 
 -(void) addTableView{
@@ -108,7 +111,7 @@
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return _countOfCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -1064,11 +1067,13 @@
             _skuList = skuList;
             _skuPriceList = skuPriceList;
             
-            //TODO:
-            _model.stock = 10;
-            _model.centerStock = 10;
-            _model.shopStock = 10;
-            [_tb reloadData];
+            [NetHelper recommendList:_model._id withGoodsId:_model.shopId callBack:^(NSString *error, NSArray *data) {
+                if (data.count > 0) {
+                    _countOfCell = 4;
+                    [_recommendCV setDataSource:data];
+                }
+                [_tb reloadData];
+            }];
         }else{
             [ConfigModel mbProgressHUD:error andView:self.view];
         }

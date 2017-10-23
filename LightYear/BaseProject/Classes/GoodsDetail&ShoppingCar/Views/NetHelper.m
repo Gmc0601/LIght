@@ -360,4 +360,24 @@
         }
     }];
 }
+
++(void) recommendList:(NSString *) shopId withGoodsId:(NSString *) goodsId  callBack:(void(^)(NSString *error,NSArray *)) callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    [params setObject:goodsId forKey:@"goods_id"];
+    [params setObject:shopId forKey:@"shopid"];
+
+    
+    [HttpRequest postPath:@"_guess_like_001" params:params resultBlock:^(id responseObject, NSError *error) {
+        NSDictionary *datadic = responseObject;
+        
+        if ([datadic[@"error"] intValue] == 0) {
+            NSDictionary *infoDic = datadic[@"info"];
+            NSArray *arr = [self jsonToGoodsModelList:infoDic];
+            
+            callback(nil,arr);
+        }else{
+            callback(datadic[@"info"],nil);
+        }
+    }];
+}
 @end

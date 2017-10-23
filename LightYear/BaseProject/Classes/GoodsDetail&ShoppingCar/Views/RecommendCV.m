@@ -11,7 +11,7 @@
 #import <Masonry/Masonry.h>
 
 @interface RecommendCV()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property(retain,atomic) NSMutableArray *datasource;
+@property(retain,atomic) NSArray *datasource;
 @property(retain,atomic) UICollectionView *cv;
 @end
 
@@ -22,30 +22,14 @@
     self = [super init];
     if (self) {
         [self addCV];
-        [self mockData];
     }
     return self;
 }
 
--(void) mockData{
-    _datasource = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
-        model.price = @"111";
-        model.memberPrice = @"1";
-        [_datasource addObject:model];
-    }
-    
+-(void) setDataSource:(NSArray *) dataSource{
+    _datasource = dataSource;
     [_cv reloadData];
 }
-
 
 -(void) addCV{
     CGFloat height = SizeHeigh(250);
