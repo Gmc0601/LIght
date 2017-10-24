@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "homeBannerModel.h"
 
 @protocol HomeBannerViewDelegate <NSObject>
 
-- (void)didSelectBanner:(NSArray *)list;
+- (void)didSelectBanner:(bannerInfo *)info;
 
 @end
 

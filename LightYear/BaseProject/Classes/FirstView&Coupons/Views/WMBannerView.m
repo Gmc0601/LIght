@@ -69,6 +69,7 @@
     if (dataArray.count != 0) {
         [self invalidTimer];
         _selectedImageIndex = 0;
+        _imageScrollView.scrollEnabled = YES;
         [_bannerArray removeAllObjects];
         for (bannerInfo *info in dataArray) {
             [_bannerArray addObject:info];
@@ -106,6 +107,7 @@
         [imageView addSubview:_promptLabel];
         [_imageScrollView addSubview:imageView];
         [_imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
+        _imageScrollView.scrollEnabled = NO;
     }
 }
 

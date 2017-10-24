@@ -16,10 +16,12 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "ShopListModel.h"
 #import "homeBannerModel.h"
-//#import "InspectCouponViewController.h"
+#import "InspectCouponViewController.h"
 #import "MycenterViewController.h"
 #import "FirstLevelGoodsViewController.h"
 #import "LoginViewController.h"
+#import "UserModel.h"
+
 @interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
     //定位
     AMapLocationManager * _locationManager;
@@ -39,7 +41,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLab.text = [self getCurrentTime];
     [self initLeftNavBar];
     [self initRightBar];
     [self addSubview];
@@ -49,6 +50,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    UserInfo *info = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    self.titleLab.text = [NSString stringWithFormat:@"%@!%@",[self getCurrentTime],info.nickname];
+    self.titleLab.adjustsFontSizeToFitWidth = YES;
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
     _bannerArray = [NSMutableArray array];
@@ -111,8 +115,8 @@
 }
 
 - (void)rightBtnClick {
-//    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
-//    [self.navigationController pushViewController:expireVC animated:YES];
+    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
+    [self.navigationController pushViewController:expireVC animated:YES];
 }
 
 #pragma mark - Service
@@ -168,7 +172,7 @@
 }
 
 #pragma mark - HomeBannerViewDelegate
-- (void)didSelectBanner:(NSArray *)list {
+- (void)didSelectBanner:(bannerInfo *)info {
     
 }
 

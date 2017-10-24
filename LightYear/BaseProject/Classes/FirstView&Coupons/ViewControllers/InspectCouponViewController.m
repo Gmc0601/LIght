@@ -53,12 +53,17 @@
     });
 }
 
+- (void)more:(UIButton *)sender {
+    ExpireCouponViewController *expireVC = [[ExpireCouponViewController alloc] init];
+    [self.navigationController pushViewController:expireVC animated:YES];
+}
+
 - (void)initRightBar {
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake( kScreenW - 10 - 40, 25, 40, 30)];
     leftBtn.backgroundColor = [UIColor clearColor];
     [leftBtn setTitle:@"过期券" forState:UIControlStateNormal];
     [leftBtn setTitleColor:UIColorFromHex(0x333333) forState:UIControlStateNormal];
-    leftBtn.titleLabel.font = SourceHanSansCNRegular(13);
+    leftBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [leftBtn addTarget:self action:@selector(expireCoupon) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationView addSubview:leftBtn];
 }

@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *img_url;
+@property (nonatomic, copy) NSString *shopid;
+@property (nonatomic, copy) NSString *goodid;
 
 @end
 
