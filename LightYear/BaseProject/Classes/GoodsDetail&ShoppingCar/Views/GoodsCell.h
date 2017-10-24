@@ -1,0 +1,15 @@
+//
+//  GoodsCell.h
+//  BaseProject
+//
+//  Created by LeoGeng on 09/09/2017.
+//  Copyright © 2017 cc. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "GoodsModel.h"
+
+@interface GoodsCell : UITableViewCell
+@property(retain,nonatomic) GoodsModel *model;
+@property(assign,nonatomic) BOOL isFavorite;
+@end
