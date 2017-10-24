@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
 @property (nonatomic, strong) NSMutableArray *scrollDataArray;
+@property (nonatomic, strong) UILabel *promptLabel;
 
 @end
 
@@ -93,9 +94,16 @@
         _imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), SizeHeigh(310));
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345), 0, _imageScrollView.width, _imageScrollView.height)];
         imageView.contentMode = UIViewContentModeCenter;
-        [imageView setImage:[UIImage imageNamed:@"default"]];
+        [imageView setImage:[UIImage imageNamed:@"icon_sy_hdqx"]];
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.userInteractionEnabled = NO;
+        _promptLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0, 0, SizeWidth(200), SizeHeigh(20))];
+        _promptLabel.center = CGPointMake( imageView.width/2, imageView.height/2+SizeHeigh(56));
+        _promptLabel.text = @"暂无活动";
+        _promptLabel.font = SourceHanSansCNRegular(SizeWidth(13));
+        _promptLabel.textColor = UIColorFromHex(0xcccccc);
+        _promptLabel.textAlignment = NSTextAlignmentCenter;
+        [imageView addSubview:_promptLabel];
         [_imageScrollView addSubview:imageView];
         [_imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
     }

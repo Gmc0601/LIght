@@ -73,7 +73,7 @@
         _addressLabel.font = SourceHanSansCNMedium(SizeWidth(18));
         _addressLabel.textColor = UIColorFromHex(0x333333);
         _addressLabel.textAlignment = NSTextAlignmentLeft;
-        _addressLabel.text = @"12e123k123";
+        _addressLabel.text = @"";
     }
     return _addressLabel;
 }

@@ -75,6 +75,7 @@
 #define IsLogin @"islogin"
 #define UserInfoModel @"UserInfoModel"
 #define UserToken @"userTOken"
+#define UserNickName @"nickname"
 // 经纬度  地理位置信息
 #define Longitude @"longitude"
 

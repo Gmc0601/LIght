@@ -132,11 +132,12 @@
             _info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
             [[TMCache sharedCache] setObject:_info.aid forKey:kShopInfo];
             [self.headerView changeLabelTitle:_info.shopname];
+            [self syncWithBannerListRequest:_info.aid];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
         [ConfigModel hideHud:self];
-        [self syncWithBannerListRequest:_info.aid];
+        [self.bannerView fillWithList:_bannerArray];
     }];
 }
 
@@ -153,10 +154,10 @@
         homeBannerModel *model = [[homeBannerModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
             [_bannerArray addObjectsFromArray:model.info];
-            [self.bannerView fillWithList:_bannerArray];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
+        [self.bannerView fillWithList:_bannerArray];
         [ConfigModel hideHud:self];
     }];
 }

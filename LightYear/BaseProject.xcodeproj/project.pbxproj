@@ -36,6 +36,10 @@
 		00C40BC51F9DE100002A31A0 /* ShopListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C40BBE1F9DE100002A31A0 /* ShopListModel.m */; };
 		00C40BC61F9DE100002A31A0 /* tradeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C40BC01F9DE100002A31A0 /* tradeListModel.m */; };
 		00C40BC91F9DE132002A31A0 /* RechargeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C40BC81F9DE132002A31A0 /* RechargeInfoCell.m */; };
+		0422A30F1F9F3BEB0037AC25 /* ExpireCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422A30A1F9F3BEA0037AC25 /* ExpireCouponViewController.m */; };
+		0422A3101F9F3BEB0037AC25 /* SelectCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422A30B1F9F3BEB0037AC25 /* SelectCouponViewController.m */; };
+		0422A3111F9F3BEB0037AC25 /* InspectCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422A30D1F9F3BEB0037AC25 /* InspectCouponViewController.m */; };
+		0422A3141F9F3BF30037AC25 /* CouponDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0422A3131F9F3BF30037AC25 /* CouponDefaultCell.m */; };
 		04274F721F7654A1009DF308 /* MemberCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F711F7654A1009DF308 /* MemberCardViewController.m */; };
 		04274F751F765FE9009DF308 /* MemberRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F741F765FE9009DF308 /* MemberRechargeViewController.m */; };
 		04274F781F766716009DF308 /* SelectShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04274F771F766716009DF308 /* SelectShopViewController.m */; };
@@ -241,6 +245,14 @@
 		00C40BC01F9DE100002A31A0 /* tradeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradeListModel.m; sourceTree = "<group>"; };
 		00C40BC71F9DE132002A31A0 /* RechargeInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeInfoCell.h; sourceTree = "<group>"; };
 		00C40BC81F9DE132002A31A0 /* RechargeInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeInfoCell.m; sourceTree = "<group>"; };
+		0422A3091F9F3BEA0037AC25 /* InspectCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectCouponViewController.h; sourceTree = "<group>"; };
+		0422A30A1F9F3BEA0037AC25 /* ExpireCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpireCouponViewController.m; sourceTree = "<group>"; };
+		0422A30B1F9F3BEB0037AC25 /* SelectCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCouponViewController.m; sourceTree = "<group>"; };
+		0422A30C1F9F3BEB0037AC25 /* ExpireCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpireCouponViewController.h; sourceTree = "<group>"; };
+		0422A30D1F9F3BEB0037AC25 /* InspectCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectCouponViewController.m; sourceTree = "<group>"; };
+		0422A30E1F9F3BEB0037AC25 /* SelectCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCouponViewController.h; sourceTree = "<group>"; };
+		0422A3121F9F3BF30037AC25 /* CouponDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDefaultCell.h; sourceTree = "<group>"; };
+		0422A3131F9F3BF30037AC25 /* CouponDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDefaultCell.m; sourceTree = "<group>"; };
 		04274F701F7654A1009DF308 /* MemberCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCardViewController.h; sourceTree = "<group>"; };
 		04274F711F7654A1009DF308 /* MemberCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCardViewController.m; sourceTree = "<group>"; };
 		04274F731F765FE9009DF308 /* MemberRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRechargeViewController.h; sourceTree = "<group>"; };
@@ -642,6 +654,8 @@
 		04654A8D1F6E65F80023FF63 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0422A3121F9F3BF30037AC25 /* CouponDefaultCell.h */,
+				0422A3131F9F3BF30037AC25 /* CouponDefaultCell.m */,
 				046C47491F73D90A00FDCFF6 /* WMBannerView.h */,
 				046C474A1F73D90A00FDCFF6 /* WMBannerView.m */,
 				04654AA11F6E97230023FF63 /* couponDetailsCell.h */,
@@ -872,6 +886,12 @@
 		429941181F5EAC4F0009ADDA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0422A30C1F9F3BEB0037AC25 /* ExpireCouponViewController.h */,
+				0422A30A1F9F3BEA0037AC25 /* ExpireCouponViewController.m */,
+				0422A3091F9F3BEA0037AC25 /* InspectCouponViewController.h */,
+				0422A30D1F9F3BEB0037AC25 /* InspectCouponViewController.m */,
+				0422A30E1F9F3BEB0037AC25 /* SelectCouponViewController.h */,
+				0422A30B1F9F3BEB0037AC25 /* SelectCouponViewController.m */,
 				04654A9B1F6E663D0023FF63 /* WMBalancePointDetailsViewController.h */,
 				04654A9C1F6E663D0023FF63 /* WMBalancePointDetailsViewController.m */,
 				4214BDD91F5FA27400FA1F85 /* FirstViewViewController.h */,
@@ -1437,6 +1457,7 @@
 				6B015A261F764AB900CDEA16 /* SKUPrice.m in Sources */,
 				6BB114B91F6D7E9A00C9C886 /* PurchaseCarViewController.m in Sources */,
 				00C40BC91F9DE132002A31A0 /* RechargeInfoCell.m in Sources */,
+				0422A3141F9F3BF30037AC25 /* CouponDefaultCell.m in Sources */,
 				6B5F6DA71F628D28001BDC0E /* NSString+Predicate.m in Sources */,
 				04274F7B1F766732009DF308 /* SelectShopCell.m in Sources */,
 				6B5F6DB21F628D28001BDC0E /* UIView+BGFrame.m in Sources */,
@@ -1511,15 +1532,18 @@
 				6BD8871B1F72C1DC00871019 /* PurcharseCell.m in Sources */,
 				6B5F6DBC1F629EB8001BDC0E /* GoodsListViewController.m in Sources */,
 				00A952881F7024F800DEE0F6 /* FeedBackTableViewCell.m in Sources */,
+				0422A3101F9F3BEB0037AC25 /* SelectCouponViewController.m in Sources */,
 				6B015A291F76A75100CDEA16 /* SearchListView.m in Sources */,
 				427C3D501F9F22180081B431 /* HHPayPasswordView.m in Sources */,
 				42C84EB61EF2DCBC0008189D /* ConfigModel.m in Sources */,
 				4214BDDB1F5FA27400FA1F85 /* FirstViewViewController.m in Sources */,
 				6BB191171F737606001ED732 /* NetHelper.m in Sources */,
+				0422A30F1F9F3BEB0037AC25 /* ExpireCouponViewController.m in Sources */,
 				00A9527A1F7024F800DEE0F6 /* ChangeUserInfoViewController.m in Sources */,
 				6BBD89BA1F697AC700C8B7C3 /* RecommendCell.m in Sources */,
 				6B5F6DA21F628D28001BDC0E /* NSMutableAttributedString+Category.m in Sources */,
 				6B015A231F764A6000CDEA16 /* SKU.m in Sources */,
+				0422A3111F9F3BEB0037AC25 /* InspectCouponViewController.m in Sources */,
 				6B5F6DAB1F628D28001BDC0E /* UIControl+ResponseTime.m in Sources */,
 				427C3D711F9F227B0081B431 /* OrderModel.m in Sources */,
 				427C3D511F9F22180081B431 /* HHTextField.m in Sources */,
