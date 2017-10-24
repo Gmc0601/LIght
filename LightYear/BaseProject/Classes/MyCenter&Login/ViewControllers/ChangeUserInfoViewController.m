@@ -27,7 +27,11 @@
     
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     if (self.type == UserInfoTypeName) {
-        self.titleLab.text = @"修改昵称";
+        if (userModel.username.length > 0) {
+            self.titleLab.text = @"修改昵称";
+        }else{
+            self.titleLab.text = @"设置昵称";
+        }
     }else if (self.type == UserInfoTypePayPassword){
         if (userModel.is_trade == 0) {
             self.titleLab.text = @"设置支付密码";
@@ -230,6 +234,24 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+#pragma BaseTextFileldDelegate
+//内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
+- (void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text{
+    NSLog(@"========%@",textField.text);
+   if (textField.tag == 10){
+        if (text.length > 4) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 4)];
+        }
+    }else if (textField.tag == 11){
+        if (text.length > 4) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 4)];
+        }
+    }else if (textField.tag == 12){
+        if (text.length > 4) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 4)];
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

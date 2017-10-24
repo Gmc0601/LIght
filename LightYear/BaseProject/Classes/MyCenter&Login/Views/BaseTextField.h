@@ -12,7 +12,7 @@
 
 @optional
 
--(void)textFieldTextChange:(UITextField *)textField;
+-(void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text;
 
 @end
 

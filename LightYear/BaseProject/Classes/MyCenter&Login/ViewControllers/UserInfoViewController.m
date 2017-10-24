@@ -269,12 +269,13 @@
     [self hideDatePickerView];
 }
 - (void)sureAction {
-    NSDate *date = dateView.datePicker.date;
+    NSDate * date = dateView.datePicker.date;
     int time = [date timeIntervalSince1970];
     NSString * birthday = [NSString stringWithFormat:@"%d", time];
     NSDate *dateStr = [NSDate dateWithTimeIntervalSince1970:[birthday intValue]];
     NSDateFormatter *Formatter=[[NSDateFormatter alloc] init];
     [Formatter setDateFormat:@"yyyy-MM-dd"];
+    
     NSString *resultStr=[Formatter stringFromDate:dateStr];
     [self changeUserInfoWithKey:@"birthday" Value:resultStr];
     [self hideDatePickerView];

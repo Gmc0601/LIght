@@ -40,8 +40,19 @@
     return self;
 }
 -(void)textFieldTextChange{
-    if ([self.textDelegate respondsToSelector:@selector(textFieldTextChange:)]) {
-        [self.textDelegate textFieldTextChange:self];
+    NSString * toBeString = self.text;
+    NSString * lang = self.textInputMode.primaryLanguage;//键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) {//简体中文输入
+        UITextRange * selectedRange = [self markedTextRange];//获取高亮部分
+        if (!selectedRange) {//无高亮状态
+            if ([self.textDelegate respondsToSelector:@selector(textFieldTextChange:Text:)]) {
+                [self.textDelegate textFieldTextChange:self Text:toBeString];
+            }
+        }
+    }else{
+        if ([self.textDelegate respondsToSelector:@selector(textFieldTextChange:Text:)]) {
+            [self.textDelegate textFieldTextChange:self Text:toBeString];
+        }
     }
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

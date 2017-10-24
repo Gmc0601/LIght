@@ -13,7 +13,8 @@
 #import "EditFeedBackViewController.h"
 #import "UserInfoPicketView.h"
 #import "OrderViewController.h"
-
+#import "LoginViewController.h"
+#import "WMHomePageViewController.h"
 @interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate,UserInfoPicketViewDelegate>
 {
     UIButton * bottomButton;
@@ -33,6 +34,14 @@
     dataArray = [NSMutableArray arrayWithObjects:@"收货地址",@"意见反馈",@"联系我们", nil];//,@"分享App给朋友
     [self createBaseView];
 }
+//- (void)back:(UIButton *)sender{
+//    for (UIViewController * controller in self.navigationController.viewControllers) {
+//        if ([controller isKindOfClass:[WMHomePageViewController class]]) {
+//            WMHomePageViewController * homeVC =(WMHomePageViewController *)controller;
+//            [self.navigationController popToViewController:homeVC animated:YES];
+//        }
+//    }
+//}
 - (void)createBaseView{
     bottomButton = [UIButton new];
     bottomButton.titleLabel.font = [UIFont systemFontOfSize:18];
@@ -216,10 +225,16 @@
 
 //退出登录
 - (void)exitLoginAction{
+    for (UIViewController * controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[WMHomePageViewController class]]) {
+            WMHomePageViewController * homeVC =(WMHomePageViewController *)controller;
+            [self.navigationController popToViewController:homeVC animated:YES];
+        }
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(1)];
 }
 //获取当前时间
--(NSString * )getCurrentTime{
+- (NSString * )getCurrentTime{
     //获取当前的时间
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *now;

@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "MycenterViewController.h"
 #import "BaseTextField.h"
 #import "UserModel.h"
 @interface LoginViewController ()<BaseTextFieldDelegate>
@@ -26,10 +27,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self makeView];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     self.leftBar.hidden = YES;
     self.rightBar.hidden = YES;
-    
-    [self makeView];
 }
 - (void)makeView{
     UIImageView * logoView = [UIImageView new];
@@ -53,7 +57,7 @@
     
     _userTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入11位手机号" isBorder:YES];
     _userTextField.keyboardType = UIKeyboardTypeNumberPad;
-    _userTextField.tag = 100;
+    _userTextField.tag = 1000;
     _userTextField.textDelegate = self;
     [self.view addSubview:_userTextField];
     [_userTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,7 +97,7 @@
     
     _passTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@"请输入4位验证码" isBorder:YES];
     _passTextField.keyboardType = UIKeyboardTypeNumberPad;
-    _passTextField.tag = 101;
+    _passTextField.tag = 1001;
     _passTextField.isChangeKeyBoard = YES;
     _passTextField.textDelegate = self;
     [self.view addSubview:_passTextField];
@@ -121,6 +125,14 @@
         make.height.mas_offset(50);
     }];
     
+    UIButton * backButton = [UIButton new];
+    [backButton setImage:[UIImage imageNamed:@"sg_ic_quxiao"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
+    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_offset(40);
+        make.right.mas_offset(-20);
+    }];
 //    UILabel * tipLabel = [UILabel new];
 //    tipLabel.text = @"或使用快捷登录";
 //    tipLabel.font = [UIFont systemFontOfSize:14];
@@ -168,6 +180,11 @@
 //        }];
 //    }
 }
+//返回
+- (void)backAction{
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 //登录
 - (void)loginAction:(UIButton *)sender{
     [ConfigModel showHud:self];
@@ -177,11 +194,13 @@
                                };
     [HttpRequest postPath:CodeLoginURL params:logindic resultBlock:^(id responseObject, NSError *error) {
         UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
-        [ConfigModel saveString:userModel.info.userToken forKey:UserToken];
-        [[TMCache sharedCache] setObject:userModel.info forKey:UserInfoModel];
         [ConfigModel hideHud:self];
         if (userModel.error == 0) {
+            [ConfigModel saveString:userModel.info.userToken forKey:UserToken];
+            [[TMCache sharedCache] setObject:userModel.info forKey:UserInfoModel];
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginNotification object:@(0)];
+//            [self.navigationController pushViewController:[MycenterViewController new] animated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }else {
             [ConfigModel mbProgressHUD:userModel.message andView:nil];
         }
@@ -224,13 +243,13 @@
     }
 }
 //监听输入内容
-- (void)textFieldTextChange:(UITextField *)textField{
-    if (textField.tag == 100) {
-        if (textField.text.length == 11) {
+- (void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text{
+    if (textField.tag == 1000) {
+        if (text.length == 11) {
             [_passTextField becomeFirstResponder];
         }
     }else{
-        if (textField.text.length == 4) {
+        if (text.length == 4) {
             [self.view endEditing:YES];
             _loginButton.userInteractionEnabled = YES;
             _loginButton.backgroundColor = UIColorFromHex(0x3e7bb1);

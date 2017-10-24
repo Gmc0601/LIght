@@ -195,14 +195,14 @@
 //内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (range.location < 100)
+    if (range.location < 200)
     {
         return  YES;
     } else  if ([textView.text isEqualToString:@"\n"]) {
         //这里写按了ReturnKey 按钮后的代码
         return NO;
     }
-    if (textView.text.length == 100) {
+    if (textView.text.length == 200) {
         return NO;
     }
     return YES;

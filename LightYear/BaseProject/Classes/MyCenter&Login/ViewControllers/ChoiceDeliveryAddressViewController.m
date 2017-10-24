@@ -156,8 +156,8 @@
     }];
 }
 #pragma mark BaseTextFieldDelegate
-- (void)textFieldTextChange:(UITextField *)textField{
-    if (textField.text.length == 0) {
+- (void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text{
+    if (text.length == 0) {
         isSearchData = NO;
         [myTableView reloadData];
     }

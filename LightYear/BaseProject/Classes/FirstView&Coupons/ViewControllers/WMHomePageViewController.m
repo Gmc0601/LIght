@@ -16,10 +16,10 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "ShopListModel.h"
 #import "homeBannerModel.h"
-#import "InspectCouponViewController.h"
+//#import "InspectCouponViewController.h"
 #import "MycenterViewController.h"
 #import "FirstLevelGoodsViewController.h"
-
+#import "LoginViewController.h"
 @interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
     //定位
     AMapLocationManager * _locationManager;
@@ -102,12 +102,17 @@
 
 - (void)leftBtnClick {
 
-    [self.navigationController pushViewController:[MycenterViewController new] animated:YES];
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        [self.navigationController pushViewController:[MycenterViewController new] animated:YES];
+    }else{
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+    }
+    
 }
 
 - (void)rightBtnClick {
-    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
-    [self.navigationController pushViewController:expireVC animated:YES];
+//    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
+//    [self.navigationController pushViewController:expireVC animated:YES];
 }
 
 #pragma mark - Service

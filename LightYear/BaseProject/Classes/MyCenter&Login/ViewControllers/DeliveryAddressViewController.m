@@ -33,11 +33,13 @@
     [ConfigModel showHud:self];
     [HttpRequest postPath:ReceiptListURL params:nil resultBlock:^(id responseObject, NSError *error) {
         DeliveryAddressModel * model = [[DeliveryAddressModel alloc] initWithDictionary:responseObject error:nil];
+        [dataArray removeAllObjects];
         if (model.error == 0) {
             [dataArray addObjectsFromArray:model.info];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
+        [self changeEmptyView];
         [ConfigModel hideHud:self];
         [myTableView reloadData];
     }];
@@ -86,6 +88,28 @@
         make.center.mas_offset(0);
     }];
 }
+
+- (void)changeEmptyView{
+    if (dataArray.count == 0) {
+        myTableView.hidden = YES;
+        normalLabel.hidden = NO;
+        [bottomButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(normalLabel.mas_bottom).offset(20);
+            make.height.mas_offset(40);
+            make.left.mas_offset(20);
+            make.right.mas_offset(-20);
+        }];
+    }else{
+        myTableView.hidden = NO;
+        normalLabel.hidden = YES;
+        [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_offset(-20);
+            make.height.mas_offset(40);
+            make.left.mas_offset(20);
+            make.right.mas_offset(-20);
+        }];
+    }
+}
 //新建收货地址
 - (void)addDeliveryAddressAction:(UIButton *)button{
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
@@ -99,6 +123,7 @@
             [dataArray addObject:model];
         }
         [myTableView reloadData];
+        [self changeEmptyView];
     }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
 }

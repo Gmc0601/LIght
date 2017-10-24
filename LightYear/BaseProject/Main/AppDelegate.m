@@ -24,13 +24,14 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    UINavigationController * na;
+    UINavigationController * na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
     
-    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
-        na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
-    }else{
-        na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
-    }
+//    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+//        na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
+//    }else{
+//        na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
+//    }
+    
     self.window.rootViewController = na;
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -49,17 +50,17 @@
     /**
      *  type=0登录成功，type=1退出登录，type=2注册成功，type=3登录失败
      */
-    UINavigationController * na;
+    //UINavigationController * na;
     if ([aNote.object isEqual:@0]) {
         NSLog(@"LoginSuccess");
         [ConfigModel saveBoolObject:YES forKey:IsLogin];
-        na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
+        //na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
     }else if ([aNote.object isEqual:@1]){
         NSLog(@"OutLoginSuccess");
         [ConfigModel saveBoolObject:NO forKey:IsLogin];
-        na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
+        //na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
     }
-    self.window.rootViewController = na;
+    //self.window.rootViewController = na;
 }
 
 

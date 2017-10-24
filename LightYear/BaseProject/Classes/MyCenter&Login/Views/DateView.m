@@ -27,6 +27,7 @@
 ////        如果是出生日期，显示年月日
 //        self.datePicker.datePickerMode = UIDatePickerModeDate;
 //    }
+    self.datePicker.maximumDate = [NSDate date];//设置最大显示天数
 }
 
 - (IBAction)cancelAction:(UIButton *)sender {

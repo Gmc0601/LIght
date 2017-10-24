@@ -78,13 +78,13 @@
 //确定
 - (void)sureAction:(UIButton *)button{
     BaseTextField * firstTextField = [self.view viewWithTag:10];
-    if (firstTextField.text.length == 0) {
-        [ConfigModel mbProgressHUD:@"密码为空" andView:nil];
+    if (firstTextField.text.length < 6) {
+        [ConfigModel mbProgressHUD:@"请输入6位数密码" andView:nil];
         return;
     }
     BaseTextField * secondTextField = [self.view viewWithTag:11];
-    if (secondTextField.text.length == 0) {
-        [ConfigModel mbProgressHUD:@"确认密码为空" andView:nil];
+    if (secondTextField.text.length < 6) {
+        [ConfigModel mbProgressHUD:@"请输入6位数密码" andView:nil];
         return;
     }
     if (![firstTextField.text isEqualToString:secondTextField.text]) {
@@ -97,8 +97,14 @@
         [ConfigModel hideHud:self];
         BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
         if (baseModel.error == 0) {
-            userModel.is_trade = 1;
-            [[TMCache sharedCache] setObject:userModel forKey:UserInfoModel];
+            
+            if (userModel.is_trade == 0) {
+                userModel.is_trade = 1;
+                [[TMCache sharedCache] setObject:userModel forKey:UserInfoModel];
+                [ConfigModel mbProgressHUD:@"设置成功" andView:nil];
+            }else{
+                [ConfigModel mbProgressHUD:@"修改成功" andView:nil];
+            }
             UIViewController * viewController = self.navigationController.childViewControllers[2];
             [self.navigationController popToViewController:viewController animated:YES];
         }else {
@@ -108,6 +114,19 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+#pragma BaseTextFileldDelegate
+//内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
+- (void)textFieldTextChange:(UITextField *)textField  Text:(NSString *)text{
+    if (textField.tag == 10) {
+        if (text.length > 6) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 6)];
+        }
+    }else if (textField.tag == 11){
+        if (text.length > 6) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 6)];
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

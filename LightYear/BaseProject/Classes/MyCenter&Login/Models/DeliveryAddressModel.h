@@ -14,7 +14,7 @@
 
 @interface DeliveryAddressInfo : JSONModel
 
-@property (nonatomic , assign) int isdefault;//是否默认 1 默认 0 非默认
+@property (nonatomic , assign) int isdefault;//是否默认 1 默认 2 非默认
 @property (nonatomic , copy) NSString * tablet;//门牌号
 @property (nonatomic , copy) NSString * address;//收货的具体地址
 @property (nonatomic , copy) NSString * phone;//收货人电话

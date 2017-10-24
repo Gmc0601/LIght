@@ -90,7 +90,6 @@
                 addressLabel.textColor = UIColorFromHex(0xcccccc);
             }
             addressLabel.font = [UIFont systemFontOfSize:16];
-            addressLabel.numberOfLines = 2;
             [baseView addSubview:addressLabel];
             [addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(baseLabel.mas_right).offset(20);
@@ -98,14 +97,22 @@
                 make.right.mas_offset(-30);
             }];
             
+            UIImageView * arrowImage = [UIImageView new];
+            arrowImage.image = [UIImage imageNamed:@"icon_gds"];
+            [baseView addSubview:arrowImage];
+            [arrowImage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_offset(0);
+                make.right.mas_offset(-10);
+                make.size.mas_offset(CGSizeMake(13, 18));
+            }];
+            
             UIButton * arrowButton = [UIButton new];
             [arrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchUpInside];
-            [arrowButton setImage:[UIImage imageNamed:@"icon_gds"] forState:UIControlStateNormal];
             [baseView addSubview:arrowButton];
             [arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.mas_offset(0);
-                make.right.mas_offset(0);
-                make.width.mas_offset(30);
+                make.left.mas_equalTo(baseLabel.mas_right).offset(20);
+                make.top.bottom.right.mas_offset(0);
+                make.right.mas_offset(-30);
             }];
         }
     }
@@ -151,7 +158,7 @@
 }
 //确定
 - (void)sureAction:(UIButton *)button{
-    [ConfigModel showHud:self];
+    
     BaseTextField * nameText = [self.view viewWithTag:100];
     _addressModel.username = nameText.text;
     if (nameText.text.length == 0) {
@@ -163,8 +170,11 @@
     if (mobileText.text.length == 0) {
         [ConfigModel mbProgressHUD:@"手机号不能为空" andView:nil];
         return;
+    }else if (mobileText.text.length > 0 && mobileText.text.length < 11){
+        [ConfigModel mbProgressHUD:@"请输入11位手机号" andView:nil];
+        return;
     }
-    if (addressLabel.text.length == 0) {
+    if (_addressModel.address.length == 0) {
         [ConfigModel mbProgressHUD:@"地址不能为空" andView:nil];
         return;
     }
@@ -178,7 +188,11 @@
     if (_addressModel.aid.length > 0) {
         addressID = _addressModel.aid;
     }
-    NSDictionary * params = @{@"default":@(_addressModel.isdefault).stringValue,@"tablet":_addressModel.tablet,@"address":_addressModel.address,@"phone":_addressModel.phone,@"username":_addressModel.username,@"id":addressID,@"lat":_addressModel.lat,@"lng":_addressModel.lng};
+    if (_addressModel.isdefault == 0) {
+        _addressModel.isdefault = 2;
+    }
+    NSDictionary * params = @{@"default":@(_addressModel.isdefault),@"tablet":_addressModel.tablet,@"address":_addressModel.address,@"phone":_addressModel.phone,@"username":_addressModel.username,@"id":addressID,@"lat":_addressModel.lat,@"lng":_addressModel.lng};
+    [ConfigModel showHud:self];
     [HttpRequest postPath:SetReceiptURL params:params resultBlock:^(id responseObject, NSError *error) {
         BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
         [ConfigModel hideHud:self];
@@ -211,6 +225,19 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+#pragma BaseTextFileldDelegate
+//内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
+- (void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text{
+    if (textField.tag == 100) {
+        if (text.length > 10) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 10)];
+        }
+    }else if (textField.tag == 101){
+        if (text.length > 11) {
+            textField.text = [text substringWithRange:NSMakeRange(0, 11)];
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
