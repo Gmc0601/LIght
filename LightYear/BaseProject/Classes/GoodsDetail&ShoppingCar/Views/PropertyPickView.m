@@ -10,6 +10,7 @@
 #import "UIColor+BGHexColor.h"
 #import <Masonry/Masonry.h>
 #import "SKU.h"
+#import "NSString+Category.h"
 
 @interface PropertyPickView()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property(retain,atomic) UIPickerView *pickerView;
@@ -26,7 +27,7 @@
     if (!_hasIntial) {
         _hasIntial = YES;
         _pickViews = [NSMutableArray arrayWithCapacity:_datasource.count];
-        CGFloat offSet = SizeWidth(626/2)/_datasource.count;
+        CGFloat offSet = SizeWidth(636/2)/_datasource.count;
         if (_datasource.count == 3) {
             [self addTitleWithText:((SKU *)_datasource[0][0]).name withOffSet:-offSet withIndex:0];
             [self addTitleWithText:((SKU *)_datasource[1][0]).name withOffSet:0 withIndex:1];
@@ -90,7 +91,7 @@
     UILabel *lblTitle;
     
     if (view == nil) {
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SizeWidth(75/2), SizeHeigh(30))];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SizeWidth(110), SizeHeigh(30))];
         lblTitle.font = SourceHanSansCNRegular(SizeWidth(18));
         lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
         lblTitle.textAlignment = NSTextAlignmentCenter;
@@ -147,12 +148,25 @@
     [_pickViews addObject:pickerView];
     
     [self addSubview:pickerView];
+//    CGFloat width = [self getMaxWidth:values];
     [pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(SizeHeigh(30));
         make.centerX.equalTo(lblTitle.mas_centerX);
-        make.width.equalTo(@(SizeWidth(80)));
+        make.width.equalTo(@(SizeWidth(110)));
         make.height.equalTo(@(SizeHeigh(110)));
     }];
+}
+
+-(CGFloat) getMaxWidth:(NSArray *) values{
+    CGFloat width = 0;
+    for (SKU *s in values) {
+        CGFloat w = [s.value widthWithFont:[UIFont systemFontOfSize:SizeWidth(18)] height:SizeWidth(18)];
+        if (width < w) {
+            width = w;
+        }
+    }
+    
+    return width;
 }
 
 @end
