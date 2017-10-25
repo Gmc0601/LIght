@@ -159,6 +159,7 @@
                                   @"id" : model.id
                                   };
             [HttpRequest postPath:@"_order_002" params:dic resultBlock:^(id responseObject, NSError *error) {
+                NSLog(@"%@", responseObject);
                 if([error isEqual:[NSNull null]] || error == nil){
                     NSLog(@"success");
                 }

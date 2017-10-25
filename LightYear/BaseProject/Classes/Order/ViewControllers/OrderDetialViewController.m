@@ -87,7 +87,29 @@
 }
 
 - (void)more:(UIButton *)sender {
-    [ConfigModel mbProgressHUD:@"取消订单" andView:nil];
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    if (self.orderType == Order_Topay || self.orderType == Order_Distribution || self.orderType == Order_Distributioning) {
+        [dic setValue:self.OrderID forKey:@"id"];
+        [dic setValue:@"10" forKey:@"status"];
+        [HttpRequest postPath:@"_change_order_status_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+            if([error isEqual:[NSNull null]] || error == nil){
+                NSLog(@"success");
+            }
+            NSDictionary *datadic = responseObject;
+            if ([datadic[@"error"] intValue] == 0) {
+                [ConfigModel mbProgressHUD:@"取消成功" andView:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                NSString *str = datadic[@"info"];
+                [ConfigModel mbProgressHUD:str andView:nil];
+            }
+        }];
+        
+    }
+    
+    
 }
 
 - (void)createView {

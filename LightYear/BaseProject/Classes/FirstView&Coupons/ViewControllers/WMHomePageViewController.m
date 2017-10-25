@@ -120,15 +120,15 @@
 }
 
 #pragma mark - Service
-#pragma mark - Service
 - (void)syncWithShopListRequest {
-    [ConfigModel showHud:self];
+//    [ConfigModel showHud:self];
     NSDictionary *dic = @{
                           @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
                           @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
 //                          @"lng": @"112.587329",
 //                          @"lat": @"26.885513",
                           };
+    WeakSelf(weakself);
     [HttpRequest postPath:homeShopURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
         ShopListModel *model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
@@ -140,19 +140,20 @@
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
-        [ConfigModel hideHud:self];
+        [ConfigModel hideHud:weakself];
         [self.bannerView fillWithList:_bannerArray];
     }];
 }
 
 - (void)syncWithBannerListRequest:(NSString *)shopCode {
-    [ConfigModel showHud:self];
+//    [ConfigModel showHud:self];
     if (_bannerArray.count>0) {
         [_bannerArray removeAllObjects];
     }
     NSDictionary *dic = @{
                           @"shopid":shopCode,
                           };
+    WeakSelf(weakself);
     [HttpRequest postPath:homeBannerURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
         homeBannerModel *model = [[homeBannerModel alloc] initWithDictionary:responseObject error:nil];
@@ -162,7 +163,7 @@
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
         [self.bannerView fillWithList:_bannerArray];
-        [ConfigModel hideHud:self];
+        [ConfigModel hideHud:weakself];
     }];
 }
 

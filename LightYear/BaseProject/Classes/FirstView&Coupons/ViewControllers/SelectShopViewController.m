@@ -38,10 +38,10 @@
 - (void)syncWithShopListRequest {
     [ConfigModel showHud:self];
     NSDictionary *dic = @{
-//                        @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
-//                        @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
-                          @"lng": @"112.587329",
-                          @"lat": @"26.885513",
+                        @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
+                        @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
+//                          @"lng": @"112.587329",
+//                          @"lat": @"26.885513",
                        };
     [HttpRequest postPath:shoplistURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
