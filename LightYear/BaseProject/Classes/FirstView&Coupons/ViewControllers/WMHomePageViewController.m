@@ -21,6 +21,7 @@
 #import "FirstLevelGoodsViewController.h"
 #import "LoginViewController.h"
 #import "UserModel.h"
+#import "GoodDetialViewController.h"
 
 @interface WMHomePageViewController ()<HomeBannerViewDelegate, HomeHeaderDelegate, SelectShopDelegate>{
     //定位
@@ -115,8 +116,12 @@
 }
 
 - (void)rightBtnClick {
-    InspectCouponViewController *expireVC = [[InspectCouponViewController alloc] init];
-    [self.navigationController pushViewController:expireVC animated:YES];
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        InspectCouponViewController *inspectVC = [[InspectCouponViewController alloc] init];
+        [self.navigationController pushViewController:inspectVC animated:YES];
+    }else{
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Service
@@ -174,7 +179,9 @@
 
 #pragma mark - HomeBannerViewDelegate
 - (void)didSelectBanner:(bannerInfo *)info {
-    
+    GoodDetialViewController *goodsVC = [[GoodDetialViewController alloc] init];
+    [goodsVC setGoodsId:info.goodid withShopId:info.shopid];
+    [self.navigationController pushViewController:goodsVC animated:YES];
 }
 
 #pragma mark - HomeHeaderDelegate
