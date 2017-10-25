@@ -183,18 +183,17 @@
 -(void) addChangeNumberControl{
 //    UIFont *buttonFont = [UIFont fontWithName:@"AdobeHeitiStd-Regular" size:SizeWidth(13)];
     UIFont *buttonFont = SourceHanSansCNLight(13);
-    UIButton *btnSubtract = [UIButton new];
-    [btnSubtract addTarget:self action:@selector(tapPlusButton) forControlEvents:UIControlEventTouchUpInside];
-    btnSubtract.titleLabel.font = buttonFont;
-[btnSubtract setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
-    btnSubtract.layer.cornerRadius = SizeWidth(2.5);
-    btnSubtract.layer.borderWidth = SizeWidth(1);
-    btnSubtract.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
-    [btnSubtract addTarget:self action:@selector(tapSubtractButton) forControlEvents:UIControlEventTouchUpInside];
-    [btnSubtract setTitle:@"+" forState:UIControlStateNormal];
-    [self addSubview:btnSubtract];
+    UIButton *btnPlus = [UIButton new];
+    btnPlus.titleLabel.font = buttonFont;
+[btnPlus setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    btnPlus.layer.cornerRadius = SizeWidth(2.5);
+    btnPlus.layer.borderWidth = SizeWidth(1);
+    btnPlus.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
+    [btnPlus addTarget:self action:@selector(tapPlusButton) forControlEvents:UIControlEventTouchUpInside];
+    [btnPlus setTitle:@"+" forState:UIControlStateNormal];
+    [self addSubview:btnPlus];
     
-    [btnSubtract mas_makeConstraints:^(MASConstraintMaker *make) {
+    [btnPlus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(SizeWidth(-30/2));
         make.top.equalTo(_lblPrice1.mas_top).offset(SizeHeigh(9));
         make.width.equalTo(@(SizeWidth(40/2)));
@@ -211,32 +210,31 @@
     [self addSubview:_lblCount];
     
     [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(btnSubtract.mas_centerY);
-        make.right.equalTo(btnSubtract.mas_left).offset(SizeWidth(1));
+        make.centerY.equalTo(btnPlus.mas_centerY);
+        make.right.equalTo(btnPlus.mas_left).offset(SizeWidth(1));
         make.width.equalTo(@(SizeWidth(80/2)));
-        make.height.equalTo(btnSubtract);
+        make.height.equalTo(btnPlus);
     }];
     
-    UIButton *btnPlus = [UIButton new];
-    [btnPlus addTarget:self action:@selector(tapPlusButton) forControlEvents:UIControlEventTouchUpInside];
-    btnPlus.titleLabel.font = buttonFont;
-    [btnPlus setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
-    btnPlus.layer.cornerRadius = SizeWidth(2.5);
-    btnPlus.layer.borderWidth = SizeWidth(1);
-    btnPlus.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
-    [btnPlus addTarget:self action:@selector(tapPlusButton) forControlEvents:UIControlEventTouchUpInside];
-    [btnPlus setTitle:@"-" forState:UIControlStateNormal];
-    [self addSubview:btnPlus];
+    UIButton *btnSubtract= [UIButton new];
+    btnSubtract.titleLabel.font = buttonFont;
+    [btnSubtract setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    btnSubtract.layer.cornerRadius = SizeWidth(2.5);
+    btnSubtract.layer.borderWidth = SizeWidth(1);
+    btnSubtract.layer.borderColor = [UIColor colorWithHexString:@"e0e0e0"].CGColor;
+    [btnSubtract addTarget:self action:@selector(tapSubtractButton) forControlEvents:UIControlEventTouchUpInside];
+    [btnSubtract setTitle:@"-" forState:UIControlStateNormal];
+    [self addSubview:btnSubtract];
     
-    [btnPlus mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(btnSubtract.mas_centerY);
+    [btnSubtract mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(btnPlus.mas_centerY);
         make.right.equalTo(_lblCount.mas_left).offset(SizeWidth(1));
         make.width.equalTo(@(SizeWidth(40/2)));
         make.height.equalTo(btnSubtract);
     }];
 }
 
--(void) tapPlusButton{
+-(void) tapSubtractButton{
     if ((_model.count - 1) > 0) {
         _model.count -= 1;
         _lblCount.text = [NSString stringWithFormat:@"%d",_model.count] ;
@@ -244,7 +242,7 @@
     }
 }
 
--(void) tapSubtractButton{
+-(void) tapPlusButton{
     if ((_model.count + 1) <= _model.stock) {
         _model.count += 1;
         _lblCount.text = [NSString stringWithFormat:@"%d",_model.count] ;
