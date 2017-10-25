@@ -232,7 +232,7 @@
     [_lblPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lblSum.mas_right).offset(SizeWidth(5));
         make.bottom.equalTo(lblSum.mas_bottom);
-        make.width.equalTo(@(SizeWidth(70)));
+        make.width.equalTo(@(SizeWidth(150)));
         make.height.equalTo(@(SizeHeigh(20)));
     }];
     
@@ -261,7 +261,7 @@
     [_lblDiscount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_lblPrice);
         make.bottom.equalTo(lblDiscountTitle.mas_bottom);
-        make.width.equalTo(@(SizeWidth(70)));
+        make.width.equalTo(@(SizeWidth(100)));
         make.height.equalTo(@(SizeHeigh(12)));
     }];
     
@@ -285,12 +285,12 @@
 -(void) check{
     [ConfigModel showHud:self];
     NSString *shopId = ((PurchaseModel *) _dataSource[0]).shopId;
-    int sum = 0;
+    float sum = 0;
     for (PurchaseModel *model in _dataSource) {
-        sum += model.price.intValue;
+        sum += model.price.floatValue * model.count;
     }
     
-    [NetHelper addOrder:shopId withAmount:[NSString stringWithFormat:@"%d",sum] callBack:^(NSString *error, NSString *info) {
+    [NetHelper addOrder:shopId withAmount:[NSString stringWithFormat:@"%.2f",sum] callBack:^(NSString *error, NSString *info) {
         [ConfigModel hideHud:self];
         if (error == nil) {
             MakeOrderViewController *newVC = [MakeOrderViewController new];
@@ -324,6 +324,9 @@
                     m.count = model.count;
                 }
             }
+            
+            [self renderUI];
+
         } else {
             [ConfigModel mbProgressHUD:error andView:self.view];
         }
@@ -331,14 +334,14 @@
 }
 
 -(void) setPrice{
-    int sum = 0;
-    int discount = 0;
+    float sum = 0;
+    float discount = 0;
     for (PurchaseModel *model in _dataSource) {
-        sum += model.price.intValue;
-        discount += model.oldPrice - model.price.intValue;
+        sum += model.price.floatValue * model.count;
+        discount += (model.oldPrice - model.price.intValue) * model.count;
     }
     
-    _lblPrice.text = [NSString stringWithFormat:@"￥%d",sum];
-    _lblDiscount.text = [NSString stringWithFormat:@"￥%d",discount];
+    _lblPrice.text = [NSString stringWithFormat:@"￥%.2f",sum];
+    _lblDiscount.text = [NSString stringWithFormat:@"￥%.2f",discount];
 }
 @end
