@@ -285,25 +285,6 @@
 		4214BDE91F5FA8A800FA1F85 /* ShoppingCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarViewController.m; sourceTree = "<group>"; };
 		4214BDEC1F5FA97A00FA1F85 /* FactorySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactorySet.h; sourceTree = "<group>"; };
 		4214BDED1F5FA97A00FA1F85 /* FactorySet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactorySet.m; sourceTree = "<group>"; };
-		423BA6261F8B0845009B0FBE /* IKEA Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Bold.ttf"; sourceTree = "<group>"; };
-		423BA6271F8B0845009B0FBE /* IKEA Sans Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA Sans Heavy.ttf"; sourceTree = "<group>"; };
-		423BA6281F8B0845009B0FBE /* IKEASans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEASans-Regular.ttf"; sourceTree = "<group>"; };
-		423BA6291F8B0845009B0FBE /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
-		423BA62A1F8B0845009B0FBE /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		423BA62B1F8B0845009B0FBE /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
-		423BA62C1F8B0845009B0FBE /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
-		423BA62D1F8B0845009B0FBE /* SourceHanSansCN-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Bold.ttf"; sourceTree = "<group>"; };
-		423BA62E1F8B0845009B0FBE /* SourceHanSansCN-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-ExtraLight.ttf"; sourceTree = "<group>"; };
-		423BA62F1F8B0845009B0FBE /* SourceHanSansCN-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Heavy.ttf"; sourceTree = "<group>"; };
-		423BA6301F8B0845009B0FBE /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
-		423BA6311F8B0845009B0FBE /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; };
-		423BA6321F8B0845009B0FBE /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
-		423BA6331F8B0845009B0FBE /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; };
-		423BA6341F8B0845009B0FBE /* Verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana.ttf; sourceTree = "<group>"; };
-		423BA6351F8B0845009B0FBE /* Verdana_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana_0.ttf; sourceTree = "<group>"; };
-		423BA6361F8B0845009B0FBE /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
-		423BA6371F8B0845009B0FBE /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
-		423BA6381F8B0845009B0FBE /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
 		427C3D421F9F21C10081B431 /* BasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicView.h; sourceTree = "<group>"; };
 		427C3D431F9F21C10081B431 /* BasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicView.m; sourceTree = "<group>"; };
 		427C3D441F9F21C10081B431 /* PickerViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewCustom.h; sourceTree = "<group>"; };
@@ -765,32 +746,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		423BA6251F8B0845009B0FBE /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				423BA6261F8B0845009B0FBE /* IKEA Sans Bold.ttf */,
-				423BA6271F8B0845009B0FBE /* IKEA Sans Heavy.ttf */,
-				423BA6281F8B0845009B0FBE /* IKEASans-Regular.ttf */,
-				423BA6291F8B0845009B0FBE /* NotoSans-Bold.ttf */,
-				423BA62A1F8B0845009B0FBE /* NotoSans-BoldItalic.ttf */,
-				423BA62B1F8B0845009B0FBE /* NotoSans-Italic.ttf */,
-				423BA62C1F8B0845009B0FBE /* NotoSans-Regular.ttf */,
-				423BA62D1F8B0845009B0FBE /* SourceHanSansCN-Bold.ttf */,
-				423BA62E1F8B0845009B0FBE /* SourceHanSansCN-ExtraLight.ttf */,
-				423BA62F1F8B0845009B0FBE /* SourceHanSansCN-Heavy.ttf */,
-				423BA6301F8B0845009B0FBE /* SourceHanSansCN-Light.ttf */,
-				423BA6311F8B0845009B0FBE /* SourceHanSansCN-Medium.ttf */,
-				423BA6321F8B0845009B0FBE /* SourceHanSansCN-Normal.ttf */,
-				423BA6331F8B0845009B0FBE /* SourceHanSansCN-Regular.ttf */,
-				423BA6341F8B0845009B0FBE /* Verdana.ttf */,
-				423BA6351F8B0845009B0FBE /* Verdana_0.ttf */,
-				423BA6361F8B0845009B0FBE /* verdanab.ttf */,
-				423BA6371F8B0845009B0FBE /* verdanab_0.ttf */,
-				423BA6381F8B0845009B0FBE /* verdanai_0.ttf */,
-			);
-			path = Font;
-			sourceTree = "<group>";
-		};
 		427C3D411F9F21C10081B431 /* TimeAlter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1058,7 +1013,6 @@
 		42C84EA61EF2DB060008189D /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				423BA6251F8B0845009B0FBE /* Font */,
 				42F795CA1F00CBDF00A11A69 /* Factory */,
 				42C84EA71EF2DB060008189D /* ConfigModel */,
 				42C84EA81EF2DB060008189D /* MainApi */,

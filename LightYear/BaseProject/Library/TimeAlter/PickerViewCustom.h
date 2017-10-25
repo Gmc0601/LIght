@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
 @protocol PickerViewCustomDelegate<NSObject>
 -(void)title:(NSString *)title;
 @end
 @interface PickerViewCustom : UIView
 @property (weak, nonatomic) id<PickerViewCustomDelegate>delegate;
+
+@property (nonatomic, retain) OrderModel *model;
+
 -(void)show;
 -(void)hide;
 @end
