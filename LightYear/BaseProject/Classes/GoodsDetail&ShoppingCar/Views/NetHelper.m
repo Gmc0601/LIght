@@ -123,6 +123,12 @@
             
             for (NSDictionary *dict in pricelist) {
                 SKUPrice *model = [SKUPrice new];
+                NSMutableArray *skuList = [NSMutableArray arrayWithCapacity:0];
+                for(NSString *value in dict[@"category_id"]){
+                    [skuList addObject:value];
+                }
+                model.skuIdList = skuList;
+                
                 model._id = dict[@"id"];
                 model.memberPrice = dict[@"user_price"] == [NSNull null] ? nil:dict[@"user_price"];
                 model.specilPrice = dict[@"special_price"]  == [NSNull null] ? nil:dict[@"special_price"];
@@ -147,8 +153,8 @@
             model.isUser = goodinfo[@"is_user"];
             model.shopId = goodinfo[@"shopid"];
             model.stock = ((NSString *)goodinfo[@"stock"]).intValue;
-            model.shopStock = ((NSString *)goodinfo[@"w_stock"]).intValue;
-            model.centerStock = ((NSString *)goodinfo[@"s_stock"]).intValue;
+            model.shopStock = ((NSString *)goodinfo[@"s_stock"]).intValue;
+            model.centerStock = ((NSString *)goodinfo[@"w_stock"]).intValue;
             model.img = goodinfo[@"img_path"];
             model.desc = goodinfo[@"img_desc"] == [NSNull null] ? @"":goodinfo[@"img_desc"];
             model.info = goodinfo[@"info_desc"] == [NSNull null] ? @"":goodinfo[@"info_desc"];
