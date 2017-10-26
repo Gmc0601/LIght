@@ -175,6 +175,7 @@
 #pragma mark - SelectShopDelegate
 - (void)callbackWithSelectShop:(NSString *)shopName code:(NSString *)shopCode {
     [self.headerView changeLabelTitle:shopName];
+    [self syncWithBannerListRequest:shopCode];
 }
 
 #pragma mark - HomeBannerViewDelegate
