@@ -77,7 +77,7 @@
     
     NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
 
-    [NetHelper searchBy:self.searchBar.keyword withShopId:shopId withPage:1 callBack:^(NSString *error, NSArray *datasource) {
+    [NetHelper searchBy:keyworkd withShopId:shopId withPage:1 callBack:^(NSString *error, NSArray *datasource) {
         [ConfigModel hideHud:self];
         if (error != nil) {
             [ConfigModel mbProgressHUD:error andView:self.view];
