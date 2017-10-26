@@ -150,7 +150,7 @@
             model.memberPrice = goodinfo[@"user_price"] == [NSNull null] ? nil:goodinfo[@"user_price"];
             model.specilPrice = goodinfo[@"special_price"]  == [NSNull null] ? nil:goodinfo[@"special_price"];
             model.price = goodinfo[@"price"]  == [NSNull null] ? nil:goodinfo[@"price"];
-            model.isUser = goodinfo[@"is_user"];
+            model.isUser = [goodinfo[@"is_user"]  isEqual: @"1"];
             model.shopId = goodinfo[@"shopid"];
             model.stock = ((NSString *)goodinfo[@"stock"]).intValue;
             model.shopStock = ((NSString *)goodinfo[@"s_stock"]).intValue;
@@ -182,7 +182,7 @@
         model.memberPrice = dict[@"user_price"] == [NSNull null] ? nil:dict[@"user_price"];
         model.specilPrice = dict[@"special_price"]  == [NSNull null] ? nil:dict[@"special_price"];
         model.price = dict[@"price"]  == [NSNull null] ? nil:dict[@"price"];
-        model.isUser = dict[@"is_user"];
+        model.isUser = ![dict[@"is_user"]  isEqual: @"0"];
         model.shopId = dict[@"shopid"];
         model.stock = ((NSString *)dict[@"stock"]).intValue;
         model.shopStock = ((NSString *)dict[@"s_stock"]).intValue;

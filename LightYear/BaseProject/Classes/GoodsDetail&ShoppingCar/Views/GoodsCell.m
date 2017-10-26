@@ -203,8 +203,8 @@
     
     [self addSubview:_lblPrice1];
     
-    if (_model.specilPrice == nil) {
-        if(_model.memberPrice == nil){
+    if (_model.specilPrice == nil || [_model.specilPrice  isEqual: @"0"]) {
+        if(_model.memberPrice == nil || [_model.memberPrice  isEqual: @"0"]){
             price1 = _model.price;
             _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
         }else{

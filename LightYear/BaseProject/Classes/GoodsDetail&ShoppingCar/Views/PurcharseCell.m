@@ -102,7 +102,7 @@
     _lblUserNeed.font = SourceHanSansCNLight(SizeWidth(10));
     _lblUserNeed.textColor = [UIColor colorWithHexString:@"#999999"];
     _lblUserNeed.textAlignment = NSTextAlignmentLeft;
-// _lblUserNeed.text = _model.sku == nil ? @"":_model.sku;
+ _lblUserNeed.text = _model.sku == nil ? @"":_model.sku;
     
     [self addSubview:_lblUserNeed];
     
