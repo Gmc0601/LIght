@@ -20,6 +20,7 @@
 #import "UIImageView+WebCache.h"
 #import "SKU.h"
 #import "SKUPrice.h"
+#import "NSString+Category.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -65,6 +66,7 @@
 @property(retain,atomic) UIWebView *descWebView;
 @property(retain,atomic)  SKUPrice *skuPrice;
 @property(assign,atomic)  int *countOfCell;
+@property(assign,atomic)  BOOL *multiLine;
 @end
 
 @implementation GoodDetialViewController
@@ -156,7 +158,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return SizeHeigh(625);
+        CGFloat height = 575;
+        if (_model.hasDiscounts) {
+            height += 30;
+        }
+        
+        if ([self titleIsMultiLine]) {
+            height += 20;
+        }
+        
+        return SizeHeigh(height);
     }else if(indexPath.section == 1){
         _infoWebView.hidden = !_showDetail;
         
@@ -234,6 +245,8 @@
 
     [self addBannerToCell:cell];
     [self addTitleToCell:cell];
+    [self addNewFlagToCell:cell];
+
     [self addPriceLableToCell:cell];
     if (![self hasView:_btnFaveritor inSuperView:cell]) {
         [self addFavoriteButtonToCell:cell];
@@ -245,6 +258,23 @@
     }
 }
 
+-(void) addNewFlagToCell:(UITableViewCell *) cell{
+    if (!_model.isNew || [self hasView:_imgNew inSuperView:cell]) {
+        return;
+    }
+    
+    _imgNew = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sign_xq_xp"]];
+    [cell addSubview:_imgNew];
+    
+    [_imgNew mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell).offset(SizeWidth(15));
+        make.top.equalTo(_lblTitle.mas_bottom).offset(SizeHeigh(5));
+        make.height.equalTo(@(SizeHeigh(16)));
+        make.width.equalTo(@(SizeHeigh(22)));
+    }];
+
+}
+
 -(void) addTitleToCell:(UITableViewCell *) cell{
     if ([self hasView:_lblTitle inSuperView:cell]) {
         return;
@@ -254,14 +284,32 @@
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblTitle.textAlignment = NSTextAlignmentLeft;
     _lblTitle.text = _model.name;
+    _lblTitle.numberOfLines = 2;
+    _lblTitle.lineBreakMode = NSLineBreakByWordWrapping;
     [cell addSubview:_lblTitle];
+    
+    CGFloat height = SizeHeigh(15);
+   
+    if ([self titleIsMultiLine]) {
+        height = SizeHeigh(45);
+    }
     
     [_lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(cell).offset(SizeWidth(15));
         make.top.equalTo(_banner.mas_bottom).offset(SizeHeigh(25));
-        make.right.equalTo(cell).offset(SizeWidth(15));
-        make.height.equalTo(@(SizeHeigh(30)));
+        make.right.equalTo(cell).offset(-SizeWidth(15));
+        make.height.equalTo(@(height));
     }];
+}
+
+-(BOOL) titleIsMultiLine{
+    UIFont *font = [UIFont systemFontOfSize:SizeWidth(15)];
+    CGFloat width = [_model.name widthWithFont:font height:SizeHeigh(12)];
+    if (width > ScreenWidth - SizeWidth(30)) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 -(void) addPriceLableToCell:(UITableViewCell *) cell{
@@ -275,14 +323,6 @@
         [_pricePanel removeConstraints:_pricePanel.constraints];
     }
     
-    
-    if (_skuPrice != nil) {
-        _model.price = _skuPrice.price;
-        _model.memberPrice = _skuPrice.memberPrice;
-        _model.isUser = _skuPrice.isUser;
-        _model.price = _skuPrice.price;
-        _model.price = _skuPrice.price;
-    }
     
     NSString *price1 = _model.memberPrice;
     NSString *price2 = nil;
@@ -332,9 +372,13 @@
     }];
     
     _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(28)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(28)) suffixColor:_lblPrice1.textColor];
+    CGFloat height = 20;
+    if (_model.isNew) {
+        height = 30;
+    }
     
     [_pricePanel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_lblTitle.mas_bottom).offset(SizeHeigh(20));
+        make.top.equalTo(_lblTitle.mas_bottom).offset(SizeHeigh(height));
         make.left.equalTo(_lblTitle);
         make.height.equalTo(@(heightOfPricePanel));
         make.width.equalTo(@(SizeWidth(400)));
@@ -562,7 +606,6 @@
 -(void) addChoosePanelToCell:(UIView *) superView{
     _choosePanel = [UIView new];
     [superView addSubview:_choosePanel];
-    
     _choosePanel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGuesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showChooseView)];
     [_choosePanel addGestureRecognizer:tapGuesture];
@@ -730,7 +773,7 @@
 -(void) addDDPanelToCell:(UIView *) superView{
     BOOL highlight = _model.centerStock > 0;
     
-    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(30) text:@"本商品支持配送" withHighlight:highlight];
+    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(20) text:@"本商品支持配送" withHighlight:highlight];
     highlight = _model.shopStock > 0;
     
     UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:@"本商品支持到店自取" withHighlight:highlight];
