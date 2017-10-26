@@ -10,6 +10,7 @@
 #import "WMTableView.h"
 #import "SelectShopCell.h"
 #import "ShopListModel.h"
+#import "TBRefresh.h"
 
 @interface SelectShopViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +26,12 @@
     [self.rightBar removeFromSuperview];
     self.titleLab.text = @"选择门店";
     [self.view addSubview:self.tableV];
+    @weakify(self)
+    [self.tableV addRefreshHeaderWithBlock:^{
+        @strongify(self)
+        [self syncWithShopListRequest];
+        [self.tableV.header endHeadRefresh];
+    }];
     
 }
 
@@ -40,13 +47,16 @@
     NSDictionary *dic = @{
                         @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
                         @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
-//                          @"lng": @"112.587329",
-//                          @"lat": @"26.885513",
+//                          @"lng": @"120.162744",
+//                          @"lat": @"30.185959",
                        };
     [HttpRequest postPath:shoplistURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
         ShopListModel * model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
+            if (_dataArray.count != 0) {
+                [_dataArray removeAllObjects];
+            }
             [_dataArray addObjectsFromArray:model.info];
             [self.tableV reloadData];
         }else{

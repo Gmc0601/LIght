@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *selectArray;
 @property (nonatomic, assign) NSInteger pageNo;
+@property (nonatomic, assign) NSInteger lastSelectRow;
 
 @end
 
@@ -71,6 +72,7 @@
                 if (i == 0) {
                     [dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%d",i]];
                     [_selectArray addObject:dic];
+                    _lastSelectRow = 0;
                 } else {
                     [dic setObject:@"NO" forKey:[NSString stringWithFormat:@"%d",i]];
                     [_selectArray addObject:dic];
@@ -123,6 +125,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *lastDic = _selectArray[_lastSelectRow];
+    [lastDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld",_lastSelectRow]];
+    [_selectArray replaceObjectAtIndex:_lastSelectRow withObject:lastDic];
+    NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:_lastSelectRow inSection:0];
+    [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationFade];
+
     NSMutableDictionary *dic = _selectArray[indexPath.row];
     NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
     if ([str isEqualToString:@"NO"]) {
@@ -130,6 +138,7 @@
         [_selectArray replaceObjectAtIndex:indexPath.row withObject:dic];
         NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
         [self.tableV reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+        _lastSelectRow = indexPath.row;
     }
 }
 
@@ -142,6 +151,7 @@
         _tableV.dataSource = self;
         _tableV.backgroundColor = [UIColor clearColor];
         _tableV.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_tableV];
     }
     return _tableV;
 }

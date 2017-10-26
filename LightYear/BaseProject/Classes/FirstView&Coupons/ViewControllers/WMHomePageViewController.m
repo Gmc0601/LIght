@@ -130,8 +130,8 @@
     NSDictionary *dic = @{
                           @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
                           @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
-//                          @"lng": @"112.587329",
-//                          @"lat": @"26.885513",
+//                          @"lng": @"120.162744",
+//                          @"lat": @"30.185959",
                           };
     WeakSelf(weakself);
     [HttpRequest postPath:homeShopURL params:dic resultBlock:^(id responseObject, NSError *error) {
