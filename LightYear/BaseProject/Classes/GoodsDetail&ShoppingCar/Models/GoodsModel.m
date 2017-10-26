@@ -11,7 +11,7 @@
 @implementation GoodsModel
 @synthesize hasDiscounts = _hasDiscounts;
 -(BOOL)hasDiscounts{
-    return self.couponid == nil || [self.couponid isEqualToString:@""];
+    return self.couponid != nil && ![self.couponid isEqualToString:@""];
 }
 
 @synthesize canDelivery = _canDelivery;

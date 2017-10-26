@@ -735,7 +735,9 @@
     
     UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:@"本商品支持到店自取" withHighlight:highlight];
     
-    [self addDiscountPanel:superView preView:view2 top:SizeHeigh(25)];
+    if (_model.hasDiscounts) {
+        [self addDiscountPanel:superView preView:view2 top:SizeHeigh(25)];
+    }
     
 }
 
@@ -797,7 +799,7 @@
         make.width.equalTo(@(SizeWidth(22)));
     }];
     
-    BOOL highlight = NO;
+    BOOL highlight = YES;
     UILabel *lbl = [self getLableForDiscount:_model.discountMessage withHighlight:highlight];
     [view addSubview:lbl];
     

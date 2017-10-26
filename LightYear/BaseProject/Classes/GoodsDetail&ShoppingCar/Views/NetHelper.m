@@ -159,6 +159,7 @@
             model.desc = goodinfo[@"img_desc"] == [NSNull null] ? @"":goodinfo[@"img_desc"];
             model.info = goodinfo[@"info_desc"] == [NSNull null] ? @"":goodinfo[@"info_desc"];
             model.isFollow = [goodinfo[@"isfollow"]  isEqual: @"1"];
+            model.discountMessage = goodinfo[@"couponinfo"] == [NSNull null] ? @"":goodinfo[@"couponinfo"];
             callback(nil,skuList,skuPriceList,model);
         }else{
             callback(datadic[@"info"],nil,nil,nil);
