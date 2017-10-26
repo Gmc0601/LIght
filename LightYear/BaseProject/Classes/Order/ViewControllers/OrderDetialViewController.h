@@ -22,9 +22,12 @@ typedef enum {
     
 }OrderDetailType;
 
+
 @interface OrderDetialViewController : CCBaseViewController
 
 @property (nonatomic, assign) OrderDetailType orderType;  //  订单状态
+
+@property (nonatomic, assign) BOOL backHome;
 
 @property (nonatomic, copy) NSString *OrderID;  //  订单ID
 

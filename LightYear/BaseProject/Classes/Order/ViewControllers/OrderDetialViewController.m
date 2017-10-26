@@ -39,6 +39,14 @@
     [self createData];
 }
 
+- (void)back:(UIButton *)sender {
+    if (self.backHome) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)resetFather {
     NSString *titleStr;
     NSString *rightBarStr;

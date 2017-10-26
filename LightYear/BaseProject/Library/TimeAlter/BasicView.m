@@ -44,6 +44,7 @@
         main.bounds = CGRectMake(0, 0, self.bounds.size.width - KHorizontal -KHorizontal + 1,0);
         main.backgroundColor = [UIColor whiteColor];
         main.alpha = 0;
+        self.mainview = main;
         [self addSubview:main];
         
         /**

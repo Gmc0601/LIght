@@ -18,6 +18,8 @@
 #import "DeliveryAddressViewController.h"
 #import "PickerViewCustom.h"
 #import "HHPayPasswordView.h"
+#import "ChangePayPasswordViewController.h"
+#import "OrderDetialViewController.h"
 
 @interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
@@ -211,7 +213,13 @@
                         }
                         cell.textLabel.font = SourceHanSansCNRegular(15);
                         cell.textLabel.text = @"取货时间";
-                        cell.detailTextLabel.text = @"未选择";
+                        NSString *str ;
+                        if (getTime.length == 0) {
+                            str = @"未选择";
+                        }else {
+                            str = getTime;
+                        }
+                        cell.detailTextLabel.text = str;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         cell.detailTextLabel.font = VerdanaBold(15);
                         return cell;
@@ -358,6 +366,7 @@
     if (indexPath.section == 0 && indexPath.row == 1 && !post) {
         PickerViewCustom *customView = [[PickerViewCustom alloc]init];
         customView.delegate = self;
+        
         [customView show];
     }
     
@@ -401,10 +410,12 @@
         [self.navigationController pushViewController:view animated:YES];
     }
 }
-
+//  获取返回时间
 -(void)title:(NSString *)title
 {
-//    [self.button setTitle:title forState:UIControlStateNormal];
+    NSLog(@"...%@", title);
+    getTime = title;
+    [self.noUseTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -505,7 +516,13 @@
         }
     }else {
         [dic setValue:@"2" forKey:@"type"];
-        [dic setValue:@"" forKey:@"drawtime"];
+        if (getTime.length > 0) {
+            [dic setValue:getTime forKey:@"drawtime"];
+        }else {
+            [ConfigModel mbProgressHUD:@"请选择取货时间" andView:nil];
+            return;
+        }
+        
     }
     [HttpRequest postPath:@"_update_order_001" params:dic resultBlock:^(id responseObject, NSError *error) {
 
@@ -535,6 +552,7 @@
                               @"invest_id" : self.OrderID,
                               @"tradePwd" : password
                                   };
+        WeakSelf(weakself);
         [HttpRequest postPath:@"_pay_001" params:dic resultBlock:^(id responseObject, NSError *error) {
             NSLog(@"%@", responseObject);
             
@@ -547,8 +565,11 @@
                 [passwordView paySuccess];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [passwordView hide];
-                    //                PaySuccessViewController *paySuccessVC = [[PaySuccessViewController alloc] init];
-                    //                [self.navigationController pushViewController:paySuccessVC animated:YES];
+                    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+                    vc.OrderID = self.OrderID;
+                    vc.backHome = YES;
+                    [weakself.navigationController pushViewController:vc animated:YES];
+                    
                 });
             }else {
                 NSString *str = datadic[@"info"];
@@ -565,7 +586,8 @@
 
 - (void)forgetPayPassword {
     //  忘记密码
-    
+    ChangePayPasswordViewController *vc = [[ChangePayPasswordViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSMutableArray *)goodsArr {

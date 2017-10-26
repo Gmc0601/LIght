@@ -10,4 +10,5 @@
 
 @interface BasicView : UIView
 @property (nonatomic,strong) UIPickerView *picker;
+@property (nonatomic, retain) UIView *mainview;
 @end

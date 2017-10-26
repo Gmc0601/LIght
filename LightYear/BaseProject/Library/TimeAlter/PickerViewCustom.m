@@ -8,6 +8,7 @@
 
 #import "PickerViewCustom.h"
 #import "BasicView.h"
+#import "UIView+Frame.h"
 @interface PickerViewCustom()<UIGestureRecognizerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 @property (nonatomic,strong) UIWindow *keyWindow;
 @property (nonatomic,strong) BasicView *basicView;
@@ -43,8 +44,14 @@
     basicView.userInteractionEnabled = YES;
     basicView.backgroundColor = [UIColor clearColor];
     [self addSubview:basicView];
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapHide:)];
-    [basicView addGestureRecognizer:tapGR];
+    UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(basicView.mainview.left + 10, basicView.mainview.bottom - 30, basicView.mainview.width - 20, 25)];
+    btn.backgroundColor =MainBlue;
+    [btn setTitle:@"完成" forState:UIControlStateNormal];
+    btn.titleLabel.font = NormalFont(13);
+    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [basicView addSubview:btn];
+//    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapHide:)];
+//    [basicView addGestureRecognizer:tapGR];
     basicView.picker.dataSource = self;
     basicView.picker.delegate = self;
     
@@ -84,6 +91,8 @@
     NSArray *arr = (NSArray *)[self gettimeArr:nil];
     
     NSArray *array2 = @[@"我",@"你",@"他",@"它",@"她",@"他们"];
+    self.titleOne = arr1[0];
+    self.titleTwo = arr[0];
     
     self.data = @[arr1,arr];
 
@@ -124,6 +133,22 @@
 }
 
 
+- (void)btnClick:(UIButton *)sender {
+    [self hide];
+    if(self.titleOne && self.titleTwo){
+        if([self.delegate respondsToSelector:@selector(title:)]){
+            NSDate*nowDate = [NSDate date];
+            NSDate* theDate;
+            theDate = [nowDate initWithTimeIntervalSinceNow: 10 ];
+            NSString *str = [NSString stringWithFormat:@"%@", theDate];
+            NSString *first =  [str substringToIndex:4];
+            NSString *backStr = [NSString stringWithFormat:@"%@%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
+            [self.delegate title:backStr];
+        }
+    }else{
+    }
+}
+
 -(void)hide
 {
     
@@ -163,7 +188,17 @@
     }
     if(self.titleOne && self.titleTwo){
     if([self.delegate respondsToSelector:@selector(title:)]){
-        [self.delegate title:[NSString stringWithFormat:@"%@ = %@",self.titleOne,self.titleTwo]];
+        
+        NSDate*nowDate = [NSDate date];
+        NSDate* theDate;
+        theDate = [nowDate initWithTimeIntervalSinceNow: 10 ];
+        NSString *str = [NSString stringWithFormat:@"%@", theDate];
+        NSString *first =  [str substringToIndex:4];
+        NSString *backStr = [NSString stringWithFormat:@"%@%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
+        
+        
+        
+        [self.delegate title:backStr];
     }
     }else{
     }
