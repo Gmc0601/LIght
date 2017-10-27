@@ -55,7 +55,7 @@
     [super viewWillAppear:animated];
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     if (userModel) {
-        self.titleLab.text = [NSString stringWithFormat:@"%@，%@",[self getCurrentTime],userModel.nickname];
+        self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
     }else{
         self.titleLab.text = [self getCurrentTime];
     }

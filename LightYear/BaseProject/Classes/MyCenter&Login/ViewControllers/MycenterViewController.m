@@ -15,6 +15,8 @@
 #import "OrderViewController.h"
 #import "LoginViewController.h"
 #import "WMHomePageViewController.h"
+#import "UserModel.h"
+
 @interface MycenterViewController ()<UITableViewDelegate,UITableViewDataSource,MycenterHeadViewDelegate,UserInfoPicketViewDelegate>
 {
     UIButton * bottomButton;
@@ -22,6 +24,7 @@
     NSMutableArray * dataArray;
     MycenterHeadView * headView;
     UserInfoPicketView * picketView;
+        UserInfo * userModel;
 }
 @end
 
@@ -30,9 +33,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLab.text = [NSString stringWithFormat:@"%@！光年",[self getCurrentTime]];
     dataArray = [NSMutableArray arrayWithObjects:@"收货地址",@"意见反馈",@"联系我们", nil];//,@"分享App给朋友
     [self createBaseView];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    if (userModel) {
+        self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
+    }else{
+        self.titleLab.text = [self getCurrentTime];
+    }
 }
 //- (void)back:(UIButton *)sender{
 //    for (UIViewController * controller in self.navigationController.viewControllers) {
