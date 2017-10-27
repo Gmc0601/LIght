@@ -65,7 +65,7 @@
     self.separatorInset = UIEdgeInsetsMake(0, SizeWidth(15), 0, SizeWidth(15));
     _imgTop = SizeHeigh(31);
     _imgSize = CGSizeMake(SizeWidth(100), SizeHeigh(100));
-    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     return  self;
 }
 
