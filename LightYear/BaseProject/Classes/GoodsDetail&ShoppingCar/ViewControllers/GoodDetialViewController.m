@@ -1206,7 +1206,14 @@
         }];
     }
     
-    [web loadHTMLString:html baseURL:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        // 耗时的操作
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // 更新界面
+//        });
+        [web loadHTMLString:html baseURL:nil];
+
+    });
     
     return web;
 }
@@ -1225,8 +1232,8 @@
         _heightOfInfo = fittingSize.height;
     }
     
-    [_tb beginUpdates];
-    [_tb endUpdates];
+//    [_tb beginUpdates];
+//    [_tb endUpdates];
 }
 
 -(void) restPrice{
