@@ -15,6 +15,7 @@
 @interface InspectCouponViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) WMTableView *tableV;
+@property (nonatomic, strong) UIImageView *defImageV;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *selectArray;
 @property (nonatomic, assign) NSInteger lastSelectRow;
@@ -84,8 +85,9 @@
         
         CouponListModel * model = [[CouponListModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
-            for (CouponInfo *info in model.info) {
-                [_dataArray addObject:info];
+            [_dataArray addObjectsFromArray:model.info];
+            if (_dataArray.count ==0 && ![self.tableV.subviews containsObject:self.defImageV]) {
+                [self.tableV addSubview:self.defImageV];
             }
             for (int i = 0; i<_dataArray.count; i++) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -100,6 +102,9 @@
             }
             [self.tableV reloadData];
         }else{
+            if (![self.tableV.subviews containsObject:self.defImageV]) {
+                [self.tableV addSubview:self.defImageV];
+            }
             [ConfigModel mbProgressHUD:model.message andView:nil];
         }
         [ConfigModel hideHud:self];
@@ -174,6 +179,15 @@
         [self.view addSubview:_tableV];
     }
     return _tableV;
+}
+
+- (UIImageView *)defImageV {
+    if (!_defImageV) {
+        _defImageV = [[UIImageView alloc] initWithFrame:CGRectMake( 0, 0, SizeWidth(76), SizeHeigh(45))];
+        _defImageV.center = CGPointMake(self.tableV.width/2, self.tableV.height/2);
+        _defImageV.image = [UIImage imageNamed:@"icon_couponqx"];
+    }
+    return _defImageV;
 }
 
 @end
