@@ -28,6 +28,7 @@
     AMapLocationManager * _locationManager;
     //当前地理位置
     CLLocation *_currentLocation;
+    UserInfo * userModel;
 }
 
 @property (nonatomic, strong) WMHomeHeaderView *headerView;
@@ -42,6 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initLeftNavBar];
     [self initRightBar];
     [self addSubview];
@@ -51,8 +53,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    UserInfo *info = [[TMCache sharedCache] objectForKey:UserInfoModel];
-    self.titleLab.text = [NSString stringWithFormat:@"%@!%@",[self getCurrentTime],info.nickname];
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    if (userModel) {
+        self.titleLab.text = [NSString stringWithFormat:@"%@，%@",[self getCurrentTime],userModel.nickname];
+    }else{
+        self.titleLab.text = [self getCurrentTime];
+    }
     self.titleLab.adjustsFontSizeToFitWidth = YES;
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
