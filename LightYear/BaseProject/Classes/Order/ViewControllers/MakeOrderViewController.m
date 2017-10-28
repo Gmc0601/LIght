@@ -567,6 +567,11 @@
                     [passwordView hide];
                     OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
                     vc.OrderID = self.OrderID;
+                    if (post) {
+                        vc.orderType = Order_Distribution;
+                    }else {
+                        vc.orderType = Order_Invite;
+                    }
                     vc.backHome = YES;
                     [weakself.navigationController pushViewController:vc animated:YES];
                     
