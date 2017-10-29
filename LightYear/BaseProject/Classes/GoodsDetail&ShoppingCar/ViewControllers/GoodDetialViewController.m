@@ -79,7 +79,7 @@
     [super viewDidLoad];
     _countOfCell = 3;
     [self addBottomView];
-
+    
     [self addTableView];
     self.rightBar.hidden = YES;
 }
@@ -242,11 +242,11 @@
 }
 
 -(void) addGoodsDetailToCell:(UITableViewCell *) cell{
-
+    
     [self addBannerToCell:cell];
     [self addTitleToCell:cell];
     [self addNewFlagToCell:cell];
-
+    
     [self addPriceLableToCell:cell];
     if (![self hasView:_btnFaveritor inSuperView:cell]) {
         [self addFavoriteButtonToCell:cell];
@@ -272,7 +272,7 @@
         make.height.equalTo(@(SizeHeigh(16)));
         make.width.equalTo(@(SizeHeigh(22)));
     }];
-
+    
 }
 
 -(void) addTitleToCell:(UITableViewCell *) cell{
@@ -289,7 +289,7 @@
     [cell addSubview:_lblTitle];
     
     CGFloat height = SizeHeigh(15);
-   
+    
     if ([self titleIsMultiLine]) {
         height = SizeHeigh(45);
     }
@@ -898,7 +898,7 @@
     int count = ((SKU *)(_skuSelectValue[_skuSelectValue.count - 1])).value.intValue;
     NSString *price = _model.price;
     if (_model.specilPrice !=nil) {
-            price = _model.specilPrice;
+        price = _model.specilPrice;
     }else if(_model.memberPrice == nil){
         price = _model.memberPrice;
     }else{
@@ -977,7 +977,7 @@
 
 -(void) tapComplete{
     _skuSelectValue = _pickView.selectValue;
-//    [self resetSubViewsToChoosePanel];
+    //    [self resetSubViewsToChoosePanel];
     [self restPrice];
     [self dismissPopup];
 }
@@ -1207,12 +1207,12 @@
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        // 耗时的操作
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // 更新界面
-//        });
+        //        // 耗时的操作
+        //        dispatch_async(dispatch_get_main_queue(), ^{
+        //            // 更新界面
+        //        });
         [web loadHTMLString:html baseURL:nil];
-
+        
     });
     
     return web;
@@ -1232,8 +1232,8 @@
         _heightOfInfo = fittingSize.height;
     }
     
-//    [_tb beginUpdates];
-//    [_tb endUpdates];
+    //    [_tb beginUpdates];
+    //    [_tb endUpdates];
 }
 
 -(void) restPrice{
