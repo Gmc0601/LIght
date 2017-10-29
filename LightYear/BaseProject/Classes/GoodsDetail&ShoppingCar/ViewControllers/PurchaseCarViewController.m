@@ -320,7 +320,7 @@
         [ConfigModel hideHud:self];
         if (error == nil) {
             for (PurchaseModel *m in _dataSource) {
-                if (m._id == model._id) {
+                if (m._id == model._id && m.sku == model.sku) {
                     m.count = model.count;
                     break;
                 }
