@@ -102,7 +102,7 @@
     if ([textField.text isEqualToString:@""]) {
         return NO;
     }
-    
+    _keyword = textField.text;
     [self.delegate didSearch:textField.text];
     return YES;
 }

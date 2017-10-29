@@ -53,6 +53,7 @@
 }
 
 -(void) didSearch:(NSString *)keyworkd{
+    keyworkd = @"会员";
     NSMutableArray *history = [ConfigModel getArrforKey:historyKey];
     [history removeObject:keyworkd];
     [history insertObject:keyworkd atIndex:0];

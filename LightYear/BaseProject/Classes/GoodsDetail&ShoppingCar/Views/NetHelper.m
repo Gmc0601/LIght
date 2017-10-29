@@ -317,7 +317,7 @@
         if ([datadic[@"error"] intValue] == 0) {
             callback(nil,nil);
         }else{
-            callback(datadic[@"info"],nil);
+            callback(datadic[@"message"],nil);
         }
     }];
 }
