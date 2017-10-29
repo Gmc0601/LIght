@@ -322,6 +322,7 @@
             for (PurchaseModel *m in _dataSource) {
                 if (m._id == model._id) {
                     m.count = model.count;
+                    break;
                 }
             }
             
@@ -338,9 +339,10 @@
     float discount = 0;
     for (PurchaseModel *model in _dataSource) {
         sum += model.price.floatValue * model.count;
-        discount += (model.oldPrice - model.price.intValue) * model.count;
+        if (model.oldPrice > 0) {
+            discount += (model.oldPrice - model.price.intValue) * model.count;
+        }
     }
-    
     _lblPrice.text = [NSString stringWithFormat:@"￥%.2f",sum];
     _lblDiscount.text = [NSString stringWithFormat:@"￥%.2f",discount];
 }
