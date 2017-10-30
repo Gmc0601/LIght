@@ -293,15 +293,18 @@
 }
 
 -(void) showPurchaseCarViewController{
-    PurchaseCarViewController *newVC = [PurchaseCarViewController new];
-    
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromTop;
-    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    [self.navigationController pushViewController:newVC animated:YES];
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        PurchaseCarViewController *newVC = [PurchaseCarViewController new];
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.5;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromTop;
+        [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+        [self.navigationController pushViewController:newVC animated:YES];
+    }else{
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Time
