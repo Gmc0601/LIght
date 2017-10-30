@@ -345,9 +345,9 @@
     }else{
         if (_model.isUser) {
             price1 = _model.specilPrice;
+            price2 = _model.price;
         }else{
             price1 = _model.specilPrice;
-            price2 = _model.specilPrice;
         }
         
         _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
