@@ -91,10 +91,10 @@
     _tb = [[UITableView alloc] init];
     _tb.delegate = self;
     _tb.dataSource = self;
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell1"];
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell2"];
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell3"];
-    [_tb registerClass:[GoodsCell class] forCellReuseIdentifier:@"cell4"];
+    [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell1"];
+    [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
+    [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell3"];
+    [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell4"];
     [_tb registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:_headerIdentifier];
     _tb.tableFooterView = [UIView new];
     _tb.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -122,24 +122,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
     ;
     
     if (_model != nil) {
         switch (indexPath.section) {
             case 0:
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
                 [self addGoodsDetailToCell:cell];
                 break;
             case 1:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
-                _infoWebView = [self addWebViewToCell:cell withHtml:_model.info];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+                [self addWebView:_descWebView toCell:cell];
                 break;
             case 2:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-                _descWebView = [self addWebViewToCell:cell withHtml:_model.desc];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
+                [self addWebView:_infoWebView toCell:cell];
                 break;
             case 3:
-                cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cell4" forIndexPath:indexPath];
                 [self addRecommendViewToCell:cell];
                 break;
                 
@@ -170,17 +171,18 @@
         
         return SizeHeigh(height);
     }else if(indexPath.section == 1){
-        _infoWebView.hidden = !_showDetail;
-        
+//        _descWebView.hidden = !_showReminder;
+
         if (_showDetail) {
-            return _heightOfInfo +SizeHeigh(50);
+            return _heightOfDesc +SizeHeigh(20);
         }else{
             return 0;
         }
     }else if(indexPath.section == 2){
-        _descWebView.hidden = !_showReminder;
+//        _infoWebView.hidden = !_showDetail;
+
         if (_showReminder) {
-            return _heightOfDesc + SizeHeigh(50);
+            return _heightOfInfo + SizeHeigh(20);
         }else{
             return 0;
         }
@@ -894,7 +896,7 @@
 -(void) buy{
     
     if ([ConfigModel getBoolObjectforKey:IsLogin] == NO) {
-         [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
         return;
     }
     
@@ -1118,6 +1120,8 @@
             _model = model;
             _skuList = skuList;
             _skuPriceList = skuPriceList;
+            _descWebView = [self setWebView:_descWebView withHtml:model.desc];
+            _infoWebView = [self setWebView:_infoWebView withHtml:model.info];
             
             [NetHelper recommendList:_model._id withGoodsId:_model.shopId callBack:^(NSString *error, NSArray *data) {
                 if (data.count > 0) {
@@ -1189,40 +1193,33 @@
     return datasource;
 }
 
--(UIWebView *) addWebViewToCell:(UITableViewCell *) cell withHtml:(NSString *) html{
-    UIWebView *web  = nil;
-    for (UIView *view in cell.subviews) {
-        if ([view isKindOfClass:[UIWebView class]]) {
-            web = (UIWebView *)view;
-            break;
-        }
-    }
+-(void) addWebView:(UIWebView *) web toCell:(UITableViewCell *) cell{
+    web.backgroundColor = [UIColor redColor];
+  
+    [web removeFromSuperview];
+    [cell insertSubview:web atIndex:0];
+    web.hidden = NO;
+    [web mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell).offset(SizeWidth(15));
+        make.right.equalTo(cell).offset(-SizeWidth(15));
+        make.top.equalTo(cell).offset(SizeHeigh(10));
+        make.bottom.equalTo(cell).offset(-SizeHeigh(15));
+    }];
+}
+
+-(UIWebView *)setWebView:(UIWebView *) web withHtml:(NSString *) html{
     
     if (web == nil) {
-        [self addSeperatorToView:cell];
-        
-        web = [UIWebView new];
+        web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 3)];
         web.delegate = self;
         web.scrollView.scrollEnabled = NO;
-        [cell addSubview:web];
-        [web mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(cell).offset(SizeWidth(15));
-            make.right.equalTo(cell).offset(-SizeWidth(15));
-            make.top.equalTo(cell).offset(SizeHeigh(20));
-            make.bottom.equalTo(cell).offset(-SizeHeigh(30));
-        }];
+        web.hidden = YES;
+        [self.view addSubview:web];
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //        // 耗时的操作
-        //        dispatch_async(dispatch_get_main_queue(), ^{
-        //            // 更新界面
-        //        });
-        [web loadHTMLString:html baseURL:nil];
-        
-    });
+    [web loadHTMLString:html baseURL:nil];
     
-    return web;
+    return  web;
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
