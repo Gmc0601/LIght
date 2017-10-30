@@ -86,7 +86,8 @@
         [self startTimer];
     }
     else {
-//        [self invalidTimer];
+        [self invalidTimer];
+        [_bannerArray removeAllObjects];
         _selectedImageIndex = 0;
         _pageControl.hidden = YES;
         _pageControl.currentPage = _selectedImageIndex;

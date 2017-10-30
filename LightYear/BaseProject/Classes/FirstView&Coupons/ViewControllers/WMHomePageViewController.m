@@ -54,7 +54,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
-    if (userModel) {
+    if (userModel.nickname != nil) {
         self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
     }else{
         self.titleLab.text = [self getCurrentTime];
@@ -211,14 +211,18 @@
 }
 
 - (void)callbackMemberClick {
-    MemberCardViewController *cardVC = [[MemberCardViewController alloc] init];
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromTop;
-    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    [self.navigationController pushViewController:cardVC animated:YES];
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        MemberCardViewController *cardVC = [[MemberCardViewController alloc] init];
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.5;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromTop;
+        [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+        [self.navigationController pushViewController:cardVC animated:YES];
+    }else{
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+    }
 }
 
 #pragma mark - lazyLoad

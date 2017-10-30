@@ -39,7 +39,7 @@
 #pragma mark - lazyLoad
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(15), SizeWidth(100), SizeHeigh(20))];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(15), SizeWidth(200), SizeHeigh(20))];
         _titleLabel.font = SourceHanSansCNMedium(SizeWidth(15));
         _titleLabel.textColor = UIColorFromHex(0x333333);
         _titleLabel.textAlignment = NSTextAlignmentLeft;
