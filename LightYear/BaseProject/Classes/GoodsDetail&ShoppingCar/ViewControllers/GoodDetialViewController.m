@@ -21,6 +21,7 @@
 #import "SKU.h"
 #import "SKUPrice.h"
 #import "NSString+Category.h"
+#import "LoginViewController.h"
 
 #define TAG 100
 #define ARROW_TAG 1000
@@ -891,6 +892,12 @@
 }
 
 -(void) buy{
+    
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == NO) {
+         [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+        return;
+    }
+    
     if (_skuPrice == nil) {
         _skuPrice = [self getSkuPrice];
     }
