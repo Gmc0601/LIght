@@ -308,7 +308,7 @@
 -(BOOL) titleIsMultiLine{
     UIFont *font = [UIFont systemFontOfSize:SizeWidth(15)];
     CGFloat width = [_model.name widthWithFont:font height:SizeHeigh(12)];
-    if (width > ScreenWidth - SizeWidth(55)) {
+    if (width > ScreenWidth - SizeWidth(68)) {
         return YES;
     }
     
