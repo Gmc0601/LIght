@@ -24,12 +24,32 @@
     if (_addressModel == nil) {
         _addressModel = [[DeliveryAddressInfo alloc] init];
         self.titleLab.text = @"新建收货地址";
+        self.rightBar.hidden = YES;
     }else{
         self.titleLab.text = @"编辑收货地址";
+        [self.rightBar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.rightBar setTitle:@"删除" forState:UIControlStateNormal];
     }
     [self createBaseView];
 }
 
+//删除收货地址
+- (void)more:(UIButton *)sender{
+    NSDictionary * params = @{@"id":_addressModel.id};
+    [ConfigModel showHud:self];
+    [HttpRequest postPath:DeleteReceiptURL params:params resultBlock:^(id responseObject, NSError *error) {
+        BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+        [ConfigModel hideHud:self];
+        if (model.error == 0) {
+            if (self.finishBlock) {
+                self.finishBlock(nil);
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [ConfigModel mbProgressHUD:model.message andView:nil];
+        }
+    }];
+}
 - (void)createBaseView{
     UIView * currentView;
     for (int i = 0; i < 4; i++) {

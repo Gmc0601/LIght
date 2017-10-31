@@ -210,7 +210,9 @@
 //内容发生改变编辑 自定义文本框placeholder
 - (void)textViewDidChange:(UITextView *)textView
 {
-    
+    if (textView.text.length > 200) {
+        textView.text = [textView.text substringWithRange:NSMakeRange(0, 200)];
+    }
 }
 - (void)lookMoreButtonAction:(UIButton *)button{
     FeedBackViewController * feedBackVC = [[FeedBackViewController alloc] init];

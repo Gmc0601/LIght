@@ -169,35 +169,35 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    DeliveryAddressInfo *model = [[DeliveryAddressInfo alloc] init];
-    model = dataArray[indexPath.section];
-    if (self.addressBlock) {
-        self.addressBlock(model);
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-}
-
-#pragma mark DeilveryAddressTableViewCellDelegate
-- (void)didDeilveryAddressTableViewCellEditButton:(UIButton *)button{
-    CGPoint point = button.center;
-    point = [myTableView convertPoint:point fromView:button.superview];
-    NSIndexPath* indexPath = [myTableView indexPathForRowAtPoint:point];
+    DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
+    detailModel = dataArray[indexPath.section];
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
-    editAddressVC.addressModel = dataArray[indexPath.section];
+    editAddressVC.addressModel = detailModel;
     [editAddressVC setFinishBlock:^(DeliveryAddressInfo *model) {
-        if (model.isdefault == 1) {
-            [dataArray removeObject:dataArray[indexPath.section]];
-            for (DeliveryAddressInfo * info in dataArray) {
-                info.isdefault = 0;
-            }
-            [dataArray insertObject:model atIndex:0];
+        if (model == nil) {
+            [dataArray removeObject:detailModel];
         }else{
-            [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
+            if (model.isdefault == 1) {
+                [dataArray removeObject:detailModel];
+                for (DeliveryAddressInfo * info in dataArray) {
+                    info.isdefault = 0;
+                }
+                [dataArray insertObject:model atIndex:0];
+            }else{
+                [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
+            }
         }
         [myTableView reloadData];
     }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
+}
+
+#pragma mark DeilveryAddressTableViewCellDelegate
+- (void)didDeilveryAddressTableViewCellEditButton:(UIButton *)button{
+//    CGPoint point = button.center;
+//    point = [myTableView convertPoint:point fromView:button.superview];
+//    NSIndexPath* indexPath = [myTableView indexPathForRowAtPoint:point];
+    
 }
 
 - (void)didReceiveMemoryWarning {
