@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RecommendCV : UIView
+@property(retain,atomic) UIViewController *owner;
 -(void) setDataSource:(NSArray *) dataSource;
 @end

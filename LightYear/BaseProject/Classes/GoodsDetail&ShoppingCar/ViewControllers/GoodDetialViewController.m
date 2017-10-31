@@ -57,6 +57,7 @@
 @property(retain,atomic) RecommendCV* recommendCV;
 @property(retain,atomic) NSArray* skuList;
 @property(retain,atomic) NSArray* skuPriceList;
+@property(retain,atomic) NSArray* recommendList;
 @property (retain,nonatomic) NSString *goodsId;
 @property (retain,nonatomic) NSString *shopId;
 @property (retain,nonatomic) SKU *sku;
@@ -66,7 +67,7 @@
 @property(retain,atomic) UIWebView *infoWebView;
 @property(retain,atomic) UIWebView *descWebView;
 @property(retain,atomic)  SKUPrice *skuPrice;
-@property(assign,atomic)  int *countOfCell;
+@property(assign,atomic)  int countOfCell;
 @property(assign,atomic)  BOOL *multiLine;
 @end
 
@@ -151,12 +152,12 @@
     
     return cell;
 }
-
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    GoodDetialViewController *newVC = [GoodDetialViewController new];
-    
-    [self.navigationController pushViewController:newVC animated:YES];
-}
+//
+//-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    GoodDetialViewController *newVC = [GoodDetialViewController new];
+//    
+//    [self.navigationController pushViewController:newVC animated:YES];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -186,8 +187,9 @@
         }else{
             return 0;
         }
+    }else if (indexPath.section == 3){
+        return SizeHeigh(320);
     }
-    
     return  SizeHeigh(350);
 }
 
@@ -1078,7 +1080,6 @@
     if (_recommendCV != nil) {
         return;
     }
-    
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
     lblTitle.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -1094,6 +1095,7 @@
     }];
     
     _recommendCV = [RecommendCV new];
+    _recommendCV.owner = self;
     _recommendCV.backgroundColor = [UIColor whiteColor];
     [cell addSubview:_recommendCV];
     
@@ -1103,6 +1105,9 @@
         make.right.equalTo(cell).offset(-SizeWidth(15));
         make.left.equalTo(cell).offset(SizeWidth(15));
     }];
+    
+    [_recommendCV setDataSource:_recommendList];
+
 }
 
 -(void) setGoodsId:(NSString *)goodsId withShopId:(NSString *) shopId{
@@ -1123,10 +1128,10 @@
             _descWebView = [self setWebView:_descWebView withHtml:model.desc];
             _infoWebView = [self setWebView:_infoWebView withHtml:model.info];
             
-            [NetHelper recommendList:_model._id withGoodsId:_model.shopId callBack:^(NSString *error, NSArray *data) {
+            [NetHelper recommendList:_model.shopId withGoodsId:_model._id  callBack:^(NSString *error, NSArray *data) {
                 if (data.count > 0) {
                     _countOfCell = 4;
-                    [_recommendCV setDataSource:data];
+                    _recommendList = data;
                 }
                 [_tb reloadData];
             }];
@@ -1194,8 +1199,6 @@
 }
 
 -(void) addWebView:(UIWebView *) web toCell:(UITableViewCell *) cell{
-    web.backgroundColor = [UIColor redColor];
-  
     [web removeFromSuperview];
     [cell insertSubview:web atIndex:0];
     web.hidden = NO;

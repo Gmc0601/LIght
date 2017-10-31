@@ -220,6 +220,7 @@
             price2 = _model.price;
         }else{
             price1 = _model.specilPrice;
+            price2 = nil;
 //            price2 = _model.specilPrice;
         }
         
@@ -256,7 +257,7 @@
     _lblPrice2.font = VerdanaBold(SizeWidth(15));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice1.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice1.textColor];
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice2.textColor];
     
     [self addSubview:_lblPrice2];
     CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);

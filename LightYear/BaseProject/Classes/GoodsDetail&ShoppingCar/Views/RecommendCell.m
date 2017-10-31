@@ -75,12 +75,13 @@
     _lblTitle.textAlignment = NSTextAlignmentLeft;
     _lblTitle.text = _model.name;
     _lblTitle.numberOfLines = 2;
+    _lblTitle.lineBreakMode = NSLineBreakByWordWrapping;
     [self addSubview:_lblTitle];
     
     [_lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self);
         make.top.equalTo(_img.mas_bottom).offset(SizeHeigh(20/2));
-        make.height.equalTo(@(SizeHeigh(30)));
+        make.height.equalTo(@(SizeHeigh(45)));
         make.width.equalTo(self);
     }];
     
@@ -100,8 +101,8 @@
     
     [self addSubview:_lblPrice1];
     
-    if (_model.specilPrice == nil) {
-        if(_model.memberPrice == nil){
+    if (_model.specilPrice == nil || [_model.specilPrice  isEqual: @"0"]) {
+        if(_model.memberPrice == nil || [_model.memberPrice  isEqual: @"0"]){
             price1 = _model.price;
             _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
         }else{
@@ -117,6 +118,7 @@
             price2 = _model.price;
         }else{
             price1 = _model.specilPrice;
+            price2 = nil;
         }
         
         _lblPrice1.backgroundColor = [UIColor colorWithHexString:@"fecd2f"];
@@ -154,7 +156,7 @@
     _lblPrice2.font = VerdanaBold(SizeWidth(10));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(10)) prefixColor:_lblPrice1.textColor suffixString:price suffixFont: _lblPrice2.font suffixColor:_lblPrice1.textColor];
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(10)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: _lblPrice2.font suffixColor:_lblPrice2.textColor];
     
     [self addSubview:_lblPrice2];
     CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);
@@ -181,7 +183,7 @@
         make.bottom.equalTo(constraintView);
         make.left.equalTo(constraintView.mas_right).offset(leftMargin);
         make.height.equalTo(@(SizeHeigh(10)));
-        make.width.equalTo(@(SizeHeigh(30)));
+        make.width.equalTo(@(SizeWidth(40)));
     }];
     
     return lbl;

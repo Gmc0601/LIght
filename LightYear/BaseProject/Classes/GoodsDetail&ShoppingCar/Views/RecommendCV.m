@@ -9,6 +9,7 @@
 #import "RecommendCV.h"
 #import "RecommendCell.h"
 #import <Masonry/Masonry.h>
+#import "GoodDetialViewController.h"
 
 @interface RecommendCV()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(retain,atomic) NSArray *datasource;
@@ -68,6 +69,11 @@
     return  cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    GoodsModel *model = (GoodsModel *) _datasource[indexPath.row];
+    GoodDetialViewController *newVC = [GoodDetialViewController new];
+    NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+    [newVC setGoodsId:model._id withShopId:shopId];
+    [self.owner.navigationController pushViewController:newVC animated:YES];
 }
 
 -(void)reload{
