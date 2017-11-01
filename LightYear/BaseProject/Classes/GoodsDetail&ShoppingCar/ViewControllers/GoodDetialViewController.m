@@ -915,7 +915,7 @@
     NSString *price = _model.price;
     if (_model.specilPrice !=nil) {
         price = _model.specilPrice;
-    }else if(_model.memberPrice == nil){
+    }else if(_model.memberPrice != nil){
         price = _model.memberPrice;
     }else{
         price = _model.price;
