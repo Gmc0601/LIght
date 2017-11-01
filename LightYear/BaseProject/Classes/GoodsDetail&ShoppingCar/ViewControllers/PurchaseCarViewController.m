@@ -326,7 +326,9 @@
                 }
             }
             
-            [self renderUI];
+//            [self renderUI];
+            [_tb reloadData];
+
 
         } else {
             [ConfigModel mbProgressHUD:error andView:self.view];
