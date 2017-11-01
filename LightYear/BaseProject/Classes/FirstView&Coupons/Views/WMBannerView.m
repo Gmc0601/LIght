@@ -40,7 +40,7 @@
 
 - (UIScrollView *)imageScrollView {
     if (!_imageScrollView) {
-        _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake( (self.width-SizeWidth(345))/2, 0, SizeWidth(345), SizeWidth(310))];
+        _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake( (self.width-SizeWidth(345))/2, 0, SizeWidth(345), SizeHeigh(310))];
         _imageScrollView.backgroundColor = [UIColor clearColor];
         _imageScrollView.showsHorizontalScrollIndicator = NO;
         _imageScrollView.showsVerticalScrollIndicator = NO;
@@ -59,7 +59,7 @@
         _pageControl.centerX = self.centerX;
         _pageControl.backgroundColor = [UIColor clearColor];
         _pageControl.pageIndicatorTintColor = UIColorFromHex(0x333333);
-        _pageControl.currentPageIndicatorTintColor = UIColorFromHex(0x4d333333);
+        _pageControl.currentPageIndicatorTintColor = UIColorFromHex(0x4d3333);
         _pageControl.numberOfPages = 1;
     }
     return _pageControl;
@@ -214,9 +214,10 @@
     
     // 水平滚动
     // 往下翻一张
-    if(xOffset >= (2 * SizeWidth(345))) {
+    if(xOffset >= (2 * SizeWidth(344))) {
         //向右
         _selectedImageIndex++;
+        NSLog(@"----%ld",_selectedImageIndex);
         _selectedImageIndex = _selectedImageIndex % _bannerArray.count;
         [self refreshScrollView];
     }
