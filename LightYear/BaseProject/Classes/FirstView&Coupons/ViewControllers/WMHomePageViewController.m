@@ -254,14 +254,14 @@
         make.height.equalTo(@(SizeHeigh(98/2)));
     }];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qd"]];
     [self.bottomView addSubview:imgView];
     
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomView).offset(SizeHeigh(27/2));
         make.left.equalTo(self.bottomView).offset(SizeWidth(38/2));
-        make.width.equalTo(@(SizeWidth(57/2)));
-        make.height.equalTo(@(SizeHeigh(57/2)));
+        make.width.equalTo(@(SizeWidth(22)));
+        make.height.equalTo(@(SizeHeigh(22)));
     }];
     
     UILabel *lblTitle = [UILabel new];
