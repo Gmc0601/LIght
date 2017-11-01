@@ -11,6 +11,7 @@
 #import "GoodsListView.h"
 #import "GoodDetialViewController.h"
 #import "PurchaseCarViewController.h"
+#import "LoginViewController.h"
 
 @interface ShopBaseViewController ()<GoodsListViewDelegate>
 @property(retain,atomic) UIView *rightView;
@@ -59,6 +60,11 @@
 }
 
 -(void) showFavoriarView{
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == NO) {
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+        return;
+    }
+    
     CGFloat width = SizeWidth(639/2);
     CGFloat x = self.view.bounds.size.width - width;
     
@@ -218,6 +224,10 @@
 }
 
 -(void) showPurchaseCarViewController{
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == NO) {
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+        return;
+    }
     PurchaseCarViewController *newVC = [PurchaseCarViewController new];
     
     CATransition *transition = [CATransition animation];

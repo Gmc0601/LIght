@@ -566,6 +566,11 @@
 }
 
 -(void) tapFavoriteButton{
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == NO) {
+        [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+        return;
+    }
+    
     [ConfigModel showHud:self];
     if (_btnFaveritor.selected) {
         [NetHelper cancelFavoriteWithGoodsId:_model._id withShopId:_model.shopId callBack:^(NSString *error, NSString *message) {
