@@ -246,14 +246,14 @@
     
     if (_lblCount == nil) {
         _lblCount = [UILabel new];
-        _lblCount.font = Verdana(SizeWidth(9));
+        _lblCount.font = Verdana(SizeWidth(8));
         _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _lblCount.textAlignment = NSTextAlignmentCenter;
         [img addSubview:_lblCount];
         
         [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(img).offset(SizeWidth(2.5));
-            make.bottom.equalTo(img).offset(-SizeHeigh(3));
+            make.right.equalTo(img).offset(SizeWidth(3));
+            make.bottom.equalTo(img).offset(-SizeHeigh(2));
             make.width.equalTo(@(SizeWidth(20)));
             make.height.equalTo(@(SizeHeigh(10)));
         }];

@@ -54,7 +54,7 @@
                 [self addTableView];
             }
             
-            [self addLableCountToImage:self.leftBar withText:info];
+//            [self addLableCountToImage:self.leftBar withText:info];
             [_tb.header beginRefreshing];
         }else{
             [ConfigModel hideHud:self];
@@ -325,7 +325,7 @@
                     break;
                 }
             }
-            
+            [self setPrice];
 //            [self renderUI];
             [_tb reloadData];
 
@@ -339,7 +339,9 @@
 -(void) setPrice{
     float sum = 0;
     float discount = 0;
+    int count = 0;
     for (PurchaseModel *model in _dataSource) {
+        count += model.count;
         sum += model.price.floatValue * model.count;
         if (model.oldPrice > 0) {
             discount += (model.oldPrice - model.price.intValue) * model.count;
@@ -347,5 +349,7 @@
     }
     _lblPrice.text = [NSString stringWithFormat:@"￥%.2f",sum];
     _lblDiscount.text = [NSString stringWithFormat:@"￥%.2f",discount];
+    [self addLableCountToImage:self.leftBar withText:[NSString stringWithFormat:@"%d",count]];
+
 }
 @end
