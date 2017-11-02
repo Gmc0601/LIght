@@ -30,7 +30,7 @@
     //    [self addViewsForEmpty];
     self.navigationView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     self.titleLab.text = @"购物清单";
-    
+    [self.rightBar setTitle:@"" forState:UIControlStateNormal];
     [self.rightBar setImage:[UIImage imageNamed:@"sg_ic_down_up_h"] forState:UIControlStateNormal];
     
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,6 +64,7 @@
                 _tb = nil;
                 self.bottomView = nil;
             }
+            [self removeCountLableFromImage];
             [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
             [self addViewsForEmpty];
         }

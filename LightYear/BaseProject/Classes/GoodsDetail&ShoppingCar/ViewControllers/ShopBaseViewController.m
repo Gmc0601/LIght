@@ -239,8 +239,14 @@
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
+-(void) removeCountLableFromImage{
+    [_lblCount removeFromSuperview];
+    _lblCount = nil;
+}
+
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
-    if (text == nil) {
+    if (text == nil || [text  isEqual: @"0"]) {
+        [_lblCount removeFromSuperview];
         return;
     }
     

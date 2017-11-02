@@ -23,4 +23,5 @@
 -(void) addSearchButton;
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text;
 -(void) refreshCountOfGoodsInCar;
+-(void) removeCountLableFromImage;
 @end
