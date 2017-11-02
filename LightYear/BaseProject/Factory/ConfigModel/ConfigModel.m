@@ -69,6 +69,10 @@
     NSMutableArray *userDefaultsArr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     NSMutableArray *mutableCopyArr = [userDefaultsArr mutableCopy];
+
+    if(mutableCopyArr == nil){
+        mutableCopyArr = [NSMutableArray arrayWithCapacity:0];
+    }
     return mutableCopyArr;
 }
 
