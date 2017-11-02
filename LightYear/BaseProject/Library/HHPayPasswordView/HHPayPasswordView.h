@@ -28,6 +28,8 @@
 
 @property (nonatomic, weak) id<HHPayPasswordViewDelegate> delegate;
 
+@property (nonatomic, copy) void(^closeBlock)();
+
 - (void)showInView:(UIView *)view;
 
 - (void)hide;

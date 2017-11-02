@@ -178,6 +178,7 @@
     if (!_logoImage) {
         _logoImage = [[UIImageView alloc] initWithFrame:FRAME(SizeWidth(15), SizeHeigh(20), SizeWidth(16), SizeWidth(16))];
         _logoImage.backgroundColor = [UIColor clearColor];
+        _logoImage.image = [UIImage imageNamed:@"icon_tx"];
     }
     return _logoImage;
 }

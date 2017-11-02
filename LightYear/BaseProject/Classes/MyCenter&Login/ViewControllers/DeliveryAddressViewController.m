@@ -169,6 +169,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if (self.getback) {
+        if (self.addressBlock) {
+            DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
+            detailModel = dataArray[indexPath.section];
+            self.addressBlock(detailModel);
+        }
+        return;
+    }
+    
     DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
     detailModel = dataArray[indexPath.section];
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];

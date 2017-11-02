@@ -19,9 +19,15 @@
 
 - (void)updatcell:(OrderModel *)model {
     self.storeNameLab.text = model.shopInfo.shopname;
-    NSString *num = [NSString stringWithFormat:@"共%lu件 >", model.goodlist.count];
+    int goodsNum = 0;
+    for (int i = 0; i < model.goodlist.count; i++) {
+        NSDictionary *dic = (NSDictionary *)model.goodlist[i];
+        int num = [dic[@"count"] intValue];
+        goodsNum += num;
+    }
+    
+    NSString *num = [NSString stringWithFormat:@"共%d件 >", goodsNum];
     self.foodsNumLab.text = num;
-//    NSArray *goodArr = [Goodlist mj_keyValuesArrayWithObjectArray:model.goodlist];
     NSString *price = [NSString stringWithFormat:@"待付：￥%.2f", [model.amount floatValue]];
     self.priceLab.text = price;
     if (model.goodlist.count == 0) {
@@ -40,10 +46,21 @@
         
         NSDictionary *dic = (NSDictionary *)model.goodlist[0];
         NSString *img = dic[@"img_path"];
-        NSString *sku = dic[@"sku"];
-        NSString *name = dic[@"good_name"];
+
+        NSString *name, *des;
+        if([dic[@"good_name"] isEqual:[NSNull null]] || dic[@"good_name"] == nil){
+            name = nil;
+        }else {
+            name = [NSString stringWithFormat:@"%@", dic[@"good_name"]];
+        }
+        if([dic[@"sku"] isEqual:[NSNull null]] || dic[@"sku"] == nil){
+            des = nil;
+        }else {
+            des = [NSString stringWithFormat:@"%@", dic[@"sku"]];
+        }
+
         [self.foodimageview1 sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:nil];
-        self.foodDesLab.text = sku;
+        self.foodDesLab.text = des;
         self.foodTitleLab.text = name;
     }
    

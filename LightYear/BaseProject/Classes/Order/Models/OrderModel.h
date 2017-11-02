@@ -109,6 +109,8 @@
 @property (nonatomic , copy) NSString              * pay_money;
 @property (nonatomic , copy) NSString              * note;
 @property (nonatomic , copy) NSString              * amount;
+@property (nonatomic, copy) NSString *  can_selftake;
+@property (nonatomic, copy) NSString *  can_ship;
 
 @end
 
@@ -167,6 +169,9 @@
 @property (nonatomic , strong) WarehouseInfo              * warehouseInfo;
 @property (nonatomic , copy) NSString              * note;
 @property (nonatomic , copy) NSString              * amount;
+@property (nonatomic, copy) NSString *  can_selftake;
+@property (nonatomic, copy) NSString *  can_ship;
+
 
 @end
 

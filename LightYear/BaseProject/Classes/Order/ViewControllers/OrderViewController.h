@@ -22,4 +22,6 @@ typedef enum OrderListType {
 
 @property (nonatomic,assign) OrderListType listType;
 
+@property (nonatomic, assign) BOOL backHome;
+
 @end

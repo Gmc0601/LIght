@@ -21,8 +21,17 @@
     
     NSString *num = [NSString stringWithFormat:@"%@x",dic[@"count"]];
     NSString *pic = dic[@"img_path"];
-    NSString *name = dic[@"good_name"];
-    NSString *des = dic[@"sku"];
+    NSString *name, *des;
+    if([dic[@"good_name"] isEqual:[NSNull null]] || dic[@"good_name"] == nil){
+        name = nil;
+    }else {
+        name = [NSString stringWithFormat:@"%@", dic[@"good_name"]];
+    }
+    if([dic[@"sku"] isEqual:[NSNull null]] || dic[@"sku"] == nil){
+        des = nil;
+    }else {
+        des = [NSString stringWithFormat:@"%@", dic[@"sku"]];
+    }
     NSString *price = [NSString stringWithFormat:@"￥%.2f",[dic[@"price"] floatValue]];
     
     self.numLab.text = num;

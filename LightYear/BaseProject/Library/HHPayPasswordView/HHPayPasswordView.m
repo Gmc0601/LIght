@@ -232,11 +232,20 @@ static CGFloat const kDotWith_height = 10;
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeButton setTitle:@"X" forState:UIControlStateNormal];
         _closeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [_closeButton addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
         [_closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return _closeButton;
 }
+
+- (void)closeClick {
+    [self close];
+    if (self.closeBlock) {
+        self.closeBlock();
+    }
+}
+
+
 - (UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] init];

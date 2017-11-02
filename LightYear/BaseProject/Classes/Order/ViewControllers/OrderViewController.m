@@ -38,6 +38,15 @@
     
 }
 
+#pragma mark - Action  ---> NeedReset in son
+- (void)back:(UIButton *)sender {
+    if (self.backHome) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)resetFather {
     page = 1;
     self.rightBar.hidden = YES;

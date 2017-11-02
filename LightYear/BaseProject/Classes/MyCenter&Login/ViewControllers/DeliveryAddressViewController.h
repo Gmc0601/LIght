@@ -13,4 +13,6 @@
 
 @property (nonatomic, copy) void(^addressBlock)(DeliveryAddressInfo *model);
 
+@property (nonatomic, assign) BOOL getback;
+
 @end

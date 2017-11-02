@@ -50,8 +50,8 @@
     btn.titleLabel.font = NormalFont(13);
     [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [basicView addSubview:btn];
-//    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapHide:)];
-//    [basicView addGestureRecognizer:tapGR];
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapHide:)];
+    [basicView addGestureRecognizer:tapGR];
     basicView.picker.dataSource = self;
     basicView.picker.delegate = self;
     

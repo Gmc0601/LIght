@@ -13,10 +13,15 @@
 #import "OrderAddressTableViewCell.h"
 #import "OrderStoreInfoTableViewCell.h"
 #import "OrderDataHelper.h"
+#import "HHPayPasswordView.h"
+#import "OrderViewController.h"
+#import "ChangePayPasswordViewController.h"
+#import "MakeOrderViewController.h"
 
-@interface OrderDetialViewController ()<UITableViewDelegate, UITableViewDataSource>{
+@interface OrderDetialViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate>{
     BOOL post;   //  配送
-    NSString *footInfo, *btnStr;
+    float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
+    NSString *footInfo, *btnStr , *payStr;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -33,6 +38,7 @@
 
 - (void)viewDidLoad {
     post = YES;
+    payStr = @"已支付";
     [super viewDidLoad];
     [self createView];
     [self resetFather];
@@ -50,12 +56,15 @@
 - (void)resetFather {
     NSString *titleStr;
     NSString *rightBarStr;
+    
     self.rightBar.frame = FRAME(kScreenW - SizeWidth(75), 25, SizeWidth(65), 30);
     [self.footView choiseType:FootOneLab];
     switch (self.orderType) {
         case Order_Topay:
             rightBarStr = @"取消订单";
             titleStr = @"待支付";
+            self.titleArr = @[@"商品金额",@"优惠券抵扣",@"配送费",payStr];
+            payStr = @"待支付";
             [self.footView choiseType:FootNoraml];
             break;
         case Order_Distribution:
@@ -65,21 +74,44 @@
         case Order_Distributioning:
             rightBarStr = @"取消订单";
             titleStr = @"配送中";
+            [self.footView choiseType:FootOneLab];
+             self.footView.moreLab.text = @"配送员正在狂奔送货中...请耐心等待";
+            self.footView.logoImage.hidden = YES;
+            [self.footView changeBtnStyle:Gray];
+            [self.footView.payBtn setTitle:@"确认收货" forState:UIControlStateNormal];
+            
             break;
         case Order_Invite:
             titleStr = @"待自取";
+            
             break;
         case Order_Finished:
             titleStr = @"已完成";
+            [self.footView choiseType:FootOneLab];
+            self.footView.moreLab.hidden = YES;
+            self.footView.logoImage.hidden = YES;
+            [self.footView changeBtnStyle:Yellow];
+            [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
             break;
         case Order_Cancle:
             titleStr = @"已取消";
+            [self.footView choiseType:FootOneLab];
+            self.footView.logoImage.hidden = YES;
+            self.footView.moreLab.hidden =YES;
+            [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
+            [self.footView changeBtnStyle:Yellow];
             break;
         case Order_Refunding:
             titleStr = @"退款审核中";
+            [self.footView choiseType:FootOneLab];
+            self.footView.moreLab.text = @"退款审核中...请您耐心等待";
+        
             break;
         case Order_Refundsuccess:
             titleStr = @"退款成功";
+            [self.footView choiseType:FootOneLab];
+            self.footView.payBtn.hidden = YES;
+            self.footView.moreLab.text = @"退款将原路返回您的支付账户，请注意查收";
             break;
         default:
             titleStr = @"没设置状态";
@@ -95,29 +127,34 @@
 }
 
 - (void)more:(UIButton *)sender {
+    
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否删除订单" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alter show];
+}
 
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    if (self.orderType == Order_Topay || self.orderType == Order_Distribution || self.orderType == Order_Distributioning) {
-        [dic setValue:self.OrderID forKey:@"id"];
-        [dic setValue:@"10" forKey:@"status"];
-        [HttpRequest postPath:@"_change_order_status_001" params:dic resultBlock:^(id responseObject, NSError *error) {
-            if([error isEqual:[NSNull null]] || error == nil){
-                NSLog(@"success");
-            }
-            NSDictionary *datadic = responseObject;
-            if ([datadic[@"error"] intValue] == 0) {
-                [ConfigModel mbProgressHUD:@"取消成功" andView:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else {
-                NSString *str = datadic[@"info"];
-                [ConfigModel mbProgressHUD:str andView:nil];
-            }
-        }];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         
+        if (self.orderType == Order_Topay || self.orderType == Order_Distribution || self.orderType == Order_Distributioning) {
+            [dic setValue:self.OrderID forKey:@"id"];
+            [dic setValue:@"10" forKey:@"status"];
+            [HttpRequest postPath:@"_change_order_status_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+                if([error isEqual:[NSNull null]] || error == nil){
+                    NSLog(@"success");
+                }
+                NSDictionary *datadic = responseObject;
+                if ([datadic[@"error"] intValue] == 0) {
+                    [ConfigModel mbProgressHUD:@"取消成功" andView:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    NSString *str = datadic[@"info"];
+                    [ConfigModel mbProgressHUD:str andView:nil];
+                }
+            }];
+            
+        }
     }
-    
-    
 }
 
 - (void)createView {
@@ -136,27 +173,136 @@
                          };
     [OrderDataHelper orderDetailWithParameter:dic callBack:^(BOOL success, OrderDetailModel *model) {
         self.model = model;
+        amont = [self.model.all_amount floatValue];
+        postmoney = [self.model.postage floatValue];
         if ([self.model.type intValue] == 1) {
             post = YES;
         }else {
             post = NO;
         }
+        if (self.orderType == Order_Distribution || self.orderType == Order_Invite) {
+            
+            [self.footView choiseType:FootOneLab];
+    
+            NSDate*nowDate = [NSDate date];
+            NSDate *before ;
+            before = [nowDate initWithTimeIntervalSinceNow: - 60*5];
+            NSString *nowstr = [NSString stringWithFormat:@"%@", before];
+    
+            if ([self compareDate:self.model.create_time withDate:nowstr]) {
+                //   超时
+                self.footView.moreLab.hidden = YES;
+                self.footView.payBtn.hidden = YES;
+            } else {
+                //  未超时
+                self.footView.moreLab.text = @"下单5分钟内支持申请退款";
+                [self.footView changeBtnStyle:Gray];
+                self.footView.logoImage.hidden = YES;
+                [self.footView.payBtn setTitle:@"申请退款" forState:UIControlStateNormal];
+            }
+        }
+        
         self.goodsArr = (NSMutableArray *)self.model.goodlist;
         self.couponArr = (NSMutableArray *)self.model.couponList;
         [self.footInfoView updateinfo:self.model];
-//        amont = [self.model.all_amount floatValue];
-//        postmoney = [self.model.postage floatValue];
-//        storeName = self.model.shopInfo.shopname;
-//        if ([self.model.type intValue] == 1) {
-//            post = YES;
-//        }else {
-//            post = NO;
-//        }
+        if (self.orderType == Order_Topay) {
+           [self changefootviewInfo];
+        }
         [self.noUseTableView reloadData];
         
     }];
     
     //   修改订单状态
+}
+
+- (void)changefootviewInfo {
+//    NSDate*nowDate = [NSDate date];
+//    NSDate *before ;
+//    before = [nowDate initWithTimeIntervalSinceNow: - 60*5];
+//    NSString *nowstr = [NSString stringWithFormat:@"%@", before];
+//    if ([self compareDate:self.model.create_time withDate:nowstr]) {
+//        //   超时
+//        [self.footView choiseType:FootOneLab];
+//        self.footView.logoImage.hidden = YES;
+//        self.footView.moreLab.hidden =YES;
+//        [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
+//        [self.footView changeBtnStyle:Yellow];
+//        return;
+//    }
+    //  添加倒计时 
+    
+    float price;
+    if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
+        price = amont - couponcut;
+    }else {
+        price = amont + postmoney - couponcut;
+    }
+    self.footView.priceLab.text = [NSString stringWithFormat:@"%.2f", price];
+    self.footView.balanceLab.text = [NSString stringWithFormat:@"账户余额：￥%.2f", [self.model.userAmount floatValue]];
+    if ([self.model.userAmount floatValue]  < price) {
+        [self.footView.payBtn setTitle:@"账户余额不足" forState:UIControlStateNormal];
+        [self.footView changeBtnStyle:Gray];
+        return;
+    }
+        [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+        [self.footView changeBtnStyle:Red];
+    topaymoney = price;
+}
+
+- (void)click{
+    HHPayPasswordView *payPasswordView = [[HHPayPasswordView alloc] init];
+    payPasswordView.delegate = self;
+    WeakSelf(weak);
+    payPasswordView.closeBlock = ^{
+        OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+        vc.OrderID = self.OrderID;
+        vc.orderType = Order_Topay;
+        vc.backHome = YES;
+        [weak.navigationController pushViewController:vc animated:YES];
+    };
+    [payPasswordView showInView:self.view];
+}
+
+#pragma mark - HHPayPasswordViewDelegate
+- (void)passwordView:(HHPayPasswordView *)passwordView didFinishInputPayPassword:(NSString *)password{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //   请求网络
+        NSDictionary *dic = @{
+                              @"invest_id" : self.OrderID,
+                              @"tradePwd" : password
+                              };
+        WeakSelf(weakself);
+        [HttpRequest postPath:@"_pay_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+            NSLog(@"%@", responseObject);
+            
+            if([error isEqual:[NSNull null]] || error == nil){
+                NSLog(@"success");
+            }
+            
+            NSDictionary *datadic = responseObject;
+            if ([datadic[@"error"] intValue] == 0) {
+                [passwordView paySuccess];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [passwordView hide];
+                    OrderViewController  *vc = [[OrderViewController alloc] init];
+                    vc.listType = OrderList_All;
+                    vc.backHome = YES;
+                    [weakself.navigationController pushViewController:vc animated:YES];
+                });
+            }else {
+                [passwordView payFailureWithPasswordError:YES withErrorLimit:3];
+                [ConfigModel mbProgressHUD:@"支付密码错误" andView:nil];
+            }
+        }];
+        
+        
+    });
+}
+
+- (void)forgetPayPassword {
+    //  忘记密码
+    ChangePayPasswordViewController *vc = [[ChangePayPasswordViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -174,6 +320,9 @@
         }
             break;
         case 2:{
+            if (!post) {
+                _titleArr = @[@"商品金额",@"优惠券抵扣",payStr];
+            }
             return self.titleArr.count;
         }
             break;
@@ -342,10 +491,13 @@
         }
             break;
         case 2:{
+            
+//            if (indexPath.row == 2 && !post) {
+//                return 0;
+//            }
             return SizeHeigh(50);
         }
             break;
-            
         default:
             return 0;
             break;
@@ -394,17 +546,112 @@
     }
     return _noUseTableView;
 }
+
+
 - (OrderFootView *)footView {
     if (!_footView) {
         _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW, SizeHeigh(54))];
-        _footView.topupBlock = ^{
-            
-        };
+        WeakSelf(weak);
+//        _footView.topupBlock = ^{
+//
+//        };
+        NSDictionary *dic;
+        if (self.model.id.length > 0) {
+           dic  = @{
+                    @"id" : self.model.id
+                   };
+        }
+        
         _footView.payBlock = ^{
             
+            if ([_footView.payBtn.titleLabel.text isEqualToString:@"再来一单"]) {
+                
+                [HttpRequest postPath:@"_order_002" params:dic resultBlock:^(id responseObject, NSError *error) {
+                    NSLog(@"%@", responseObject);
+                    if([error isEqual:[NSNull null]] || error == nil){
+                        NSLog(@"success");
+                    }
+                    NSDictionary *datadic = responseObject;
+                    if ([datadic[@"error"] intValue] == 0) {
+                        NSDictionary *infoDic = datadic[@"info"];
+                        NSString *idstr = infoDic[@"id"];
+                        MakeOrderViewController *view = [[MakeOrderViewController alloc] init];
+                        view.OrderID = idstr;
+                        [weak.navigationController pushViewController:view animated:YES];
+                    }else {
+                        NSString *str = datadic[@"message"];
+                        [ConfigModel mbProgressHUD:str andView:nil];
+                    }
+                }];
+            }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"立即支付"]){
+                [weak click];
+            }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"确认收货"]) {
+                NSDictionary *di = @{
+                                     @"id" : self.model.id,
+                                     @"status" : @"1"
+                                     };
+                [HttpRequest postPath:@"_change_order_status_001" params:di resultBlock:^(id responseObject, NSError *error) {
+                    if([error isEqual:[NSNull null]] || error == nil){
+                        NSLog(@"success");
+                    }
+                    NSDictionary *datadic = responseObject;
+                    if ([datadic[@"error"] intValue] == 0) {
+                        [ConfigModel mbProgressHUD:@"确认收货成功" andView:nil];
+                        [weak.navigationController popViewControllerAnimated:YES];
+                    }else {
+                        NSString *str = datadic[@"info"];
+                        [ConfigModel mbProgressHUD:str andView:nil];
+                    }
+                }];
+            }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"申请退款"]) {
+                [HttpRequest postPath:@"_order_refund_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+                    if([error isEqual:[NSNull null]] || error == nil){
+                        NSLog(@"success");
+                    }
+                    NSDictionary *datadic = responseObject;
+                    if ([datadic[@"error"] intValue] == 0) {
+                        [ConfigModel mbProgressHUD:@"申请退款成功" andView:nil];
+                        [weak.navigationController popViewControllerAnimated:YES];
+                    }else {
+                        NSString *str = datadic[@"info"];
+                        [ConfigModel mbProgressHUD:str andView:nil];
+                    }
+                }];
+            }
+                
         };
     }
     return _footView;
+}
+
+
+- (BOOL)compareDate:(NSString*)aDate withDate:(NSString*)bDate
+{
+    BOOL time;
+    NSDateFormatter *dateformater = [[NSDateFormatter alloc] init];
+    [dateformater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dta = [[NSDate alloc] init];
+    NSDate *dtb = [[NSDate alloc] init];
+    
+    dta = [dateformater dateFromString:aDate];
+    dtb = [dateformater dateFromString:bDate];
+    NSComparisonResult result = [dta compare:dtb];
+    if (result == NSOrderedSame)
+    {
+        //        相等  aa=0
+        time = YES;
+    }else if (result == NSOrderedAscending)
+    {
+        //bDate比aDate大//  chaoshi
+        time = NO;
+    }else if (result == NSOrderedDescending)
+    {
+        //bDate比aDate小
+        time = YES;
+        
+    }
+    
+    return time;
 }
 
 - (OrderInfoFootView *)footInfoView {
@@ -422,10 +669,11 @@
 
 - (NSArray *)titleArr {
     if (!_titleArr) {
-        _titleArr = @[@"商品金额",@"优惠券抵扣",@"配送费",@"待支付"];
+        _titleArr = @[@"商品金额",@"优惠券抵扣",@"配送费",payStr];
     }
     return _titleArr;
 }
 
 
 @end
+

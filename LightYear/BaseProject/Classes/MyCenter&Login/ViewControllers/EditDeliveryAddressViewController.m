@@ -10,8 +10,7 @@
 #import "ChoiceDeliveryAddressViewController.h"
 #import "BaseTextField.h"
 
-@interface EditDeliveryAddressViewController ()<BaseTextFieldDelegate>
-{
+@interface EditDeliveryAddressViewController ()<BaseTextFieldDelegate> {
     UILabel * addressLabel;
 }
 @end
@@ -37,7 +36,7 @@
 - (void)more:(UIButton *)sender{
     NSDictionary * params = @{@"id":_addressModel.id};
     [ConfigModel showHud:self];
-    [HttpRequest postPath:DeleteReceiptURL params:params resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:@"_delete_receipt_001" params:params resultBlock:^(id responseObject, NSError *error) {
         BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
         [ConfigModel hideHud:self];
         if (model.error == 0) {

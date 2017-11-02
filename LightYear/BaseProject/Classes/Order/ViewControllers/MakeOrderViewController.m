@@ -20,6 +20,7 @@
 #import "HHPayPasswordView.h"
 #import "ChangePayPasswordViewController.h"
 #import "OrderDetialViewController.h"
+#import "OrderViewController.h"
 
 @interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
@@ -114,6 +115,16 @@
 }
 
 - (void)changefootviewInfo {
+    
+    if (!self.model.warehouseInfo  &&  post) {
+        
+        [self.footView choiseType:FootOneLab];
+        self.footView.moreLab.text = @"收货地址超出配送范围,无法配送";
+        [self.footView changeBtnStyle:Gray];
+        [self.footView.payBtn setTitle:@"查看其它店铺" forState:UIControlStateNormal];
+        return;
+    }
+    
     float price;
     if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
         price = amont - couponcut;
@@ -372,6 +383,7 @@
     
     if (indexPath.section == 0 && indexPath.row == 2 && post) {
         DeliveryAddressViewController *vc = [[DeliveryAddressViewController alloc] init];
+        vc.getback = YES;
         WeakSelf(weakself);
         vc.addressBlock = ^(DeliveryAddressInfo *model) {
             NSDictionary *dic = @{
@@ -389,6 +401,7 @@
                     weakself.model.receiptinfo.username = model.username;
                     weakself.model.receiptinfo.address = model.address;
                     weakself.model.receiptinfo.id = model.id;
+                    [weakself createData];
                     [weakself.noUseTableView reloadData];
                 }else {
                     NSString *str = datadic[@"info"];
@@ -481,6 +494,12 @@
         };
         _footView.payBlock = ^{
             //  修改订单状态
+            if ([_footView.payBtn.titleLabel.text isEqualToString:@"查看其它店铺"]) {
+//                查看其它店铺
+                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                return ;
+            }
+            
             [weakself updateOrderState];
         };
     }
@@ -490,7 +509,6 @@
 - (void)updateOrderState {
 //    [self click];
 //    return;
-    
     /*
      userToken
      invest_id订单id
@@ -528,9 +546,7 @@
 
         NSDictionary *datadic = responseObject;
         if ([datadic[@"error"] intValue] == 0) {
-           
             [self click];
-            
         }else {
             NSString *str = datadic[@"message"];
             [ConfigModel mbProgressHUD:str andView:nil];
@@ -541,6 +557,14 @@
 - (void)click{
     HHPayPasswordView *payPasswordView = [[HHPayPasswordView alloc] init];
     payPasswordView.delegate = self;
+    WeakSelf(weak);
+    payPasswordView.closeBlock = ^{
+        OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+        vc.OrderID = self.OrderID;
+        vc.orderType = Order_Topay;
+        vc.backHome = YES;
+        [weak.navigationController pushViewController:vc animated:YES];
+    };
     [payPasswordView showInView:self.view];
 }
 
@@ -560,25 +584,20 @@
                 NSLog(@"success");
                 
             }
+            
             NSDictionary *datadic = responseObject;
             if ([datadic[@"error"] intValue] == 0) {
                 [passwordView paySuccess];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [passwordView hide];
-                    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
-                    vc.OrderID = self.OrderID;
-                    if (post) {
-                        vc.orderType = Order_Distribution;
-                    }else {
-                        vc.orderType = Order_Invite;
-                    }
+                    OrderViewController  *vc = [[OrderViewController alloc] init];
+                    vc.listType = OrderList_All;
                     vc.backHome = YES;
                     [weakself.navigationController pushViewController:vc animated:YES];
-                    
                 });
             }else {
-                NSString *str = datadic[@"info"];
-                [ConfigModel mbProgressHUD:str andView:nil];
+                [passwordView payFailureWithPasswordError:YES withErrorLimit:3];
+                [ConfigModel mbProgressHUD:@"支付密码错误" andView:nil];
             }
             
             
@@ -645,17 +664,27 @@
 
 - (void)postOrget:(UIButton *)sender {
     if (sender.tag == 100) {
+        if ([self.model.can_ship intValue] == 1) {
+            [ConfigModel mbProgressHUD:@"该商品只能自取不能配送" andView:nil];
+            return;
+        }
         post = YES;
     }else {
+        if ([self.model.can_selftake intValue] == 1) {
+            [ConfigModel mbProgressHUD:@"该商品只能配送不能自取" andView:nil];
+            return;
+        }
         post = NO;
     }
     [self changePostType];
+    [self changefootviewInfo];
     [self.noUseTableView reloadData];
 }
 
 
 - (void)changePostType {
     if (post) {
+        
         [self.postBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.postBtn.backgroundColor = UIColorFromHex(0x3e7bb1);
         self.getBtn.backgroundColor =UIColorFromHex(0xf1f2f2);
