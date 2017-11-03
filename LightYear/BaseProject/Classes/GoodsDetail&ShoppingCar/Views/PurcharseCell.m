@@ -176,7 +176,7 @@
         make.top.equalTo(_lblTakeBySelf.mas_bottom).offset(SizeHeigh(16));
         make.left.equalTo(_lblTitle.mas_left);
         make.height.equalTo(@(SizeHeigh(28)));
-        make.width.equalTo(@(SizeWidth(100)));
+        make.width.equalTo(@(SizeWidth(110)));
     }];
 }
 
@@ -195,7 +195,7 @@
     
     [btnPlus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(SizeWidth(-30/2));
-        make.top.equalTo(_lblPrice1.mas_top).offset(SizeHeigh(9));
+        make.bottom.equalTo(_lblPrice1.mas_bottom);
         make.width.equalTo(@(SizeWidth(40/2)));
         make.height.equalTo(@(SizeHeigh(50/2)));
     }];
