@@ -21,6 +21,7 @@
 #import "ChangePayPasswordViewController.h"
 #import "OrderDetialViewController.h"
 #import "OrderViewController.h"
+#import "ChangeUserInfoViewController.h"
 
 @interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
@@ -81,9 +82,8 @@
         self.goodsArr = (NSMutableArray *)self.model.goodlist;
         self.couponArr = (NSMutableArray *)self.model.couponList;
         amont = [self.model.all_amount floatValue];
-        postmoney = [self.model.postage floatValue];
+        postmoney = [self.model.warehouseInfo.deliverfee floatValue];
         storeName = self.model.shopInfo.shopname;
-        
         if ([self.model.can_ship intValue] == 1) {
             post = YES;
         }else {
@@ -117,9 +117,6 @@
 
 - (void)changefootviewInfo {
     
-   
-
-    
     if (([self.model.warehouseInfo isEqual:[NSNull null]] || self.model.warehouseInfo == nil) && post) {
         
         [self.footView choiseType:FootOneLab];
@@ -143,13 +140,14 @@
         return;
     }
     if (post) {
-        if (amont > [self.model.warehouseInfo.minprice floatValue]) {
+        if (amont >= [self.model.warehouseInfo.minprice floatValue]) {
             [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.footView changeBtnStyle:Red];
         }else {
-            float cut = amont - [self.model.warehouseInfo.minprice floatValue];
+            float cut = [self.model.warehouseInfo.minprice floatValue] - amont;
             NSString * str = [NSString stringWithFormat:@"还差%.2f元起送", cut];
             [self.footView.payBtn setTitle:str forState:UIControlStateNormal];
+            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(7);
             [self.footView changeBtnStyle:Gray];
         }
     }else {
@@ -327,7 +325,8 @@
                     str = @"￥0.00";
                     postmoney = 0;
                 }else {
-                    str = [NSString stringWithFormat:@"￥%.2f", postmoney];
+                    str = [NSString stringWithFormat:@"￥%.2f",[self.model.warehouseInfo.deliverfee floatValue] ];
+                    postmoney  = [self.model.warehouseInfo.deliverfee floatValue];
                 }
             }
             cell.detailTextLabel.text = str;
@@ -614,8 +613,12 @@
 
 - (void)forgetPayPassword {
     //  忘记密码
-    ChangePayPasswordViewController *vc = [[ChangePayPasswordViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    ChangeUserInfoViewController * changeUserInfoVC = [[ChangeUserInfoViewController alloc] init];
+    changeUserInfoVC.type = UserInfoTypePayPassword;
+    [self.navigationController pushViewController:changeUserInfoVC animated:YES];
+    
+//    ChangePayPasswordViewController *vc = [[ChangePayPasswordViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSMutableArray *)goodsArr {
@@ -668,13 +671,13 @@
 
 - (void)postOrget:(UIButton *)sender {
     if (sender.tag == 100) {
-        if ([self.model.can_selftake intValue] == 1) {
+        if ([self.model.can_ship intValue] == 2) {
             [ConfigModel mbProgressHUD:@"该商品只能自取不能配送" andView:nil];
             return;
         }
         post = YES;
     }else {
-        if ([self.model.can_ship intValue] == 1) {
+        if ([self.model.can_selftake intValue] == 2) {
             [ConfigModel mbProgressHUD:@"该商品只能配送不能自取" andView:nil];
             return;
         }

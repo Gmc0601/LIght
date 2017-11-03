@@ -142,7 +142,7 @@
             theDate = [nowDate initWithTimeIntervalSinceNow: 10 ];
             NSString *str = [NSString stringWithFormat:@"%@", theDate];
             NSString *first =  [str substringToIndex:4];
-            NSString *backStr = [NSString stringWithFormat:@"%@%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
+            NSString *backStr = [NSString stringWithFormat:@"%@-%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
             [self.delegate title:backStr];
         }
     }else{
@@ -194,7 +194,7 @@
         theDate = [nowDate initWithTimeIntervalSinceNow: 10 ];
         NSString *str = [NSString stringWithFormat:@"%@", theDate];
         NSString *first =  [str substringToIndex:4];
-        NSString *backStr = [NSString stringWithFormat:@"%@%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
+        NSString *backStr = [NSString stringWithFormat:@"%@-%@ %@%@", first, self.titleOne, self.titleTwo,@":00"];
         
         
         

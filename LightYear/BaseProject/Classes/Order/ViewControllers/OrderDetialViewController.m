@@ -453,7 +453,12 @@
             }else if (indexPath.row == 1){
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.coupon_money floatValue]];
             }else if(indexPath.row == 2){
-                str = [NSString stringWithFormat:@"￥%.2f", [self.model.postage floatValue]];
+                if (post) {
+                    str = [NSString stringWithFormat:@"￥%.2f", [self.model.postage floatValue]];
+                }else {
+                   str = [NSString stringWithFormat:@"￥%.2f", [self.model.amount floatValue]];
+                }
+                
             }else {
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.amount floatValue]];
             }
@@ -676,4 +681,5 @@
 
 
 @end
+
 
