@@ -83,13 +83,14 @@
         amont = [self.model.all_amount floatValue];
         postmoney = [self.model.postage floatValue];
         storeName = self.model.shopInfo.shopname;
-        if ([self.model.type intValue] == 1) {
+        
+        if ([self.model.can_ship intValue] == 1) {
             post = YES;
         }else {
             post = NO;
         }
+        
         [self changefootviewInfo];
-        //  j
         
         NSDictionary *couDic = @{
                                  @"type" : @"1",
@@ -116,7 +117,10 @@
 
 - (void)changefootviewInfo {
     
-    if (!self.model.warehouseInfo  &&  post) {
+   
+
+    
+    if (([self.model.warehouseInfo isEqual:[NSNull null]] || self.model.warehouseInfo == nil) && post) {
         
         [self.footView choiseType:FootOneLab];
         self.footView.moreLab.text = @"收货地址超出配送范围,无法配送";
@@ -124,7 +128,7 @@
         [self.footView.payBtn setTitle:@"查看其它店铺" forState:UIControlStateNormal];
         return;
     }
-    
+    [self.footView choiseType:FootNoraml];
     float price;
     if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
         price = amont - couponcut;
@@ -664,13 +668,13 @@
 
 - (void)postOrget:(UIButton *)sender {
     if (sender.tag == 100) {
-        if ([self.model.can_ship intValue] == 1) {
+        if ([self.model.can_selftake intValue] == 1) {
             [ConfigModel mbProgressHUD:@"该商品只能自取不能配送" andView:nil];
             return;
         }
         post = YES;
     }else {
-        if ([self.model.can_selftake intValue] == 1) {
+        if ([self.model.can_ship intValue] == 1) {
             [ConfigModel mbProgressHUD:@"该商品只能配送不能自取" andView:nil];
             return;
         }

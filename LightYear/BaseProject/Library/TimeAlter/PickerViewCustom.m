@@ -55,7 +55,7 @@
     basicView.picker.dataSource = self;
     basicView.picker.delegate = self;
     
-    //   计算   时间 列表
+    //   计算 时间 列表
     
     NSInteger dis = 3; //前后的天数
     

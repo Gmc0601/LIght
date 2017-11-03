@@ -176,6 +176,7 @@
             DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
             detailModel = dataArray[indexPath.section];
             self.addressBlock(detailModel);
+            [self.navigationController popViewControllerAnimated:YES];
         }
         return;
     }

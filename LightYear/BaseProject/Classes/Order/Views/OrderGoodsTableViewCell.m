@@ -57,7 +57,7 @@
 
 - (UILabel *)numLab {
     if (!_numLab) {
-        _numLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(15), SizeHeigh(70), SizeWidth(30), SizeHeigh(15))];
+        _numLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(15), SizeHeigh(70), SizeWidth(40), SizeHeigh(15))];
         _numLab.font = VerdanaBold(18);
         _numLab.text = @"2x";
     }
