@@ -28,7 +28,7 @@
     
     NSString *num = [NSString stringWithFormat:@"共%d件 >", goodsNum];
     self.foodsNumLab.text = num;
-    NSString *price = [NSString stringWithFormat:@"待付：￥%.2f", [model.amount floatValue]];
+    NSString *price = [NSString stringWithFormat:@"%@：￥%.2f",self.stateStr, [model.amount floatValue]];
     self.priceLab.text = price;
     if (model.goodlist.count == 0) {
         return;
@@ -68,7 +68,7 @@
 
 - (void)changeCellType:(OrderCellType)type {
     NSString *stateStr, *btnStr;
-    
+    self.stateStr = @"待付";
     switch (type) {
         case Ordercell_Topay:{// 待支付
             stateStr = @"待支付";
@@ -80,16 +80,19 @@
         case Ordercell_Distribution:{// 待配送
             stateStr = @"待配送";
             self.clickBtn.hidden = YES;
+            self.stateStr = @"已付";
         }
             break;
         case Ordercell_Distributioning:{// 配送中
             stateStr = @"配送中";
+            self.stateStr = @"已付";
             self.clickBtn.hidden = YES;
             self.dislab.hidden = NO;
         }
             break;
         case Ordercell_Invite:{// 待自取
             stateStr = @"待自取";
+            self.stateStr = @"已付";
             btnStr = @"取货码";
             self.clickBtn.backgroundColor = MainBlue;
             [self.clickBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -97,6 +100,7 @@
             break;
         case Ordercell_Finished:{// 已完成
             stateStr = @"已完成";
+            self.stateStr = @"已付";
             btnStr = @"再来一单";
             self.clickBtn.backgroundColor  = MainYellow;
             [self.clickBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -111,11 +115,13 @@
             break;
         case Ordercell_Refunding:{// 退款审核中
             stateStr = @"退款审核中";
+            self.stateStr = @"已付";
             self.clickBtn.hidden = YES;
         }
             break;
         case Ordercell_Refundsuccess:{// 退款成功
             stateStr = @"退款成功";
+            self.stateStr = @"已付";
             self.clickBtn.hidden = YES;
         }
             break;

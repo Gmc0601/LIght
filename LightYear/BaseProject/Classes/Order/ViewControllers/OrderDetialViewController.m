@@ -17,11 +17,12 @@
 #import "OrderViewController.h"
 #import "ChangePayPasswordViewController.h"
 #import "MakeOrderViewController.h"
+#import "UIButton+YX.h"
 
 @interface OrderDetialViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate>{
     BOOL post;   //  配送
     float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
-    NSString *footInfo, *btnStr , *payStr;
+    NSString *footInfo, *btnStr , *payStr, *storeName;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) OrderFootView *footView;
 @property (nonatomic, retain) OrderInfoFootView *footInfoView;
 @property (nonatomic, retain) NSArray *titleArr;
+
 
 
 @end
@@ -68,11 +70,11 @@
             [self.footView choiseType:FootNoraml];
             break;
         case Order_Distribution:
-            rightBarStr = @"取消订单";
+//            rightBarStr = @"取消订单";
             titleStr = @"待配送";
             break;
         case Order_Distributioning:
-            rightBarStr = @"取消订单";
+//            rightBarStr = @"取消订单";
             titleStr = @"配送中";
             [self.footView choiseType:FootOneLab];
              self.footView.moreLab.text = @"配送员正在狂奔送货中...请耐心等待";
@@ -175,6 +177,7 @@
         self.model = model;
         amont = [self.model.all_amount floatValue];
         postmoney = [self.model.postage floatValue];
+        storeName = self.model.shopInfo.shopname;
         if ([self.model.type intValue] == 1) {
             post = YES;
         }else {
@@ -184,13 +187,14 @@
             
             [self.footView choiseType:FootOneLab];
     
-            NSDate*nowDate = [NSDate date];
-            NSDate *before ;
-            before = [nowDate initWithTimeIntervalSinceNow: - 60*5];
-            NSString *nowstr = [NSString stringWithFormat:@"%@", before];
+            NSDate * now = [NSDate date];
+            NSDate * anHourAgo = [now dateByAddingTimeInterval:-5*60];
+            NSString *nowstr = [NSString stringWithFormat:@"%@", anHourAgo];
+            nowstr = [nowstr substringToIndex:18];
     
             if ([self compareDate:self.model.create_time withDate:nowstr]) {
                 //   超时
+                self.footView.logoImage.hidden = YES;
                 self.footView.moreLab.hidden = YES;
                 self.footView.payBtn.hidden = YES;
             } else {
@@ -216,20 +220,22 @@
 }
 
 - (void)changefootviewInfo {
-//    NSDate*nowDate = [NSDate date];
-//    NSDate *before ;
-//    before = [nowDate initWithTimeIntervalSinceNow: - 60*5];
-//    NSString *nowstr = [NSString stringWithFormat:@"%@", before];
-//    if ([self compareDate:self.model.create_time withDate:nowstr]) {
-//        //   超时
-//        [self.footView choiseType:FootOneLab];
-//        self.footView.logoImage.hidden = YES;
-//        self.footView.moreLab.hidden =YES;
-//        [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
-//        [self.footView changeBtnStyle:Yellow];
-//        return;
-//    }
-    //  添加倒计时 
+    
+    NSDate * now = [NSDate date];
+    NSDate * anHourAgo = [now dateByAddingTimeInterval:-5*60];
+    NSString *nowstr = [NSString stringWithFormat:@"%@", anHourAgo];
+    nowstr = [nowstr substringToIndex:18];
+    
+    if ([self compareDate:self.model.create_time withDate:nowstr]) {
+        //   超时
+        [self.footView choiseType:FootOneLab];
+        self.footView.logoImage.hidden = YES;
+        self.footView.moreLab.hidden =YES;
+        [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
+        [self.footView changeBtnStyle:Yellow];
+        return;
+    }
+    //  添加倒计时
     
     float price;
     if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
@@ -312,6 +318,9 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
         case 0:{
+            if (self.orderType == Order_Invite ) {
+                return 5;
+            }
             return post ? 3 : 4;
         }
             break;
@@ -372,6 +381,44 @@
                     if (post) {
                         return [self defaleCellWithTitle:@"收货地址" andCellId:cellId];
                     }else {
+                        if (self.orderType == Order_Invite) {
+                            UITableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+                            for (UIView* subView in cell.contentView.subviews) {
+                                [subView removeFromSuperview];
+                            }
+                            if (!cell) {
+                                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+                            }
+                            cell.textLabel.font = SourceHanSansCNRegular(15);
+                            cell.textLabel.text = @"取货码";
+                            cell.detailTextLabel.text = self.model.code;
+                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                            cell.detailTextLabel.font = VerdanaBold(15);
+                            cell.detailTextLabel.textColor = UIColorFromHex(0x3e7bb1);
+                            return cell;
+                        }else {
+                            UITableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+                            for (UIView* subView in cell.contentView.subviews) {
+                                [subView removeFromSuperview];
+                            }
+                            if (!cell) {
+                                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+                            }
+                            cell.textLabel.font = SourceHanSansCNRegular(15);
+                            cell.textLabel.text = @"取货时间";
+                            cell.detailTextLabel.text = self.model.drawtime;
+                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                            cell.detailTextLabel.font = VerdanaBold(15);
+                            return cell;
+                        }
+                        
+                        
+                    }
+                }
+                    break;
+                case 2:{
+                    
+                    if (self.orderType == Order_Invite) {
                         UITableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
                         for (UIView* subView in cell.contentView.subviews) {
                             [subView removeFromSuperview];
@@ -385,29 +432,51 @@
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         cell.detailTextLabel.font = VerdanaBold(15);
                         return cell;
-                    }
-                }
-                    break;
-                case 2:{
-                    
-                    OrderAddressTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
-                    if (!cell) {
-                        cell = [[OrderAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-                    }
-                    if (post) {
-                        cell.textLabel.text = @"";
-                        [cell updateinfo:self.model.receiptinfo];
-                        [cell update:Order_haveAddress];
                     }else {
-                        [cell update:Order_Nothing];
-                        cell.textLabel.text = @"门店地址";
+                        OrderAddressTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+                        if (!cell) {
+                            cell = [[OrderAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+                        }
+                        if (post) {
+                            cell.textLabel.text = @"";
+                            [cell updateinfo:self.model.receiptinfo];
+                            [cell update:Order_haveAddress];
+                        }else {
+                            [cell update:Order_Nothing];
+                            cell.textLabel.text = @"门店地址";
+                        }
+                        return cell;
                     }
-                    return cell;
-                
                 }
                     break;
                     
                 case 3:{
+                    if (self.orderType == Order_Invite) {
+                        OrderAddressTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+                        if (!cell) {
+                            cell = [[OrderAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+                        }
+                        if (post) {
+                            cell.textLabel.text = @"";
+                            [cell updateinfo:self.model.receiptinfo];
+                            [cell update:Order_haveAddress];
+                        }else {
+                            [cell update:Order_Nothing];
+                            cell.textLabel.text = @"门店地址";
+                        }
+                        return cell;
+                    }else {
+                        OrderStoreInfoTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+                        if (!cell) {
+                            cell = [[OrderStoreInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+                        }
+                        [cell updateinfo:self.model.shopInfo];
+                        return cell;
+                    }
+                }
+                    break;
+                    
+                case 4:{
                     OrderStoreInfoTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
                     if (!cell) {
                         cell = [[OrderStoreInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
@@ -482,12 +551,20 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:{
-            if (indexPath.row == 3) {
-                return SizeHeigh(150);
-            }else if (indexPath.row == 2){
-                return post ? SizeHeigh(90) : SizeHeigh(50);
+            if (self.orderType == Order_Invite) {
+                if (indexPath.row == 4) {
+                    return SizeHeigh(150);
+                }else  {
+                    return SizeHeigh(50);
+                }
             }else {
-                return SizeHeigh(50);
+                if (indexPath.row == 3) {
+                    return SizeHeigh(150);
+                }else if (indexPath.row == 2){
+                    return post ? SizeHeigh(90) : SizeHeigh(50);
+                }else {
+                    return SizeHeigh(50);
+                }
             }
         }
             break;
@@ -511,8 +588,49 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 1) {
+        UIView *view = [[UIView alloc] initWithFrame:FRAME(0, 0, kScreenW, SizeHeigh(45))];
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *lab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), SizeHeigh(15), kScreenW, SizeHeigh(20))];
+        lab.text = storeName;
+        lab.font = NormalFont(15);
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - 80, 7, 70, 30)];
+        [btn setTitle:@"联系商家" forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorFromHex(0x3e7bb1) forState:UIControlStateNormal];
+        btn.titleLabel.font = NormalFont(13);
+        [btn setImage:[UIImage imageNamed:@"icon_dh"] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
+        [btn layoutButtonWithEdgeInsetsStyle:CLButtonEdgeInsetsStyleTitleRight imageTitleSpace:4];
+        [view addSubview:btn];
+        
+        UILabel *line = [[UILabel alloc] initWithFrame:FRAME(0, SizeHeigh(44), kScreenW, SizeHeigh(1))];
+        line.backgroundColor = RGBColor(239, 240, 241);
+        
+        [view addSubview:lab];
+        [view addSubview:line];
+        
+        return view;
+    }else{
+        return nil;
+    }
+}
+//   打电话
+- (void)call {
+    NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",self.model.shopInfo.customphone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 1 && self.orderType == Order_Invite) {
+        return SizeHeigh(45);
+    }else {
+        return 0.01;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -628,11 +746,32 @@
     }
     return _footView;
 }
-
+ - (BOOL)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //NSLog(@"Date1  is in the future");
+        return YES;
+    }
+    else if (result ==NSOrderedAscending){
+        //NSLog(@"Date1 is in the past");
+        return NO;
+    }
+    //NSLog(@"Both dates are the same");
+    return 0;
+    
+}
 
 - (BOOL)compareDate:(NSString*)aDate withDate:(NSString*)bDate
 {
     BOOL time;
+    NSLog(@"%@<><><>%@", aDate, bDate);
     NSDateFormatter *dateformater = [[NSDateFormatter alloc] init];
     [dateformater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *dta = [[NSDate alloc] init];
@@ -640,6 +779,7 @@
     
     dta = [dateformater dateFromString:aDate];
     dtb = [dateformater dateFromString:bDate];
+    NSLog(@"%@,,,,,,,%@", dta,dtb);
     NSComparisonResult result = [dta compare:dtb];
     if (result == NSOrderedSame)
     {
@@ -648,11 +788,11 @@
     }else if (result == NSOrderedAscending)
     {
         //bDate比aDate大//  chaoshi
-        time = NO;
+        time = YES;
     }else if (result == NSOrderedDescending)
     {
         //bDate比aDate小
-        time = YES;
+        time = NO;
         
     }
     

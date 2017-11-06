@@ -40,6 +40,30 @@
     self.desLab.text = des;
     self.priceLab.text = price;
     
+//    "w_stock": 0,    //配送中心库存
+//    "s_stock": 84,    //门店库存
+    NSString *w_stock, *s_stock;
+    if([dic[@"w_stock"] isEqual:[NSNull null]] || dic[@"w_stock"] == nil){
+        w_stock = nil;
+    }else {
+        w_stock = [NSString stringWithFormat:@"%@", dic[@"w_stock"]];
+    }
+    if([dic[@"s_stock"] isEqual:[NSNull null]] || dic[@"s_stock"] == nil){
+        s_stock = nil;
+    }else {
+        s_stock = [NSString stringWithFormat:@"%@", dic[@"s_stock"]];
+    }
+    if ([w_stock intValue] == 0) {
+        //  huise
+        self.taglab1.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
+        self.taglab1.textColor = UIColorFromHex(0x999999);
+    }
+    
+    if ([s_stock intValue] == 0) {
+        self.taglab2.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
+        self.taglab2.textColor = UIColorFromHex(0x999999);
+    }
+    
 }
 
 - (void)createView {

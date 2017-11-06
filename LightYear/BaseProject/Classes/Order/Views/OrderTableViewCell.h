@@ -43,6 +43,8 @@ typedef enum {
 
 @property (nonatomic, retain) UIImageView *foodimageview1, *foodimageview2;
 
+@property (nonatomic, copy) NSString *stateStr;
+
 @property (nonatomic, assign) FoodViewType foodviewtype;
 
 @property (nonatomic, assign) OrderCellType ordercelltype;

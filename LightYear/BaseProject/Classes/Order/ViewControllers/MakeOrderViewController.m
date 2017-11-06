@@ -22,6 +22,7 @@
 #import "OrderDetialViewController.h"
 #import "OrderViewController.h"
 #import "ChangeUserInfoViewController.h"
+#import "SelectShopViewController.h"
 
 @interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
@@ -61,6 +62,14 @@
     storeName = @"光年浙工商店";
     self.titleLab.text = @"确认订单";
     self.rightBar.hidden = YES;
+}
+
+- (void)back:(UIButton *)sender {
+    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+    vc.OrderID = self.OrderID;
+    vc.orderType = Order_Topay;
+    vc.backHome = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)createview {
@@ -142,6 +151,7 @@
     if (post) {
         if (amont >= [self.model.warehouseInfo.minprice floatValue]) {
             [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
             [self.footView changeBtnStyle:Red];
         }else {
             float cut = [self.model.warehouseInfo.minprice floatValue] - amont;
@@ -152,6 +162,7 @@
         }
     }else {
         [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+        self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
         [self.footView changeBtnStyle:Red];
     }
     topaymoney = price;
@@ -499,7 +510,9 @@
             //  修改订单状态
             if ([_footView.payBtn.titleLabel.text isEqualToString:@"查看其它店铺"]) {
 //                查看其它店铺
-                [weakself.navigationController popToRootViewControllerAnimated:YES];
+//                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                SelectShopViewController *vc = [[SelectShopViewController alloc] init];
+                [weakself.navigationController pushViewController:vc animated:YES];
                 return ;
             }
             
@@ -672,13 +685,13 @@
 - (void)postOrget:(UIButton *)sender {
     if (sender.tag == 100) {
         if ([self.model.can_ship intValue] == 2) {
-            [ConfigModel mbProgressHUD:@"该商品只能自取不能配送" andView:nil];
+            [ConfigModel mbProgressHUD:@"该商品不能配送" andView:nil];
             return;
         }
         post = YES;
     }else {
         if ([self.model.can_selftake intValue] == 2) {
-            [ConfigModel mbProgressHUD:@"该商品只能配送不能自取" andView:nil];
+            [ConfigModel mbProgressHUD:@"该商品不能自取" andView:nil];
             return;
         }
         post = NO;

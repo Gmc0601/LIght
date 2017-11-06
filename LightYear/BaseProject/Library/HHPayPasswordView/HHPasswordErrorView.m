@@ -45,7 +45,7 @@
 }
 - (void)setLimit:(NSInteger )limit{
     _limit = limit;
-    self.titleLabel.text = [NSString stringWithFormat:@"支付密码不正确，你还可以输入%ld次。",limit];
+    self.titleLabel.text = [NSString stringWithFormat:@"支付密码不正确"];
 }
 - (void)showInView:(UIView *)view{
     [view addSubview:self];
@@ -67,7 +67,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"支付密码不正确，你还可以输入 次。";
+        _titleLabel.text = @"支付密码不正确";
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.font = [UIFont systemFontOfSize:12];
