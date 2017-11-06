@@ -35,6 +35,8 @@
 @property (nonatomic, strong) WMBannerView *bannerView;
 @property (nonatomic, strong) ShopListInfo *info;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
+@property(retain,atomic) UILabel *lblCount;
+@property(retain,atomic) UIImageView *imgCount;
 @property(retain,atomic) UIView *bottomView;
 
 @end
@@ -48,7 +50,6 @@
     [self initRightBar];
     [self addSubview];
     [self addBottomView];
-    [self getLocationData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +64,10 @@
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
     _bannerArray = [NSMutableArray array];
+    [self getLocationData];
+    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+        [self refreshCountOfGoodsInCar];
+    }
 }
 
 - (void)getLocationData{
@@ -254,10 +259,10 @@
         make.height.equalTo(@(SizeHeigh(98/2)));
     }];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qd"]];
-    [self.bottomView addSubview:imgView];
+    _imgCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qd"]];
+    [self.bottomView addSubview:_imgCount];
     
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_imgCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomView).offset(SizeHeigh(27/2));
         make.left.equalTo(self.bottomView).offset(SizeWidth(38/2));
         make.width.equalTo(@(SizeWidth(22)));
@@ -305,6 +310,46 @@
     }else{
         [self presentViewController:[LoginViewController new] animated:YES completion:nil];
     }
+}
+
+-(void) refreshCountOfGoodsInCar{
+    [NetHelper getCountOfGoodsInCar:^(NSString *error, NSString *info) {
+        if (error == nil && _imgCount != nil) {
+            if (info.intValue > 0) {
+                [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
+                [self addLableCountToImage:_imgCount withText:info];
+            }else{
+                [_imgCount removeAllSubviews];
+                [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
+            }
+        } else {
+            [_imgCount removeAllSubviews];
+            [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
+        }
+    }];
+}
+
+-(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
+    if (text == nil) {
+        return;
+    }
+    
+    if (_lblCount == nil) {
+        _lblCount = [UILabel new];
+        _lblCount.font = Verdana(SizeWidth(9));
+        _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
+        _lblCount.textAlignment = NSTextAlignmentCenter;
+        [img addSubview:_lblCount];
+        
+        [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(img).offset(SizeWidth(2.5));
+            make.bottom.equalTo(img).offset(-SizeHeigh(3));
+            make.width.equalTo(@(SizeWidth(20)));
+            make.height.equalTo(@(SizeHeigh(10)));
+        }];
+    }
+    
+    _lblCount.text = [NSString stringWithFormat:@"%@",text];
 }
 
 #pragma mark - Time
