@@ -590,7 +590,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == 1&& self.orderType == Order_Invite) {
         UIView *view = [[UIView alloc] initWithFrame:FRAME(0, 0, kScreenW, SizeHeigh(45))];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *lab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), SizeHeigh(15), kScreenW, SizeHeigh(20))];
