@@ -55,7 +55,8 @@
     if (!_bgImageV) {
         _bgImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(15), SizeHeigh(10), kScreenW-SizeWidth(30), SizeHeigh(74))];
         _bgImageV.backgroundColor = [UIColor orangeColor];
-        _bgImageV.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImageV.layer.contentsRect = CGRectMake(0,0,1,0.5);
+        _bgImageV.clipsToBounds = YES;
         _bgImageV.layer.masksToBounds = YES;
         _bgImageV.layer.cornerRadius = SizeWidth(2.5);
     }

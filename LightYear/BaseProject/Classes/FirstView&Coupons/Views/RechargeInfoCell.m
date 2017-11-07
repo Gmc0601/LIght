@@ -29,7 +29,7 @@
 }
 
 - (void)fillWithType:(RechargeListInfo *)info {
-    self.amountLabel.text = info.money;
+    self.amountLabel.text = [NSString stringWithFormat:@"￥%@",info.money];
     if (info.free_money.doubleValue > 0) {
         self.giveMoneyLabel.text = [NSString stringWithFormat:@"充值即送￥%ld",info.free_money.integerValue];
         if (info.couponInfo) {

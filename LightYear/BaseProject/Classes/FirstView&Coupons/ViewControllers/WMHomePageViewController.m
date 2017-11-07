@@ -59,7 +59,7 @@
     [super viewWillAppear:animated];
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     if (userModel.nickname != nil) {
-        self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
+        self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],userModel.nickname];
     }else{
         self.titleLab.text = [self getCurrentTime];
     }
@@ -237,7 +237,7 @@
 #pragma mark - lazyLoad
 - (WMBannerView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[WMBannerView alloc] initWithFrame:CGRectMake(0, SizeHeigh(210)+64, kScreenW, SizeHeigh(335))];
+        _bannerView = [[WMBannerView alloc] initWithFrame:CGRectMake(0, SizeHeigh(225)+64, kScreenW, SizeHeigh(335))];
         _bannerView.delegate = self;
     }
     return _bannerView;
@@ -245,7 +245,7 @@
 
 - (WMHomeHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[WMHomeHeaderView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, SizeHeigh(210))];
+        _headerView = [[WMHomeHeaderView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, SizeHeigh(225))];
         _headerView.delegate = self;
     }
     return _headerView;
@@ -369,11 +369,11 @@
     NSInteger hour = [comps hour];
     NSString * timeStr;
     if (hour > 5 &&hour < 12) {
-        timeStr = @"早上好";
+        timeStr = @"早上好!";
     }else if (hour > 11 &&hour < 18){
-        timeStr = @"下午好";
+        timeStr = @"下午好!";
     }else{
-        timeStr = @"晚上好";
+        timeStr = @"晚上好!";
     }
     return timeStr;
 }

@@ -49,7 +49,7 @@
             _balanceLabel.text = info.amount;
             _scroLabel.text = info.integral;
             _codeImageV.transform= CGAffineTransformMakeRotation(90*M_PI/180);
-            _codeImageV.frame = FRAME(SizeWidth(30), SizeHeigh(65), SizeWidth(90), SizeHeigh(315));
+            _codeImageV.frame = FRAME(SizeWidth(24), SizeHeigh(61), SizeWidth(90), SizeHeigh(315));
             [_codeImageV sd_setImageWithURL:[NSURL URLWithString:info.barurl]];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
@@ -121,7 +121,7 @@
 
 - (UIImageView *)codeImageV {
     if (!_codeImageV) {
-        _codeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(30), SizeHeigh(65), SizeWidth(90), SizeHeigh(315))];
+        _codeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(24), SizeHeigh(61), SizeWidth(90), SizeHeigh(315))];
     }
     return _codeImageV;
 }

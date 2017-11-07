@@ -47,8 +47,18 @@
 }
 
 - (void)fillWithBalance:(tradeListInfo *)info {
-    self.promptLabel.text = @"购物消费";
-    self.amountLabel.text = info.money;
+    if ([info.otype isEqualToString:@"0"]) {
+        self.promptLabel.text = @"在线支付";
+    } else if ([info.otype isEqualToString:@"1"]) {
+        self.promptLabel.text = @"门店支付";
+    } else if ([info.otype isEqualToString:@"2"]) {
+        self.promptLabel.text = @"线上充值";
+    } else if ([info.otype isEqualToString:@"3"]) {
+        self.promptLabel.text = @"门店充值";
+    } else {
+        self.promptLabel.text = @"充值赠送";
+    }
+    self.amountLabel.text = [NSString stringWithFormat:@"￥%@",info.money];
     self.timeLabel.text = info.create_date;
 }
 

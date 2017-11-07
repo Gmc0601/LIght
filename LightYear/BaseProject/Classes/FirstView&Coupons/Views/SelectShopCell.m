@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *distanceLabel;
 @property (nonatomic, strong) UILabel *addressLabel;
+@property (nonatomic, strong) UIView *lineView;
 
 @end
 
@@ -26,6 +27,7 @@
         [self addSubview:self.titleLabel];
         [self addSubview:self.distanceLabel];
         [self addSubview:self.addressLabel];
+        [self addSubview:self.lineView];
     }
     return self;
 }
@@ -59,12 +61,20 @@
 
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
-        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), _titleLabel.origin.y+_titleLabel.height+SizeHeigh(10), SizeWidth(300), SizeHeigh(20))];
+        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(SizeWidth(15), _titleLabel.origin.y+_titleLabel.height+SizeHeigh(10), self.contentView.width-SizeWidth(30), SizeHeigh(20))];
         _addressLabel.font = SourceHanSansCNRegular(SizeWidth(13));
         _addressLabel.textColor = UIColorFromHex(0x999999);
         _addressLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _addressLabel;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(SizeWidth(15), self.contentView.height-0.5, self.contentView.width-SizeWidth(30), 0.5)];
+        _lineView.backgroundColor = UIColorFromHex(0xe0e0e0);
+    }
+    return _lineView;
 }
 
 

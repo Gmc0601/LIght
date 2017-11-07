@@ -48,6 +48,7 @@
         _imageScrollView.directionalLockEnabled = YES;
         _imageScrollView.alwaysBounceVertical = NO;
         _imageScrollView.alwaysBounceHorizontal = YES;
+        _imageScrollView.contentSize = CGSizeMake( SizeWidth(345), SizeHeigh(310));
         _imageScrollView.delegate = self;
     }
     return _imageScrollView;
@@ -55,11 +56,11 @@
 
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
-        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _imageScrollView.height+SizeHeigh(10), _imageScrollView.width, SizeWidth(12))];
+        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.imageScrollView.height+SizeHeigh(5), self.imageScrollView.width, SizeWidth(12))];
         _pageControl.centerX = self.centerX;
         _pageControl.backgroundColor = [UIColor clearColor];
-        _pageControl.pageIndicatorTintColor = UIColorFromHex(0x333333);
-        _pageControl.currentPageIndicatorTintColor = UIColorFromHex(0x4d3333);
+        _pageControl.pageIndicatorTintColor = UIColorFromHex(0xc1c1c1);
+        _pageControl.currentPageIndicatorTintColor = UIColorFromHex(0x333333);
         _pageControl.numberOfPages = 1;
     }
     return _pageControl;
@@ -69,7 +70,7 @@
     if (dataArray.count != 0) {
         [self invalidTimer];
         _selectedImageIndex = 0;
-        _imageScrollView.scrollEnabled = YES;
+        self.imageScrollView.scrollEnabled = YES;
         [_bannerArray removeAllObjects];
         for (bannerInfo *info in dataArray) {
             [_bannerArray addObject:info];
@@ -93,8 +94,8 @@
         _pageControl.currentPage = _selectedImageIndex;
 //        [self startTimer];
 
-        _imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), SizeHeigh(310));
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345), 0, _imageScrollView.width, _imageScrollView.height)];
+        self.imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), SizeHeigh(310));
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345), 0, self.imageScrollView.width, self.imageScrollView.height)];
         imageView.contentMode = UIViewContentModeCenter;
         [imageView setImage:[UIImage imageNamed:@"icon_sy_hdqx"]];
         imageView.backgroundColor = [UIColor whiteColor];
@@ -106,15 +107,15 @@
         _promptLabel.textColor = UIColorFromHex(0xcccccc);
         _promptLabel.textAlignment = NSTextAlignmentCenter;
         [imageView addSubview:_promptLabel];
-        [_imageScrollView addSubview:imageView];
-        [_imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
-        _imageScrollView.scrollEnabled = NO;
+        [self.imageScrollView addSubview:imageView];
+        [self.imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
+        self.imageScrollView.scrollEnabled = NO;
     }
 }
 
 - (void)refreshScrollView {
     
-    NSArray *temp = [_imageScrollView subviews];
+    NSArray *temp = [self.imageScrollView subviews];
     [temp makeObjectsPerformSelector:@selector(removeFromSuperview) withObject:nil];
     
     if (_bannerArray.count != 0) {
@@ -127,7 +128,7 @@
         _imageScrollView.contentSize = CGSizeMake(SizeWidth(345) * _scrollDataArray.count, self.height);
         for (int i = 0; i < _scrollDataArray.count; i++) {
             bannerInfo *info = _scrollDataArray[i];
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345) * i, 0, _imageScrollView.width, _imageScrollView.height)];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345) * i, 0, self.imageScrollView.width, self.imageScrollView.height)];
             //        imageView.contentMode = UIViewContentModeCenter;
             [imageView sd_setImageWithURL:[NSURL URLWithString:info.img_url]];
             imageView.backgroundColor = [UIColor whiteColor];
@@ -136,9 +137,9 @@
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
             [imageView addGestureRecognizer:singleTap];
             
-            [_imageScrollView addSubview:imageView];
+            [self.imageScrollView addSubview:imageView];
         }
-        [_imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
+        [self.imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0)];
     }
 }
 
@@ -177,7 +178,7 @@
     [animation setType:kCATransitionPush];
     [animation setSubtype:kCATransitionFromRight];
     
-    [_imageScrollView.layer addAnimation:animation forKey:nil];
+    [self.imageScrollView.layer addAnimation:animation forKey:nil];
     
     [self refreshScrollView];
     
@@ -231,6 +232,13 @@
         }
         [self refreshScrollView];
     }
+    if (scrollView.contentOffset.y < 0) {
+        scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, 0);
+    }
+    
+    if (scrollView.contentOffset.y > 0) {
+        scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, 0);
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -240,7 +248,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
 {
-    [_imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0) animated:YES];
+    [self.imageScrollView setContentOffset:CGPointMake(SizeWidth(345), 0) animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate

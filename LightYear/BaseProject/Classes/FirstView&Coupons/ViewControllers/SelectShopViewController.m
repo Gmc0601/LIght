@@ -45,8 +45,8 @@
 - (void)syncWithShopListRequest {
     [ConfigModel showHud:self];
     NSDictionary *dic = @{
-                        @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
-                        @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
+                          @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
+                          @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
 //                          @"lng": @"120.162744",
 //                          @"lat": @"30.185959",
                        };

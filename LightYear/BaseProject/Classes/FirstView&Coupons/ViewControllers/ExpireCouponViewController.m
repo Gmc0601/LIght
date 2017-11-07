@@ -73,14 +73,9 @@
             } 
             for (int i = 0; i<_dataArray.count; i++) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-                if (i == 0) {
-                    [dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%d",i]];
-                    [_selectArray addObject:dic];
-                    _lastSelectRow = 0;
-                } else {
-                    [dic setObject:@"NO" forKey:[NSString stringWithFormat:@"%d",i]];
-                    [_selectArray addObject:dic];
-                }
+                [dic setObject:@"NO" forKey:[NSString stringWithFormat:@"%d",i]];
+                [_selectArray addObject:dic];
+                
             }
             [self.tableV reloadData];
         }else{
@@ -136,7 +131,7 @@
     [lastDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld",_lastSelectRow]];
     [_selectArray replaceObjectAtIndex:_lastSelectRow withObject:lastDic];
     NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:_lastSelectRow inSection:0];
-    [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationNone];
 
     NSMutableDictionary *dic = _selectArray[indexPath.row];
     NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
@@ -144,7 +139,7 @@
         [dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
         [_selectArray replaceObjectAtIndex:indexPath.row withObject:dic];
         NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
-        [self.tableV reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableV reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationBottom];
         _lastSelectRow = indexPath.row;
     }
 }
