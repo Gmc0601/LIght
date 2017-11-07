@@ -142,7 +142,12 @@
     if (post && (amont >= [self.model.warehouseInfo.freeprice floatValue])) {
         price = amont - couponcut;
     }else {
-        price = amont + postmoney - couponcut;
+        if (!post) {
+            price = amont - couponcut;
+        }else {
+           price = amont + postmoney - couponcut;
+        }
+        
     }
     self.footView.priceLab.text = [NSString stringWithFormat:@"%.2f", price];
     self.footView.balanceLab.text = [NSString stringWithFormat:@"账户余额：￥%.2f", [self.model.userAmount floatValue]];
@@ -153,18 +158,18 @@
     }
     if (post) {
         if (amont >= [self.model.warehouseInfo.minprice floatValue]) {
-            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
+            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(13));
             [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.footView changeBtnStyle:Red];
         }else {
             float cut = [self.model.warehouseInfo.minprice floatValue] - amont;
             NSString * str = [NSString stringWithFormat:@"还差%.2f元起送", cut];
             [self.footView.payBtn setTitle:str forState:UIControlStateNormal];
-            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(7);
+            self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(13));
             [self.footView changeBtnStyle:Gray];
         }
     }else {
-        self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
+        self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(13));
         [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
         [self.footView changeBtnStyle:Red];
     }
@@ -335,7 +340,10 @@
             }else if (indexPath.row == 1){
                 str = [NSString stringWithFormat:@"￥%.2f", amont];
             }else {
-                if ([self.model.all_amount floatValue] > [self.model.warehouseInfo.freeprice floatValue]) {
+                NSString *title;
+                title = [NSString stringWithFormat:@"配送费（满%.2f元，免配送费）", [self.model.warehouseInfo.freeprice floatValue]];
+                cell.textLabel.text = title;
+                if ([self.model.all_amount floatValue] >= [self.model.warehouseInfo.freeprice floatValue]) {
                     str = @"￥0.00";
                     postmoney = 0;
                 }else {
@@ -393,8 +401,8 @@
     
     if (indexPath.section == 0 && indexPath.row == 1 && !post) {
         PickerViewCustom *customView = [[PickerViewCustom alloc]init];
+        customView.model = self.model;
         customView.delegate = self;
-        
         [customView show];
     }
     
@@ -513,11 +521,13 @@
             //  修改订单状态
             if ([_footView.payBtn.titleLabel.text isEqualToString:@"查看其它店铺"]) {
 //                查看其它店铺
-//                [weakself.navigationController popToRootViewControllerAnimated:YES];
-                SelectShopViewController *vc = [[SelectShopViewController alloc] init];
-                CLLocation *l1 = [[CLLocation alloc] initWithLatitude:[[ConfigModel getStringforKey:@"Save_lat"] floatValue] longitude:[[ConfigModel getStringforKey:@"Save_lng"] floatValue]];
-                vc.currentLocation = l1;
-                [weakself.navigationController pushViewController:vc animated:YES];
+                
+                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"shopName" object:nil];
+//                SelectShopViewController *vc = [[SelectShopViewController alloc] init];
+//                CLLocation *l1 = [[CLLocation alloc] initWithLatitude:[[ConfigModel getStringforKey:@"Save_lat"] floatValue] longitude:[[ConfigModel getStringforKey:@"Save_lng"] floatValue]];
+//                vc.currentLocation = l1;
+//                [weakself.navigationController pushViewController:vc animated:YES];
                 return ;
             }
             

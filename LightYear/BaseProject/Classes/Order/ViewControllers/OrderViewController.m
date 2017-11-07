@@ -13,7 +13,7 @@
 #import "OrderDetialViewController.h"
 #import "OrderDataHelper.h"
 #import "OrderModel.h"
-
+#import "TBRefresh.h"
 
 @interface OrderViewController ()<UITableViewDelegate, UITableViewDataSource>{
     int page;
@@ -113,6 +113,7 @@
     WeakSelf(weakself);
     [OrderDataHelper orderListWithparameter:dic callBack:^(BOOL success, NSArray *modelArr) {
         [ConfigModel hideHud:self];
+        [weakself.noUseTableView.footer endFooterRefreshing];
         if (success) {
             if (modelArr.count == 15) {
                 page ++;
@@ -262,6 +263,10 @@
         _noUseTableView.delegate = self;
         _noUseTableView.dataSource = self;
         [_noUseTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        WeakSelf(weak);
+        [_noUseTableView addRefreshFootWithBlock:^{
+            [weak createData];
+        }];
         _noUseTableView.tableHeaderView = ({
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 0)];
             view;

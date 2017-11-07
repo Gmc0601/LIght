@@ -23,7 +23,21 @@
     NSString *state = [NSString stringWithFormat:@"订单状态：%@", model.status_name];
     self.orderNumLab.text = orderid;
     self.orderTimeLab.text = time;
-    self.OrderState.text = state;
+    if ([model.status intValue] == 6) {
+        //   审核中  1
+        if ([model.isrefund intValue] == 1) {
+             self.OrderState.text = @"退款审核中";
+        }else {
+             self.OrderState.text = @"退款成功";
+        }
+        //   退款成功 2
+        
+        
+    }else {
+      self.OrderState.text = state;
+    }
+    
+    
 }
 
 - (void)createView {

@@ -51,6 +51,8 @@
     [self addSubview];
     [self addBottomView];
     [self getLocationData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callbackOtherClick) name:@"shopName" object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -57,7 +57,7 @@
     
     //   计算 时间 列表
     
-    NSInteger dis = 3; //前后的天数
+    NSInteger dis = [self.model.shopInfo.orderdays integerValue]; //前后的天数
     
     NSDate*nowDate = [NSDate date];
     NSDate* theDate;
@@ -86,11 +86,9 @@
         theDate = nowDate;
     }
 
-    NSArray *array1 = @[@"My",@"Your",@"He",@"She",@"His",@"Thier"];
     
     NSArray *arr = (NSArray *)[self gettimeArr:nil];
-    
-    NSArray *array2 = @[@"我",@"你",@"他",@"它",@"她",@"他们"];
+
     self.titleOne = arr1[0];
     self.titleTwo = arr[0];
     
@@ -99,7 +97,7 @@
 }
 
 - (NSMutableArray *)gettimeArr:(NSString *)str {
-    int time = 15;
+    int time = [self.model.shopInfo.ordertimes intValue];
     NSString *now_hour = @"9", *now_min = @"28";
     NSString *star_hour = @"8";
     NSString *end_hour = @"20";
