@@ -89,7 +89,9 @@
             }
         }
         _currentLocation = location;
-        [self syncWithShopListRequest];
+        [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude] forKey:@"Save_lng"];
+        [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude] forKey:@"Save_lat"];
+                [self syncWithShopListRequest];
     }];
 }
 

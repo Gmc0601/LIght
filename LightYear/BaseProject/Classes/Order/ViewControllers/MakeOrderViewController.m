@@ -515,6 +515,8 @@
 //                查看其它店铺
 //                [weakself.navigationController popToRootViewControllerAnimated:YES];
                 SelectShopViewController *vc = [[SelectShopViewController alloc] init];
+                CLLocation *l1 = [[CLLocation alloc] initWithLatitude:[[ConfigModel getStringforKey:@"Save_lat"] floatValue] longitude:[[ConfigModel getStringforKey:@"Save_lng"] floatValue]];
+                vc.currentLocation = l1;
                 [weakself.navigationController pushViewController:vc animated:YES];
                 return ;
             }
