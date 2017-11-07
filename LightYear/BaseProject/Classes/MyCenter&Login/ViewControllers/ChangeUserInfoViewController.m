@@ -194,9 +194,20 @@
     }else if (self.type == UserInfoTypePayPassword){
         BaseTextField * thirdTextField = [self.view viewWithTag:12];
         if (thirdTextField.text.length == 4) {
-            ChangePayPasswordViewController * payPasswordVC = [[ChangePayPasswordViewController alloc] init];
-            payPasswordVC.code = thirdTextField.text;
-            [self.navigationController pushViewController:payPasswordVC animated:YES];
+            //校验验证码
+            [ConfigModel showHud:self];
+            NSDictionary * params = @{@"mobile":userModel.username,@"code":thirdTextField.text};
+            [HttpRequest postPath:CheckSmscodeURL params:params resultBlock:^(id responseObject, NSError *error) {
+                [ConfigModel hideHud:self];
+                BaseModel * baseModel = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
+                if (baseModel.error == 0) {
+                    ChangePayPasswordViewController * payPasswordVC = [[ChangePayPasswordViewController alloc] init];
+                    payPasswordVC.code = thirdTextField.text;
+                    [self.navigationController pushViewController:payPasswordVC animated:YES];
+                }else {
+                    [ConfigModel mbProgressHUD:@"验证码校验失败" andView:nil];
+                }
+            }];
         }else{
             [ConfigModel mbProgressHUD:@"验证码输入有误" andView:nil];
         }
@@ -238,7 +249,6 @@
 #pragma BaseTextFileldDelegate
 //内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
 - (void)textFieldTextChange:(UITextField *)textField Text:(NSString *)text{
-    NSLog(@"========%@",textField.text);
    if (textField.tag == 10){
         if (text.length > 4) {
             textField.text = [text substringWithRange:NSMakeRange(0, 4)];

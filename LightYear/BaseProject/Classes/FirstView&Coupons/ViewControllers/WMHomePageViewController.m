@@ -120,7 +120,7 @@
 
 - (void)leftBtnClick {
 
-    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+    if ([[TMCache sharedCache] objectForKey:UserInfoModel]) {
         [self.navigationController pushViewController:[MycenterViewController new] animated:YES];
     }else{
         [self presentViewController:[LoginViewController new] animated:YES completion:nil];
@@ -129,7 +129,7 @@
 }
 
 - (void)rightBtnClick {
-    if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
+    if ([[TMCache sharedCache] objectForKey:UserInfoModel]) {
         InspectCouponViewController *inspectVC = [[InspectCouponViewController alloc] init];
         [self.navigationController pushViewController:inspectVC animated:YES];
     }else{

@@ -94,7 +94,7 @@
     }
     nameLabel.text = model.username;
     telephoneLabel.text = model.phone;
-    addressLabel.text = model.address;
+    addressLabel.text = [NSString stringWithFormat:@"%@%@",model.address,model.tablet];
 }
 - (void)editAction:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(didDeilveryAddressTableViewCellEditButton:)]) {

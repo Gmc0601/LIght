@@ -45,8 +45,10 @@
 #define ReceiptListURL @"_receipt_001"
 #define ChangePayCodeURL @"_change_pay_pwd_001"
 #define SetReceiptURL @"_set_receipt_001"
+#define DeleteReceiptURL @"_delete_receipt_001"
 #define FeedBackURL @"_beedback_002"
 #define SetFeedBackURL @"_beedback_001"
+#define CheckSmscodeURL @"_check_smscode_001"
 
 #define BrandList @"_brandlist_001"
 
