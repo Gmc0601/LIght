@@ -166,6 +166,7 @@
 
 - (void)createData {
     //   查询订单详情
+    [ConfigModel showHud:self];
     if (self.OrderID.length == 0) {
         [ConfigModel mbProgressHUD:@"请传入Order_NO" andView:nil];
         return;
@@ -174,6 +175,7 @@
                          @"id" : self.OrderID
                          };
     [OrderDataHelper orderDetailWithParameter:dic callBack:^(BOOL success, OrderDetailModel *model) {
+        [ConfigModel hideHud: self];
         self.model = model;
         amont = [self.model.all_amount floatValue];
         postmoney = [self.model.postage floatValue];
@@ -727,7 +729,11 @@
                     }
                 }];
             }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"申请退款"]) {
-                [HttpRequest postPath:@"_order_refund_001" params:dic resultBlock:^(id responseObject, NSError *error) {
+                NSDictionary *dict = @{
+                                       @"id" : self.model.id
+                                       };
+                
+                [HttpRequest postPath:@"_order_refund_001" params:dict resultBlock:^(id responseObject, NSError *error) {
                     if([error isEqual:[NSNull null]] || error == nil){
                         NSLog(@"success");
                     }
@@ -736,7 +742,7 @@
                         [ConfigModel mbProgressHUD:@"申请退款成功" andView:nil];
                         [weak.navigationController popViewControllerAnimated:YES];
                     }else {
-                        NSString *str = datadic[@"info"];
+                        NSString *str = datadic[@"message"];
                         [ConfigModel mbProgressHUD:str andView:nil];
                     }
                 }];

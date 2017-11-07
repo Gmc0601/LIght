@@ -79,6 +79,7 @@
 
 - (void)createData {
     //   查询订单详情
+    [ConfigModel showHud:self];
     if (self.OrderID.length == 0) {
         [ConfigModel mbProgressHUD:@"请传入Order_NO" andView:nil];
         return;
@@ -87,6 +88,7 @@
                          @"id" : self.OrderID
                          };
     [OrderDataHelper orderDetailWithParameter:dic callBack:^(BOOL success, OrderDetailModel *model) {
+        [ConfigModel hideHud:self];
         self.model = model;
         self.goodsArr = (NSMutableArray *)self.model.goodlist;
         self.couponArr = (NSMutableArray *)self.model.couponList;
@@ -131,12 +133,13 @@
         [self.footView choiseType:FootOneLab];
         self.footView.moreLab.text = @"收货地址超出配送范围,无法配送";
         [self.footView changeBtnStyle:Gray];
+        self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
         [self.footView.payBtn setTitle:@"查看其它店铺" forState:UIControlStateNormal];
         return;
     }
     [self.footView choiseType:FootNoraml];
     float price;
-    if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
+    if (post && (amont >= [self.model.warehouseInfo.freeprice floatValue])) {
         price = amont - couponcut;
     }else {
         price = amont + postmoney - couponcut;
@@ -150,8 +153,8 @@
     }
     if (post) {
         if (amont >= [self.model.warehouseInfo.minprice floatValue]) {
-            [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
             self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
+            [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.footView changeBtnStyle:Red];
         }else {
             float cut = [self.model.warehouseInfo.minprice floatValue] - amont;
@@ -161,8 +164,8 @@
             [self.footView changeBtnStyle:Gray];
         }
     }else {
-        [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
         self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
+        [self.footView.payBtn setTitle:@"立即支付" forState:UIControlStateNormal];
         [self.footView changeBtnStyle:Red];
     }
     topaymoney = price;

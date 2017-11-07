@@ -61,6 +61,7 @@
     
 }
 - (void)createData {
+    [ConfigModel showHud:self];
    ////999全部订单2待支付4配送中3待配送5待自取6退款退货
     NSDictionary *dic;
     switch (self.listType) {
@@ -111,6 +112,7 @@
     
     WeakSelf(weakself);
     [OrderDataHelper orderListWithparameter:dic callBack:^(BOOL success, NSArray *modelArr) {
+        [ConfigModel hideHud:self];
         if (success) {
             if (modelArr.count == 15) {
                 page ++;
