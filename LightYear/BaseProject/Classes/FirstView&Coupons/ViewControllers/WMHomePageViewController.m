@@ -50,6 +50,7 @@
     [self initRightBar];
     [self addSubview];
     [self addBottomView];
+    [self getLocationData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +65,6 @@
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
     _bannerArray = [NSMutableArray array];
-    [self getLocationData];
     if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
         [self refreshCountOfGoodsInCar];
     }
@@ -344,8 +344,8 @@
         [img addSubview:_lblCount];
         
         [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(img).offset(SizeWidth(2.5));
-            make.bottom.equalTo(img).offset(-SizeHeigh(3));
+            make.right.equalTo(img).offset(SizeWidth(4));
+            make.bottom.equalTo(img).offset(-SizeHeigh(2));
             make.width.equalTo(@(SizeWidth(20)));
             make.height.equalTo(@(SizeHeigh(10)));
         }];
