@@ -29,6 +29,7 @@
     dataArray = [NSMutableArray array];
     
     self.titleLab.text = @"意见反馈";
+    self.rightBar.hidden = YES;
     [self createBaseView];
     [self getData];
 }

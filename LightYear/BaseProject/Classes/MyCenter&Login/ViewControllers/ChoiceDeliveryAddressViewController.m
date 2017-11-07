@@ -46,6 +46,7 @@
     [super viewDidLoad];
     
     self.titleLab.text = @"选择收货地址";
+    self.rightBar.hidden = YES;
     
     searchPage = 1;
     textSearchPage = 1;

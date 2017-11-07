@@ -39,6 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    self.rightBar.hidden = YES;
     if (userModel) {
         self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
     }else{

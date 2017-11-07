@@ -44,6 +44,8 @@
 }
 
 - (void)createBaseView{
+    self.rightBar.hidden = YES;
+    
     myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     myTableView.delegate = self;
     myTableView.dataSource = self;

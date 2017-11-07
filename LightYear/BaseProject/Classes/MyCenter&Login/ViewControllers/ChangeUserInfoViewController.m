@@ -39,6 +39,7 @@
             self.titleLab.text = @"修改支付密码";
         }
     }
+    self.rightBar.hidden = YES;
     [self createBaseView];
 }
 - (void)createBaseView{

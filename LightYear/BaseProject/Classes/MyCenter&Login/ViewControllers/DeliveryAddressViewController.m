@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     self.titleLab.text = @"收货地址";
+    self.rightBar.hidden = YES;
     dataArray = [NSMutableArray array];
     [self getData];
     [self createBaseView];

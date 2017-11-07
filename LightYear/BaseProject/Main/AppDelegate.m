@@ -58,6 +58,7 @@
     }else if ([aNote.object isEqual:@1]){
         NSLog(@"OutLoginSuccess");
         [ConfigModel saveBoolObject:NO forKey:IsLogin];
+        [[TMCache sharedCache] removeObjectForKey:UserInfoModel];
         //na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
     }
     //self.window.rootViewController = na;

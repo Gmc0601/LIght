@@ -28,6 +28,7 @@
     [super viewDidLoad];
     
     self.titleLab.text = @"个人资料";
+    self.rightBar.hidden = YES;
     dataArray = [NSMutableArray arrayWithObjects:@"头像",@"姓名",@"性别",@"生日", @"钱包支付密码",nil];
     [self createBaseView];
 }
