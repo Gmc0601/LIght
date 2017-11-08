@@ -75,6 +75,7 @@
 		4218CED71FB157A400A63A13 /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC41FB157A400A63A13 /* verdanab.ttf */; };
 		4218CED81FB157A400A63A13 /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC51FB157A400A63A13 /* verdanab_0.ttf */; };
 		4218CED91FB157A400A63A13 /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC61FB157A400A63A13 /* verdanai_0.ttf */; };
+		423607CF1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */; };
 		427C3D461F9F21C10081B431 /* BasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D431F9F21C10081B431 /* BasicView.m */; };
 		427C3D471F9F21C10081B431 /* PickerViewCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D451F9F21C10081B431 /* PickerViewCustom.m */; };
 		427C3D4F1F9F22180081B431 /* HHPasswordErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4A1F9F22180081B431 /* HHPasswordErrorView.m */; };
@@ -323,6 +324,8 @@
 		4218CEC41FB157A400A63A13 /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
 		4218CEC51FB157A400A63A13 /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
 		4218CEC61FB157A400A63A13 /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
+		423607CD1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+EOCBlocksSupport.h"; sourceTree = "<group>"; };
+		423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+EOCBlocksSupport.m"; sourceTree = "<group>"; };
 		427C3D421F9F21C10081B431 /* BasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicView.h; sourceTree = "<group>"; };
 		427C3D431F9F21C10081B431 /* BasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicView.m; sourceTree = "<group>"; };
 		427C3D441F9F21C10081B431 /* PickerViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewCustom.h; sourceTree = "<group>"; };
@@ -810,6 +813,15 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		423607CC1FB2ACF800DF96CD /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				423607CD1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.h */,
+				423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		427C3D411F9F21C10081B431 /* TimeAlter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,6 +1118,7 @@
 		42C84EA91EF2DB060008189D /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				423607CC1FB2ACF800DF96CD /* Timer */,
 				427C3D481F9F22180081B431 /* HHPayPasswordView */,
 				427C3D411F9F21C10081B431 /* TimeAlter */,
 				42DDA53D1F70F19A006A6A26 /* OpenSDK1.8.0 */,
@@ -1507,6 +1520,7 @@
 				00A952811F7024F800DEE0F6 /* MycenterViewController.m in Sources */,
 				427C3D4F1F9F22180081B431 /* HHPasswordErrorView.m in Sources */,
 				42C84EC81EF2DD1A0008189D /* DIc.m in Sources */,
+				423607CF1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m in Sources */,
 				427C3D721F9F227B0081B431 /* CouponViewController.m in Sources */,
 				6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */,
 				427C3D461F9F21C10081B431 /* BasicView.m in Sources */,

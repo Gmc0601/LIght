@@ -192,6 +192,7 @@
 }
 
 - (void)callbtnClick:(UIButton *)sender {
+    [self dismiss];
     if (self.callBtnBlock) {
         self.callBtnBlock();
     }

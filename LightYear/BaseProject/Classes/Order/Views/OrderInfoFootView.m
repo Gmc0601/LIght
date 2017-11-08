@@ -26,9 +26,9 @@
     if ([model.status intValue] == 6) {
         //   审核中  1
         if ([model.isrefund intValue] == 1) {
-             self.OrderState.text = @"退款审核中";
+             self.OrderState.text = @"订单状态：退款审核中";
         }else {
-             self.OrderState.text = @"退款成功";
+             self.OrderState.text = @"订单状态：退款成功";
         }
         //   退款成功 2
         

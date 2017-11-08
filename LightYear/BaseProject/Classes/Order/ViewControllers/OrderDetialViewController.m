@@ -18,14 +18,17 @@
 #import "ChangePayPasswordViewController.h"
 #import "MakeOrderViewController.h"
 #import "UIButton+YX.h"
+#import "NSTimer+EOCBlocksSupport.h"
 
 @interface OrderDetialViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate>{
     BOOL post;   //  配送
     float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
     NSString *footInfo, *btnStr , *payStr, *storeName;
+    NSTimer *_timer;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
+@property (nonatomic, retain) UILabel *timeLab;
 @property (nonatomic, retain) NSMutableArray *goodsArr, *couponArr;
 @property (nonatomic, retain) OrderDetailModel *model;
 @property (nonatomic, retain) OrderFootView *footView;
@@ -70,11 +73,9 @@
             [self.footView choiseType:FootNoraml];
             break;
         case Order_Distribution:
-//            rightBarStr = @"取消订单";
             titleStr = @"待配送";
             break;
         case Order_Distributioning:
-//            rightBarStr = @"取消订单";
             titleStr = @"配送中";
             [self.footView choiseType:FootOneLab];
              self.footView.moreLab.text = @"配送员正在狂奔送货中...请耐心等待";
@@ -97,6 +98,8 @@
             break;
         case Order_Cancle:
             titleStr = @"已取消";
+            payStr = @"待支付";
+            self.titleArr = @[@"商品金额",@"优惠券抵扣",@"配送费",payStr];
             [self.footView choiseType:FootOneLab];
             self.footView.logoImage.hidden = YES;
             self.footView.moreLab.hidden =YES;
@@ -151,8 +154,12 @@
                 }
                 NSDictionary *datadic = responseObject;
                 if ([datadic[@"error"] intValue] == 0) {
+                    //   
                     [ConfigModel mbProgressHUD:@"申请退款成功" andView:nil];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+                    vc.OrderID = self.model.order_no;
+                    vc.backHome = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
                 }else {
                     NSString *str = datadic[@"message"];
                     [ConfigModel mbProgressHUD:str andView:nil];
@@ -184,11 +191,6 @@
             }
         }
     }
-    
-    
-    
-    
-
     
 }
 
@@ -272,6 +274,43 @@
         return;
     }
     //  添加倒计时
+    
+    /*
+     self.hour.text = [NSString stringWithFormat:@"%02d", subTime/3600];
+     self.miunute.text = [NSString stringWithFormat:@"%02d",((int)subTime / 60) % 60];
+     self.second.text = [NSString stringWithFormat:@"%02d",subTime % 60];
+     */
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *timeDate = [dateFormatter dateFromString:self.model.create_time];//model.created_at 时间
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate:timeDate];
+    NSDate *mydate = [timeDate dateByAddingTimeInterval:interval];
+    //两个时间间隔
+    NSTimeInterval timeInterval = [mydate timeIntervalSinceDate:now];
+    timeInterval = -timeInterval;
+    __block int subTime = timeInterval;
+    [self.view addSubview:self.timeLab];
+    _timer=[NSTimer eoc_scheduledTimerWithTimeInterval:1 block:
+            ^{
+                subTime --;
+                if (subTime <= 0) {
+                    [self.timeLab removeFromSuperview];
+                    self.footView.payBtn.hidden = YES;
+                    
+                }else {
+
+                    NSString *minute , *time;
+                   minute = [NSString stringWithFormat:@"%02d",subTime/60 + (subTime%60==0?0:1)];
+                    time = [NSString stringWithFormat:@"%02d", subTime%60];
+                 self.timeLab.text = [NSString stringWithFormat:@"   %@分%@秒后失效",  minute, time];
+                    
+                }
+            }
+                                               repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer: _timer  forMode: NSRunLoopCommonModes];
+    
     
     float price;
     if (post && (amont > [self.model.warehouseInfo.freeprice floatValue])) {
@@ -447,8 +486,6 @@
                             cell.detailTextLabel.font = VerdanaBold(15);
                             return cell;
                         }
-                        
-                        
                     }
                 }
                     break;
@@ -625,7 +662,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
         UIView *view = [[UIView alloc] initWithFrame:FRAME(0, 0, kScreenW, SizeHeigh(45))];
         view.backgroundColor = [UIColor whiteColor];
@@ -659,7 +696,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1 ) {
         return SizeHeigh(45);
     }else {
@@ -812,7 +849,6 @@
     
     dta = [dateformater dateFromString:aDate];
     dtb = [dateformater dateFromString:bDate];
-    NSLog(@"%@,,,,,,,%@", dta,dtb);
     NSComparisonResult result = [dta compare:dtb];
     if (result == NSOrderedSame)
     {
@@ -852,6 +888,15 @@
     return _titleArr;
 }
 
+- (UILabel *)timeLab {
+    if (!_timeLab) {
+        _timeLab = [[UILabel alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(70), kScreenW, SizeHeigh(20))];
+        _timeLab.backgroundColor = RGBColorAlpha(239, 240, 241, 0.7);
+        _timeLab.textColor = UIColorFromHex(0x999999);
+        _timeLab.font = NormalFont(13);
+    }
+    return _timeLab;
+}
 
 @end
 

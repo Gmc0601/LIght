@@ -159,6 +159,10 @@
         if (clicktype == Order_Invite) {
             OrderAlterView *view = [[OrderAlterView alloc] initWithFrame:FRAME(0, 0, kScreenW, kScreenH)];
             [view update:model];
+            view.callBtnBlock = ^{
+                NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",model.shopInfo.customphone];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            };
             [view pop];
         }
         if (clicktype == Order_Topay ) {

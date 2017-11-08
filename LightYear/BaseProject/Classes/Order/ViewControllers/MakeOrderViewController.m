@@ -105,7 +105,8 @@
         
         NSDictionary *couDic = @{
                                  @"type" : @"1",
-                                 @"amount" : @"",
+                                 @"amount" : self.model.all_amount,
+                                 @"ctype" : @"1"
                                  };
         [HttpRequest postPath:@"_coupon_list_001" params:couDic resultBlock:^(id responseObject, NSError *error) {
             if([error isEqual:[NSNull null]] || error == nil){
