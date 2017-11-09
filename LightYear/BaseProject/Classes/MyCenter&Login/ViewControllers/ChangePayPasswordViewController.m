@@ -50,6 +50,7 @@
         baseTextField.tag = 10+i;
         baseTextField.keyboardType = UIKeyboardTypeDefault;
         baseTextField.textDelegate = self;
+        baseTextField.secureTextEntry = YES;
         baseTextField.font = [UIFont systemFontOfSize:16];
         [self.view addSubview:baseTextField];
         [baseTextField mas_makeConstraints:^(MASConstraintMaker *make) {
