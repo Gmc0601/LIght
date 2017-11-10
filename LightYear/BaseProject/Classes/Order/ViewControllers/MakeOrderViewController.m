@@ -16,19 +16,20 @@
 #import "OrderDataHelper.h"
 #import "MemberRechargeViewController.h"
 #import "DeliveryAddressViewController.h"
-#import "PickerViewCustom.h"
 #import "HHPayPasswordView.h"
 #import "ChangePayPasswordViewController.h"
 #import "OrderDetialViewController.h"
 #import "OrderViewController.h"
 #import "ChangeUserInfoViewController.h"
 #import "SelectShopViewController.h"
+#import "CCDateAlter.h"
 
-@interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, PickerViewCustomDelegate, HHPayPasswordViewDelegate> {
+@interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
     int canUseCouponNum , couponId;   //  可使用优惠券数量
     float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
     NSString *getTime, *storeName, *couponInfo;  //  自取时间   商店名称   优惠券信息
+    UserInfo * userModel;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -250,7 +251,9 @@
                         if (getTime.length == 0) {
                             str = @"未选择";
                         }else {
-                            str = getTime;
+                            
+                            str = [getTime substringWithRange:NSMakeRange(5, 11)];
+//                            str = getTime;
                         }
                         cell.detailTextLabel.text = str;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -401,10 +404,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0 && indexPath.row == 1 && !post) {
-        PickerViewCustom *customView = [[PickerViewCustom alloc]init];
-        customView.model = self.model;
-        customView.delegate = self;
-        [customView show];
+        CCDateAlter *view = [[CCDateAlter alloc] initWithFrame:FRAME(0, 0, kScreenW, kScreenH)];
+        [view update:self.model];
+        WeakSelf(weak);
+        view.finishBlock = ^(NSString *time) {
+            getTime = time;
+            [weak.noUseTableView reloadData];
+        };
+        [view pop];
     }
     
     if (indexPath.section == 0 && indexPath.row == 2 && post) {
@@ -448,13 +455,6 @@
         };
         [self.navigationController pushViewController:view animated:YES];
     }
-}
-//  获取返回时间
--(void)title:(NSString *)title
-{
-    NSLog(@"...%@", title);
-    getTime = title;
-    [self.noUseTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -578,12 +578,26 @@
 
         NSDictionary *datadic = responseObject;
         if ([datadic[@"error"] intValue] == 0) {
-            [self click];
+            userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+            if (userModel.is_trade == 0) {
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有设置支付密码，是否去设置？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                [alter show];
+            }else{
+                [self click];
+            }
         }else {
             NSString *str = datadic[@"message"];
             [ConfigModel mbProgressHUD:str andView:nil];
         }
     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        ChangeUserInfoViewController *vc = [[ChangeUserInfoViewController alloc] init];
+        vc.type = UserInfoTypePayPassword;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)click{
@@ -645,9 +659,7 @@
     ChangeUserInfoViewController * changeUserInfoVC = [[ChangeUserInfoViewController alloc] init];
     changeUserInfoVC.type = UserInfoTypePayPassword;
     [self.navigationController pushViewController:changeUserInfoVC animated:YES];
-    
-//    ChangePayPasswordViewController *vc = [[ChangePayPasswordViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (NSMutableArray *)goodsArr {

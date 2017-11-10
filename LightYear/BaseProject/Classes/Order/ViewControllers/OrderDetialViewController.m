@@ -224,12 +224,17 @@
             
             [self.footView choiseType:FootOneLab];
     
-            NSDate * now = [NSDate date];
-            NSDate * anHourAgo = [now dateByAddingTimeInterval:-5*60];
-            NSString *nowstr = [NSString stringWithFormat:@"%@", anHourAgo];
-            nowstr = [nowstr substringToIndex:18];
+            NSDate *date = [NSDate date];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            [formatter setTimeStyle:NSDateFormatterShortStyle];
+            [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+            NSString *DateTime = [formatter stringFromDate:date];
+            
+            __block int subTime = [self dateTimeDifferenceWithStartTime:self.model.create_time endTime:DateTime];
+            int minute = (int)subTime /60%60;
     
-            if ([self compareDate:self.model.create_time withDate:nowstr]) {
+            if (minute > 5) {
                 //   超时
                 self.footView.logoImage.hidden = YES;
                 self.footView.moreLab.hidden = YES;
@@ -259,53 +264,45 @@
 
 - (void)changefootviewInfo {
     
-    NSDate * now = [NSDate date];
-    NSDate * anHourAgo = [now dateByAddingTimeInterval:-5*60];
-    NSString *nowstr = [NSString stringWithFormat:@"%@", anHourAgo];
-    nowstr = [nowstr substringToIndex:18];
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    NSString *DateTime = [formatter stringFromDate:date];
     
-    if ([self compareDate:self.model.create_time withDate:nowstr]) {
-        //   超时
-        [self.footView choiseType:FootOneLab];
-        self.footView.logoImage.hidden = YES;
-        self.footView.moreLab.hidden =YES;
-        [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
-        [self.footView changeBtnStyle:Yellow];
-        return;
-    }
-    //  添加倒计时
+    __block int subTime = [self dateTimeDifferenceWithStartTime:self.model.create_time endTime:DateTime];
+    int minute = (int)subTime /60%60;
     
-    /*
-     self.hour.text = [NSString stringWithFormat:@"%02d", subTime/3600];
-     self.miunute.text = [NSString stringWithFormat:@"%02d",((int)subTime / 60) % 60];
-     self.second.text = [NSString stringWithFormat:@"%02d",subTime % 60];
-     */
+        if (minute >= 15) {
+            //   超时
+            [self.footView choiseType:FootOneLab];
+            self.footView.logoImage.hidden = YES;
+            self.footView.moreLab.hidden =YES;
+            [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
+            [self.footView changeBtnStyle:Yellow];
+            return;
+        }
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *timeDate = [dateFormatter dateFromString:self.model.create_time];//model.created_at 时间
-    NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [zone secondsFromGMTForDate:timeDate];
-    NSDate *mydate = [timeDate dateByAddingTimeInterval:interval];
-    //两个时间间隔
-    NSTimeInterval timeInterval = [mydate timeIntervalSinceDate:now];
-    timeInterval = -timeInterval;
-    __block int subTime = timeInterval;
     [self.view addSubview:self.timeLab];
+   __block int time = 15*60 - subTime;
     _timer=[NSTimer eoc_scheduledTimerWithTimeInterval:1 block:
             ^{
-                subTime --;
+                time --;
                 if (subTime <= 0) {
                     [self.timeLab removeFromSuperview];
-                    self.footView.payBtn.hidden = YES;
-                    
-                }else {
+                    [self.footView choiseType:FootOneLab];
+                    self.footView.logoImage.hidden = YES;
+                    self.footView.moreLab.hidden =YES;
+                    [self.footView.payBtn setTitle:@"再来一单" forState:UIControlStateNormal];
+                    [self.footView changeBtnStyle:Yellow];
+                    return;
 
-                    NSString *minute , *time;
-                   minute = [NSString stringWithFormat:@"%02d",subTime/60 + (subTime%60==0?0:1)];
-                    time = [NSString stringWithFormat:@"%02d", subTime%60];
-                 self.timeLab.text = [NSString stringWithFormat:@"   %@分%@秒后失效",  minute, time];
-                    
+                }else {
+                    int second = (int)time %60;//秒
+                    int minute = (int)time /60%60;
+                 self.timeLab.text = [NSString stringWithFormat:@"   %.2d分%.2d秒后失效",  minute, second];
+
                 }
             }
                                                repeats:YES];
@@ -501,7 +498,8 @@
                         }
                         cell.textLabel.font = SourceHanSansCNRegular(15);
                         cell.textLabel.text = @"取货时间";
-                        cell.detailTextLabel.text = self.model.drawtime;
+                     NSString *str = [self.model.drawtime substringWithRange:NSMakeRange(5, 11)];
+                        cell.detailTextLabel.text = str;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         cell.detailTextLabel.font = VerdanaBold(15);
                         return cell;
@@ -590,12 +588,12 @@
             cell.detailTextLabel.textColor = UIColorFromHex(0x333333);
             if (indexPath.row == 0) {
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.all_amount floatValue]];
-                cell.detailTextLabel.font = SourceHanSansCNMedium(12);
-                cell.detailTextLabel.textColor = UIColorFromHex(0xff543a);
             }else if (indexPath.row == 1){
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.coupon_money floatValue]];
             }else if(indexPath.row == 2){
                 if (post) {
+                    cell.detailTextLabel.font = SourceHanSansCNMedium(15);
+                    cell.detailTextLabel.textColor = UIColorFromHex(0xff543a);
                     str = [NSString stringWithFormat:@"￥%.2f", [self.model.postage floatValue]];
                 }else {
                    str = [NSString stringWithFormat:@"￥%.2f", [self.model.amount floatValue]];
@@ -670,7 +668,7 @@
         lab.text = storeName;
         lab.font = NormalFont(15);
         
-        UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - 80, 7, 70, 30)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - 90, 7, 80, 30)];
         [btn setTitle:@"联系商家" forState:UIControlStateNormal];
         [btn setTitleColor:UIColorFromHex(0x3e7bb1) forState:UIControlStateNormal];
         btn.titleLabel.font = NormalFont(13);
@@ -816,57 +814,32 @@
     return _footView;
 }
 
- - (BOOL)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
-    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
-    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
-    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
-    NSComparisonResult result = [dateA compare:dateB];
-    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
-    if (result == NSOrderedDescending) {
-        //NSLog(@"Date1  is in the future");
-        return YES;
+- (NSTimeInterval )dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *startD =[date dateFromString:startTime];
+    NSDate *endD = [date dateFromString:endTime];
+    NSTimeInterval start = [startD timeIntervalSince1970]*1;
+    NSTimeInterval end = [endD timeIntervalSince1970]*1;
+    NSTimeInterval value = end - start;
+    int second = (int)value %60;//秒
+    int minute = (int)value /60%60;
+    int house = (int)value / (24 *3600)%3600;
+    int day = (int)value / (24 *3600);
+    NSString *str;
+    if (day != 0) {
+        str = [NSString stringWithFormat:@"耗时%d天%d小时%d分%d秒",day,house,minute,second];
+    }else if (day==0 && house !=0) {
+        str = [NSString stringWithFormat:@"耗时%d小时%d分%d秒",house,minute,second];
+    }else if (day==0 && house==0 && minute!=0) {
+        str = [NSString stringWithFormat:@"耗时%d分%d秒",minute,second];
+    }else{
+        str = [NSString stringWithFormat:@"耗时%d秒",second];
     }
-    else if (result ==NSOrderedAscending){
-        //NSLog(@"Date1 is in the past");
-        return NO;
-    }
-    //NSLog(@"Both dates are the same");
-    return 0;
-    
+    return value;
 }
 
-- (BOOL)compareDate:(NSString*)aDate withDate:(NSString*)bDate
-{
-    BOOL time;
-    NSLog(@"%@<><><>%@", aDate, bDate);
-    NSDateFormatter *dateformater = [[NSDateFormatter alloc] init];
-    [dateformater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *dta = [[NSDate alloc] init];
-    NSDate *dtb = [[NSDate alloc] init];
-    
-    dta = [dateformater dateFromString:aDate];
-    dtb = [dateformater dateFromString:bDate];
-    NSComparisonResult result = [dta compare:dtb];
-    if (result == NSOrderedSame)
-    {
-        //        相等  aa=0
-        time = YES;
-    }else if (result == NSOrderedAscending)
-    {
-        //bDate比aDate大//  chaoshi
-        time = YES;
-    }else if (result == NSOrderedDescending)
-    {
-        //bDate比aDate小
-        time = NO;
-        
-    }
-    
-    return time;
-}
+
 
 - (OrderInfoFootView *)footInfoView {
     WeakSelf(weakself);

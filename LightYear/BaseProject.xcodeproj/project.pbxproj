@@ -76,8 +76,6 @@
 		4218CED81FB157A400A63A13 /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC51FB157A400A63A13 /* verdanab_0.ttf */; };
 		4218CED91FB157A400A63A13 /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC61FB157A400A63A13 /* verdanai_0.ttf */; };
 		423607CF1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */; };
-		427C3D461F9F21C10081B431 /* BasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D431F9F21C10081B431 /* BasicView.m */; };
-		427C3D471F9F21C10081B431 /* PickerViewCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D451F9F21C10081B431 /* PickerViewCustom.m */; };
 		427C3D4F1F9F22180081B431 /* HHPasswordErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4A1F9F22180081B431 /* HHPasswordErrorView.m */; };
 		427C3D501F9F22180081B431 /* HHPayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4C1F9F22180081B431 /* HHPayPasswordView.m */; };
 		427C3D511F9F22180081B431 /* HHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4E1F9F22180081B431 /* HHTextField.m */; };
@@ -94,6 +92,7 @@
 		427C3D7A1F9F227B0081B431 /* OrderInfoFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D6B1F9F227B0081B431 /* OrderInfoFootView.m */; };
 		427C3D7B1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D6D1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m */; };
 		427C3D7C1F9F227B0081B431 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */; };
+		4284B4AC1FB58DD500E3D3D7 /* CCDateAlter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */; };
 		429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */; };
 		42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC01F5F07B3005130DC /* LocationHelper.m */; };
 		42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC31F5F0CE5005130DC /* UIButton+SSEdgeInsets.m */; };
@@ -326,10 +325,6 @@
 		4218CEC61FB157A400A63A13 /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
 		423607CD1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+EOCBlocksSupport.h"; sourceTree = "<group>"; };
 		423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+EOCBlocksSupport.m"; sourceTree = "<group>"; };
-		427C3D421F9F21C10081B431 /* BasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicView.h; sourceTree = "<group>"; };
-		427C3D431F9F21C10081B431 /* BasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicView.m; sourceTree = "<group>"; };
-		427C3D441F9F21C10081B431 /* PickerViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewCustom.h; sourceTree = "<group>"; };
-		427C3D451F9F21C10081B431 /* PickerViewCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewCustom.m; sourceTree = "<group>"; };
 		427C3D491F9F22180081B431 /* HHPasswordErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHPasswordErrorView.h; sourceTree = "<group>"; };
 		427C3D4A1F9F22180081B431 /* HHPasswordErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHPasswordErrorView.m; sourceTree = "<group>"; };
 		427C3D4B1F9F22180081B431 /* HHPayPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHPayPasswordView.h; sourceTree = "<group>"; };
@@ -362,6 +357,8 @@
 		427C3D6D1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStoreInfoTableViewCell.m; sourceTree = "<group>"; };
 		427C3D6E1F9F227B0081B431 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		4284B4AA1FB58DD500E3D3D7 /* CCDateAlter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCDateAlter.h; sourceTree = "<group>"; };
+		4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCDateAlter.m; sourceTree = "<group>"; };
 		429940EC1F5E8ED60009ADDA /* CCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBaseViewController.h; sourceTree = "<group>"; };
 		429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBaseViewController.m; sourceTree = "<group>"; };
 		42A24FBF1F5F07B3005130DC /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
@@ -822,17 +819,6 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
-		427C3D411F9F21C10081B431 /* TimeAlter */ = {
-			isa = PBXGroup;
-			children = (
-				427C3D421F9F21C10081B431 /* BasicView.h */,
-				427C3D431F9F21C10081B431 /* BasicView.m */,
-				427C3D441F9F21C10081B431 /* PickerViewCustom.h */,
-				427C3D451F9F21C10081B431 /* PickerViewCustom.m */,
-			);
-			path = TimeAlter;
-			sourceTree = "<group>";
-		};
 		427C3D481F9F22180081B431 /* HHPayPasswordView */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,6 +885,8 @@
 				427C3D6D1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m */,
 				427C3D6E1F9F227B0081B431 /* OrderTableViewCell.h */,
 				427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */,
+				4284B4AA1FB58DD500E3D3D7 /* CCDateAlter.h */,
+				4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1120,7 +1108,6 @@
 			children = (
 				423607CC1FB2ACF800DF96CD /* Timer */,
 				427C3D481F9F22180081B431 /* HHPayPasswordView */,
-				427C3D411F9F21C10081B431 /* TimeAlter */,
 				42DDA53D1F70F19A006A6A26 /* OpenSDK1.8.0 */,
 				42F795CE1F00CC3E00A11A69 /* MJRefresh */,
 				42C84F141EF2EB650008189D /* Json */,
@@ -1523,7 +1510,6 @@
 				423607CF1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m in Sources */,
 				427C3D721F9F227B0081B431 /* CouponViewController.m in Sources */,
 				6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */,
-				427C3D461F9F21C10081B431 /* BasicView.m in Sources */,
 				6B5F6DAA1F628D28001BDC0E /* UIColor+BGHexColor.m in Sources */,
 				6B5F6DA11F628D28001BDC0E /* NSMutableArray+Category.m in Sources */,
 				6B5F6DA81F628D28001BDC0E /* NSTimer+Category.m in Sources */,
@@ -1566,7 +1552,6 @@
 				42C84ECB1EF2DD1A0008189D /* NSString+MD5.m in Sources */,
 				6B5F6D681F6281BC001BDC0E /* FirstLevelGoodsViewController.m in Sources */,
 				42C84F1C1EF2EB650008189D /* NSObject+SBJSON.m in Sources */,
-				427C3D471F9F21C10081B431 /* PickerViewCustom.m in Sources */,
 				6BB114B01F6C1F4B00C9C886 /* SearchViewContrller.m in Sources */,
 				6BB114AD1F6C177B00C9C886 /* SearchBarView.m in Sources */,
 				00A9527D1F7024F800DEE0F6 /* EditDeliveryAddressViewController.m in Sources */,
@@ -1610,6 +1595,7 @@
 				04274F721F7654A1009DF308 /* MemberCardViewController.m in Sources */,
 				6B5F6DA41F628D28001BDC0E /* NSString+Category.m in Sources */,
 				00C40BC51F9DE100002A31A0 /* ShopListModel.m in Sources */,
+				4284B4AC1FB58DD500E3D3D7 /* CCDateAlter.m in Sources */,
 				427C3D7A1F9F227B0081B431 /* OrderInfoFootView.m in Sources */,
 				00A952871F7024F800DEE0F6 /* DeilveryAddressTableViewCell.m in Sources */,
 				42A24FCF1F5F0CE5005130DC /* UIView+Frame.m in Sources */,
