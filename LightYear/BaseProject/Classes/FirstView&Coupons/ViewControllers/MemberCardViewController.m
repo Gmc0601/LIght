@@ -46,7 +46,7 @@
         ShopListModel * model = [[ShopListModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
             ShopListInfo *info = [[ShopListInfo alloc] initWithDictionary:responseObject[@"info"] error:nil];
-            _balanceLabel.text = info.amount;
+            _balanceLabel.text = [NSString stringWithFormat:@"￥%@",info.amount];
             _scroLabel.text = info.integral;
             _codeImageV.transform= CGAffineTransformMakeRotation(90*M_PI/180);
             _codeImageV.frame = FRAME(SizeWidth(24), SizeHeigh(61), SizeWidth(90), SizeHeigh(315));
