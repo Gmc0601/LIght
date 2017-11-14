@@ -130,9 +130,9 @@
                 model.skuIdList = skuList;
                 
                 model._id = dict[@"id"];
-                model.memberPrice = dict[@"user_price"] == [NSNull null] ? nil:dict[@"user_price"];
-                model.specilPrice = dict[@"special_price"]  == [NSNull null] ? nil:dict[@"special_price"];
-                model.price = dict[@"price"]  == [NSNull null] ? nil:dict[@"price"];
+                model.memberPrice = dict[@"user_price"] == [NSNull null] ? @"0.0":[self getPrice:dict[@"user_price"]];
+                model.specilPrice = dict[@"special_price"]  == [NSNull null]? @"0.0" : [self getPrice:dict[@"special_price"]];
+                model.price = dict[@"price"]  == [NSNull null] ? @"0.0":[self getPrice:dict[@"price"]];
                 model.isUser = dict[@"is_user"];
                 model.shopId = dict[@"shopid"];
                 model.stock = ((NSString *)dict[@"stock"]).intValue;
@@ -147,9 +147,9 @@
             model.name = goodinfo[@"good_name"];
             model.couponid = goodinfo[@"couponid"] == [NSNull null] ? nil:goodinfo[@"couponid"];
             model.isNew = [goodinfo[@"isnew"]  isEqual: @"1"];
-            model.memberPrice = goodinfo[@"user_price"] == [NSNull null] ? nil:goodinfo[@"user_price"];
-            model.specilPrice = goodinfo[@"special_price"]  == [NSNull null] ? nil:goodinfo[@"special_price"];
-            model.price = goodinfo[@"price"]  == [NSNull null] ? nil:goodinfo[@"price"];
+            model.memberPrice = goodinfo[@"user_price"] == [NSNull null] ?  @"0.0":[self getPrice:goodinfo[@"user_price"]];
+            model.specilPrice = goodinfo[@"special_price"]  == [NSNull null] ?  @"0.0":[self getPrice:goodinfo[@"special_price"]];
+            model.price = goodinfo[@"price"]  == [NSNull null] ? @"0.0":[self getPrice:goodinfo[@"price"]];
             model.isUser = [goodinfo[@"is_user"]  isEqual: @"1"];
             model.shopId = goodinfo[@"shopid"];
             model.stock = ((NSString *)goodinfo[@"stock"]).intValue;
@@ -180,9 +180,9 @@
         model.name = dict[@"good_name"];
         model.couponid = dict[@"couponid"] == [NSNull null] ? nil:dict[@"couponid"];
         model.isNew = [dict[@"isnew"]  isEqual: @"1"];
-        model.memberPrice = dict[@"user_price"] == [NSNull null] ? nil:dict[@"user_price"];
-        model.specilPrice = dict[@"special_price"]  == [NSNull null] ? nil:dict[@"special_price"];
-        model.price = dict[@"price"]  == [NSNull null] ? nil:dict[@"price"];
+        model.memberPrice = dict[@"user_price"] == [NSNull null] ?  @"0.0":[self getPrice:dict[@"user_price"]];
+        model.specilPrice = dict[@"special_price"]  == [NSNull null] ?  @"0.0":[self getPrice:dict[@"special_price"]];
+        model.price = dict[@"price"]  == [NSNull null] ? @"0.0":[self getPrice:dict[@"price"]];
         model.isUser = ![dict[@"is_user"]  isEqual: @"0"];
         model.shopId = dict[@"shopid"];
         model.stock = ((NSString *)dict[@"stock"]).intValue;
@@ -270,7 +270,7 @@
                 model._id = infoDic[@"id"];
                 model.name = infoDic[@"title"];
                 model.couponid = infoDic[@"couponid"] == [NSNull null] ? nil:infoDic[@"couponid"];
-                model.price = infoDic[@"price"]  == [NSNull null] ? nil:infoDic[@"price"];
+                model.price = infoDic[@"price"]  == [NSNull null] ? @"0.0":[self getPrice:infoDic[@"price"]];
                 model.shopId = infoDic[@"shopid"];
                 model.stock = ((NSString *)infoDic[@"stock"]).intValue;
                 model.shopStock = ((NSString *)infoDic[@"s_stock"]).intValue;
@@ -388,5 +388,9 @@
             callback(datadic[@"info"],nil);
         }
     }];
+}
+
++(NSString *) getPrice:(NSString *) price{
+    return [NSString stringWithFormat:@"%.1f",price.floatValue];
 }
 @end
