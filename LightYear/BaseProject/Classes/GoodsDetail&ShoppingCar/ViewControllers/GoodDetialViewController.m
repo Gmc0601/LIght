@@ -68,7 +68,9 @@
 @property(retain,atomic) UIWebView *descWebView;
 @property(retain,atomic)  SKUPrice *skuPrice;
 @property(assign,atomic)  int countOfCell;
-@property(assign,atomic)  BOOL *multiLine;
+@property(assign,atomic)  BOOL multiLine;
+@property(assign,atomic)  BOOL hideDetailHeader;
+@property(assign,atomic)  BOOL hideReminderHeader;
 @end
 
 @implementation GoodDetialViewController
@@ -194,7 +196,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1 || section == 2) {
+    if (section == 1 && !_hideDetailHeader) {
+        return SizeHeigh(61);
+    }
+    
+    if (!_hideReminderHeader && section == 2) {
         return SizeHeigh(61);
     }
     
@@ -1136,10 +1142,21 @@
         [ConfigModel hideHud:self];
         if (error == nil) {
             _model = model;
+            
             _skuList = skuList;
             _skuPriceList = skuPriceList;
-            _descWebView = [self setWebView:_descWebView withHtml:model.desc];
-            _infoWebView = [self setWebView:_infoWebView withHtml:model.info];
+            if ([_model.desc isEqualToString:@""]) {
+                _hideDetailHeader = YES;
+            }else{
+                _descWebView = [self setWebView:_descWebView withHtml:model.desc];
+            }
+            
+            if ([_model.info isEqualToString:@""]) {
+                _hideReminderHeader = YES;
+            }else{
+                _infoWebView = [self setWebView:_infoWebView withHtml:model.info];
+
+            }
             
             [NetHelper recommendList:_model.shopId withGoodsId:_model._id  callBack:^(NSString *error, NSArray *data) {
                 if (data.count > 0) {
