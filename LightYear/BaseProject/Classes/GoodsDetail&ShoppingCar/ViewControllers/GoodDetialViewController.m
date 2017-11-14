@@ -222,10 +222,18 @@
     _banner = [ZYBannerView new];
     _banner.dataSource = self;
     _banner.delegate = self;
-    _banner.backgroundColor = [UIColor whiteColor];
+    _banner.backgroundColor = self.view.backgroundColor;
+
     _banner.pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#cccccc"];
     _banner.pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"#333333"];
+    cell.backgroundColor = self.view.backgroundColor;
     [cell addSubview:_banner];
+    
+    for (UIView *subView in _banner.subviews) {
+        if ([subView isKindOfClass:[UICollectionView class]]) {
+            subView.backgroundColor =self.view.backgroundColor;
+        }
+    }
     
     [_banner mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(cell);
@@ -242,7 +250,7 @@
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index{
     UIImageView *img = [UIImageView new];
     [img sd_setImageWithURL:[NSURL URLWithString:_model.img[index]]];
-    
+    img.backgroundColor = self.view.backgroundColor;
     return img;
 }
 

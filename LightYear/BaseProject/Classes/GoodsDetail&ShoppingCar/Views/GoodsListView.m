@@ -18,7 +18,7 @@
     int pageIndex;
 }
 @property(retain,atomic)     UITableView *tb;
-@property(retain,atomic)     NSArray *datasource;
+@property(retain,atomic)     NSMutableArray *datasource;
 @end
 @implementation GoodsListView
 
@@ -49,7 +49,11 @@
                 [ConfigModel mbProgressHUD:error andView:_owner.view];
             }else{
                 if(data != nil && data.count > 0){
-                    _datasource = data;
+                    if (pageIndex == 1) {
+                        _datasource = [NSMutableArray arrayWithCapacity:0];
+                    }
+                    [_datasource addObjectsFromArray:data];
+
                     [_tb reloadData];
                 }
             }
@@ -62,7 +66,10 @@
                 [ConfigModel mbProgressHUD:error andView:_owner.view];
             }else{
                 if(data != nil && data.count > 0){
-                    _datasource = data;
+                    if (pageIndex == 1) {
+                        _datasource = [NSMutableArray arrayWithCapacity:0];
+                    }
+                    [_datasource addObjectsFromArray:data];
                     [_tb reloadData];
                 }
             }
@@ -75,7 +82,7 @@
     self = [super init];
     if (self) {
         _owner = owner;
-        [self addTableView];
+//        [self addTableView];
     }
     return self;
 }
@@ -90,6 +97,7 @@
 }
 
 -(void) addTableView{
+    _datasource = [NSMutableArray arrayWithCapacity:0];
     _cellIdentifier = @"cell";
     _tb = [[UITableView alloc] init];
     _tb.rowHeight = SizeHeigh(161);
