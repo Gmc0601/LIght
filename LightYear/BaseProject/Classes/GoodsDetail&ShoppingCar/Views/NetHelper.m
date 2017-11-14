@@ -240,6 +240,7 @@
 +(void) getFavoriteListWithShopId:(NSString *) shopId withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback{
     NSMutableDictionary *params = [NSMutableDictionary new];
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"page"];
+    [params setObject:[NSString stringWithFormat:@"%@",shopId] forKey:@"shopid"];
     [params setObject:@"10" forKey:@"size"];
     
     [HttpRequest postPath:@"_follow_list_001" params:params resultBlock:^(id responseObject, NSError *error) {

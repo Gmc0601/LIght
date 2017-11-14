@@ -100,6 +100,7 @@
         listView.delegate = self;
         [_rightView insertSubview:listView atIndex:_rightView.subviews.count];
         listView.isFavorite = true;
+        listView.tag = 8001;
         
         [listView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_rightView);
@@ -107,6 +108,9 @@
             make.top.equalTo(lblTitle.mas_bottom);
             make.bottom.equalTo(_rightView);
         }];
+    }else{
+        GoodsListView *list = (GoodsListView *)[_rightView viewWithTag:8001];
+        [list reloadData];
     }
     
     [UIView animateWithDuration:0.5 animations:^{

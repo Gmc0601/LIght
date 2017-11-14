@@ -34,6 +34,10 @@
     [_tb.header beginRefreshing];
 }
 
+-(void) reloadData{
+    [_tb.header beginRefreshing ];
+}
+
 -(void) fetchDate{
     [ConfigModel showHud:_owner];
     
