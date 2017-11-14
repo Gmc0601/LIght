@@ -84,10 +84,15 @@
             _pageControl.hidden = NO;
         }
         _pageControl.currentPage = _selectedImageIndex;
-        [self startTimer];
+        if (_bannerArray.count>1) {
+            [self startTimer];
+            _imageScrollView.scrollEnabled = YES;
+        } else {
+            [self invalidTimer];
+            _imageScrollView.scrollEnabled = NO;
+        }
     }
     else {
-        [self invalidTimer];
         [_bannerArray removeAllObjects];
         _selectedImageIndex = 0;
         _pageControl.hidden = YES;

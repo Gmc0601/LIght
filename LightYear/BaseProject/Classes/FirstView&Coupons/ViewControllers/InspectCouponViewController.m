@@ -40,6 +40,7 @@
     [self.rightBar removeFromSuperview];
     _dataArray = [NSMutableArray array];
     _selectArray = [NSMutableArray array];
+    _lastSelectRow = -1;
     [self syncWithRequest];
 }
 
@@ -144,11 +145,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *lastDic = _selectArray[_lastSelectRow];
-    [lastDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld",_lastSelectRow]];
-    [_selectArray replaceObjectAtIndex:_lastSelectRow withObject:lastDic];
-    NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:_lastSelectRow inSection:0];
-    [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationNone];
+    if (_lastSelectRow == indexPath.row) {
+        NSMutableDictionary *lastDic = _selectArray[_lastSelectRow];
+        [lastDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld",_lastSelectRow]];
+        [_selectArray replaceObjectAtIndex:_lastSelectRow withObject:lastDic];
+        NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:_lastSelectRow inSection:0];
+        [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationNone];
+        _lastSelectRow = -1;
+        return;
+    }
+    if (_lastSelectRow != -1) {
+        NSMutableDictionary *lastDic = _selectArray[_lastSelectRow];
+        [lastDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld",_lastSelectRow]];
+        [_selectArray replaceObjectAtIndex:_lastSelectRow withObject:lastDic];
+        NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:_lastSelectRow inSection:0];
+        [self.tableV reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationNone];
+    }
     
     NSMutableDictionary *dic = _selectArray[indexPath.row];
     NSString *str = [dic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];

@@ -71,7 +71,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         @strongify(self)
         [self syncWithBalanceRequest];
-        self.balanceTableV.showsInfiniteScrolling = NO;
+//        self.balanceTableV.showsInfiniteScrolling = NO;
         [self.balanceTableV.infiniteScrollingView stopAnimating];
     });
 }
@@ -83,7 +83,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         @strongify(self)
         [self syncWithPointRequest];
-        self.pointTableV.showsInfiniteScrolling = NO;
+//        self.pointTableV.showsInfiniteScrolling = NO;
         [self.pointTableV.infiniteScrollingView stopAnimating];
     });
 }
@@ -96,7 +96,7 @@
     }
     NSDictionary *dic = @{
                           @"page":[NSString stringWithFormat:@"%ld",self.balancePageNo],
-                          @"size":@"5",
+                          @"size":@"10",
                           };
     [HttpRequest postPath:tradeListURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
@@ -131,7 +131,7 @@
     }
     NSDictionary *dic = @{
                           @"page":[NSString stringWithFormat:@"%ld",self.pointPageNo],
-                          @"size":@"5",
+                          @"size":@"10",
                           };
     [HttpRequest postPath:integralListURL params:dic resultBlock:^(id responseObject, NSError *error) {
         integralListModel * model = [[integralListModel alloc] initWithDictionary:responseObject error:nil];

@@ -41,7 +41,13 @@
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     self.rightBar.hidden = YES;
     if (userModel) {
-        self.titleLab.text = [NSString stringWithFormat:@"%@！%@",[self getCurrentTime],userModel.nickname];
+        if ([userModel.nickname containsString:@","]) {
+            NSArray *nameArr = [userModel.nickname componentsSeparatedByString:@","];
+            NSString *name = nameArr[1];
+            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],name];
+        } else {
+            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],userModel.nickname];
+        }
     }else{
         self.titleLab.text = [self getCurrentTime];
     }

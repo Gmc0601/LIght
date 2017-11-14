@@ -60,10 +60,11 @@
     }
     if ([info.full_type isEqualToString:@"1"]) {
         self.conditionLabel.text = [NSString stringWithFormat:@"订单金额满%@优惠%@",info.condition,info.denomination];
+        self.titleLabel.text = [NSString stringWithFormat:@"%@元优惠券",info.denomination];
     } else {
         self.conditionLabel.text = @"到店选择需要领取的物品";
+        self.titleLabel.text = @"领物券";
     }
-    self.titleLabel.text = info.title;
     self.promptLabel.text = @"使用条件";
     self.timePromptLabel.text = @"过期时间";
     self.timeLabel.text = info.end_time;

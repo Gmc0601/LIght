@@ -35,13 +35,13 @@
 - (void)fillWithPoint:(integralListInfo *)info {
     if ([info.type isEqualToString:@"1"]) {
         self.promptLabel.text = @"门店购物";
-        self.amountLabel.text = [NSString stringWithFormat:@"+%@",info.integral];
+        self.amountLabel.text = [NSString stringWithFormat:@"%@",info.integral];
     } else if ([info.type isEqualToString:@"2"]) {
         self.promptLabel.text = @"线上购物";
-        self.amountLabel.text = [NSString stringWithFormat:@"+%@",info.integral];
+        self.amountLabel.text = [NSString stringWithFormat:@"%@",info.integral];
     } else {
         self.promptLabel.text = @"门店消费";
-        self.amountLabel.text = [NSString stringWithFormat:@"-%@",info.integral];
+        self.amountLabel.text = [NSString stringWithFormat:@"%@",info.integral];
     }
     self.timeLabel.text = info.create_time;
 }
@@ -58,7 +58,7 @@
     } else {
         self.promptLabel.text = @"充值赠送";
     }
-    self.amountLabel.text = [NSString stringWithFormat:@"￥%@",info.money];
+    self.amountLabel.text = [NSString stringWithFormat:@"%@",info.money];
     self.timeLabel.text = info.create_date;
 }
 
