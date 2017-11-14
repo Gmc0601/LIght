@@ -60,23 +60,7 @@
     [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(64);
         make.left.right.mas_offset(0);
-        make.bottom.mas_offset(-70);
-    }];
-    
-    bottomButton = [UIButton new];
-    bottomButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    bottomButton.backgroundColor = UIColorFromHex(0x3e7bb1);
-    bottomButton.layer.cornerRadius = 4.0f;
-    bottomButton.layer.masksToBounds = YES;
-    [bottomButton setTitle:@"新增收货地址" forState:UIControlStateNormal];
-    [bottomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bottomButton addTarget:self action:@selector(addDeliveryAddressAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:bottomButton];
-    [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_offset(-20);
-        make.height.mas_offset(40);
-        make.left.mas_offset(20);
-        make.right.mas_offset(-20);
+        make.bottom.mas_offset(0);
     }];
     
     normalLabel = [UILabel new];
@@ -88,43 +72,51 @@
     [normalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_offset(0);
     }];
+    
+    bottomButton = [UIButton new];
+    bottomButton.hidden = YES;
+    bottomButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    bottomButton.backgroundColor = UIColorFromHex(0x3e7bb1);
+    bottomButton.layer.cornerRadius = 4.0f;
+    bottomButton.layer.masksToBounds = YES;
+    [bottomButton setTitle:@"新增收货地址" forState:UIControlStateNormal];
+    [bottomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bottomButton addTarget:self action:@selector(addDeliveryAddressAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bottomButton];
+    [bottomButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(normalLabel.mas_bottom).offset(20);
+        make.height.mas_offset(40);
+        make.left.mas_offset(20);
+        make.right.mas_offset(-20);
+    }];
 }
 
 - (void)changeEmptyView{
     if (dataArray.count == 0) {
         myTableView.hidden = YES;
         normalLabel.hidden = NO;
-        [bottomButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(normalLabel.mas_bottom).offset(20);
-            make.height.mas_offset(40);
-            make.left.mas_offset(20);
-            make.right.mas_offset(-20);
-        }];
+        bottomButton.hidden = NO;
     }else{
         myTableView.hidden = NO;
         normalLabel.hidden = YES;
-        [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_offset(-20);
-            make.height.mas_offset(40);
-            make.left.mas_offset(20);
-            make.right.mas_offset(-20);
-        }];
+        bottomButton.hidden = YES;
     }
 }
 //新建收货地址
 - (void)addDeliveryAddressAction:(UIButton *)button{
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
     [editAddressVC setFinishBlock:^(DeliveryAddressInfo *model) {
-        if (model.isdefault == 1) {
-            for (DeliveryAddressInfo * info in dataArray) {
-                info.isdefault = 0;
-            }
-            [dataArray insertObject:model atIndex:0];
-        }else{
-            [dataArray addObject:model];
-        }
-        [myTableView reloadData];
-        [self changeEmptyView];
+        [self getData];
+//        if (model.isdefault == 1) {
+//            for (DeliveryAddressInfo * info in dataArray) {
+//                info.isdefault = 0;
+//            }
+//            [dataArray insertObject:model atIndex:0];
+//        }else{
+//            [dataArray addObject:model];
+//        }
+//        [myTableView reloadData];
+//        [self changeEmptyView];
     }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
 }
@@ -139,18 +131,41 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * view = [UIView new];
-    UIView * lineView = [UIView new];
-    lineView.backgroundColor = UIColorFromHex(0xcccccc);
-    [view addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(15);
-        make.right.mas_offset(-15);
-        make.top.bottom.mas_offset(1);
-    }];
+    if (section < dataArray.count-1) {
+        UIView * lineView = [UIView new];
+        lineView.backgroundColor = UIColorFromHex(0xcccccc);
+        [view addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(15);
+            make.right.mas_offset(-15);
+            make.top.bottom.mas_offset(1);
+        }];
+    }else{
+        UIButton * tableBottomButton = [UIButton new];
+        tableBottomButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+        tableBottomButton.backgroundColor = UIColorFromHex(0x3e7bb1);
+        tableBottomButton.layer.cornerRadius = 4.0f;
+        tableBottomButton.layer.masksToBounds = YES;
+        [tableBottomButton setTitle:@"新增收货地址" forState:UIControlStateNormal];
+        [tableBottomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [tableBottomButton addTarget:self action:@selector(addDeliveryAddressAction:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:tableBottomButton];
+        [tableBottomButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_offset(10);
+            make.height.mas_offset(40);
+            make.left.mas_offset(20);
+            make.right.mas_offset(-20);
+        }];
+    }
+    
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 1;
+    if (section < dataArray.count-1) {
+        return 1;
+    }else{
+        return 60;
+    }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return dataArray.count;
@@ -169,8 +184,8 @@
     return cell;
 }
 
+//编辑收货地址
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     if (self.getback) {
         if (self.addressBlock) {
@@ -186,21 +201,23 @@
     detailModel = dataArray[indexPath.section];
     EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
     editAddressVC.addressModel = detailModel;
-    [editAddressVC setFinishBlock:^(DeliveryAddressInfo *model) {
+    [editAddressVC setFinishBlock:^(DeliveryAddressInfo * model) {
         if (model == nil) {
             [dataArray removeObject:detailModel];
+            [myTableView reloadData];
+            [self changeEmptyView];
         }else{
-            if (model.isdefault == 1) {
-                [dataArray removeObject:detailModel];
-                for (DeliveryAddressInfo * info in dataArray) {
-                    info.isdefault = 0;
-                }
-                [dataArray insertObject:model atIndex:0];
-            }else{
-                [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
-            }
+            [self getData];
+//            if (model.isdefault == 1) {
+//                [dataArray removeObject:detailModel];
+//                for (DeliveryAddressInfo * info in dataArray) {
+//                    info.isdefault = 0;
+//                }
+//                [dataArray insertObject:model atIndex:0];
+//            }else{
+//                [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
+//            }
         }
-        [myTableView reloadData];
     }];
     [self.navigationController pushViewController:editAddressVC animated:YES];
 }
