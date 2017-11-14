@@ -392,7 +392,7 @@
 
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin{
-    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
+    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员价" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
 }
 
 -(void) addPriceLabel2:(NSString *) price{
@@ -411,7 +411,7 @@
         make.width.equalTo(@(width));
     }];
     
-    [self getLabeForMemberAndNoMemberLabel:[UIColor colorWithHexString:@"#333333"] withText:@"非会员" withConstraintView:_lblPrice2 withLeftMargin:SizeWidth(2)];
+    [self getLabeForMemberAndNoMemberLabel:[UIColor colorWithHexString:@"#333333"] withText:@"非会员价" withConstraintView:_lblPrice2 withLeftMargin:SizeWidth(2)];
 }
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin{
@@ -434,7 +434,7 @@
 }
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{
-    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin toCell:cell];
+    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员价" withConstraintView:_lblPrice1 withLeftMargin:leftMargin toCell:cell];
 }
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin toCell:(UIView *) cell{

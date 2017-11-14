@@ -251,7 +251,7 @@
 }
 
 -(void) addMemberLabel:(UIColor *) fontColor withLeftMargin:(CGFloat) leftMargin{
-    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
+    [self getLabeForMemberAndNoMemberLabel:fontColor withText:@"会员价" withConstraintView:_lblPrice1 withLeftMargin:leftMargin];
 }
 
 -(UILabel *) getLabeForMemberAndNoMemberLabel:(UIColor *) fontColor withText:(NSString *) text withConstraintView:(UIView *) constraintView withLeftMargin:(CGFloat) leftMargin{
