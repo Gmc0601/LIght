@@ -92,6 +92,9 @@
     _cellIdentifier = @"cell";
     _headerIdentifier = @"header";
     _tb = [[UITableView alloc] init];
+    _tb.estimatedRowHeight = 0;
+    _tb.estimatedSectionHeaderHeight = 0;
+    _tb.estimatedSectionFooterHeight = 0;
     _tb.delegate = self;
     _tb.dataSource = self;
     [_tb registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell1"];
@@ -154,13 +157,6 @@
     
     return cell;
 }
-//
-//-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    GoodDetialViewController *newVC = [GoodDetialViewController new];
-//    
-//    [self.navigationController pushViewController:newVC animated:YES];
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         CGFloat height = 575;
@@ -475,9 +471,9 @@
     [header removeAllSubviews];
     UILabel *lblTitle = [header viewWithTag:TAG + section];
     if (lblTitle == nil) {
+        
         lblTitle = [self addLableToHeaderView:header  withIndex:section];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeader:)];
-        
         [header addGestureRecognizer:tapGesture];
         header.backgroundView = [UIView new];
     }
@@ -1230,6 +1226,7 @@
 }
 
 -(void) addWebView:(UIWebView *) web toCell:(UITableViewCell *) cell{
+    
     [web removeFromSuperview];
     [cell insertSubview:web atIndex:0];
     web.hidden = NO;
