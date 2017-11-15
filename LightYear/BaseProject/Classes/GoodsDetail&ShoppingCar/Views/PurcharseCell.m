@@ -291,7 +291,7 @@
     lblTitle.font = SourceHanSansCNMedium(SizeWidth(13));
     lblTitle.textColor = [UIColor colorWithHexString:@"#ffffff"];
     lblTitle.textAlignment = NSTextAlignmentCenter;
-    lblTitle.text = @"已售完";
+    lblTitle.text = @"已售罄";
     [self addSubview:lblTitle];
     
     [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {

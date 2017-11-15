@@ -66,6 +66,7 @@
             }
             [self removeCountLableFromImage];
             [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
+            self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(-SizeHeigh(0), 0, 0, SizeWidth(4));
             [self addViewsForEmpty];
         }
     }];
