@@ -249,7 +249,7 @@
 }
 
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
-    if (text == nil || [text  isEqual: @"0"]) {
+    if (text == nil || text.floatValue == 0) {
         [_lblCount removeFromSuperview];
         return;
     }

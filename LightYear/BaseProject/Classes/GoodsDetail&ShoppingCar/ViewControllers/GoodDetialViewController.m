@@ -255,6 +255,7 @@
 
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index{
     UIImageView *img = [UIImageView new];
+    img.contentMode = UIViewContentModeScaleAspectFit;
     [img sd_setImageWithURL:[NSURL URLWithString:_model.img[index]]];
     img.backgroundColor = self.view.backgroundColor;
     return img;
@@ -350,8 +351,8 @@
     
     [_pricePanel addSubview:_lblPrice1];
     
-    if (_model.specilPrice == nil || [_model.specilPrice isEqualToString:@"0"]) {
-        if(_model.memberPrice == nil || [_model.memberPrice isEqualToString:@"0"]){
+    if (_model.specilPrice == nil || _model.specilPrice.floatValue == 0) {
+        if(_model.memberPrice == nil || _model.memberPrice.floatValue == 0){
             price1 = _model.price;
             _lblPrice1.textColor = [UIColor colorWithHexString:@"#333333"];
         }else{
@@ -927,9 +928,9 @@
     
     int count = ((SKU *)(_skuSelectValue[_skuSelectValue.count - 1])).value.intValue;
     NSString *price = _model.price;
-    if (_model.specilPrice !=nil) {
+    if (_model.specilPrice !=nil && _model.specilPrice.floatValue > 0) {
         price = _model.specilPrice;
-    }else if(_model.memberPrice != nil){
+    }else if(_model.memberPrice != nil &&  _model.memberPrice.floatValue > 0){
         price = _model.memberPrice;
     }else{
         price = _model.price;
