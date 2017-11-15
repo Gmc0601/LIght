@@ -179,7 +179,6 @@
         make.height.equalTo(@(SizeHeigh(57/2)));
     }];
     
-    
     UILabel *lblTitle = [UILabel new];
     lblTitle.font = SourceHanSansCNRegular(SizeWidth(15));
     lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -219,9 +218,17 @@
             if (info.intValue > 0) {
                 [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
                 [self addLableCountToImage:_imgCount withText:info];
+                [_imgCount mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@(SizeWidth(57/2)));
+                    make.height.equalTo(@(SizeHeigh(57/2)));
+                }];
             }else{
                 [_imgCount removeAllSubviews];
                 [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
+                [_imgCount mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@(SizeWidth(22)));
+                    make.height.equalTo(@(SizeHeigh(22)));
+                }];
             }
         }
     }];
