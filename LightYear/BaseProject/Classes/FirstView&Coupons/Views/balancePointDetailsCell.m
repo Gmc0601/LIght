@@ -48,9 +48,9 @@
 
 - (void)fillWithBalance:(tradeListInfo *)info {
     if ([info.otype isEqualToString:@"0"]) {
-        self.promptLabel.text = @"在线支付";
+        self.promptLabel.text = @"线上购物";
     } else if ([info.otype isEqualToString:@"1"]) {
-        self.promptLabel.text = @"门店支付";
+        self.promptLabel.text = @"门店购物";
     } else if ([info.otype isEqualToString:@"2"]) {
         self.promptLabel.text = @"线上充值";
     } else if ([info.otype isEqualToString:@"3"]) {
