@@ -80,6 +80,9 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     GoodsModel *model = (GoodsModel *) _datasource[indexPath.row];
+    if (model.outOfStack) {
+        return;
+    }
     [self.delegate didSelectGoods:model._id];
 }
 @end

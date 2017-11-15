@@ -311,9 +311,9 @@
     lblTitle.text = @"已售完";
     [self addSubview:lblTitle];
     
-    [backgroudView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_img);
-        make.centerY.equalTo(_img);
+    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(backgroudView);
+        make.centerY.equalTo(backgroudView);
         make.height.equalTo(@(SizeHeigh(15)));
         make.width.equalTo(@(SizeWidth(100)));
     }];

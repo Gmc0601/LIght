@@ -28,4 +28,9 @@
 -(int) count{
     return _shopStock + _centerStock;
 }
+
+@synthesize outOfStack = _outOfStack;
+-(int) outOfStack{
+    return self.count <= 0;
+}
 @end

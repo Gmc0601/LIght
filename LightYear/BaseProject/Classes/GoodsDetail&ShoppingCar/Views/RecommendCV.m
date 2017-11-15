@@ -70,6 +70,9 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     GoodsModel *model = (GoodsModel *) _datasource[indexPath.row];
+    if (model.outOfStack) {
+        return;
+    }
     GoodDetialViewController *newVC = [GoodDetialViewController new];
     NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
     [newVC setGoodsId:model._id withShopId:shopId];
