@@ -35,9 +35,12 @@
 @property (nonatomic, strong) WMBannerView *bannerView;
 @property (nonatomic, strong) ShopListInfo *info;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-@property(retain,atomic) UILabel *lblCount;
-@property(retain,atomic) UIImageView *imgCount;
-@property(retain,atomic) UIView *bottomView;
+@property (retain,atomic) UILabel *lblCount;
+@property (retain,atomic) UIImageView *imgCount;
+@property (retain,atomic) UIView *bottomView;
+// 标签
+@property (nonatomic, assign) BOOL isSelectShop;
+@property (nonatomic, copy) NSString *selectCode;
 
 @end
 
@@ -45,14 +48,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _isSelectShop = NO;
+    _selectCode = @"";
     [self initLeftNavBar];
     [self initRightBar];
     [self addSubview];
     [self addBottomView];
-    [self getLocationData];
+    _bannerArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callbackOtherClick) name:@"shopName" object:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,7 +75,12 @@
     self.titleLab.adjustsFontSizeToFitWidth = YES;
     [self.leftBar removeFromSuperview];
     [self.rightBar removeFromSuperview];
-    _bannerArray = [NSMutableArray array];
+    if (_isSelectShop) {
+        [self syncWithBannerListRequest:self.selectCode];
+    } else {
+        [self getLocationData];
+    }
+    
     if ([ConfigModel getBoolObjectforKey:IsLogin] == YES) {
         [self refreshCountOfGoodsInCar];
     }
@@ -195,6 +203,8 @@
 
 #pragma mark - SelectShopDelegate
 - (void)callbackWithSelectShop:(NSString *)shopName code:(NSString *)shopCode {
+    _isSelectShop = YES;
+    _selectCode = shopCode;
     [self.headerView changeLabelTitle:shopName];
     [self syncWithBannerListRequest:shopCode];
 }
@@ -275,8 +285,8 @@
     [_imgCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomView).offset(SizeHeigh(27/2));
         make.left.equalTo(self.bottomView).offset(SizeWidth(38/2));
-        make.width.equalTo(@(SizeWidth(22)));
-        make.height.equalTo(@(SizeHeigh(22)));
+        make.width.equalTo(@(SizeWidth(57/2)));
+        make.height.equalTo(@(SizeHeigh(57/2)));
     }];
     
     UILabel *lblTitle = [UILabel new];
@@ -328,19 +338,25 @@
             if (info.intValue > 0) {
                 [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
                 [self addLableCountToImage:_imgCount withText:info];
+                [_imgCount mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@(SizeWidth(57/2)));
+                    make.height.equalTo(@(SizeHeigh(57/2)));
+                }];
             }else{
                 [_imgCount removeAllSubviews];
                 [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
+                [_imgCount mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@(SizeWidth(22)));
+                    make.height.equalTo(@(SizeHeigh(22)));
+                }];
             }
-        } else {
-            [_imgCount removeAllSubviews];
-            [_imgCount setImage:[UIImage imageNamed:@"icon_tab_qd"]];
         }
     }];
 }
 
 -(void) addLableCountToImage:(UIView *) img withText:(NSString *)  text{
-    if (text == nil) {
+    if (text == nil || text.floatValue == 0) {
+        [_lblCount removeFromSuperview];
         return;
     }
     
@@ -352,7 +368,7 @@
         [img addSubview:_lblCount];
         
         [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(img).offset(SizeWidth(4));
+            make.right.equalTo(img).offset(SizeWidth(3));
             make.bottom.equalTo(img).offset(-SizeHeigh(2));
             make.width.equalTo(@(SizeWidth(20)));
             make.height.equalTo(@(SizeHeigh(10)));

@@ -78,7 +78,7 @@
         [self refreshScrollView];
         
         _pageControl.numberOfPages = [_bannerArray count];
-        if (_bannerArray.count == 0) {
+        if (_bannerArray.count <= 1) {
             _pageControl.hidden = YES;
         } else {
             _pageControl.hidden = NO;
@@ -97,6 +97,7 @@
         _selectedImageIndex = 0;
         _pageControl.hidden = YES;
         _pageControl.currentPage = _selectedImageIndex;
+        [self invalidTimer];
 //        [self startTimer];
 
         self.imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), SizeHeigh(310));

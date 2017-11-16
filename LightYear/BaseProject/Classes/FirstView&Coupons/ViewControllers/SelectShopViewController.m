@@ -32,7 +32,6 @@
         [self syncWithShopListRequest];
         [self.tableV.header endHeadRefresh];
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
