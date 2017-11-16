@@ -58,7 +58,6 @@
 -(void) addSubView{
     
     _img = [UIImageView new];
-    _img.backgroundColor = [UIColor redColor];
     [_img sd_setImageWithURL:[NSURL URLWithString:_model.img[0]]];
     [self addSubview:_img];
     

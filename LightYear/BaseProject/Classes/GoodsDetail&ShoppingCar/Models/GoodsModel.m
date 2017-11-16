@@ -31,6 +31,6 @@
 
 @synthesize outOfStack = _outOfStack;
 -(int) outOfStack{
-    return self.count <= 0;
+    return self.count <= 0 && self.stock <=0;
 }
 @end
