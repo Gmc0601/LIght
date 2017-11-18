@@ -65,9 +65,9 @@
         if ([userModel.nickname containsString:@","]) {
             NSArray *nameArr = [userModel.nickname componentsSeparatedByString:@","];
             NSString *name = nameArr[1];
-            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],name];
+            self.titleLab.text = [NSString stringWithFormat:@"%@ %@",[self getCurrentTime],name];
         } else {
-            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],userModel.nickname];
+            self.titleLab.text = [NSString stringWithFormat:@"%@ %@",[self getCurrentTime],userModel.nickname];
         }
     }else{
         self.titleLab.text = [self getCurrentTime];

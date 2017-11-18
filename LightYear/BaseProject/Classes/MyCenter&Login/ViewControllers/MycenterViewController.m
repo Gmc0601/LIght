@@ -43,10 +43,10 @@
     if (userModel) {
         if ([userModel.nickname containsString:@","]) {
             NSArray *nameArr = [userModel.nickname componentsSeparatedByString:@","];
-            NSString *name = nameArr[1];
-            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],name];
+            NSString *name = [nameArr componentsJoinedByString:@""];
+            self.titleLab.text = [NSString stringWithFormat:@"%@ %@",[self getCurrentTime],name];
         } else {
-            self.titleLab.text = [NSString stringWithFormat:@"%@%@",[self getCurrentTime],userModel.nickname];
+            self.titleLab.text = [NSString stringWithFormat:@"%@ %@",[self getCurrentTime],userModel.nickname];
         }
     }else{
         self.titleLab.text = [self getCurrentTime];
@@ -264,11 +264,11 @@
     NSInteger hour = [comps hour];
     NSString * timeStr;
     if (hour > 5 &&hour < 12) {
-        timeStr = @"早上好";
+        timeStr = @"早上好!";
     }else if (hour > 11 &&hour < 18){
-        timeStr = @"下午好";
+        timeStr = @"下午好!";
     }else{
-        timeStr = @"晚上好";
+        timeStr = @"晚上好!";
     }
     return timeStr;
 }

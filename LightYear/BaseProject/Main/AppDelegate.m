@@ -13,7 +13,7 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "WMHomePageViewController.h"
-
+#import "UserModel.h"
 @interface AppDelegate ()
 @end
 
@@ -45,9 +45,23 @@
     //设置地图
     [AMapServices sharedServices].apiKey = AMapKey;
     
+    //自动更新用户信息
+    if ([[TMCache sharedCache] objectForKey:UserInfoModel]) {
+        [self updateUserInfo];
+    }
+    
     return YES;
 }
-
+- (void)updateUserInfo{
+    [HttpRequest postPath:GetUserinfoURL params:nil resultBlock:^(id responseObject, NSError *error) {
+        UserModel * userModel = [[UserModel alloc] initWithDictionary:responseObject error:nil];
+        NSLog(@"自动更新用户信息==========%@",userModel.info);
+        if (userModel.error == 0) {
+            userModel.info.userToken = [ConfigModel getStringforKey:UserToken];
+            [[TMCache sharedCache] setObject:userModel.info forKey:UserInfoModel];
+        }
+    }];
+}
 - (void)loginActionWithType:(NSNotification *)aNote {
     /**
      *  type=0登录成功，type=1退出登录，type=2注册成功，type=3登录失败

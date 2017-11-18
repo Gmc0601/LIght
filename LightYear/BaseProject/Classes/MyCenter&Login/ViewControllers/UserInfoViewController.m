@@ -68,10 +68,10 @@
             }else if ([key isEqualToString:@"birthday"]){
                 userModel.birthday = value;
             }else if ([key isEqualToString:@"nickname"]){
-                NSMutableString * mutableStr = [[NSMutableString alloc] initWithString:value];
-                NSRange range = [mutableStr rangeOfString:@","];
-                [mutableStr deleteCharactersInRange:range];
-                userModel.nickname = mutableStr;
+//                NSMutableString * mutableStr = [[NSMutableString alloc] initWithString:value];
+//                NSRange range = [mutableStr rangeOfString:@","];
+//                [mutableStr deleteCharactersInRange:range];
+                userModel.nickname = value;
             }else if ([key isEqualToString:@"avatar_id"]){
                 userModel.avatar_url = responseObject[@"info"];
                 if (self.finishBlock) {

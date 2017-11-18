@@ -49,6 +49,7 @@
 #define FeedBackURL @"_beedback_002"
 #define SetFeedBackURL @"_beedback_001"
 #define CheckSmscodeURL @"_check_smscode_001"
+#define GetUserinfoURL @"_get_userinfo_001"
 
 #define BrandList @"_brandlist_001"
 
