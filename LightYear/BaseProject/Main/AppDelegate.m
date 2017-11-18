@@ -22,6 +22,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //自动更新用户信息
+    if ([[TMCache sharedCache] objectForKey:UserInfoModel]) {
+        [self updateUserInfo];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     UINavigationController * na = [[UINavigationController alloc] initWithRootViewController:[WMHomePageViewController new]];
@@ -44,11 +49,6 @@
     
     //设置地图
     [AMapServices sharedServices].apiKey = AMapKey;
-    
-    //自动更新用户信息
-    if ([[TMCache sharedCache] objectForKey:UserInfoModel]) {
-        [self updateUserInfo];
-    }
     
     return YES;
 }
