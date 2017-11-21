@@ -206,7 +206,6 @@
     _isSelectShop = YES;
     _selectCode = shopCode;
     [self.headerView changeLabelTitle:shopName];
-    [self syncWithBannerListRequest:shopCode];
 }
 
 #pragma mark - HomeBannerViewDelegate
