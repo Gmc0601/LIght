@@ -14,12 +14,14 @@
 #import "PurchaseModel.h"
 
 @implementation NetHelper
-+(void) getCategoryListWithId:(NSString *) _id withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback{
++(void) getCategoryListWithId:(NSString *) _id  withPage:(int) pageIndex  callBack:(void(^)(NSString *error,NSArray *)) callback{
     NSMutableDictionary *params = [NSMutableDictionary new];
     if (![_id  isEqual: @"0"]) {
         [params setObject:_id forKey:@"id"];
     }
-    
+    NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+    [params setObject:shopId forKey:@"shopid"];
+
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"page"];
     
     [HttpRequest postPath:@"_goodstype_by_pid_001" params:params resultBlock:^(id responseObject, NSError *error) {
