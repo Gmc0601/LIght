@@ -23,7 +23,7 @@
 - (void)updateinfo:(Receiptinfo *)model {
     self.nameLab.text = model.username;
     self.phoneLab.text = model.phone;
-    self.addressLab.text = model.address;
+    self.addressLab.text = [NSString stringWithFormat:@"%@%@",model.address,model.tablet];
 }
 
 - (void)update:(OrderAddressCellType)type {

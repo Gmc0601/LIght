@@ -27,7 +27,7 @@
     self.stroNameLab.text = model.shopInfo.shopname;
     self.addressLab.text = model.shopInfo.address;
     NSString *str1 = [NSString stringWithFormat:@"工作日：%@ - %@", model.shopInfo.startdate,model.shopInfo.enddate];
-    NSString *str2 = [NSString stringWithFormat:@"%@ - %@", model.shopInfo.hstartdate, model.shopInfo.henddate];
+    NSString *str2 = [NSString stringWithFormat:@"节假日：%@ - %@", model.shopInfo.hstartdate, model.shopInfo.henddate];
     self.workTimeLab1.text = str1;
     self.workTimeLab2.text = str2;
 }

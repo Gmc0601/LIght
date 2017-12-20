@@ -76,6 +76,7 @@
 		4218CED81FB157A400A63A13 /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC51FB157A400A63A13 /* verdanab_0.ttf */; };
 		4218CED91FB157A400A63A13 /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4218CEC61FB157A400A63A13 /* verdanai_0.ttf */; };
 		423607CF1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */; };
+		4271F8B51FBD8069009D3E79 /* GetBackTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4271F8B41FBD8069009D3E79 /* GetBackTime.m */; };
 		427C3D4F1F9F22180081B431 /* HHPasswordErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4A1F9F22180081B431 /* HHPasswordErrorView.m */; };
 		427C3D501F9F22180081B431 /* HHPayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4C1F9F22180081B431 /* HHPayPasswordView.m */; };
 		427C3D511F9F22180081B431 /* HHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D4E1F9F22180081B431 /* HHTextField.m */; };
@@ -325,6 +326,8 @@
 		4218CEC61FB157A400A63A13 /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
 		423607CD1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+EOCBlocksSupport.h"; sourceTree = "<group>"; };
 		423607CE1FB2ACF800DF96CD /* NSTimer+EOCBlocksSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+EOCBlocksSupport.m"; sourceTree = "<group>"; };
+		4271F8B31FBD8069009D3E79 /* GetBackTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetBackTime.h; sourceTree = "<group>"; };
+		4271F8B41FBD8069009D3E79 /* GetBackTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetBackTime.m; sourceTree = "<group>"; };
 		427C3D491F9F22180081B431 /* HHPasswordErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHPasswordErrorView.h; sourceTree = "<group>"; };
 		427C3D4A1F9F22180081B431 /* HHPasswordErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHPasswordErrorView.m; sourceTree = "<group>"; };
 		427C3D4B1F9F22180081B431 /* HHPayPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHPayPasswordView.h; sourceTree = "<group>"; };
@@ -849,6 +852,8 @@
 				427C3D551F9F227B0081B431 /* OrderDataHelper.m */,
 				427C3D561F9F227B0081B431 /* OrderModel.h */,
 				427C3D571F9F227B0081B431 /* OrderModel.m */,
+				4271F8B31FBD8069009D3E79 /* GetBackTime.h */,
+				4271F8B41FBD8069009D3E79 /* GetBackTime.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1619,6 +1624,7 @@
 				00C40BC61F9DE100002A31A0 /* tradeListModel.m in Sources */,
 				42C84EB01EF2DB060008189D /* AppDelegate.m in Sources */,
 				00A9528A1F7024F800DEE0F6 /* UserInfoPicketView.m in Sources */,
+				4271F8B51FBD8069009D3E79 /* GetBackTime.m in Sources */,
 				42C84F1E1EF2EB650008189D /* SBJSON.m in Sources */,
 				6B5F6D9C1F628D28001BDC0E /* NSArray+Category.m in Sources */,
 				00C40BC41F9DE100002A31A0 /* RechargeListModel.m in Sources */,

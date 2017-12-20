@@ -47,11 +47,13 @@
         self.titleLabel.textColor = UIColorFromHex(0xffffff);
         self.stateLabel.text = @"";
     }
-    if ([info.full_type isEqualToString:@"1"]) {
-        self.titleLabel.text = [NSString stringWithFormat:@"%@元优惠券",info.denomination];
-    } else {
-        self.titleLabel.text = @"领物券";
-    }
+    self.titleLabel.text =  info.title;
+    self.titleLabel.textColor = [UIColor whiteColor];
+//    if ([info.full_type isEqualToString:@"1"]) {
+//        self.titleLabel.text = [NSString stringWithFormat:@"%@元优惠券",info.denomination];
+//    } else {
+//        self.titleLabel.text = @"领物券";
+//    }
 }
 
 #pragma mark - lazyLoad

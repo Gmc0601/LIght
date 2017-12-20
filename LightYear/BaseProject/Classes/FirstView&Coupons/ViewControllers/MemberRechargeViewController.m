@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) WMTableView *tableV;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, retain) UILabel *lab;
 @end
 
 @implementation MemberRechargeViewController
@@ -24,6 +24,7 @@
     [super viewDidLoad];
     self.titleLab.text = @"充值优惠";
     [self.view addSubview:self.tableV];
+    [self.view addSubview:self.lab];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +84,18 @@
         _tableV.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableV;
+}
+
+- (UILabel *)lab {
+    if (!_lab) {
+        _lab = [[UILabel alloc] initWithFrame:FRAME(0, kScreenH - 50, kScreenW, 20)];
+        _lab.textAlignment = NSTextAlignmentCenter;
+        _lab.font = NormalFont(12);
+        _lab.textColor = UIColorFromHex(0x999999);
+        _lab.text = @"请到附近的门店进行会员卡充值";
+        _lab.backgroundColor = [UIColor clearColor];
+    }
+    return _lab;
 }
 
 @end

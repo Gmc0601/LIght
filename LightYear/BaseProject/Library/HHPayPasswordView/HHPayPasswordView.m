@@ -149,7 +149,7 @@ static CGFloat const kDotWith_height = 10;
     CGFloat password_width = passwordFieldWidth / kDotsNumber;
     //密码输入框的高度
     CGFloat password_height = CGRectGetHeight(self.passwordField.frame);
-    
+
     for (int i = 0; i < kDotsNumber; i ++)
     {
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(i * password_width, 0, 0.5, password_height)];

@@ -387,7 +387,7 @@
         make.width.equalTo(@(width));
     }];
     
-    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(28)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(28)) suffixColor:_lblPrice1.textColor];
+    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaBold(SizeWidth(24)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(28)) suffixColor:_lblPrice1.textColor];
     CGFloat height = 20;
     if (_model.isNew) {
         height = 30;
@@ -411,7 +411,7 @@
     //    _lblPrice2.font = VerdanaBold(SizeWidth(15));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(15)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: VerdanaBold(SizeWidth(15)) suffixColor:_lblPrice2.textColor];
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:Verdana(SizeWidth(15)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: Verdana(SizeWidth(15)) suffixColor:_lblPrice2.textColor];
     
     [_pricePanel addSubview:_lblPrice2];
     CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);
@@ -685,7 +685,12 @@
     UIView *left = leftView;
     int index = 0;
     for (SKU *obj in _skuSelectValue) {
-        NSString *value = obj.value;
+        NSString *value ;
+        if (_skuSelectValue.count == 1) {
+            value = [NSString stringWithFormat:@"x%@",obj.value];
+        }else {
+            value = [NSString stringWithFormat:@"%@",obj.value];
+        }
         if (index == 2) {
             value = [NSString stringWithFormat:@"x%@",value];
         }
@@ -793,11 +798,24 @@
 
 -(void) addDDPanelToCell:(UIView *) superView{
     BOOL highlight = _model.centerStock > 0;
+    NSString *title1;
+    if (highlight) {
+        title1 = @"本商品支持配送";
+    }else {
+        title1 = @"本商品不支持配送";
+    }
     
-    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(20) text:@"本商品支持配送" withHighlight:highlight];
+    UIView *view1 = [self addDilivery:superView preView:_purchasePanel top:SizeHeigh(20) text:title1 withHighlight:highlight];
     highlight = _model.shopStock > 0;
     
-    UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:@"本商品支持到店自取" withHighlight:highlight];
+    NSString *title2;
+    if (highlight) {
+        title2 = @"本商品支持到店自取";
+    }else {
+        title2 = @"本商品不支持到店自取";
+    }
+    
+    UIView *view2 = [self addDilivery:superView preView:view1 top:SizeHeigh(25) text:title2 withHighlight:highlight];
     
     if (_model.hasDiscounts) {
         [self addDiscountPanel:superView preView:view2 top:SizeHeigh(25)];

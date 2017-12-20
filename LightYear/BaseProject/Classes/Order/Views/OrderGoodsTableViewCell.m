@@ -89,7 +89,7 @@
 - (UIImageView *)goodsPic {
     if (!_goodsPic) {
         _goodsPic = [[UIImageView alloc] initWithFrame:FRAME(self.numLab.right + SizeWidth(15), SizeHeigh(30), SizeWidth(100), SizeHeigh(100))];
-        _goodsPic.backgroundColor = [UIColor grayColor];
+        _goodsPic.backgroundColor = [UIColor clearColor];
     }
     return _goodsPic;
 }

@@ -26,7 +26,7 @@
         goodsNum += num;
     }
     
-    NSString *num = [NSString stringWithFormat:@"共%d件 >", goodsNum];
+    NSString *num = [NSString stringWithFormat:@"共%d件", goodsNum];
     self.foodsNumLab.text = num;
     NSString *price = [NSString stringWithFormat:@"%@：￥%.2f",self.stateStr, [model.amount floatValue]];
     self.priceLab.text = price;
@@ -40,10 +40,9 @@
         
         NSDictionary *dic1 = (NSDictionary *)model.goodlist[1];
         NSString *img1 = dic1[@"img_path"];
-        [self.foodimageview1 sd_setImageWithURL:[NSURL URLWithString:img1] placeholderImage:nil];
+        [self.foodimageview2 sd_setImageWithURL:[NSURL URLWithString:img1] placeholderImage:nil];
         
     }else {
-        
         NSDictionary *dic = (NSDictionary *)model.goodlist[0];
         NSString *img = dic[@"img_path"];
 
@@ -100,6 +99,7 @@
             break;
         case Ordercell_Finished:{// 已完成
             stateStr = @"已完成";
+            self.stateLab.textColor = UIColorFromHex(0x999999);
             self.stateStr = @"已付";
             btnStr = @"再来一单";
             self.clickBtn.backgroundColor  = MainYellow;
@@ -108,6 +108,7 @@
             break;
         case Ordercell_Cancle:{// 已取消
             stateStr = @"已取消";
+            self.stateLab.textColor = UIColorFromHex(0x999999);
             btnStr = @"再来一单";
             self.clickBtn.backgroundColor  = MainYellow;
             [self.clickBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -120,6 +121,7 @@
         }
             break;
         case Ordercell_Refundsuccess:{// 退款成功
+            self.stateLab.textColor = UIColorFromHex(0x999999);
             stateStr = @"退款成功";
             self.stateStr = @"已付";
             self.clickBtn.hidden = YES;
@@ -152,6 +154,7 @@
     [self.contentView addSubview:self.foodTitleLab];
     [self.contentView addSubview:self.foodDesLab];
     [self.contentView addSubview:self.foodsNumLab];
+    [self.contentView addSubview:self.moreLogo];
     [self.contentView addSubview:self.priceLab];
     [self.contentView addSubview:self.dislab];
     [self.contentView addSubview:self.clickBtn];
@@ -189,7 +192,7 @@
 - (UIImageView *)foodimageview1 {
     if (!_foodimageview1) {
         _foodimageview1 = [[UIImageView alloc] initWithFrame:FRAME(SizeWidth(15), SizeHeigh(52), SizeWidth(100), SizeHeigh(100))];
-        _foodimageview1.backgroundColor = [UIColor grayColor];
+        _foodimageview1.backgroundColor = [UIColor clearColor];
     }
     return _foodimageview1;
 }
@@ -197,7 +200,7 @@
 - (UIImageView *)foodimageview2 {
     if (!_foodimageview2) {
         _foodimageview2 = [[UIImageView alloc] initWithFrame:FRAME(SizeWidth(125), SizeHeigh(53), SizeWidth(100), SizeHeigh(100))];
-        _foodimageview2.backgroundColor = [UIColor grayColor];
+        _foodimageview2.backgroundColor = [UIColor clearColor];
     }
     return _foodimageview2;
 }
@@ -224,10 +227,10 @@
 
 - (UILabel *)foodsNumLab {
     if (!_foodsNumLab) {
-        _foodsNumLab = [[UILabel alloc] initWithFrame:FRAME(kScreenW/2 , SizeHeigh(100), kScreenW/2 - SizeWidth(15), SizeHeigh(15))];
+        _foodsNumLab = [[UILabel alloc] initWithFrame:FRAME(kScreenW/2 , SizeHeigh(100), kScreenW/2 - SizeWidth(25), SizeHeigh(15))];
         _foodsNumLab.font = SourceHanSansCNRegular(12);
         _foodsNumLab.textColor = UIColorFromHex(0x999999);
-        _foodsNumLab.text = @"共你猜件  >";
+        _foodsNumLab.text = @"共你猜件";
         _foodsNumLab.textAlignment = NSTextAlignmentRight;
     }
     return _foodsNumLab;
@@ -275,9 +278,19 @@
     }
 }
 
+- (UIImageView *)moreLogo {
+    if (!_moreLogo) {
+        _moreLogo = [[UIImageView alloc] initWithFrame:FRAME(self.foodsNumLab.right + 1, self.foodsNumLab.top + 4, 5, 5)];
+        _moreLogo.backgroundColor = [UIColor clearColor];
+        _moreLogo.image = [UIImage imageNamed:@"icon_gds"];
+    }
+    return _moreLogo;
+}
+
 
 - (UIView *)line2 {
     if (!_line2) {
+        
         _line2 =  [[UIView alloc] initWithFrame:FRAME(0, SizeHeigh(225), kScreenW, SizeHeigh(5))];
         _line2.backgroundColor = RGBColor(239, 240, 241);
     }

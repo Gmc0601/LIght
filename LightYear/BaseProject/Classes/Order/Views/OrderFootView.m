@@ -146,7 +146,7 @@
     if (!_topUpBtn) {
         _topUpBtn = [[UIButton alloc] init];
         _topUpBtn.backgroundColor = [UIColor clearColor];
-        [_topUpBtn setTitle:@"立即充值" forState:UIControlStateNormal];
+        [_topUpBtn setTitle:@"充值优惠" forState:UIControlStateNormal];
         [_topUpBtn setTitleColor:UIColorFromHex(0x3e7bb1) forState:UIControlStateNormal];
         _topUpBtn.titleLabel.font = NormalFont(11);
         [_topUpBtn addTarget:self action:@selector(topupClick:) forControlEvents:UIControlEventTouchUpInside];

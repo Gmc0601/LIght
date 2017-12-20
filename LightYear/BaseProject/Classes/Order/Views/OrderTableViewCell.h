@@ -41,7 +41,7 @@ typedef enum {
 
 @property (nonatomic, retain) UIView *line1, *line2;
 
-@property (nonatomic, retain) UIImageView *foodimageview1, *foodimageview2;
+@property (nonatomic, retain) UIImageView *foodimageview1, *foodimageview2, *moreLogo;
 
 @property (nonatomic, copy) NSString *stateStr;
 

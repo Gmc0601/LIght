@@ -68,7 +68,7 @@
     if (!_giveMoneyLabel) {
         _giveMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake( self.width-SizeWidth(76+31), 0, SizeWidth(76), SizeHeigh(17))];
         _giveMoneyLabel.backgroundColor = UIColorFromHex(0xff543a);
-        _giveMoneyLabel.layer.masksToBounds = YES;
+//        _giveMoneyLabel.layer.masksToBounds = YES;
         _giveMoneyLabel.layer.cornerRadius = SizeWidth(2.5);
         _giveMoneyLabel.adjustsFontSizeToFitWidth = YES;
         _giveMoneyLabel.centerY = self.height/2;
@@ -84,7 +84,7 @@
     if (!_couponLabel) {
         _couponLabel = [[UILabel alloc] initWithFrame:CGRectMake( _giveMoneyLabel.origin.x-SizeWidth(69), 0, SizeWidth(64), SizeHeigh(17))];
         _couponLabel.backgroundColor = UIColorFromHex(0xff543a);
-        _couponLabel.layer.masksToBounds = YES;
+//        _couponLabel.layer.masksToBounds = YES;
         _couponLabel.layer.cornerRadius = SizeWidth(2.5);
         _couponLabel.adjustsFontSizeToFitWidth = YES;
         _couponLabel.centerY = self.height/2;

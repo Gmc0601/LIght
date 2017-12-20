@@ -19,12 +19,15 @@
 #import "MakeOrderViewController.h"
 #import "UIButton+YX.h"
 #import "NSTimer+EOCBlocksSupport.h"
+#import "UserModel.h"
 
 @interface OrderDetialViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate>{
     BOOL post;   //  配送
     float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
     NSString *footInfo, *btnStr , *payStr, *storeName;
     NSTimer *_timer;
+    UserInfo * userModel;
+
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -126,6 +129,7 @@
     if (rightBarStr.length > 0) {
         [self.rightBar setTitle:rightBarStr forState:UIControlStateNormal];
         self.rightBar.titleLabel.font = NormalFont(13);
+        [self.rightBar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }else {
         self.rightBar.hidden = YES;
     }
@@ -158,6 +162,7 @@
                     [ConfigModel mbProgressHUD:@"申请退款成功" andView:nil];
                     OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
                     vc.OrderID = self.model.order_no;
+                    vc.orderType = Order_Refunding;
                     vc.backHome = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else {
@@ -301,7 +306,7 @@
                 }else {
                     int second = (int)time %60;//秒
                     int minute = (int)time /60%60;
-                 self.timeLab.text = [NSString stringWithFormat:@"   %.2d分%.2d秒后失效",  minute, second];
+                 self.timeLab.text = [NSString stringWithFormat:@"   %.2d分%.2d秒内未支付，订单自动取消",  minute, second];
 
                 }
             }
@@ -315,7 +320,7 @@
     }else {
         price = amont + postmoney - couponcut;
     }
-    self.footView.priceLab.text = [NSString stringWithFormat:@"%.2f", price];
+    self.footView.priceLab.text = [NSString stringWithFormat:@"￥%.2f", price];
     self.footView.balanceLab.text = [NSString stringWithFormat:@"账户余额：￥%.2f", [self.model.userAmount floatValue]];
     if ([self.model.userAmount floatValue]  < price) {
         [self.footView.payBtn setTitle:@"账户余额不足" forState:UIControlStateNormal];
@@ -328,6 +333,14 @@
 }
 
 - (void)click{
+    
+    userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
+    if (userModel.is_trade == 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有设置支付密码，是否去设置？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alter show];
+        return;
+    }
+    
     HHPayPasswordView *payPasswordView = [[HHPayPasswordView alloc] init];
     payPasswordView.delegate = self;
     WeakSelf(weak);
@@ -464,7 +477,7 @@
                             cell.textLabel.font = SourceHanSansCNRegular(15);
                             cell.textLabel.text = @"取货码";
                             cell.detailTextLabel.text = self.model.code;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                            cell.accessoryType = UITableViewCellAccessoryNone;
                             cell.detailTextLabel.font = VerdanaBold(15);
                             cell.detailTextLabel.textColor = UIColorFromHex(0x3e7bb1);
                             return cell;
@@ -479,7 +492,7 @@
                             cell.textLabel.font = SourceHanSansCNRegular(15);
                             cell.textLabel.text = @"取货时间";
                             cell.detailTextLabel.text = self.model.drawtime;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                            cell.accessoryType = UITableViewCellAccessoryNone;
                             cell.detailTextLabel.font = VerdanaBold(15);
                             return cell;
                         }
@@ -589,6 +602,8 @@
             if (indexPath.row == 0) {
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.all_amount floatValue]];
             }else if (indexPath.row == 1){
+                cell.detailTextLabel.font = SourceHanSansCNMedium(15);
+                cell.detailTextLabel.textColor = UIColorFromHex(0xff543a);
                 str = [NSString stringWithFormat:@"￥%.2f", [self.model.coupon_money floatValue]];
             }else if(indexPath.row == 2){
                 if (post) {
@@ -668,7 +683,7 @@
         lab.text = storeName;
         lab.font = NormalFont(15);
         
-        UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - 90, 7, 80, 30)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - SizeWidth(110), 7, SizeWidth(100), 30)];
         [btn setTitle:@"联系商家" forState:UIControlStateNormal];
         [btn setTitleColor:UIColorFromHex(0x3e7bb1) forState:UIControlStateNormal];
         btn.titleLabel.font = NormalFont(13);

@@ -10,7 +10,7 @@
 
 @interface SearchBarView()<UITextFieldDelegate>
 @property(retain,atomic) UIButton *imgDelete;
-@property(retain,atomic)  UITextField *txtSearch;
+
 @end
 
 @implementation SearchBarView

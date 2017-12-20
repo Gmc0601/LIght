@@ -106,6 +106,8 @@
     [HttpRequest postPath:@"_goods_info_001" params:params resultBlock:^(id responseObject, NSError *error) {
         NSDictionary *datadic = responseObject;
         
+        NSLog(@"goodsinfo%@",responseObject );
+        
         if ([datadic[@"error"] intValue] == 0) {
             NSDictionary *infoDic = datadic[@"info"];
             NSDictionary *categorylist = infoDic[@"categorylist"];

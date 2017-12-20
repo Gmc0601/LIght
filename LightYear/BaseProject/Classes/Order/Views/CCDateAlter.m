@@ -36,7 +36,7 @@
     if(dis!=0)
     {
         NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
-        for (int i = 0; i <= dis; i++) {
+        for (int i = 0; i < dis; i++) {
             theDate = [nowDate initWithTimeIntervalSinceNow: +oneDay*i ];
             NSString *str = [NSString stringWithFormat:@"%@", theDate];
             NSString *str2 = [str substringToIndex:10];
@@ -107,6 +107,24 @@
         }
     }
     
+    if (self.str0.length == 0) {
+        self.str0 = self.arr0[0];
+    }
+    if (self.str1.length == 0) {
+        self.str1 = self.arr1[0];
+    }
+    
+    NSDate*nowDate = [NSDate date];
+    NSDate* theDate;
+    theDate = [nowDate initWithTimeIntervalSinceNow: 10 ];
+    NSString *str = [NSString stringWithFormat:@"%@", theDate];
+    NSString *first =  [str substringToIndex:4];
+    NSString *backStr = [NSString stringWithFormat:@"%@-%@ %@%@", first,self.str0, self.str1,@":00"];
+    self.timeStr = backStr;
+    NSLog(@"%@", self.timeStr);
+    if (self.finishBlock) {
+        self.finishBlock(self.timeStr);
+    }
 }
 
 

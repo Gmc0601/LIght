@@ -23,6 +23,7 @@
 #import "ChangeUserInfoViewController.h"
 #import "SelectShopViewController.h"
 #import "CCDateAlter.h"
+#import "GetBackTime.h"
 
 @interface MakeOrderViewController ()<UITableViewDelegate, UITableViewDataSource, HHPayPasswordViewDelegate> {
     BOOL post; //  配送
@@ -66,11 +67,33 @@
 }
 
 - (void)back:(UIButton *)sender {
-    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
-    vc.OrderID = self.OrderID;
-    vc.orderType = Order_Topay;
-    vc.backHome = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    //返回删除订单
+    [ConfigModel showHud:self];
+    NSDictionary *di = @{
+                         @"id" : self.OrderID,
+                         @"status" : @"11"
+                         };
+    [HttpRequest postPath:@"_change_order_status_001" params:di resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        [ConfigModel hideHud:self];
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"error"] intValue] == 0) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            NSString *str = datadic[@"info"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+//    [self.navigationController popViewControllerAnimated:YES];
+    //   跳转到待支付订单
+//    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+//    vc.OrderID = self.OrderID;
+//    vc.orderType = Order_Topay;
+//    vc.backHome = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)createview {
@@ -103,6 +126,9 @@
         }
         
         [self changefootviewInfo];
+        //  获取默认取货时间
+        
+        
         
         NSDictionary *couDic = @{
                                  @"type" : @"1",
@@ -123,6 +149,11 @@
             }
         }];
         [self.noUseTableView reloadData];
+        
+        GetBackTime *back = [[GetBackTime alloc] init];
+        getTime = [back update:self.model];
+        [self.noUseTableView reloadData];
+        
     }];
     
     //   修改订单状态
@@ -281,7 +312,6 @@
                         cell.textLabel.text = @"门店地址";
                     }
                         return cell;
-            
                 }
                     break;
 
@@ -432,7 +462,7 @@
                 if ([datadic[@"error"] intValue] == 0) {
                     weakself.model.receiptinfo.phone = model.phone;
                     weakself.model.receiptinfo.username = model.username;
-                    weakself.model.receiptinfo.address = model.address;
+                    weakself.model.receiptinfo.address = [NSString stringWithFormat:@"%@%@",model.address,model.tablet];
                     weakself.model.receiptinfo.id = model.id;
                     [weakself createData];
                     [weakself.noUseTableView reloadData];
@@ -525,10 +555,6 @@
                 
                 [weakself.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"shopName" object:nil];
-//                SelectShopViewController *vc = [[SelectShopViewController alloc] init];
-//                CLLocation *l1 = [[CLLocation alloc] initWithLatitude:[[ConfigModel getStringforKey:@"Save_lat"] floatValue] longitude:[[ConfigModel getStringforKey:@"Save_lng"] floatValue]];
-//                vc.currentLocation = l1;
-//                [weakself.navigationController pushViewController:vc animated:YES];
                 return ;
             }
             
@@ -713,13 +739,13 @@
 - (void)postOrget:(UIButton *)sender {
     if (sender.tag == 100) {
         if ([self.model.can_ship intValue] == 2) {
-            [ConfigModel mbProgressHUD:@"该商品不能配送" andView:nil];
+            [ConfigModel mbProgressHUD:@"订单中部分商品不支持配送" andView:nil];
             return;
         }
         post = YES;
     }else {
         if ([self.model.can_selftake intValue] == 2) {
-            [ConfigModel mbProgressHUD:@"该商品不能自取" andView:nil];
+            [ConfigModel mbProgressHUD:@"订单中部分商品不支持自取" andView:nil];
             return;
         }
         post = NO;

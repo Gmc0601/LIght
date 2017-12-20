@@ -35,7 +35,6 @@
     [self createView];
     
     [self createData];
-    
 }
 
 #pragma mark - Action  ---> NeedReset in son
@@ -170,7 +169,7 @@
             view.OrderID = model.id;
             [weakself.navigationController pushViewController:view animated:YES];
         }
-        if (clicktype == Order_Cancle) {
+        if (clicktype == Order_Cancle  || clicktype == Order_Finished) {
             NSDictionary *dic = @{
                                   @"id" : model.id
                                   };
@@ -193,11 +192,8 @@
                 }
             }];
         }
-        
     };
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 //  转换状态

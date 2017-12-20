@@ -53,6 +53,10 @@
 }
 
 -(void) didSearch:(NSString *)keyworkd{
+    
+    
+    [self.searchBar.txtSearch resignFirstResponder];
+    
     NSMutableArray *history = [ConfigModel getArrforKey:historyKey];
     [history removeObject:keyworkd];
     [history insertObject:keyworkd atIndex:0];

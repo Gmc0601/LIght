@@ -47,7 +47,7 @@
     if (self.type == UserInfoTypeName) {
         for (int i = 0; i < 2; i++) {
             UILabel * baseLabel = [UILabel new];
-            baseLabel.text = @[@"姓氏:",@"姓名:"][i];
+            baseLabel.text = @[@"姓:",@"名:"][i];
             baseLabel.font = [UIFont boldSystemFontOfSize:16];
             baseLabel.textColor = UIColorFromHex(0x666666);
             [self.view addSubview:baseLabel];

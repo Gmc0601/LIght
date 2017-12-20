@@ -18,5 +18,6 @@
 @interface SearchBarView : UIView
 @property(assign,nonatomic)  BOOL enable;
 @property(retain,nonatomic)  NSString *keyword;
+@property(retain,atomic)  UITextField *txtSearch;
 @property(weak,nullable)  id<SearchBarViewDelegate> delegate;
 @end
