@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseProject.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>6D86B23120BCA97C5DB656B11A175599A1CBF9EC</string>
+				<key>dateExpires</key>
+				<string>2018/10/16</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>6D86B23120BCA97C5DB656B11A175599A1CBF9EC</string>
+						<key>dateExpires</key>
+						<string>2018/10/16</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Hyphenate.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>93TJ8UCX73</string>
+						<key>name</key>
+						<string>Yong Zhan</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>93TJ8UCX73.cc.Social.app.com</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>93TJ8UCX73</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>BaseProject.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>a880901e-d742-4e58-b539-a5d366762809</string>
+				<key>name</key>
+				<string>Social_text</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>93TJ8UCX73</string>
+				<key>name</key>
+				<string>Yong Zhan</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

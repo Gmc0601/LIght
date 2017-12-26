@@ -55,7 +55,10 @@
         }
     }
 }
+
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+    textField.layer.borderColor = [[UIColor blueColor] CGColor];
     //增加监听，当键盘出现或改变时收出消息
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(keyboardWillShow:)
@@ -63,6 +66,7 @@
 //                                               object:nil];
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    textField.layer.borderColor = [[UIColor darkGrayColor] CGColor];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 //    if (isChangeSupViewFrame == YES) {
 //        isChangeSupViewFrame = NO;

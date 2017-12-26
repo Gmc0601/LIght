@@ -17,6 +17,7 @@
     DateView * dateView;
     UserInfoPicketView * picketView;
     UserInfo * userModel;
+    UIView *backView;
 }
 @property (nonatomic ,copy) void(^ChangeUserInfoBlock) (int status);
 
@@ -205,9 +206,14 @@
         //生日
         if (!dateView) {
             dateView = [[[NSBundle mainBundle] loadNibNamed:@"DateView" owner:self options:nil] lastObject];
-            dateView.frame = CGRectMake(0, kScreenH, kScreenW, 260);
+            dateView.frame = CGRectMake(15, 15, kScreenW- 30, 300);
             dateView.delegate = self;
+            dateView.layer.masksToBounds = YES;
+            dateView.layer.cornerRadius = 5;
             dateView.datePicker.datePickerMode = UIDatePickerModeDate;
+            backView = [[UIView alloc] initWithFrame:FRAME(0, 0, kScreenW, kScreenH)];
+            backView.backgroundColor = RGBColorAlpha(0, 0, 0, 0.6);
+            [self.view addSubview:backView];
             [self.view addSubview:dateView];
             [self showDatePickerView];
         }
@@ -253,13 +259,15 @@
 // 控制dateView是否显示隐藏
 - (void)showDatePickerView {
     [UIView animateWithDuration:0.25 animations:^{
-        dateView.top = kScreenH - 260;
+        dateView.top = 150;
     }];
 }
 - (void)hideDatePickerView {
     [UIView animateWithDuration:0.25 animations:^{
+        
         dateView.top = kScreenH;
     } completion:^(BOOL finished) {
+        [backView removeFromSuperview];
         [dateView removeFromSuperview];
         dateView = nil;
     }];

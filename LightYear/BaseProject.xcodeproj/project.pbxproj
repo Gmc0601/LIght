@@ -94,6 +94,7 @@
 		427C3D7B1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D6D1F9F227B0081B431 /* OrderStoreInfoTableViewCell.m */; };
 		427C3D7C1F9F227B0081B431 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */; };
 		4284B4AC1FB58DD500E3D3D7 /* CCDateAlter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */; };
+		4284FD6A1FF1063100AE2A4F /* BirthDayAlter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284FD691FF1063100AE2A4F /* BirthDayAlter.m */; };
 		429940EE1F5E8ED60009ADDA /* CCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */; };
 		42A24FC11F5F07B3005130DC /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC01F5F07B3005130DC /* LocationHelper.m */; };
 		42A24FCC1F5F0CE5005130DC /* UIButton+SSEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A24FC31F5F0CE5005130DC /* UIButton+SSEdgeInsets.m */; };
@@ -362,6 +363,8 @@
 		427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		4284B4AA1FB58DD500E3D3D7 /* CCDateAlter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCDateAlter.h; sourceTree = "<group>"; };
 		4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCDateAlter.m; sourceTree = "<group>"; };
+		4284FD681FF1063100AE2A4F /* BirthDayAlter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BirthDayAlter.h; sourceTree = "<group>"; };
+		4284FD691FF1063100AE2A4F /* BirthDayAlter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BirthDayAlter.m; sourceTree = "<group>"; };
 		429940EC1F5E8ED60009ADDA /* CCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBaseViewController.h; sourceTree = "<group>"; };
 		429940ED1F5E8ED60009ADDA /* CCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBaseViewController.m; sourceTree = "<group>"; };
 		42A24FBF1F5F07B3005130DC /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
@@ -892,6 +895,8 @@
 				427C3D6F1F9F227B0081B431 /* OrderTableViewCell.m */,
 				4284B4AA1FB58DD500E3D3D7 /* CCDateAlter.h */,
 				4284B4AB1FB58DD500E3D3D7 /* CCDateAlter.m */,
+				4284FD681FF1063100AE2A4F /* BirthDayAlter.h */,
+				4284FD691FF1063100AE2A4F /* BirthDayAlter.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1517,6 +1522,7 @@
 				6B5F6DC21F63D5D2001BDC0E /* GoodsCell.m in Sources */,
 				6B5F6DAA1F628D28001BDC0E /* UIColor+BGHexColor.m in Sources */,
 				6B5F6DA11F628D28001BDC0E /* NSMutableArray+Category.m in Sources */,
+				4284FD6A1FF1063100AE2A4F /* BirthDayAlter.m in Sources */,
 				6B5F6DA81F628D28001BDC0E /* NSTimer+Category.m in Sources */,
 				6B5F6DC51F63D5F1001BDC0E /* GoodsModel.m in Sources */,
 				00A952891F7024F800DEE0F6 /* MycenterHeadView.m in Sources */,

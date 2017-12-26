@@ -19,5 +19,7 @@
 @interface PurcharseCell : UITableViewCell
 @property(retain,nonatomic) PurchaseModel *model;
 @property(weak,nonatomic) id<PurcharseCellDelegate> delegate;
+@property (nonatomic, copy) void(^imageBlock)();
+
 @end
 

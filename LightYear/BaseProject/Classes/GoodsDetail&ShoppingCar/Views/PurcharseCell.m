@@ -83,6 +83,21 @@
         make.width.equalTo(@(_imgSize.width));
     }];
     
+
+
+    UIButton *btn = [[UIButton alloc] init];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(imgClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(btnDelete.mas_right).offset(SizeWidth(30/2));
+        make.centerY.equalTo(self);
+        make.width.equalTo(@(100));
+        make.height.equalTo(@(100));
+    }];
+    
+    
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -122,6 +137,13 @@
         [self addOutOfStackView];
     }
     
+}
+
+- (void)imgClick {
+    
+    if (self.imageBlock) {
+        self.imageBlock();
+    }
 }
 
 -(UILabel *) getLableForTag:(BOOL) highlight{

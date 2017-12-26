@@ -60,6 +60,28 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [HttpRequest postPath:@"_ios_switch_001" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+
+        NSLog(@"?????%@", responseObject);
+        if ([datadic[@"error"] intValue] == 0) {
+            NSString *info = datadic[@"info"];
+            if ([info intValue] == 1) {
+                //   只有1的时候能正常使用
+                [ConfigModel saveBoolObject:NO forKey:IosSwitch];
+            }else {
+                [ConfigModel saveBoolObject:YES forKey:IosSwitch];
+            }
+        }else {
+            NSString *str = datadic[@"info"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
     userModel = [[TMCache sharedCache] objectForKey:UserInfoModel];
     if (userModel.nickname != nil) {
         if ([userModel.nickname containsString:@","]) {
@@ -105,8 +127,11 @@
             }
         }
         _currentLocation = location;
-        [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude] forKey:@"Save_lng"];
-        [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude] forKey:@"Save_lat"];
+        if (![ConfigModel getBoolObjectforKey:IosSwitch]) {
+            [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude] forKey:@"Save_lng"];
+            [ConfigModel saveString:[NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude] forKey:@"Save_lat"];
+        }
+       
                 [self syncWithShopListRequest];
     }];
 }
@@ -156,12 +181,22 @@
 #pragma mark - Service
 - (void)syncWithShopListRequest {
 //    [ConfigModel showHud:self];
-    NSDictionary *dic = @{
-                          @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
-                          @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
-//                          @"lng": @"120.162744",
-//                          @"lat": @"30.185959",
-                          };
+    NSDictionary *dic;
+    if ([ConfigModel getBoolObjectforKey:IosSwitch]) {
+        dic = @{
+                                          @"lng": @"120.163355",
+                                          @"lat": @"30.184976",
+                };
+    }else {
+        dic = @{
+                @"lng": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.longitude],
+                @"lat": [NSString stringWithFormat:@"%f",_currentLocation.coordinate.latitude],
+                //                          @"lng": @"120.162744",
+                //                          @"lat": @"30.185959",
+                };
+    }
+    
+    
     WeakSelf(weakself);
     [HttpRequest postPath:homeShopURL params:dic resultBlock:^(id responseObject, NSError *error) {
         
@@ -362,7 +397,7 @@
     if (_lblCount == nil) {
         _lblCount = [UILabel new];
         _lblCount.font = Verdana(SizeWidth(9));
-        _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
+        _lblCount.textColor = [UIColor colorWithHexString:@"#fecd2f"];
         _lblCount.textAlignment = NSTextAlignmentCenter;
         [img addSubview:_lblCount];
         

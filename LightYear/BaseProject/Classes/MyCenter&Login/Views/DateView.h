@@ -21,6 +21,8 @@
 
 @property (nonatomic, weak) id<DateViewDelegate>delegate;
 
+@property (nonatomic, retain) UIView *backView, *whitView;
+
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 
@@ -32,5 +34,6 @@
 
 - (IBAction)cancelAction:(UIButton *)sender;
 - (IBAction)sureAction:(UIButton *)sender;
+
 
 @end

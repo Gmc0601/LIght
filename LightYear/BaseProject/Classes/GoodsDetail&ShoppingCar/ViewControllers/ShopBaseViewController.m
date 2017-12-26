@@ -264,7 +264,7 @@
     if (_lblCount == nil) {
         _lblCount = [UILabel new];
         _lblCount.font = Verdana(SizeWidth(8));
-        _lblCount.textColor = [UIColor colorWithHexString:@"#ffffff"];
+        _lblCount.textColor = [UIColor colorWithHexString:@"#fecd2f"];
         _lblCount.textAlignment = NSTextAlignmentCenter;
         [img addSubview:_lblCount];
         

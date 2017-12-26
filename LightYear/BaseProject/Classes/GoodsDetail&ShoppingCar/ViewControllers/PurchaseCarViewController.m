@@ -9,7 +9,7 @@
 #import "PurchaseCarViewController.h"
 #import "FirstLevelGoodsViewController.h"
 #import "MakeOrderViewController.h"
-
+#import "GoodDetialViewController.h"
 #import "PurchaseModel.h"
 #import "PurcharseCell.h"
 #import "TBRefresh.h"
@@ -191,11 +191,25 @@
     PurcharseCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     cell.model = _dataSource[indexPath.row];
     cell.delegate = self;
+    WeakSelf(weak);
+    cell.imageBlock = ^{
+        GoodDetialViewController *goodsVC = [[GoodDetialViewController alloc] init];
+        PurchaseModel *info = [[PurchaseModel alloc] init];
+        info = weak.dataSource[indexPath.row];
+        [goodsVC setGoodsId:info.goodsId withShopId:info.shopId];
+        [weak.navigationController pushViewController:goodsVC animated:YES];
+    };
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    GoodDetialViewController *goodsVC = [[GoodDetialViewController alloc] init];
+    PurchaseModel *info = [[PurchaseModel alloc] init];
+    info = self.dataSource[indexPath.row];
+    [goodsVC setGoodsId:info.goodsId withShopId:info.shopId];
+    [self.navigationController pushViewController:goodsVC animated:YES];
+    
 }
 
 -(void) addBottomView{

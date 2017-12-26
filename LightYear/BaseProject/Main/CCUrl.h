@@ -86,6 +86,6 @@
 
 #define NowAddress @"nowAddress"
 
-
+#define IosSwitch @"iosSwitch"
 
 #endif /* CCUrl_h */

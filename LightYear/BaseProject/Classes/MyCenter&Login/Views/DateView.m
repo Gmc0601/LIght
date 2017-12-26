@@ -7,6 +7,7 @@
 //
 
 #import "DateView.h"
+#import "UIView+Frame.h"
 
 @implementation DateView
 
@@ -27,8 +28,15 @@
 ////        如果是出生日期，显示年月日
 //        self.datePicker.datePickerMode = UIDatePickerModeDate;
 //    }
+    
+//    self.sureButton.frame = FRAME(40, self.datePicker.bottom + 10, self.width- 80, 30);
+//
+//    self.sureButton.centerX = self.centerX;
+    
     self.datePicker.maximumDate = [NSDate date];//设置最大显示天数
 }
+
+
 
 - (IBAction)cancelAction:(UIButton *)sender {
     
