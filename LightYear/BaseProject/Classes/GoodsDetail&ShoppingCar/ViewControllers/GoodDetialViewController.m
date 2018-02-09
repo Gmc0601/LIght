@@ -1022,7 +1022,7 @@
 
 -(void) tapComplete{
     _skuSelectValue = _pickView.selectValue;
-    //    [self resetSubViewsToChoosePanel];
+     [self resetSubViewsToChoosePanel];
     [self restPrice];
     [self dismissPopup];
 }
