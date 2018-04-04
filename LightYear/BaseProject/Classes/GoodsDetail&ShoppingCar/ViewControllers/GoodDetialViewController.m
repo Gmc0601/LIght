@@ -1267,7 +1267,9 @@
         [self.view addSubview:web];
     }
     
-    [web loadHTMLString:html baseURL:nil];
+    NSString *htmlString =
+    [NSString stringWithFormat:@"<body style=\"font-family:SourceHanSansCN-Regular;font-size:16.5px\">%@</body>", html];
+    [web loadHTMLString:htmlString baseURL:nil];
     
     return  web;
 }
