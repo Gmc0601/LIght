@@ -21,8 +21,14 @@
 }
 
 - (void)updateinfo:(Receiptinfo *)model {
+   
+    
     self.nameLab.text = model.username;
     self.phoneLab.text = model.phone;
+    if (model.username == nil) {
+        self.addressLab.text = @"请添加收货地址";
+        return;
+    }
     self.addressLab.text = [NSString stringWithFormat:@"%@%@",model.address,model.tablet];
 }
 

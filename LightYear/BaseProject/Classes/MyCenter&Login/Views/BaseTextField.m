@@ -33,7 +33,7 @@
         self.leftViewMode = UITextFieldViewModeAlways;
         self.delegate = self;
         if (isBorder) {
-            self.layer.borderWidth = .5f;
+            self.layer.borderWidth = 1;
             self.layer.borderColor = UIColorFromHex(0xcccccc).CGColor;
         }
     }
@@ -58,7 +58,7 @@
 
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    textField.layer.borderColor = [[UIColor blueColor] CGColor];
+    self.layer.borderColor = [UIColorFromHex(0x3e7bb1) CGColor];
     //增加监听，当键盘出现或改变时收出消息
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(keyboardWillShow:)
@@ -66,7 +66,7 @@
 //                                               object:nil];
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    textField.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.layer.borderColor = [[UIColor darkGrayColor] CGColor];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 //    if (isChangeSupViewFrame == YES) {
 //        isChangeSupViewFrame = NO;
@@ -89,6 +89,7 @@
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
     //获取键盘的高度
+    
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];

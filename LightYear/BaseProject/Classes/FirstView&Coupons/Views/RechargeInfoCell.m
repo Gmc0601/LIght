@@ -38,6 +38,8 @@
             } else {
                 self.couponLabel.text = @"送领物券";
             }
+        }else {
+            self.couponLabel.hidden = YES;
         }
     } else {
         self.couponLabel.origin = CGPointMake(self.width-SizeWidth(64+31), SizeHeigh(17));
@@ -47,6 +49,8 @@
             } else {
                 self.couponLabel.text = @"送领物券";
             }
+        }else {
+            self.couponLabel.hidden = YES;
         }
     }
 }

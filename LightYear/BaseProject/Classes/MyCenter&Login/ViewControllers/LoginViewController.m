@@ -39,10 +39,24 @@
     UIImageView * logoView = [UIImageView new];
     logoView.image = [UIImage imageNamed:@"img_dl"];
     [self.view addSubview:logoView];
-    [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(20);
-        make.top.mas_offset(80);
-    }];
+    
+    if ([ConfigModel getBoolObjectforKey:IosSwitch]) {
+        [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(20);
+            make.top.mas_offset(80);
+            make.width.mas_offset(200);
+            make.height.mas_offset(SizeHeigh(60));
+        }];
+    }else {
+        [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(20);
+            make.top.mas_offset(80);
+        }];
+    }
+    
+    
+    
+    
     
     UILabel * userLabel = [UILabel new];
     userLabel.text = @"手机号";
@@ -117,13 +131,16 @@
     _loginButton.layer.masksToBounds = YES;
     _loginButton.userInteractionEnabled = NO;
     [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_loginButton];
-    [_loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_passTextField.mas_bottom).offset(20);
-        make.left.mas_offset(20);
-        make.right.mas_offset(-20);
-        make.height.mas_offset(50);
-    }];
+     [self.view addSubview:_loginButton];
+    
+        [_loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_passTextField.mas_bottom).offset(20);
+            make.left.mas_offset(20);
+            make.right.mas_offset(-20);
+            make.height.mas_offset(50);
+        }];
+
+   
     
     UIButton * backButton = [UIButton new];
     [backButton setImage:[UIImage imageNamed:@"sg_ic_quxiao"] forState:UIControlStateNormal];

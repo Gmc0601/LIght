@@ -12,6 +12,7 @@
 #import "GoodDetialViewController.h"
 #import "GoodsModel.h"
 #import "SearchListView.h"
+#import "FirstLevelGoodsViewController.h"
 
 @interface SearchViewContrller()<SearchBarViewDelegate
 ,HistoryTableViewDelegate,SearchResultViewDelegate>{
@@ -104,6 +105,14 @@
 }
 
 -(void) gotoFirstCategory{
+    
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[FirstLevelGoodsViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

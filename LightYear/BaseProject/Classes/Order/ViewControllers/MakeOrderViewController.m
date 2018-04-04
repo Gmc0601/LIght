@@ -31,6 +31,7 @@
     float couponcut, amont, postmoney, topaymoney;//  优惠券减少金额
     NSString *getTime, *storeName, *couponInfo;  //  自取时间   商店名称   优惠券信息
     UserInfo * userModel;
+    int bottomHei;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -48,6 +49,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    bottomHei = SizeHeigh(54);
+    if (kDevice_Is_iPhoneX) {
+        bottomHei = SizeHeigh(64);
+    }
     
     [self resetFather];
     
@@ -168,6 +174,8 @@
         [self.footView changeBtnStyle:Gray];
         self.footView.payBtn.titleLabel.font = SourceHanSansCNRegular(13);
         [self.footView.payBtn setTitle:@"查看其它店铺" forState:UIControlStateNormal];
+        self.footView.payBtn.backgroundColor = UIColorFromHex(0x3e7bb1);
+        [self.footView.payBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         return;
     }
     [self.footView choiseType:FootNoraml];
@@ -182,7 +190,7 @@
         }
         
     }
-    self.footView.priceLab.text = [NSString stringWithFormat:@"%.2f", price];
+    self.footView.priceLab.text = [NSString stringWithFormat:@"￥%.2f", price];
     self.footView.balanceLab.text = [NSString stringWithFormat:@"账户余额：￥%.2f", [self.model.userAmount floatValue]];
     if ([self.model.userAmount floatValue]  < price) {
         [self.footView.payBtn setTitle:@"账户余额不足" forState:UIControlStateNormal];
@@ -522,7 +530,7 @@
 
 - (UITableView *)noUseTableView {
     if (!_noUseTableView) {
-        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64- SizeHeigh(50)) style:UITableViewStylePlain];
+        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.height, kScreenW, kScreenH - self.height - bottomHei) style:UITableViewStylePlain];
         _noUseTableView.backgroundColor = RGBColor(239, 240, 241);
         _noUseTableView.delegate = self;
         _noUseTableView.dataSource = self;
@@ -542,7 +550,8 @@
 
 - (OrderFootView *)footView {
     if (!_footView) {
-        _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW, SizeHeigh(54))];
+        
+        _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW,bottomHei)];
         WeakSelf(weakself);
         _footView.topupBlock = ^{
             MemberRechargeViewController *vc = [[MemberRechargeViewController alloc] init];
@@ -557,6 +566,11 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"shopName" object:nil];
                 return ;
             }
+            else if ([_footView.payBtn.titleLabel.text isEqualToString:@"账户余额不足"]){
+                return;
+            }
+            
+            
             
             [weakself updateOrderState];
         };

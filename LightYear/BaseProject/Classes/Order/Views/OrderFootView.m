@@ -63,15 +63,20 @@
 
 - (void)chagneFrame {
     
+    int top = SizeHeigh(10);
+    if (kDevice_Is_iPhoneX) {
+        top = SizeHeigh(5);
+    }
+    
     [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.backView.mas_left).offset(SizeWidth(15));
-        make.top.equalTo(self.backView.mas_top).offset(SizeHeigh(10));
+        make.top.equalTo(self.backView.mas_top).offset(top);
         make.height.mas_equalTo(SizeHeigh(15));
     }];
     
     [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.infoLab.mas_right).offset(SizeWidth(5));
-        make.top.equalTo(self.backView.mas_top).offset(SizeHeigh(10));
+        make.top.equalTo(self.backView.mas_top).offset(top);
         make.height.mas_equalTo(SizeHeigh(15));
     }];
     
@@ -88,9 +93,15 @@
         make.width.mas_equalTo(SizeWidth(55));
     }];
     
+    if (kDevice_Is_iPhoneX) {
+        top = SizeHeigh(2);
+    }else {
+        SizeHeigh(5);
+    }
+    
     [self.payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.backView.mas_right).offset(-SizeWidth(15));
-        make.top.equalTo(self.backView.mas_top).offset(SizeHeigh(5));
+        make.top.equalTo(self.backView.mas_top).offset(top);
         make.height.mas_equalTo(SizeHeigh(44));
         make.width.mas_equalTo(SizeWidth(100));
     }];

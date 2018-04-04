@@ -166,7 +166,10 @@
         BaseModel * model = [[BaseModel alloc] initWithDictionary:responseObject error:nil];
         [ConfigModel hideHud:self];
         if (model.error == 0) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.view endEditing:YES];
+            contentTextView.text = nil;
+            
+//            [self.navigationController popViewControllerAnimated:YES];
             [ConfigModel mbProgressHUD:@"提交成功" andView:nil];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
@@ -180,6 +183,7 @@
 //开始编辑
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    contentTextView.layer.borderColor = UIColorFromHex(0x3e7bb1).CGColor;
     if ([textView.text isEqualToString:@"请描述你的问题，我们将会及时处理！"]) {
         textView.text = @"";
         textView.textColor = UIColorFromHex(0x333333);
@@ -192,6 +196,7 @@
         textView.text = @"请描述你的问题，我们将会及时处理！";
         textView.textColor = UIColorFromHex(0xcccccc);
     }
+    contentTextView.layer.borderColor = UIColorFromHex(0xf1f2f2).CGColor;
 }
 //内容将要发生改变编辑 限制输入文本长度 监听TextView 点击了ReturnKey 按钮
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

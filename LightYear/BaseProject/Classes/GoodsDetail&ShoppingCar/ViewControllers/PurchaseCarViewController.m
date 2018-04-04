@@ -13,6 +13,8 @@
 #import "PurchaseModel.h"
 #import "PurcharseCell.h"
 #import "TBRefresh.h"
+#import "FirstLevelGoodsViewController.h"
+#import "UIView+Utils.h"
 
 @interface PurchaseCarViewController ()<UITableViewDelegate,UITableViewDataSource,PurcharseCellDelegate>{
     NSString *_cellIdentifier;
@@ -31,13 +33,12 @@
     self.navigationView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     self.titleLab.text = @"购物清单";
     [self.rightBar setTitle:@"" forState:UIControlStateNormal];
+//    [self.leftBar setTop:self.top];
     [self.rightBar setImage:[UIImage imageNamed:@"sg_ic_down_up_h"] forState:UIControlStateNormal];
-    
     [self.rightBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
 //    [self renderUI];
 }
-
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self renderUI];
@@ -49,7 +50,7 @@
         if (error == nil && info.intValue > 0) {
             if (_tb == nil) {
                 [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
-                self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(8), 0, 0, 0);
+                self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(10), 0, 0, 0);
                 [self addBottomView];
                 [self addTableView];
             }
@@ -66,6 +67,7 @@
             }
             [self removeCountLableFromImage];
             [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qd"] forState:UIControlStateNormal];
+            
             self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(-SizeHeigh(0), 0, 0, SizeWidth(4));
             [self addViewsForEmpty];
         }
@@ -126,14 +128,12 @@
 }
 
 -(void) gotoFirstCategory{
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[FirstLevelGoodsViewController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            return;
-        }
-    }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    FirstLevelGoodsViewController *vc = [[FirstLevelGoodsViewController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(void) addTableView{
@@ -217,11 +217,16 @@
     //    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#fecd2f"];
     [self.view addSubview:self.bottomView];
     
+    int hei = SizeHeigh(54);
+    if (kDevice_Is_iPhoneX) {
+        hei = SizeHeigh(69);
+    }
+    
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.height.equalTo(@(SizeHeigh(108/2)));
+        make.height.equalTo(@(hei));
     }];
     
     UILabel *lblSum = [UILabel new];

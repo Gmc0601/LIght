@@ -29,6 +29,7 @@
     //当前地理位置
     CLLocation *_currentLocation;
     UserInfo * userModel;
+    int top ;
 }
 
 @property (nonatomic, strong) WMHomeHeaderView *headerView;
@@ -50,10 +51,15 @@
     [super viewDidLoad];
     _isSelectShop = NO;
     _selectCode = @"";
+    top = 28;
+    if (kDevice_Is_iPhoneX) {
+        top += 20;
+    }
     [self initLeftNavBar];
     [self initRightBar];
     [self addSubview];
     [self addBottomView];
+    
     _bannerArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callbackOtherClick) name:@"shopName" object:nil];
 }
@@ -143,7 +149,7 @@
 
 - (void)initLeftNavBar {
     UIButton *btnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnLeft.frame = CGRectMake(SizeWidth(16), 28, 28, 28);
+    btnLeft.frame = CGRectMake(SizeWidth(16), top, 28, 28);
     [btnLeft setImage:[UIImage imageNamed:@"input-field"] forState:UIControlStateNormal];
     [btnLeft setAdjustsImageWhenHighlighted:NO];
     [btnLeft addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -152,7 +158,7 @@
 
 - (void)initRightBar {
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(self.navigationView.width-28-SizeWidth(16), 28, 28, 28);
+    rightBtn.frame = CGRectMake(self.navigationView.width-28-SizeWidth(16), top, 28, 28);
     [rightBtn setImage:[UIImage imageNamed:@"icon_yhqlb"] forState:UIControlStateNormal];
     [rightBtn setAdjustsImageWhenHighlighted:NO];
     [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -287,7 +293,11 @@
 #pragma mark - lazyLoad
 - (WMBannerView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[WMBannerView alloc] initWithFrame:CGRectMake(0, SizeHeigh(225)+64, kScreenW, SizeHeigh(335))];
+        int hei =  SizeHeigh(335);
+        if (kDevice_Is_iPhoneX) {
+            hei = SizeHeigh(270);
+        }
+        _bannerView = [[WMBannerView alloc] initWithFrame:CGRectMake(0, SizeHeigh(225)+64, kScreenW, hei)];
         _bannerView.delegate = self;
     }
     return _bannerView;
@@ -295,7 +305,11 @@
 
 - (WMHomeHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[WMHomeHeaderView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, SizeHeigh(225))];
+        int hei =  64;
+        if (kDevice_Is_iPhoneX) {
+            hei += 20;
+        }
+        _headerView = [[WMHomeHeaderView alloc] initWithFrame:CGRectMake(0, hei, kScreenW, SizeHeigh(225))];
         _headerView.delegate = self;
     }
     return _headerView;
@@ -310,7 +324,7 @@
         make.bottom.equalTo(self.view.mas_bottom);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.height.equalTo(@(SizeHeigh(98/2)));
+        make.height.equalTo(@(SizeHeigh(58)));
     }];
     
     _imgCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qd"]];
@@ -336,8 +350,8 @@
         make.width.equalTo(@(SizeWidth(200)));
         make.height.equalTo(@(SizeHeigh(15)));
     }];
-    
-    UIImageView *upView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down"]];
+//    sg_ic_down_h
+    UIImageView *upView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down_h"]];
     [self.bottomView addSubview:upView];
     
     [upView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -394,7 +408,7 @@
         return;
     }
     
-    if (_lblCount == nil) {
+//    if (_lblCount == nil) {
         _lblCount = [UILabel new];
         _lblCount.font = Verdana(SizeWidth(9));
         _lblCount.textColor = [UIColor colorWithHexString:@"#fecd2f"];
@@ -407,9 +421,10 @@
             make.width.equalTo(@(SizeWidth(20)));
             make.height.equalTo(@(SizeHeigh(10)));
         }];
-    }
+//    }
     
     _lblCount.text = [NSString stringWithFormat:@"%@",text];
+//    _lblCount.backgroundColor  = [UIColor colorWithHexString:@"#fecd2f"];
 }
 
 #pragma mark - Time

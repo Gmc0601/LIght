@@ -61,6 +61,19 @@
         make.height.equalTo(@(SizeHeigh(0.5)));
     }];
     
+    
+    UIButton *btn = [[UIButton alloc] init];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(imgClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(0);
+        make.top.equalTo(self).offset(0);
+        make.width.equalTo(@(self.contentView.width));
+        make.height.equalTo(@(self.contentView.height));
+    }];
+    
     UIButton *btnDelete = [UIButton new];
     [btnDelete setImage:[UIImage imageNamed:@"icon_sc"] forState:UIControlStateNormal];
     [btnDelete addTarget:self action:@selector(deleteGoods) forControlEvents:UIControlEventTouchUpInside];
@@ -82,21 +95,7 @@
         make.height.equalTo(@(_imgSize.height));
         make.width.equalTo(@(_imgSize.width));
     }];
-    
 
-
-    UIButton *btn = [[UIButton alloc] init];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(imgClick) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:btn];
-    
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(btnDelete.mas_right).offset(SizeWidth(30/2));
-        make.centerY.equalTo(self);
-        make.width.equalTo(@(100));
-        make.height.equalTo(@(100));
-    }];
-    
     
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(15));
@@ -108,7 +107,7 @@
     
     [_lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_img.mas_right).offset(SizeWidth(15));
-        make.top.equalTo(self.mas_top).offset(SizeHeigh(16));
+        make.top.equalTo(_img.mas_top).offset(0);
         make.height.equalTo(@(SizeHeigh(15)));
         make.right.equalTo(self.mas_right).offset(-SizeWidth(15));
     }];
@@ -195,7 +194,7 @@
     [self addSubview:_lblPrice1];
     
     [_lblPrice1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_lblTakeBySelf.mas_bottom).offset(SizeHeigh(16));
+        make.top.equalTo(_lblTakeBySelf.mas_bottom).offset(SizeHeigh(8));
         make.left.equalTo(_lblTitle.mas_left);
         make.height.equalTo(@(SizeHeigh(28)));
         make.width.equalTo(@(SizeWidth(110)));
@@ -217,7 +216,7 @@
     
     [btnPlus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(SizeWidth(-30/2));
-        make.bottom.equalTo(_lblPrice1.mas_bottom);
+        make.bottom.equalTo(_lblPrice1.mas_bottom).offset(SizeHeigh(50/2));
         make.width.equalTo(@(SizeWidth(40/2)));
         make.height.equalTo(@(SizeHeigh(50/2)));
     }];
@@ -252,7 +251,7 @@
         make.centerY.equalTo(btnPlus.mas_centerY);
         make.right.equalTo(_lblCount.mas_left).offset(SizeWidth(1));
         make.width.equalTo(@(SizeWidth(40/2)));
-        make.height.equalTo(btnSubtract);
+        make.height.equalTo(btnPlus);
     }];
 }
 

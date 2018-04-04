@@ -111,7 +111,12 @@
         self.str0 = self.arr0[0];
     }
     if (self.str1.length == 0) {
-        self.str1 = self.arr1[0];
+        if (self.arr1.count > 0) {
+          self.str1 = self.arr1[0];
+        }else {
+            self.str1 = nil;
+        }
+        
     }
     
     NSDate*nowDate = [NSDate date];
@@ -211,7 +216,13 @@
         self.str0 = self.arr0[0];
     }
     if (self.str1.length == 0) {
-        self.str1 = self.arr1[0];
+        if (self.row == 0 && self.arr1.count > 0) {
+          self.str1 = self.arr1[0];
+        }
+        if (self.row == 1) {
+            self.str1 = self.arr2[0];
+        }
+        
     }
     
     NSDate*nowDate = [NSDate date];
@@ -251,8 +262,10 @@
     }else {
         NSInteger row = [pickerView selectedRowInComponent:0];
         if (row == 0) {
+            self.row = 0;
            return self.arr1.count;
         }else {
+            self.row = 1;
             return self.arr2.count;
         }
     }
@@ -290,9 +303,19 @@
     }else {
         NSInteger srow = [pickerView selectedRowInComponent:0];
         if (srow == 0) {
-            self.str1 = self.arr1[row];
+            
+            if (self.arr1.count > 0) {
+                 self.str1 = self.arr1[row];
+            }else {
+                self.str1 = nil;
+            }
+            
+            
+           
         }else {
-            self.str1 = self.arr1[row];
+            
+                self.str1 = self.arr2[row];
+
         }
     }
     

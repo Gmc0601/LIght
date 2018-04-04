@@ -10,9 +10,11 @@
 #import "ChoiceDeliveryAddressViewController.h"
 #import "BaseTextField.h"
 
-@interface EditDeliveryAddressViewController ()<BaseTextFieldDelegate> {
+@interface EditDeliveryAddressViewController ()<BaseTextFieldDelegate, UITextFieldDelegate> {
     UILabel * addressLabel;
 }
+@property (nonatomic, assign) BaseTextField *textnme, *phone, *more;
+
 @end
 
 @implementation EditDeliveryAddressViewController
@@ -53,7 +55,8 @@
     UIView * currentView;
     for (int i = 0; i < 4; i++) {
         UIView * baseView = [UIView new];
-        baseView.layer.borderWidth = .5f;
+        baseView.layer.borderWidth = 1.0f;
+        baseView.tag = 100 + i;
         baseView.layer.borderColor = UIColorFromHex(0xcccccc).CGColor;
         [self.view addSubview:baseView];
         [baseView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,13 +86,17 @@
             BaseTextField * baseTextField = [[BaseTextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0) PlaceholderStr:@[@"姓名",@"手机号",@"选择收货地址",@"例：5号楼205室"][i] isBorder:NO];
             baseTextField.keyboardType = UIKeyboardTypeDefault;
             if (i == 0) {
+                self.textnme = baseTextField;
                 baseTextField.text = _addressModel.username;
             }else if (i == 1) {
+                self.phone = baseTextField;
                 baseTextField.text = _addressModel.phone;
                 baseTextField.keyboardType = UIKeyboardTypeNumberPad;
             }else if (i == 3) {
+                self.more = baseTextField;
                 baseTextField.text = _addressModel.tablet;
             }
+            baseTextField.delegate = self;
             baseTextField.textDelegate = self;
             baseTextField.tag = 100+i;
             baseTextField.font = [UIFont systemFontOfSize:16];
@@ -175,21 +182,41 @@
         make.right.mas_offset(-20);
     }];
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    for (UIView *find_label in self.view.subviews) {
+        if (find_label.tag == textField.tag)
+        {
+            find_label.layer.borderColor = [UIColorFromHex(0x3e7bb1) CGColor];
+        }
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    for (UIView *find_label in self.view.subviews) {
+        if (find_label.tag == textField.tag)
+        {
+            find_label.layer.borderColor = UIColorFromHex(0xcccccc).CGColor;
+        }
+    }
+    
+}
+
 //确定
 - (void)sureAction:(UIButton *)button{
     
-    BaseTextField * nameText = [self.view viewWithTag:100];
-    _addressModel.username = nameText.text;
-    if (nameText.text.length == 0) {
+
+    self.addressModel.username = self.textnme.text;
+    if (self.textnme.text.length == 0) {
         [ConfigModel mbProgressHUD:@"收货人不能为空" andView:nil];
         return;
     }
-    BaseTextField * mobileText = [self.view viewWithTag:101];
-    _addressModel.phone = mobileText.text;
-    if (mobileText.text.length == 0) {
+
+    self.addressModel.phone = self.phone.text;
+    if (self.phone.text.length == 0) {
         [ConfigModel mbProgressHUD:@"手机号不能为空" andView:nil];
         return;
-    }else if (mobileText.text.length > 0 && mobileText.text.length < 11){
+    }else if (self.phone.text.length > 0 && self.phone.text.length < 11){
         [ConfigModel mbProgressHUD:@"请输入11位手机号" andView:nil];
         return;
     }
@@ -197,9 +224,9 @@
         [ConfigModel mbProgressHUD:@"地址不能为空" andView:nil];
         return;
     }
-    BaseTextField * tabletText = [self.view viewWithTag:103];
-    _addressModel.tablet = tabletText.text;
-    if (tabletText.text.length == 0) {
+
+    _addressModel.tablet = self.more.text;
+    if (self.more.text.length == 0) {
         [ConfigModel mbProgressHUD:@"门牌号不能为空" andView:nil];
         return;
     }

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *bannerArray;
 @property (nonatomic, strong) NSMutableArray *scrollDataArray;
 @property (nonatomic, strong) UILabel *promptLabel;
+@property (nonatomic, assign) int hei;
 
 @end
 
@@ -33,6 +34,10 @@
         _selectedImageIndex = -1;
         
         [self addSubview:self.imageScrollView];
+        self.hei = frame.size.height;
+        if (kDevice_Is_iPhoneX) {
+           [self.imageScrollView setHeight:frame.size.height];
+        }
         [self addSubview:self.pageControl];
     }
     return self;
@@ -40,7 +45,7 @@
 
 - (UIScrollView *)imageScrollView {
     if (!_imageScrollView) {
-        _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake( (self.width-SizeWidth(345))/2, 0, SizeWidth(345), SizeHeigh(310))];
+        _imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake( (self.width-SizeWidth(345))/2, 0, SizeWidth(345), SizeHeigh(305))];
         _imageScrollView.backgroundColor = [UIColor clearColor];
         _imageScrollView.showsHorizontalScrollIndicator = NO;
         _imageScrollView.showsVerticalScrollIndicator = NO;
@@ -99,8 +104,12 @@
         _pageControl.currentPage = _selectedImageIndex;
         [self invalidTimer];
 //        [self startTimer];
+        int hei = SizeHeigh(310);
+        if (kDevice_Is_iPhoneX) {
+            hei =  self.hei;
+        }
 
-        self.imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), SizeHeigh(310));
+        self.imageScrollView.frame = CGRectMake( (kScreenW-SizeWidth(345))/2.0, 0, SizeWidth(345), hei);
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(SizeWidth(345), 0, self.imageScrollView.width, self.imageScrollView.height)];
         imageView.contentMode = UIViewContentModeCenter;
         [imageView setImage:[UIImage imageNamed:@"icon_sy_hdqx"]];

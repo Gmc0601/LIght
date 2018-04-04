@@ -20,6 +20,11 @@
 @property (nonatomic, retain) UILabel *titleLab;
 
 @property (nonatomic, retain) UILabel *line;
+
+@property (nonatomic, assign) int height;
+
+ @property (nonatomic, assign)int top;
+
 //
 - (void)back:(UIButton *)sender ;
 

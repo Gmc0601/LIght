@@ -166,7 +166,7 @@
         make.bottom.equalTo(self.view.mas_bottom);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.height.equalTo(@(SizeHeigh(98/2)));
+        make.height.equalTo(@(SizeHeigh(58)));
     }];
     
     _imgCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_tab_qdsl"]];
@@ -193,7 +193,7 @@
         make.height.equalTo(@(SizeHeigh(15)));
     }];
     
-    UIImageView *upView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down"]];
+    UIImageView *upView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down_h"]];
     [self.bottomView addSubview:upView];
     
     [upView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -261,6 +261,13 @@
         return;
     }
     
+    float bottom = -SizeHeigh(2);
+    float right = SizeWidth(3);
+    if ([img isKindOfClass:[UIButton class]]) {
+        bottom = -SizeHeigh(4);
+        right = SizeWidth(2);
+    }
+    
     if (_lblCount == nil) {
         _lblCount = [UILabel new];
         _lblCount.font = Verdana(SizeWidth(8));
@@ -269,8 +276,8 @@
         [img addSubview:_lblCount];
         
         [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(img).offset(SizeWidth(3));
-            make.bottom.equalTo(img).offset(-SizeHeigh(2));
+            make.right.equalTo(img).offset(right);
+            make.bottom.equalTo(img).offset(bottom);
             make.width.equalTo(@(SizeWidth(20)));
             make.height.equalTo(@(SizeHeigh(10)));
         }];

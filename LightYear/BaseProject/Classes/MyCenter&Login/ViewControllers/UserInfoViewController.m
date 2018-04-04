@@ -52,7 +52,7 @@
     [myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:myTableView];
     [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(64);
+        make.top.mas_offset(self.height);
         make.left.right.bottom.mas_offset(0);
     }];
 }

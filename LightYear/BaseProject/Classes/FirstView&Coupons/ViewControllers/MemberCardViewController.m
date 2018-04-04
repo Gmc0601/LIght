@@ -64,7 +64,7 @@
 }
 
 - (void)initLeftBar {
-    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake( SizeWidth(16), 25, 40, 30)];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake( SizeWidth(16), self.top, 40, 30)];
     leftBtn.backgroundColor = [UIColor clearColor];
     [leftBtn setTitle:@"明细" forState:UIControlStateNormal];
     [leftBtn setTitleColor:UIColorFromHex(0x333333) forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
 
 - (void)initRightBar {
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(self.navigationView.width-SizeWidth(16)-17, 30, 17,17);
+    rightBtn.frame = CGRectMake(self.navigationView.width-SizeWidth(16)-17, self.top, 17,17);
     [rightBtn setImage:[UIImage imageNamed:@"sg_ic_quxiao"] forState:UIControlStateNormal];
     [rightBtn setAdjustsImageWhenHighlighted:NO];
     [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -174,7 +174,14 @@
 
 - (UIButton *)rechargeBtn {
     if (!_rechargeBtn) {
-        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+SizeHeigh(9), SizeWidth(100), SizeHeigh(40))];
+        int height = SizeHeigh(9);  //  5- 6p  9 * X    = 9x
+        int hei = SizeHeigh(40);
+        if (kDevice_Is_iPhoneX) {
+            height = SizeHeigh(1);  //  X   4* x  =  9x
+            hei = SizeHeigh(30);
+        }
+        
+        _rechargeBtn = [[UIButton alloc] initWithFrame:CGRectMake( 0, _balanceLabel.height+_balanceLabel.origin.y+ height, SizeWidth(100), hei)];
         _rechargeBtn.centerX = _balanceLabel.centerX;
         [_rechargeBtn setTitle:@"查看充值优惠" forState:UIControlStateNormal];
         _rechargeBtn.titleLabel.font = SourceHanSansCNRegular(SizeWidth(11));

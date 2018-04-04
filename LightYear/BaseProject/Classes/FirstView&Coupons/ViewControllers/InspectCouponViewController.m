@@ -62,7 +62,7 @@
 }
 
 - (void)initRightBar {
-    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake( kScreenW - 10 - 40, 25, 40, 30)];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake( kScreenW - 10 - 40, self.top, 40, 30)];
     leftBtn.backgroundColor = [UIColor clearColor];
     [leftBtn setTitle:@"过期券" forState:UIControlStateNormal];
     [leftBtn setTitleColor:UIColorFromHex(0x333333) forState:UIControlStateNormal];
@@ -177,7 +177,7 @@
 - (WMTableView *)tableV
 {
     if (!_tableV) {
-        _tableV = [[WMTableView alloc] initWithFrame:CGRectMake( 0, 64, kScreenW, kScreenH-64) style:UITableViewStylePlain];
+        _tableV = [[WMTableView alloc] initWithFrame:CGRectMake( 0, self.height, kScreenW, kScreenH-self.height) style:UITableViewStylePlain];
         _tableV.delegate = self;
         _tableV.dataSource = self;
         _tableV.backgroundColor = [UIColor clearColor];

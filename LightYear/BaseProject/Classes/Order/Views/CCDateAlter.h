@@ -26,6 +26,8 @@
 
 @property (nonatomic, copy) NSString *timeStr, *str0, *str1;
 
+@property (nonatomic, assign) int row;
+
 - (void)update:(OrderDetailModel *)model ;
 
 - (void)pop;

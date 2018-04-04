@@ -21,4 +21,6 @@ typedef void(^ChangeUserNameBlock)(NSString * name);
 
 @property (nonatomic, copy) ChangeUserNameBlock finishBlock;
 
+@property (nonatomic, copy) NSString *make;
+
 @end

@@ -53,6 +53,10 @@
     [_tb.header beginRefreshing];
 }
 
+- (void)back:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 -(void) fetchDate{
     [ConfigModel showHud:self];
     [NetHelper getCategoryListWithId:@"0" withPage:pageIndex callBack:^(NSString *error, NSArray *data) {

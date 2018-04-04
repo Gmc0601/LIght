@@ -7,15 +7,30 @@
 //
 
 #import "CCBaseViewController.h"
+#import "UIView+Utils.h"
 
 @interface CCBaseViewController ()
-
+{
+    int height;
+    int top;
+}
 @end
 
 @implementation CCBaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    height = 64;
+    top  = 25;
+    
+    if (kDevice_Is_iPhoneX) {
+        height += 20;
+        top += 20;
+    }
+    
+    self.top = top;
+    self.height = height;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.navigationView];
     [self.navigationView addSubview:self.titleLab];
@@ -55,7 +70,7 @@
 
 - (UIView *)navigationView {
     if (!_navigationView) {
-        _navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 64)];
+        _navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, height)];
         _navigationView.backgroundColor = [UIColor whiteColor];
     }
     return _navigationView;
@@ -63,7 +78,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(80, 25, kScreenW - 160, 30)];
+        _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(80, top, kScreenW - 160, 30)];
         _titleLab.textColor = [UIColor blackColor];
         _titleLab.textAlignment = NSTextAlignmentCenter;
         _titleLab.font = [UIFont systemFontOfSize:18];
@@ -74,7 +89,7 @@
 - (UIButton *)leftBar {
     if (!_leftBar) {
         UIImage *image = [UIImage imageNamed:@"icon_fh"];
-        _leftBar = [[UIButton alloc] initWithFrame:CGRectMake(10, 25, image.size.width + 15, image.size.height + 15)];
+        _leftBar = [[UIButton alloc] initWithFrame:CGRectMake(10, top, image.size.width + 15, image.size.height + 15)];
         _leftBar.backgroundColor = [UIColor clearColor];
         [_leftBar setImage:image forState:UIControlStateNormal];
         [_leftBar addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +99,7 @@
 
 - (UILabel *)line {
     if (!_line) {
-        _line = [[UILabel alloc] initWithFrame:FRAME(0, 63, kScreenW, 1)];
+        _line = [[UILabel alloc] initWithFrame:FRAME(0, height - 1, kScreenW, 1)];
         _line.backgroundColor = RGBColor(239, 240, 241);
         _line.hidden = YES;
     }
@@ -93,7 +108,7 @@
 
 - (UIButton *)rightBar {
     if (!_rightBar) {
-        _rightBar = [[UIButton alloc] initWithFrame:CGRectMake(kScreenW - 10 - 40, 25, 40, 30)];
+        _rightBar = [[UIButton alloc] initWithFrame:CGRectMake(kScreenW - 10 - 40, top, 40, 30)];
         _rightBar.backgroundColor = [UIColor clearColor];
         [_rightBar setTitle:@"更多" forState:UIControlStateNormal];
         _rightBar.titleLabel.font = [UIFont systemFontOfSize:14];

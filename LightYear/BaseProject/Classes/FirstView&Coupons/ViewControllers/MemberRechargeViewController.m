@@ -77,7 +77,7 @@
 - (WMTableView *)tableV
 {
     if (!_tableV) {
-        _tableV = [[WMTableView alloc] initWithFrame:CGRectMake( 0, 64, kScreenW, kScreenH-64) style:UITableViewStylePlain];
+        _tableV = [[WMTableView alloc] initWithFrame:CGRectMake( 0, self.height, kScreenW, kScreenH-self.height) style:UITableViewStylePlain];
         _tableV.delegate = self;
         _tableV.dataSource = self;
         _tableV.backgroundColor = [UIColor clearColor];

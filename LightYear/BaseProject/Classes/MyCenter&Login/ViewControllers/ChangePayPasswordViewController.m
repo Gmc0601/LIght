@@ -7,7 +7,7 @@
 //
 
 #import "ChangePayPasswordViewController.h"
-
+#import "MakeOrderViewController.h"
 #import "BaseTextField.h"
 
 @interface ChangePayPasswordViewController ()<BaseTextFieldDelegate>
@@ -30,6 +30,10 @@
     [self createBaseView];
 }
 - (void)createBaseView{
+    int hei = 70 ;
+    if (kDevice_Is_iPhoneX) {
+        hei = 90;
+    }
     for (int i = 0; i < 2; i++) {
         UILabel * baseLabel = [UILabel new];
         if (userModel.is_trade == 0) {
@@ -42,7 +46,7 @@
         [self.view addSubview:baseLabel];
         [baseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_offset(20);
-            make.top.mas_offset(70+50*i);
+            make.top.mas_offset(hei+50*i);
             make.size.mas_offset(CGSizeMake(80, 40));
         }];
         
@@ -56,7 +60,7 @@
         [baseTextField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(baseLabel.mas_right).offset(0);
             make.right.mas_offset(-20);
-            make.top.mas_offset(70+50*i);
+            make.top.mas_offset(hei+50*i);
             make.height.mas_offset(40);
         }];
     }
@@ -71,7 +75,7 @@
     [bottomButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bottomButton];
     [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(180);
+        make.top.mas_offset(110 + hei);
         make.height.mas_offset(40);
         make.left.mas_offset(20);
         make.right.mas_offset(-20);
@@ -106,6 +110,12 @@
                 [ConfigModel mbProgressHUD:@"设置成功" andView:nil];
             }else{
                 [ConfigModel mbProgressHUD:@"修改成功" andView:nil];
+            }
+            for (id vc in self.navigationController.childViewControllers) {
+                if ([vc isKindOfClass:[MakeOrderViewController class]]) {
+                  [self.navigationController popToViewController:vc animated:YES];
+                    return ;
+                }
             }
             UIViewController * viewController = self.navigationController.childViewControllers[2];
             [self.navigationController popToViewController:viewController animated:YES];

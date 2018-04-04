@@ -25,6 +25,7 @@
 @synthesize categry = _categry;
 -(void) setCategry:(GoodsCategory *)categry{
     _categry = categry;
+    [self.titleLab setTop:25];
     self.titleLab.text = _categry.text;
 }
 

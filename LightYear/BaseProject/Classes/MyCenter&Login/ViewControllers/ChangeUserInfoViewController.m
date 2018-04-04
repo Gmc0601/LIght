@@ -43,9 +43,14 @@
     [self createBaseView];
 }
 - (void)createBaseView{
-
+    int hei = 70 ;
+    if (kDevice_Is_iPhoneX) {
+        hei = 90;
+    }
     if (self.type == UserInfoTypeName) {
         for (int i = 0; i < 2; i++) {
+           
+            
             UILabel * baseLabel = [UILabel new];
             baseLabel.text = @[@"姓:",@"名:"][i];
             baseLabel.font = [UIFont boldSystemFontOfSize:16];
@@ -53,7 +58,7 @@
             [self.view addSubview:baseLabel];
             [baseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_offset(20);
-                make.top.mas_offset(70+50*i);
+                make.top.mas_offset(hei+50*i);
                 make.size.mas_offset(CGSizeMake(50, 40));
             }];
             
@@ -63,10 +68,11 @@
             baseTextField.textDelegate = self;
             baseTextField.font = [UIFont systemFontOfSize:16];
             [self.view addSubview:baseTextField];
+            
             [baseTextField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(baseLabel.mas_right).offset(0);
                 make.right.mas_offset(-20);
-                make.top.mas_offset(70+50*i);
+                make.top.mas_offset(hei+50*i);
                 make.height.mas_offset(40);
             }];
         }
@@ -81,7 +87,7 @@
         [bottomButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:bottomButton];
         [bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(180);
+            make.top.mas_offset(110 + hei);
             make.height.mas_offset(40);
             make.left.mas_offset(20);
             make.right.mas_offset(-20);
@@ -92,9 +98,15 @@
         tipLabel.font = [UIFont systemFontOfSize:14];
         tipLabel.textColor = UIColorFromHex(0x666666);
         [self.view addSubview:tipLabel];
+        
+        int top  = 70;
+        if (kDevice_Is_iPhoneX) {
+            top = 90;
+        }
+        
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_offset(20);
-            make.top.mas_offset(70);
+            make.top.mas_offset(top);
         }];
         UILabel * currentLabel;
         for (int i = 0; i < 2; i++) {
@@ -204,6 +216,7 @@
                 if (baseModel.error == 0) {
                     ChangePayPasswordViewController * payPasswordVC = [[ChangePayPasswordViewController alloc] init];
                     payPasswordVC.code = thirdTextField.text;
+                    payPasswordVC.make = self.make;
                     [self.navigationController pushViewController:payPasswordVC animated:YES];
                 }else {
                     [ConfigModel mbProgressHUD:@"验证码校验失败" andView:nil];

@@ -15,6 +15,7 @@
 
 @interface RecommendCell(){
     UIImageView *_img;
+    UIImageView *_logo;
     UILabel *_lblTitle;
     UILabel *_lblPrice1;
     UILabel *_lblPrice2;
@@ -34,6 +35,7 @@
     [self removeAllSubviews];
     
     _img = nil;
+    _logo = nil;
     _lblTitle = nil;
     _lblPrice2 = nil;
     _lblMember = nil;
@@ -68,6 +70,17 @@
         make.width.equalTo(self);
     }];
     
+    _logo = [UIImageView new];
+    _logo.image = [UIImage imageNamed:@"sign_xq_xp"];
+    _logo.hidden = YES;
+    [self addSubview:_logo];
+    [_logo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.left.equalTo(self.mas_left);
+        make.height.equalTo(@(15));
+        make.width.equalTo(@(20));
+    }];
+    
     _lblTitle = [UILabel new];
     _lblTitle.font = SourceHanSansCNMedium(SizeWidth(14));
     _lblTitle.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -99,6 +112,13 @@
     _lblPrice1.textAlignment = NSTextAlignmentLeft;
     
     [self addSubview:_lblPrice1];
+    
+    
+    if (_model.isNew) {
+        _logo.hidden = NO;
+    }else {
+        _logo.hidden = YES;
+    }
     
     if (_model.specilPrice == nil || _model.specilPrice.floatValue == 0) {
         if(_model.memberPrice == nil || _model.memberPrice.floatValue == 0){
@@ -142,7 +162,7 @@
         make.width.equalTo(@(width));
     }];
     
-    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(17)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(17)) suffixColor:_lblPrice1.textColor];
+    _lblPrice1.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaBold(SizeWidth(17)) prefixColor:_lblPrice1.textColor suffixString:price1 suffixFont: VerdanaBold(SizeWidth(17)) suffixColor:_lblPrice1.textColor];
 }
 
 
@@ -152,10 +172,10 @@
 
 -(void) addPriceLabel2:(NSString *) price{
     _lblPrice2 = [UILabel new];
-    _lblPrice2.font = VerdanaBold(SizeWidth(10));
+    _lblPrice2.font = Verdana(SizeWidth(10));
     _lblPrice2.textColor = [UIColor colorWithHexString:@"#333333"];
     _lblPrice2.textAlignment = NSTextAlignmentLeft;
-    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:VerdanaItalic(SizeWidth(10)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: _lblPrice2.font suffixColor:_lblPrice2.textColor];
+    _lblPrice2.attributedText = [NSMutableAttributedString attributeString:@"￥ " prefixFont:Verdana(SizeWidth(10)) prefixColor:_lblPrice2.textColor suffixString:price suffixFont: _lblPrice2.font suffixColor:_lblPrice2.textColor];
     
     [self addSubview:_lblPrice2];
     CGFloat width = [_lblPrice2.text widthWithFont:_lblPrice2.font height:SizeWidth(15)] + SizeWidth(10);

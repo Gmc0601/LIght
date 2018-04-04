@@ -81,7 +81,7 @@
     [myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:myTableView];
     [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(64);
+        make.top.mas_offset(self.height);
         make.left.right.mas_offset(0);
         make.bottom.mas_equalTo(bottomButton.mas_top).mas_offset(-10);
     }];

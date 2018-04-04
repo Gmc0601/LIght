@@ -483,7 +483,7 @@
     UIImageView *img = [ self addImageToHeaderView:header withIndex:section];
     
     if (show) {
-        img.image = [UIImage imageNamed:@"sg_ic_down"];
+        img.image = [UIImage imageNamed:@"sg_ic_down_h"];
         header.backgroundView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f2"];
     }else{
         img.image = [UIImage imageNamed:@"sg_ic_down_up"];
@@ -514,7 +514,7 @@
     UIImageView *imgView = [header viewWithTag:tag];
     
     if (imgView == nil) {
-        imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down.png"]];
+        imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down_h"]];
         
         [header addSubview:imgView];
         [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -1021,8 +1021,9 @@
 }
 
 -(void) tapComplete{
+    
     _skuSelectValue = _pickView.selectValue;
-     [self resetSubViewsToChoosePanel];
+        [self resetSubViewsToChoosePanel];
     [self restPrice];
     [self dismissPopup];
 }

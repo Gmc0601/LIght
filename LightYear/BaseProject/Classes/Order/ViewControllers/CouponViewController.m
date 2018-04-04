@@ -100,7 +100,7 @@
 }
 - (UITableView *)noUseTableView {
     if (!_noUseTableView) {
-        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64) style:UITableViewStylePlain];
+        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.height, kScreenW, kScreenH - self.height) style:UITableViewStylePlain];
         _noUseTableView.backgroundColor = RGBColor(239, 240, 241);
         _noUseTableView.delegate = self;
         _noUseTableView.dataSource = self;

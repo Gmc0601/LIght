@@ -31,7 +31,7 @@
     {
         theDate = nowDate;
     }
-    self.arr1 = [NSMutableArray new];
+    self.arr1 = [[NSMutableArray alloc] init];
     self.arr2 = [NSMutableArray new];
     int time = [model.shopInfo.ordertimes intValue];
     NSString *startTime = model.shopInfo.startdate;
@@ -70,6 +70,9 @@
             [self.arr2 addObject:timeStr];
         }
     }
+    
+    
+    
     for (int i = 0 ; i < hourArr.count; i++) {
         NSString * str1 = hourArr[i];
         for ( int j = 0; j < minteArr.count; j++) {
@@ -85,12 +88,26 @@
         }
     }
     
+
+    
+    if (self.str1.length == 0) {
+        
+        if (self.arr1.count > 0) {
+            self.str1 = [NSString stringWithFormat:@"%@", self.arr1[0]];;
+        }else {
+            self.str1 = self.arr2[0];
+            if (self.str0.length == 0) {
+                self.str0 = self.arr0[1];
+            }
+        }
+        
+        
+    }
+    
     if (self.str0.length == 0) {
         self.str0 = self.arr0[0];
     }
-    if (self.str1.length == 0) {
-        self.str1 = self.arr1[0];
-    }
+    
     
     NSDate*nowDatenew = [NSDate date];
     NSDate* theDatenew;

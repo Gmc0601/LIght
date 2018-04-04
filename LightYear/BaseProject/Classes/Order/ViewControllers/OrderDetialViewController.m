@@ -27,7 +27,7 @@
     NSString *footInfo, *btnStr , *payStr, *storeName;
     NSTimer *_timer;
     UserInfo * userModel;
-
+    int bottomHeight;
 }
 
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -46,6 +46,10 @@
 
 - (void)viewDidLoad {
     post = YES;
+    bottomHeight = SizeHeigh(54);
+    if (kDevice_Is_iPhoneX) {
+        bottomHeight = SizeHeigh(64);
+    }
     payStr = @"已支付";
     [super viewDidLoad];
     [self createView];
@@ -65,7 +69,7 @@
     NSString *titleStr;
     NSString *rightBarStr;
     
-    self.rightBar.frame = FRAME(kScreenW - SizeWidth(75), 25, SizeWidth(65), 30);
+    self.rightBar.frame = FRAME(kScreenW - SizeWidth(75), self.top, SizeWidth(65), 30);
     [self.footView choiseType:FootOneLab];
     switch (self.orderType) {
         case Order_Topay:
@@ -737,7 +741,7 @@
 
 - (UITableView *)noUseTableView {
     if (!_noUseTableView) {
-        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64- SizeHeigh(50)) style:UITableViewStylePlain];
+        _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.height, kScreenW, kScreenH - self.height- bottomHeight) style:UITableViewStylePlain];
         _noUseTableView.backgroundColor = RGBColor(239, 240, 241);
         _noUseTableView.delegate = self;
         _noUseTableView.dataSource = self;
@@ -759,7 +763,9 @@
 
 - (OrderFootView *)footView {
     if (!_footView) {
-        _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW, SizeHeigh(54))];
+    
+        
+        _footView = [[OrderFootView alloc] initWithFrame:FRAME(0, kScreenH - SizeHeigh(54), kScreenW, bottomHeight)];
         WeakSelf(weak);
 //        _footView.topupBlock = ^{
 //
@@ -796,6 +802,8 @@
                         [ConfigModel mbProgressHUD:str andView:nil];
                     }
                 }];
+            }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"账户余额不足"]){
+                
             }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"立即支付"]){
                 [weak click];
             }else if ([_footView.payBtn.titleLabel.text isEqualToString:@"确认收货"]) {

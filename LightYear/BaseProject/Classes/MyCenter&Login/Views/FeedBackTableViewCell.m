@@ -91,7 +91,7 @@
     moreButton = [UIButton new];
     moreButton.hidden = YES;
     [moreButton setImage:[UIImage imageNamed:@"sg_ic_down_up"] forState:UIControlStateNormal];
-    [moreButton setImage:[UIImage imageNamed:@"sg_ic_down"] forState:UIControlStateSelected];
+    [moreButton setImage:[UIImage imageNamed:@"sg_ic_down_h"] forState:UIControlStateSelected];
     [moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [baseView addSubview:moreButton];
     [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
