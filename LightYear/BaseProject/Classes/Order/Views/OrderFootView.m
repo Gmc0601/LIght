@@ -101,7 +101,7 @@
     
     [self.payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.backView.mas_right).offset(-SizeWidth(15));
-        make.top.equalTo(self.backView.mas_top).offset(top);
+        make.top.equalTo(self.backView.mas_top).offset(top - SizeHeigh(5)) ;
         make.height.mas_equalTo(SizeHeigh(44));
         make.width.mas_equalTo(SizeWidth(100));
     }];

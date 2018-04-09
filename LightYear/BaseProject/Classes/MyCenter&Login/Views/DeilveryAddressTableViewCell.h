@@ -21,5 +21,6 @@
 
 @property (nonatomic, weak) id<DeilveryAddressTableViewCellDelegate> delegate;
 @property (nonatomic, strong) DeliveryAddressInfo * model;
+@property (nonatomic, copy) void(^clickBlock)();
 
 @end

@@ -97,6 +97,10 @@
     addressLabel.text = [NSString stringWithFormat:@"%@%@",model.address,model.tablet];
 }
 - (void)editAction:(UIButton *)button{
+    if (self.clickBlock) {
+        self.clickBlock();
+    }
+    
     if ([self.delegate respondsToSelector:@selector(didDeilveryAddressTableViewCellEditButton:)]) {
         [self.delegate didDeilveryAddressTableViewCellEditButton:button];
     }

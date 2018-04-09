@@ -180,6 +180,31 @@
     }
     cell.model = dataArray[indexPath.section];
     cell.delegate = self;
+    cell.clickBlock = ^{
+        DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
+        detailModel = dataArray[indexPath.section];
+        EditDeliveryAddressViewController * editAddressVC = [[EditDeliveryAddressViewController alloc] init];
+        editAddressVC.addressModel = detailModel;
+        [editAddressVC setFinishBlock:^(DeliveryAddressInfo * model) {
+            if (model == nil) {
+                [dataArray removeObject:detailModel];
+                [myTableView reloadData];
+                [self changeEmptyView];
+            }else{
+                [self getData];
+                //            if (model.isdefault == 1) {
+                //                [dataArray removeObject:detailModel];
+                //                for (DeliveryAddressInfo * info in dataArray) {
+                //                    info.isdefault = 0;
+                //                }
+                //                [dataArray insertObject:model atIndex:0];
+                //            }else{
+                //                [dataArray replaceObjectAtIndex:indexPath.section withObject:model];
+                //            }
+            }
+        }];
+        [self.navigationController pushViewController:editAddressVC animated:YES];
+    };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -191,7 +216,9 @@
         if (self.addressBlock) {
             DeliveryAddressInfo * detailModel = [[DeliveryAddressInfo alloc] init];
             detailModel = dataArray[indexPath.section];
-            self.addressBlock(detailModel);
+            if (self.addressBlock) {
+                self.addressBlock(detailModel);
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
         return;
@@ -224,9 +251,7 @@
 
 #pragma mark DeilveryAddressTableViewCellDelegate
 - (void)didDeilveryAddressTableViewCellEditButton:(UIButton *)button{
-//    CGPoint point = button.center;
-//    point = [myTableView convertPoint:point fromView:button.superview];
-//    NSIndexPath* indexPath = [myTableView indexPathForRowAtPoint:point];
+
     
 }
 
