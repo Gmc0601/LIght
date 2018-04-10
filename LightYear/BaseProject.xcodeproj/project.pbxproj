@@ -101,6 +101,24 @@
 		42C84F1C1EF2EB650008189D /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84F171EF2EB650008189D /* NSObject+SBJSON.m */; };
 		42C84F1D1EF2EB650008189D /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84F191EF2EB650008189D /* NSString+SBJSON.m */; };
 		42C84F1E1EF2EB650008189D /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C84F1B1EF2EB650008189D /* SBJSON.m */; };
+		42D3B1EF207CAC9B0088F068 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1DD207CAC9A0088F068 /* NotoSans-Regular.ttf */; };
+		42D3B1F0207CAC9B0088F068 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1DE207CAC9A0088F068 /* SourceHanSansCN-Normal.ttf */; };
+		42D3B1F1207CAC9B0088F068 /* IKEA-Sans-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1DF207CAC9A0088F068 /* IKEA-Sans-Heavy.ttf */; };
+		42D3B1F2207CAC9B0088F068 /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E0207CAC9A0088F068 /* SourceHanSansCN-Regular.ttf */; };
+		42D3B1F3207CAC9B0088F068 /* SourceHanSansCN-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E1207CAC9A0088F068 /* SourceHanSansCN-Bold.ttf */; };
+		42D3B1F4207CAC9B0088F068 /* SourceHanSansCN-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E2207CAC9A0088F068 /* SourceHanSansCN-Heavy.ttf */; };
+		42D3B1F5207CAC9B0088F068 /* verdanab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E3207CAC9A0088F068 /* verdanab.ttf */; };
+		42D3B1F6207CAC9B0088F068 /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E4207CAC9A0088F068 /* SourceHanSansCN-Light.ttf */; };
+		42D3B1F7207CAC9B0088F068 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E5207CAC9A0088F068 /* NotoSans-Bold.ttf */; };
+		42D3B1F8207CAC9B0088F068 /* verdanab_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E6207CAC9A0088F068 /* verdanab_0.ttf */; };
+		42D3B1F9207CAC9B0088F068 /* IKEA-Sans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E7207CAC9A0088F068 /* IKEA-Sans-Bold.ttf */; };
+		42D3B1FA207CAC9B0088F068 /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E8207CAC9A0088F068 /* NotoSans-BoldItalic.ttf */; };
+		42D3B1FB207CAC9B0088F068 /* SourceHanSansCN-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1E9207CAC9A0088F068 /* SourceHanSansCN-ExtraLight.ttf */; };
+		42D3B1FC207CAC9B0088F068 /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1EA207CAC9A0088F068 /* SourceHanSansCN-Medium.ttf */; };
+		42D3B1FD207CAC9B0088F068 /* Verdana_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1EB207CAC9A0088F068 /* Verdana_0.ttf */; };
+		42D3B1FE207CAC9B0088F068 /* verdanai_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1EC207CAC9A0088F068 /* verdanai_0.ttf */; };
+		42D3B1FF207CAC9B0088F068 /* Verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1ED207CAC9A0088F068 /* Verdana.ttf */; };
+		42D3B200207CAC9B0088F068 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D3B1EE207CAC9A0088F068 /* NotoSans-Italic.ttf */; };
 		42DDA3821F70D6C6006A6A26 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DDA3811F70D6C6006A6A26 /* CoreMotion.framework */; };
 		42DDA45C1F70ECBA006A6A26 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DDA45B1F70ECBA006A6A26 /* CoreTelephony.framework */; };
 		42DDA45E1F70EEDF006A6A26 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DDA45D1F70EEDF006A6A26 /* SystemConfiguration.framework */; };
@@ -380,6 +398,24 @@
 		42C84F191EF2EB650008189D /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
 		42C84F1A1EF2EB650008189D /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
 		42C84F1B1EF2EB650008189D /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		42D3B1DD207CAC9A0088F068 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		42D3B1DE207CAC9A0088F068 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		42D3B1DF207CAC9A0088F068 /* IKEA-Sans-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA-Sans-Heavy.ttf"; sourceTree = "<group>"; };
+		42D3B1E0207CAC9A0088F068 /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; };
+		42D3B1E1207CAC9A0088F068 /* SourceHanSansCN-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Bold.ttf"; sourceTree = "<group>"; };
+		42D3B1E2207CAC9A0088F068 /* SourceHanSansCN-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Heavy.ttf"; sourceTree = "<group>"; };
+		42D3B1E3207CAC9A0088F068 /* verdanab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab.ttf; sourceTree = "<group>"; };
+		42D3B1E4207CAC9A0088F068 /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
+		42D3B1E5207CAC9A0088F068 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		42D3B1E6207CAC9A0088F068 /* verdanab_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanab_0.ttf; sourceTree = "<group>"; };
+		42D3B1E7207CAC9A0088F068 /* IKEA-Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IKEA-Sans-Bold.ttf"; sourceTree = "<group>"; };
+		42D3B1E8207CAC9A0088F068 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		42D3B1E9207CAC9A0088F068 /* SourceHanSansCN-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-ExtraLight.ttf"; sourceTree = "<group>"; };
+		42D3B1EA207CAC9A0088F068 /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; };
+		42D3B1EB207CAC9A0088F068 /* Verdana_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana_0.ttf; sourceTree = "<group>"; };
+		42D3B1EC207CAC9A0088F068 /* verdanai_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdanai_0.ttf; sourceTree = "<group>"; };
+		42D3B1ED207CAC9A0088F068 /* Verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Verdana.ttf; sourceTree = "<group>"; };
+		42D3B1EE207CAC9A0088F068 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
 		42DDA3811F70D6C6006A6A26 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		42DDA45B1F70ECBA006A6A26 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		42DDA45D1F70EEDF006A6A26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1023,6 +1059,7 @@
 		42C84EA61EF2DB060008189D /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				42D3B1DC207CAC9A0088F068 /* Fonts */,
 				42F795CA1F00CBDF00A11A69 /* Factory */,
 				42C84EA71EF2DB060008189D /* ConfigModel */,
 				42C84EA81EF2DB060008189D /* MainApi */,
@@ -1117,6 +1154,31 @@
 				42C84F1B1EF2EB650008189D /* SBJSON.m */,
 			);
 			path = Json;
+			sourceTree = "<group>";
+		};
+		42D3B1DC207CAC9A0088F068 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				42D3B1DD207CAC9A0088F068 /* NotoSans-Regular.ttf */,
+				42D3B1DE207CAC9A0088F068 /* SourceHanSansCN-Normal.ttf */,
+				42D3B1DF207CAC9A0088F068 /* IKEA-Sans-Heavy.ttf */,
+				42D3B1E0207CAC9A0088F068 /* SourceHanSansCN-Regular.ttf */,
+				42D3B1E1207CAC9A0088F068 /* SourceHanSansCN-Bold.ttf */,
+				42D3B1E2207CAC9A0088F068 /* SourceHanSansCN-Heavy.ttf */,
+				42D3B1E3207CAC9A0088F068 /* verdanab.ttf */,
+				42D3B1E4207CAC9A0088F068 /* SourceHanSansCN-Light.ttf */,
+				42D3B1E5207CAC9A0088F068 /* NotoSans-Bold.ttf */,
+				42D3B1E6207CAC9A0088F068 /* verdanab_0.ttf */,
+				42D3B1E7207CAC9A0088F068 /* IKEA-Sans-Bold.ttf */,
+				42D3B1E8207CAC9A0088F068 /* NotoSans-BoldItalic.ttf */,
+				42D3B1E9207CAC9A0088F068 /* SourceHanSansCN-ExtraLight.ttf */,
+				42D3B1EA207CAC9A0088F068 /* SourceHanSansCN-Medium.ttf */,
+				42D3B1EB207CAC9A0088F068 /* Verdana_0.ttf */,
+				42D3B1EC207CAC9A0088F068 /* verdanai_0.ttf */,
+				42D3B1ED207CAC9A0088F068 /* Verdana.ttf */,
+				42D3B1EE207CAC9A0088F068 /* NotoSans-Italic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		42DDA53D1F70F19A006A6A26 /* OpenSDK1.8.0 */ = {
@@ -1319,13 +1381,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D3B1F7207CAC9B0088F068 /* NotoSans-Bold.ttf in Resources */,
 				42F795D81F00CC3E00A11A69 /* arrowdown@2x.png in Resources */,
 				42F795D91F00CC3E00A11A69 /* arrowup@2x.png in Resources */,
+				42D3B1F2207CAC9B0088F068 /* SourceHanSansCN-Regular.ttf in Resources */,
+				42D3B1FC207CAC9B0088F068 /* SourceHanSansCN-Medium.ttf in Resources */,
+				42D3B1F6207CAC9B0088F068 /* SourceHanSansCN-Light.ttf in Resources */,
+				42D3B1FB207CAC9B0088F068 /* SourceHanSansCN-ExtraLight.ttf in Resources */,
+				42D3B1F5207CAC9B0088F068 /* verdanab.ttf in Resources */,
+				42D3B1FF207CAC9B0088F068 /* Verdana.ttf in Resources */,
+				42D3B1F4207CAC9B0088F068 /* SourceHanSansCN-Heavy.ttf in Resources */,
+				42D3B200207CAC9B0088F068 /* NotoSans-Italic.ttf in Resources */,
+				42D3B1FD207CAC9B0088F068 /* Verdana_0.ttf in Resources */,
 				42A444431EF133E000F90791 /* LaunchScreen.storyboard in Resources */,
+				42D3B1F9207CAC9B0088F068 /* IKEA-Sans-Bold.ttf in Resources */,
 				42A444401EF133E000F90791 /* Assets.xcassets in Resources */,
+				42D3B1EF207CAC9B0088F068 /* NotoSans-Regular.ttf in Resources */,
+				42D3B1FE207CAC9B0088F068 /* verdanai_0.ttf in Resources */,
+				42D3B1F8207CAC9B0088F068 /* verdanab_0.ttf in Resources */,
 				00A952861F7024F800DEE0F6 /* DateView.xib in Resources */,
 				42DDA5441F70F19A006A6A26 /* README.txt in Resources */,
+				42D3B1FA207CAC9B0088F068 /* NotoSans-BoldItalic.ttf in Resources */,
+				42D3B1F3207CAC9B0088F068 /* SourceHanSansCN-Bold.ttf in Resources */,
 				42A4443B1EF133E000F90791 /* Main.storyboard in Resources */,
+				42D3B1F0207CAC9B0088F068 /* SourceHanSansCN-Normal.ttf in Resources */,
+				42D3B1F1207CAC9B0088F068 /* IKEA-Sans-Heavy.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
