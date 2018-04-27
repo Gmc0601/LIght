@@ -23,6 +23,7 @@
 @property(retain,atomic)     NSArray *dataSource;
 @property(retain,atomic)     UILabel *lblPrice;
 @property(retain,atomic)     UILabel *lblDiscount;
+@property(retain,atomic)     UILabel *lblCount;
 @end
 
 @implementation PurchaseCarViewController
@@ -50,7 +51,7 @@
         if (error == nil && info.intValue > 0) {
             if (_tb == nil) {
                 [self.leftBar setImage:[UIImage imageNamed:@"icon_tab_qdsl"] forState:UIControlStateNormal];
-                self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(10), 0, 0, 0);
+                self.leftBar.imageEdgeInsets = UIEdgeInsetsMake(SizeHeigh(2.5), SizeWidth(-3), SizeWidth(-3), 0);
                 [self addBottomView];
                 [self addTableView];
             }
@@ -370,7 +371,38 @@
     }
     _lblPrice.text = [NSString stringWithFormat:@"￥%.2f",sum];
     _lblDiscount.text = [NSString stringWithFormat:@"￥%.2f",discount];
-    [self addLableCountToImage:self.leftBar withText:[NSString stringWithFormat:@"%d",count]];
+    [self addLableCountToImage1:self.leftBar withText:[NSString stringWithFormat:@"%d",count]];
 
+}
+
+-(void) addLableCountToImage1:(UIView *) img withText:(NSString *)  text{
+    if (text == nil || text.floatValue == 0) {
+        [_lblCount removeFromSuperview];
+        return;
+    }
+    
+    float bottom = -SizeHeigh(0);
+    float right = SizeWidth(3);
+    if ([img isKindOfClass:[UIButton class]]) {
+        bottom = -SizeHeigh(4);
+        right = SizeWidth(2);
+    }
+    
+    if (_lblCount == nil) {
+        _lblCount = [UILabel new];
+        _lblCount.font = Verdana(SizeWidth(8));
+        _lblCount.textColor = [UIColor colorWithHexString:@"#fecd2f"];
+        _lblCount.textAlignment = NSTextAlignmentCenter;
+        [img addSubview:_lblCount];
+        
+        [_lblCount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(img).offset(right);
+            make.bottom.equalTo(img).offset(bottom);
+            make.width.equalTo(@(SizeWidth(20)));
+            make.height.equalTo(@(SizeHeigh(8)));
+        }];
+    }
+    
+    _lblCount.text = [NSString stringWithFormat:@"%@",text];
 }
 @end

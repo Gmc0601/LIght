@@ -121,24 +121,6 @@
     //    _rightView.c = [self mockData1];
 }
 
--(NSMutableArray *) mockData1{
-    NSMutableArray *data = [NSMutableArray arrayWithCapacity:10];
-    
-    for (int i=0; i<10; i++) {
-        GoodsModel *model = [GoodsModel new];
-        model._id = @"1";
-        model.name = @"小龙虾";
-        model.canTakeBySelf = YES;
-        model.hasDiscounts = YES;
-        model.canDelivery = NO;
-        model.isNew = NO;
-        model.price = @"111";
-        model.memberPrice = @"1";
-        [data addObject:model];
-    }
-    
-    return data;
-}
 
 
 -(void) dismissRightView{
@@ -261,7 +243,7 @@
         return;
     }
     
-    float bottom = -SizeHeigh(2);
+    float bottom = -SizeHeigh(2.5);
     float right = SizeWidth(3);
     if ([img isKindOfClass:[UIButton class]]) {
         bottom = -SizeHeigh(4);

@@ -20,6 +20,10 @@
         [params setObject:_id forKey:@"id"];
     }
     NSString *shopId = [[TMCache sharedCache] objectForKey:kShopInfo];
+    if (shopId == nil) {
+        callback(@"请选择门店",nil);
+        return;
+    }
     [params setObject:shopId forKey:@"shopid"];
 
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"page"];

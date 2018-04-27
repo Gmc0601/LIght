@@ -54,8 +54,10 @@
                     }
                     [_datasource addObjectsFromArray:data];
 
-                    [_tb reloadData];
+                }else{
+                    _datasource = [NSMutableArray arrayWithCapacity:0];
                 }
+                  [_tb reloadData];
             }
         }];
     }else{
