@@ -597,7 +597,8 @@
         [dic setValue:@(couponId) forKey:@"coupon_id"];
         [dic setValue:@(couponcut) forKey:@"coupon_money"];
     }
-    [dic setValue:@(topaymoney) forKey:@"amount"];
+    NSString *topay = [NSString stringWithFormat:@"%.2f", topaymoney];
+    [dic setValue:topay forKey:@"amount"];
     if (post) {
         [dic setValue:@"1" forKey:@"type"];
         //  邮费 ？？

@@ -164,11 +164,14 @@
                 if ([datadic[@"error"] intValue] == 0) {
                     //   
                     [ConfigModel mbProgressHUD:@"申请退款成功" andView:nil];
-                    OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
-                    vc.OrderID = self.model.order_no;
-                    vc.orderType = Order_Refunding;
-                    vc.backHome = YES;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        OrderDetialViewController *vc = [[OrderDetialViewController alloc] init];
+                        vc.OrderID = self.model.id;
+                        vc.orderType = Order_Refunding;
+                        vc.backHome = YES;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    });
+                   
                 }else {
                     NSString *str = datadic[@"message"];
                     [ConfigModel mbProgressHUD:str andView:nil];

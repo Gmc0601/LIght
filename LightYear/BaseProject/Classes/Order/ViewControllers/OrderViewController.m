@@ -112,6 +112,7 @@
     WeakSelf(weakself);
     [OrderDataHelper orderListWithparameter:dic callBack:^(BOOL success, NSArray *modelArr) {
         [ConfigModel hideHud:self];
+        [weakself.noUseTableView.header endHeadRefresh];
         [weakself.noUseTableView.footer endFooterRefreshing];
         if (success) {
             if (modelArr.count == 15) {
@@ -267,6 +268,13 @@
         [_noUseTableView addRefreshFootWithBlock:^{
             [weak createData];
         }];
+        
+        [_noUseTableView addRefreshHeaderWithBlock:^{
+            page = 1;
+            [weak.dataArr removeAllObjects];
+            [weak createData];
+        }];
+        
         _noUseTableView.tableHeaderView = ({
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 0)];
             view;

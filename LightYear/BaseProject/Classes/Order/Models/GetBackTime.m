@@ -38,7 +38,10 @@
     NSString *endTime = model.shopInfo.enddate;
     NSString *str1 =  [startTime substringToIndex:2];
     NSString *str2 =  [endTime substringToIndex:2];
-//    NSLog(@">>>>%@", str1);
+    NSRange range ;
+    range.length = 2;
+    range.location = 3;
+    NSString *endmin = [endTime substringWithRange:range];
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH"];
@@ -65,8 +68,14 @@
     for (int i = 0 ; i < hourArr.count; i++) {
         NSString * str1 = hourArr[i];
         for ( int j = 0; j < minteArr.count; j++) {
-            NSString * str2 =minteArr[j];
+            NSString * str2 = minteArr[j];
+            if (i == hourArr.count - 1) {
+                if ([str2 intValue] > [endmin intValue]) {
+                    break;
+                }
+            }
             NSString *timeStr = [NSString stringWithFormat:@"%@:%@", str1, str2];
+            NSLog(@"ARR2 %@", timeStr);
             [self.arr2 addObject:timeStr];
         }
     }
@@ -83,11 +92,17 @@
             if (([str1 intValue] == [now_hour intValue]) && ([str2 intValue] <= [now_min intValue])) {
                 break;
             }
+            if (i == hourArr.count - 1) {
+                if ([str2 intValue] > [endmin intValue]) {
+                    break;
+                }
+            }
             NSString *timeStr = [NSString stringWithFormat:@"%@:%@", str1, str2];
+            NSLog(@"ARR1 %@", timeStr);
             [self.arr1 addObject:timeStr];
         }
     }
-    
+
 
     
     if (self.str1.length == 0) {
