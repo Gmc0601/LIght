@@ -34,6 +34,7 @@
     [HttpRequest postPath:FeedBackURL params:params resultBlock:^(id responseObject, NSError *error) {
         FeedBackModel * model = [[FeedBackModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
+            [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:model.info];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];

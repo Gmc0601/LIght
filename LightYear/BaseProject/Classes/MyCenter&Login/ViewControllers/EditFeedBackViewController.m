@@ -39,6 +39,7 @@
     [HttpRequest postPath:FeedBackURL params:params resultBlock:^(id responseObject, NSError *error) {
         FeedBackModel * model = [[FeedBackModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
+            [dataArray removeAllObjects];
             [dataArray addObjectsFromArray:model.info];
         }else{
             [ConfigModel mbProgressHUD:model.message andView:nil];
@@ -168,7 +169,7 @@
         if (model.error == 0) {
             [self.view endEditing:YES];
             contentTextView.text = nil;
-            
+            [self getData];
 //            [self.navigationController popViewControllerAnimated:YES];
             [ConfigModel mbProgressHUD:@"提交成功" andView:nil];
         }else{
