@@ -141,7 +141,10 @@
         cell = [[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     OrderModel *model = [[OrderModel alloc] init];
-    model = self.dataArr[indexPath.row];
+    if (self.dataArr.count > 0) {
+        model = self.dataArr[indexPath.row];
+    }
+    
     [cell changeCellType:[self changStatus:model]];
     [cell updatcell:model];
     
