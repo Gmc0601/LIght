@@ -136,7 +136,7 @@
     [HttpRequest postPath:integralListURL params:dic resultBlock:^(id responseObject, NSError *error) {
         integralListModel * model = [[integralListModel alloc] initWithDictionary:responseObject error:nil];
         if (model.error == 0) {
-            if (self.balancePageNo>1) {
+            if (self.pointPageNo>1) {
                 NSMutableArray *array = [NSMutableArray array];
                 [array addObjectsFromArray:model.info];
                 if (array.count>0) {
